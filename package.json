@@ -1,0 +1,16 @@
+{
+  "name": "bitly",
+  "description": "A Bit.ly API library for Node.JS",
+  "version": "0.2.0",
+  "author": "Tane Piper <github@tanepiper.com>",
+  "contributors": [ 
+    { "name": "Tane Piper", "email": "github@tanepiper.com" }
+  ],
+  "keywords": ["bitly", "urls", "url shortner", "url expander"],
+  "main": "lib/bitly/Bitly.js",
+  "repository": {
+    "type": "git",
+    "url": "http://github.com/tanepiper/node-bitly.git"
+  },
+  "engines": { "node": ">= 0.2.0" }
+}
