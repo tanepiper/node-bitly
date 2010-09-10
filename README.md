@@ -8,12 +8,11 @@ The bit.ly library for node.js provides methods to pass URL requests to bit.ly
 - Expand single/multiple Urls
 - Expand single/multiple hashes
 - Expand mixed urls/hashes
-
-## To do ##
-- Add validate
-- Add clicks
-- Add lookup
-- Add info
+- Get Clicks for URLs
+- Get Info about URLs
+- Lookup URLs
+- Check for pro domain
+- Check for authenticated account
 
 ## Usage ##
 
