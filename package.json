@@ -12,5 +12,5 @@
     "type": "git",
     "url": "http://github.com/tanepiper/node-bitly.git"
   },
-  "engines": { "node": ">= 0.2.0" }
+  "engines": { "node": ">= 0.4.0" }
 }
