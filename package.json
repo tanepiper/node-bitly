@@ -4,7 +4,8 @@
   "version": "1.0.1",
   "author": "Tane Piper <github@tanepiper.com>",
   "contributors": [ 
-    { "name": "Tane Piper", "email": "github@tanepiper.com" }
+    { "name": "Tane Piper", "email": "github@tanepiper.com" },
+    { "name": "François de Metz", "email": "francois@2metz.fr" }
   ],
   "keywords": ["bitly", "urls", "url shortner", "url expander"],
   "main": "lib/bitly/Bitly.js",
