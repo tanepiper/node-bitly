@@ -24,3 +24,8 @@ take a string or array list of urls or hashes and a callback to return the data
 
 See http://code.google.com/p/bitly-api/wiki/ApiDocumentation for format of
 returned object
+
+## Tests
+
+    $ sed -i 's/<YOUR USERNAME>/XXX/' tests/*
+    $ sed -i 's/<YOUR API KEY>/XXX/' tests/*
