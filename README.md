@@ -18,7 +18,6 @@ You can also install via git by cloning:
 Usage
 -----
 
-Example:
     var Bitly = require('bitly');
     var bitly = new Bitly('<YOUR USERNAME>', '<YOUR API KEY>');
     bitly.shorten('https://github.com/tanepiper/node-bitly', function(err, response) {
