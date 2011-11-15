@@ -16,7 +16,7 @@ The bit.ly library for node.js provides methods to pass URL requests to bit.ly
 
 ## Usage ##
 
-    var Bitly = require('bitly').Bitly;
+    var Bitly = require('bitly');
     var bitly = new Bitly('<YOUR USERNAME>', '<YOUR API KEY>');
 
 To see the methods available, see examples in the tests folder.  All methods

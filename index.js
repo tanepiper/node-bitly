@@ -23,7 +23,7 @@ Bitly.prototype = {
     _parseChunks: function(chunks) {
         return chunks.join('');
     },
-	
+
     _generateNiceUrl: function(query, method) {
         var result = url.parse(url.format({
             protocol: 'http',
@@ -31,10 +31,10 @@ Bitly.prototype = {
             pathname: '/' + this.config.api_version + '/' + method,
             query: query
         }));
-		
-		return result;
+
+    return result;
     },
-	
+
     _doRequest: function(request_query, cb) {
         var scope = this;
         var client = http.createClient(80, request_query.hostname);
@@ -57,14 +57,14 @@ Bitly.prototype = {
             });
         });
     },
-	
+
     _urlCheck: function(str) {
         var v = new RegExp();
         v.compile("^[A-Za-z]+://[A-Za-z0-9-_]+\\.[A-Za-z0-9-_%&\?\/.=]+$");
         if (!v.test(str)) return false;
         return true;
     },
-	
+
     shorten: function(longUrl, cb) {
         var query = {
             login: this.config.login,
@@ -73,11 +73,11 @@ Bitly.prototype = {
             longUrl: longUrl,
             domain: this.config.domain
         };
-		
+
         var request_query = this._generateNiceUrl(query, 'shorten');
         this._doRequest(request_query, cb);
     },
-	
+
     expand: function(items, cb) {
         var shortUrl = [];
         var hash = [];
@@ -97,11 +97,11 @@ Bitly.prototype = {
             hash: hash,
             domain: this.config.domain
         };
-		
+
         var request_query = this._generateNiceUrl(query, 'expand');
         this._doRequest(request_query, cb);
     },
-	
+
     clicks: function(items, cb) {
         var shortUrl = [];
         var hash = [];
@@ -124,7 +124,7 @@ Bitly.prototype = {
         var request_query = this._generateNiceUrl(query, 'clicks');
         this._doRequest(request_query, cb);
     },
-	
+
     lookup: function(links, cb) {
         var query = {
             login: this.config.login,
@@ -133,11 +133,11 @@ Bitly.prototype = {
             url: links,
             domain: this.config.domain
         };
-		
+
         var request_query = this._generateNiceUrl(query, 'lookup');
         this._doRequest(request_query, cb);
     },
-	
+
     info: function(items, cb) {
         var shortUrl = [];
         var hash = [];
@@ -157,11 +157,11 @@ Bitly.prototype = {
             hash: hash,
             domain: this.config.domain
         };
-		
+
         var request_query = this._generateNiceUrl(query, 'info');
         this._doRequest(request_query, cb);
     },
-	
+
     bitlyProDomain: function(domain, cb) {
         var query = {
             login: this.config.login,
@@ -169,11 +169,11 @@ Bitly.prototype = {
             format: this.config.format,
             domain: domain
         };
-		
+
         var request_query = this._generateNiceUrl(query, 'bitly_pro_domain');
         this._doRequest(request_query, cb);
     },
-	
+
     authenticate: function(x_login, x_password, cb) {
         var query = {
             login: this.config.login,
@@ -182,11 +182,10 @@ Bitly.prototype = {
             x_login: x_login,
             x_password: x_password
         };
-		
+
         var request_query = this._generateNiceUrl(query, 'authenticate');
         this._doRequest(request_query, cb);
     }
 };
 
-exports.Bitly = Bitly;
-
+module.exports = Bitly;
