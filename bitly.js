@@ -49,20 +49,23 @@ Bitly.prototype._generateNiceUrl = function(query, method) {
  * @return {void}
  */
 Bitly.prototype._doRequest = function(request_query, cb) {
-  var scope = this;
   // Pass the requested URL as an object to the get request
   http.get(request_query, function(res) {
       var data = [];
       res
       .on('data', function(chunk) { data.push(chunk); })
       .on('end', function() {
-          var urldata = data.join('');
-          var result = JSON.parse(urldata);
-          return cb(null, result);
+          var urldata = data.join('').trim();
+          var result;
+          try {
+            result = JSON.parse(urldata);
+          } catch (exp) {
+            result = {'status_code': 500, 'status_text': 'JSON Parse Failed'}
+          }
+          cb(null, result);
       });
   })
   .on('error', function(e) {
-      console.log("Got http get error: " + e.message);
       callback(e);
   });
 };
@@ -93,6 +96,7 @@ Bitly.prototype.shorten = function(longUrl, cb) {
     longUrl: longUrl,
     domain: this.config.domain
   };
+
   var request_query = this._generateNiceUrl(query, 'shorten');
   this._doRequest(request_query, cb);
 };

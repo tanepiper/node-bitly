@@ -1,0 +1,3 @@
+*.log
+*.tpm
+node_module
