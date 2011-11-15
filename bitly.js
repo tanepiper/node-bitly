@@ -37,24 +37,25 @@ Bitly.prototype = {
 
     _doRequest: function(request_query, cb) {
         var scope = this;
-        var client = http.createClient(80, request_query.hostname);
-        var request = client.request('GET', request_query.pathname + '?' + request_query.query, {
-            'host': request_query.hostname
-        });
-        request.end();
-        request.on('response',
-        function(response) {
+
+        http.get({
+            host: request_query.hostname,
+            path: request_query.pathname + '?' + request_query.query,
+            port: 80
+        }, function(res) {
             var data = [];
-            response.on('data',
-            function(chunk) {
+            res
+            .on('data', function(chunk) {
                 data.push(chunk);
-            });
-            response.on('end',
-            function() {
+            })
+            .on('end', function() {
                 var urldata = scope._parseChunks(data);
-                var result = JSON.parse(urldata)
+                var result = JSON.parse(urldata);
                 return cb(result);
             });
+        })
+        .on('error', function(e) {
+            console.log("Got http get error: " + e.message);
         });
     },
 

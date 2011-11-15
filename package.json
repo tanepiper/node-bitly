@@ -9,7 +9,7 @@
     { "name": "François de Metz", "email": "francois@2metz.fr" },
     { "name": "zephrax"}
   ],
-  "main": "./index",
+  "main": "./bitly",
   "repository": {
     "type": "git",
     "url": "http://github.com/tanepiper/node-bitly.git"
