@@ -19,11 +19,6 @@ var Bitly = function(login, api_key, options) {
 };
 
 Bitly.prototype = {
-
-    _parseChunks: function(chunks) {
-        return chunks.join('');
-    },
-
     _generateNiceUrl: function(query, method) {
         var result = url.parse(url.format({
             protocol: 'http',
@@ -38,24 +33,22 @@ Bitly.prototype = {
     _doRequest: function(request_query, cb) {
         var scope = this;
 
-        http.get({
-            host: request_query.hostname,
-            path: request_query.pathname + '?' + request_query.query,
-            port: 80
-        }, function(res) {
+        // Pass the requested URL as an object to the get request
+        http.get(request_query, function(res) {
             var data = [];
             res
             .on('data', function(chunk) {
                 data.push(chunk);
             })
             .on('end', function() {
-                var urldata = scope._parseChunks(data);
+                var urldata = data.join('');
                 var result = JSON.parse(urldata);
-                return cb(result);
+                return cb(null, result);
             });
         })
         .on('error', function(e) {
             console.log("Got http get error: " + e.message);
+            callback(e);
         });
     },
 
