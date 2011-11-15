@@ -1,6 +1,7 @@
 {
   "name": "bitly",
   "description": "A Bit.ly API library for Node.JS",
+<<<<<<< HEAD
   "tags": ["url", "bitly", "shortner", "util"],
   "version": "1.1.0",
   "author": "Tane Piper <piper.tane@gmail.com>",
