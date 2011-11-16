@@ -8,11 +8,11 @@ Installation
 
 To install via NPM type the following:
 
-    `npm install bitly`
+    npm install bitly
 
 You can also install via git by cloning:
 
-    'git clone git://github.com/tanepiper/node-bitly.git /path/to/node_modules/bitly'
+    git clone git://github.com/tanepiper/node-bitly.git /path/to/node_modules/bitly
 
 
 Usage
