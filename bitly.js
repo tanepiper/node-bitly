@@ -39,6 +39,9 @@ Bitly.prototype._generateNiceUrl = function(query, method) {
     pathname: '/' + this.config.api_version + '/' + method,
     query: query
   }));
+
+  // HACK: Fixes the redirection issue in node 0.4.x
+  result.path = result.pathname + result.search;
   return result;
 };
 
