@@ -1,26 +1,21 @@
-node-bitly - bit.ly API for nodejs
+node-bitly - Bitly API for nodejs
 ====================
 
 [![Build Status](https://secure.travis-ci.org/tanepiper/node-bitly.png)](http://travis-ci.org/tanepiper/node-bitly)
 
-
-This module makes the [bit.ly](http://bitly.com) API accessible via NodeJS
+This module provides calls to the [Bitly](http://bitly.com) API for [Nodejs](http://nodejs.org).
+For more information on the API request and responses visit the [Bitly API docs](http://code.google.com/p/bitly-api/wiki/ApiDocumentation)
 
 Installation
 ------------
-
 To install via NPM type the following:
-
     npm install bitly
 
 You can also install via git by cloning:
-
     git clone git://github.com/tanepiper/node-bitly.git /path/to/node_modules/bitly
-
 
 Usage
 -----
-
     var Bitly = require('bitly');
     var bitly = new Bitly('<YOUR USERNAME>', '<YOUR API KEY>');
     bitly.shorten('https://github.com/tanepiper/node-bitly', function(err, response) {
@@ -32,15 +27,21 @@ Usage
       // Do something with data
     });
 
+Tests
+-----
+To run tests type `npm test`
 
 Bit.ly Features
 ---------------
-* Shorten Url.
-* Expand single/multiple Urls
-* Expand single/multiple hashes
-* Expand mixed urls/hashes
-* Get Clicks for URLs
-* Get Info about URLs
-* Lookup URLs
-* Check for pro domain
-* Check for authenticated account
+Currently this module does NOT support the OAuth features of the Bitly API.  As such
+this module is limited to the following API methods:
+
+* shorten
+* expand
+* validate
+* clicks / clicks_by_minute / clicks_by_day
+* referrers
+* countries
+* bitly_pro_domain
+* lookup
+* info

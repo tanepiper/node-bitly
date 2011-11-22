@@ -1,5 +1,14 @@
-var url = require('url'),
-    http = require('http');
+/**
+ * node-bitly - A node module for calling the bitly API
+ * See http://code.google.com/p/bitly-api/wiki/ApiDocumentation for details
+ * about the API requests and responses
+ * Copyright (c) 2011 Tane Piper
+ * MIT Licence
+ */
+
+
+var url = require('url');
+var http = require('http');
 
 /**
  * The main Bitly constructor, takes the users login, api key and additional options
@@ -8,12 +17,15 @@ var url = require('url'),
  * @param {Object} options Optional options
  */
 var Bitly = function(login, api_key, options) {
+  // Set default options
   options = options || {
     format: 'json',
     api_url: 'api.bit.ly',
     api_version: 'v3',
     domain: 'bit.ly'
   };
+
+  // Set up the config for requests being made with the instance of this
   this.config = {
     login: login,
     api_key: api_key,
@@ -27,7 +39,8 @@ var Bitly = function(login, api_key, options) {
 };
 
 /**
- * Function to take an incoming query and generate a URL object from it
+ * Generates the URL object to be passed to the HTTP request for a specific
+ * API method call
  * @param  {Object} query  The query object
  * @param  {String} method The Bit.ly method to call with the request
  * @return {Object} The URL object for this request
@@ -39,9 +52,9 @@ Bitly.prototype._generateNiceUrl = function(query, method) {
     pathname: '/' + this.config.api_version + '/' + method,
     query: query
   }));
-
   // HACK: Fixes the redirection issue in node 0.4.x
-  result.path = result.pathname + result.search;
+  if (!result.path) { results.path = result.pathname + result.search; }
+
   return result;
 };
 
@@ -74,7 +87,7 @@ Bitly.prototype._doRequest = function(request_query, cb) {
 };
 
 /**
- * Function for checking the regex of a URL to see that it is valid
+ * Function to check if a passed string is a valid URL
  * @param  {String} str The URL string to be checked
  * @return {Boolean}
  */
@@ -89,6 +102,7 @@ Bitly.prototype._urlCheck = function(str) {
  * Function to check through an array of items to check for short urls or hashes
  * @param  {Array} items The array of items to be checked
  * @param  {Object} The query object
+ * @return {void)
  */
 Bitly.prototype._sortUrlsAndHash = function(items, query) {
   var shortUrl = [];
@@ -106,7 +120,7 @@ Bitly.prototype._sortUrlsAndHash = function(items, query) {
 }
 
 /**
- * Bitly request to shorten a URL
+ * Request to shorten one long url
  * @param  {String} longUrl The URL to be shortened
  * @param  {Function} cb The callback function with the results
  * @return {void}
@@ -120,13 +134,12 @@ Bitly.prototype.shorten = function(longUrl, cb) {
     domain: this.config.domain
   };
 
-  var request_query = this._generateNiceUrl(query, 'shorten');
-  this._doRequest(request_query, cb);
+  this._doRequest(this._generateNiceUrl(query, 'shorten'), cb);
 };
 
 /**
- * Bitly request to expand urls
- * @param  {Array} items The URL to be shortened
+ * Request to expand a single short url, short hash or mixed array or items
+ * @param  {Mixed} items  The string or array of short urls and/or hashes to expand
  * @param  {Function} cb The callback function with the results
  * @return {void}
  */
@@ -145,13 +158,12 @@ Bitly.prototype.expand = function(items, cb) {
     this._sortUrlsAndHash(items, query);
   }
 
-  var request_query = this._generateNiceUrl(query, 'expand');
-  this._doRequest(request_query, cb);
+  this._doRequest(this._generateNiceUrl(query, 'expand'), cb);
 };
 
 /**
- * Bitly request to get clicks for an array of urls
- * @param  {Array} items Array of items
+ * Request to get clicks for a single short url, short hash or mixed array or items
+ * @param  {Mixed} items  The string or array of short urls and/or hashes to expand
  * @param  {Function} cb The callback function
  * @return {void}
  */
@@ -170,13 +182,12 @@ Bitly.prototype.clicks = function(items, cb) {
     this._sortUrlsAndHash(items, query);
   }
 
-  var request_query = this._generateNiceUrl(query, 'clicks');
-  this._doRequest(request_query, cb);
+  this._doRequest(this._generateNiceUrl(query, 'clicks'), cb);
 };
 
 /**
- * Bitly request for info on links
- * @param  {Array} items Array of items
+ * Request to get clicks by minute for a single short url, short hash or mixed array or items
+ * @param  {Mixed} items  The string or array of short urls and/or hashes to expand
  * @param  {Function} cb The callback function
  * @return {void}
  */
@@ -195,13 +206,13 @@ Bitly.prototype.clicksByMinute = function(items, cb) {
     this._sortUrlsAndHash(items, query);
   }
 
-  var request_query = this._generateNiceUrl(query, 'clicks_by_minute');
-  this._doRequest(request_query, cb);
+  this._doRequest(this._generateNiceUrl(query, 'clicks_by_minute'), cb);
+
 };
 
 /**
- * Bitly request for info on links
- * @param  {Array} items Array of items
+ * Request to get clicks by day for a single short url, short hash or mixed array or items
+ * @param  {Mixed} items  The string or array of short urls and/or hashes to expand
  * @param  {Function} cb The callback function
  * @return {void}
  */
@@ -220,13 +231,12 @@ Bitly.prototype.clicksByDay = function(items, cb) {
     this._sortUrlsAndHash(items, query);
   }
 
-  var request_query = this._generateNiceUrl(query, 'clicks_by_day');
-  this._doRequest(request_query, cb);
+  this._doRequest(this._generateNiceUrl(query, 'clicks_by_day'), cb);
 };
 
 /**
- * Bitly request to get clicks for an array of urls
- * @param  {Array} items Array of items
+ * Request to get look up an existing bitly link for a long url or array of urls
+ * @param  {Mixed} items  The string or array of long urls
  * @param  {Function} cb The callback function
  * @return {void}
  */
@@ -239,13 +249,13 @@ Bitly.prototype.lookup = function(links, cb) {
     domain: this.config.domain
   };
 
-  var request_query = this._generateNiceUrl(query, 'lookup');
-  this._doRequest(request_query, cb);
+  this._doRequest(this._generateNiceUrl(query, 'lookup'), cb);
+
 };
 
 /**
- * Bitly request for info on links
- * @param  {Array} items Array of items
+ * Request to get clicks by day for a single short url, short hash or mixed array or items
+ * @param  {Mixed} items  The string or array of short urls and/or hashes to expand
  * @param  {Function} cb The callback function
  * @return {void}
  */
@@ -264,15 +274,15 @@ Bitly.prototype.info = function(items, cb) {
     this._sortUrlsAndHash(items, query);
   }
 
-  var request_query = this._generateNiceUrl(query, 'info');
-  this._doRequest(request_query, cb);
+  this._doRequest(this._generateNiceUrl(query, 'info'), cb);
 };
 
 
 
 /**
- * Bitly request for referrers on link
- * @param  {String} link The link or hash to be checked
+ * Request the informations on all referrers for a short url.  This function only
+ * accepts one url (as per the limit of the bitly API)
+ * @param  {String} link The link be checked
  * @param  {Function} cb The callback function
  * @return {void}
  */
@@ -284,16 +294,14 @@ Bitly.prototype.referrers = function(link, cb) {
     domain: this.config.domain
   };
 
-  var type = (this._urlCheck(link)) ? 'shortUrl' : 'hash';
-  query[type] = link;
+  query[(this._urlCheck(link)) ? 'shortUrl' : 'hash'] = link;
 
-  var request_query = this._generateNiceUrl(query, 'referrers');
-  this._doRequest(request_query, cb);
+  this._doRequest(this._generateNiceUrl(query, 'referrers'), cb);
 };
 
 /**
- * Bitly request for countries on link
- * @param  {String} link The link or hash to be checked
+ * Request the information on all countries for a short url.  This function only
+ * accepts one url (as per the limit of the bitly API)
  * @param  {Function} cb The callback function
  * @return {void}
  */
@@ -305,18 +313,16 @@ Bitly.prototype.countries = function(link, cb) {
     domain: this.config.domain
   };
 
-  var type = (this._urlCheck(link)) ? 'shortUrl' : 'hash';
-  query[type] = link;
+  query[(this._urlCheck(link)) ? 'shortUrl' : 'hash'] = link;
 
-  var request_query = this._generateNiceUrl(query, 'countries');
-  this._doRequest(request_query, cb);
+  this._doRequest(this._generateNiceUrl(query, 'countries'), cb);
 };
 
 /**
- * Bitly request for prodomain
- * @param  {[type]} domain [description]
- * @param  {[type]} cb     [description]
- * @return {[type]}
+ * Request to confirm a pro-domain it set up with bitly
+ * @param  {String} domain The domain to be checked
+ * @param  {Function} cb The callback function
+ * @return {void}
  */
 Bitly.prototype.bitlyProDomain = function(domain, cb) {
   var query = {
@@ -326,30 +332,16 @@ Bitly.prototype.bitlyProDomain = function(domain, cb) {
     domain: domain
   };
 
-  var request_query = this._generateNiceUrl(query, 'bitly_pro_domain');
-  this._doRequest(request_query, cb);
+  this._doRequest(this._generateNiceUrl(query, 'bitly_pro_domain'), cb);
 };
 
 /**
- * Authenticate user
- * @param  {String} x_login    Username
- * @param  {String} x_password Password
+ * Request to validate that a login + API key are enabled with Bitly
+ * @param  {String} x_login   The login to be validated
+ * @param  {String} x_apiKey  The API key to be validated
  * @param  {Function} cb The callback
  * @return {void}
  */
-Bitly.prototype.authenticate = function(x_login, x_password, cb) {
-  var query = {
-    login: this.config.login,
-    apiKey: this.config.api_key,
-    format: this.config.format,
-    x_login: x_login,
-    x_password: x_password
-  };
-
-  var request_query = this._generateNiceUrl(query, 'authenticate');
-  this._doRequest(request_query, cb);
-};
-
 Bitly.prototype.validate = function(x_login, x_apiKey, cb) {
   var query = {
     login: this.config.login,
@@ -359,10 +351,8 @@ Bitly.prototype.validate = function(x_login, x_apiKey, cb) {
     x_apiKey: x_apiKey
   };
 
-  var request_query = this._generateNiceUrl(query, 'validate');
-  this._doRequest(request_query, cb);
+  this._doRequest(this._generateNiceUrl(query, 'validate'), cb);
 }
 
-
-
+// Export as main entry point in this module
 module.exports = Bitly;
