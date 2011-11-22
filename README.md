@@ -1,6 +1,9 @@
 node-bitly - bit.ly API for nodejs
 ====================
 
+[![Build Status](https://secure.travis-ci.org/tanepiper/node-bitly.png)](http://travis-ci.org/tanepiper/node-bitly)
+
+
 This module makes the [bit.ly](http://bitly.com) API accessible via NodeJS
 
 Installation
