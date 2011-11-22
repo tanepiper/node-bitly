@@ -16,6 +16,9 @@
   },
   "engines": { "node": ">= 0.4.0" },
   "scripts": {
-    "test": "make test"
+    "test": "node_modules/.bin/nodeunit test"
+  },
+  "devDependencies": {
+    "nodeunit": ">=0.6.2"
   }
 }

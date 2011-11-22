@@ -86,6 +86,26 @@ Bitly.prototype._urlCheck = function(str) {
 };
 
 /**
+ * Function to check through an array of items to check for short urls or hashes
+ * @param  {Array} items The array of items to be checked
+ * @param  {Object} The query object
+ */
+Bitly.prototype._sortUrlsAndHash = function(items, query) {
+  var shortUrl = [];
+  var hash = [];
+  var i = 0, j = items.length;
+  for(; i < j; i++) {
+    if (this._urlCheck(items[i])) {
+      shortUrl.push(items[i])
+    } else {
+      hash.push(items[i]);
+    }
+  }
+  if (shortUrl.length > 0) query.shortUrl = shortUrl;
+  if (hash.length > 0) query.hash = hash;
+}
+
+/**
  * Bitly request to shorten a URL
  * @param  {String} longUrl The URL to be shortened
  * @param  {Function} cb The callback function with the results
@@ -111,24 +131,19 @@ Bitly.prototype.shorten = function(longUrl, cb) {
  * @return {void}
  */
 Bitly.prototype.expand = function(items, cb) {
-  var shortUrl = [];
-  var hash = [];
-  while (items.length > 0) {
-    var item_to_check = items.pop();
-    if (this._urlCheck(item_to_check)) {
-      shortUrl.push(item_to_check);
-    } else {
-      hash.push(item_to_check);
-    }
-  }
   var query = {
     login: this.config.login,
     apiKey: this.config.api_key,
     format: this.config.format,
-    shortUrl: shortUrl,
-    hash: hash,
     domain: this.config.domain
   };
+
+  if (typeof items === 'string') {
+    var type = (this._urlCheck(items)) ? 'shortUrl' : 'hash';
+    query[type] = items;
+  } else {
+    this._sortUrlsAndHash(items, query);
+  }
 
   var request_query = this._generateNiceUrl(query, 'expand');
   this._doRequest(request_query, cb);
@@ -141,24 +156,20 @@ Bitly.prototype.expand = function(items, cb) {
  * @return {void}
  */
 Bitly.prototype.clicks = function(items, cb) {
-  var shortUrl = [];
-  var hash = [];
-  while (items.length > 0) {
-    var item_to_check = items.pop();
-    if (this._urlCheck(item_to_check)) {
-      shortUrl.push(item_to_check);
-    } else {
-      hash.push(item_to_check);
-    }
-  }
   var query = {
     login: this.config.login,
     apiKey: this.config.api_key,
     format: this.config.format,
-    shortUrl: shortUrl,
-    hash: hash,
     domain: this.config.domain
   };
+
+  if (typeof items === 'string') {
+    var type = (this._urlCheck(items)) ? 'shortUrl' : 'hash';
+    query[type] = items;
+  } else {
+    this._sortUrlsAndHash(items, query);
+  }
+
   var request_query = this._generateNiceUrl(query, 'clicks');
   this._doRequest(request_query, cb);
 };
@@ -189,24 +200,19 @@ Bitly.prototype.lookup = function(links, cb) {
  * @return {void}
  */
 Bitly.prototype.info = function(items, cb) {
-  var shortUrl = [];
-  var hash = [];
-  while (items.length > 0) {
-    var item_to_check = items.pop();
-    if (this._urlCheck(item_to_check)) {
-      shortUrl.push(item_to_check);
-    } else {
-      hash.push(item_to_check);
-    }
-  }
   var query = {
     login: this.config.login,
     apiKey: this.config.api_key,
     format: this.config.format,
-    shortUrl: shortUrl,
-    hash: hash,
     domain: this.config.domain
   };
+
+  if (typeof items === 'string') {
+    var type = (this._urlCheck(items)) ? 'shortUrl' : 'hash';
+    query[type] = items;
+  } else {
+    this._sortUrlsAndHash(items, query);
+  }
 
   var request_query = this._generateNiceUrl(query, 'info');
   this._doRequest(request_query, cb);
