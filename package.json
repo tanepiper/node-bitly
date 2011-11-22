@@ -2,7 +2,7 @@
   "name": "bitly",
   "description": "A Bit.ly API library for Node.JS",
   "tags": ["url", "bitly", "shortner", "util"],
-  "version": "1.1.2",
+  "version": "1.2.0",
   "author": "Tane Piper <piper.tane@gmail.com>",
   "contributors": [
     { "name": "Tane Piper", "email": "piper.tane@gmail.com" },
