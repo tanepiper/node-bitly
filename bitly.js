@@ -82,7 +82,7 @@ Bitly.prototype._doRequest = function(request_query, cb) {
       });
   })
   .on('error', function(e) {
-      callback(e);
+      cb(e);
   });
 };
 
