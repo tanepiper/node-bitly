@@ -76,7 +76,7 @@ Bitly.prototype._doRequest = function(request_query, cb) {
           try {
             result = JSON.parse(urldata);
           } catch (exp) {
-            result = {'status_code': 500, 'status_text': 'JSON Parse Failed'}
+            result = {'status_code': 500, 'status_text': 'JSON Parse Failed'};
           }
           cb(null, result);
       });
@@ -93,7 +93,7 @@ Bitly.prototype._doRequest = function(request_query, cb) {
  */
 Bitly.prototype._urlCheck = function(str) {
     var v = new RegExp();
-    v.compile("^[A-Za-z]+://[A-Za-z0-9-_]+\\.[A-Za-z0-9-_%&\?\/.=]+$");
+    v.compile("^[A-Za-z]+://[A-Za-z0-9-_]+\\.[A-Za-z0-9-_%&\\?\/.=]+$");
     if (!v.test(str)) return false;
     return true;
 };
@@ -110,14 +110,14 @@ Bitly.prototype._sortUrlsAndHash = function(items, query) {
   var i = 0, j = items.length;
   for(; i < j; i++) {
     if (this._urlCheck(items[i])) {
-      shortUrl.push(items[i])
+      shortUrl.push(items[i]);
     } else {
       hash.push(items[i]);
     }
   }
   if (shortUrl.length > 0) query.shortUrl = shortUrl;
   if (hash.length > 0) query.hash = hash;
-}
+};
 
 /**
  * Request to shorten one long url
@@ -352,7 +352,7 @@ Bitly.prototype.validate = function(x_login, x_apiKey, cb) {
   };
 
   this._doRequest(this._generateNiceUrl(query, 'validate'), cb);
-}
+};
 
 // Export as main entry point in this module
 module.exports = Bitly;

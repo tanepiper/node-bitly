@@ -1,10 +1,16 @@
-var Bitly = require('../bitly');
+var Bitly = require('../');
 
 var bitly_user = 'bitlynodejs';
 var bitly_key = 'R_8a2a91d31932dc7fda5468033dfe3c15';
 
 
 module.exports = {
+  'test valid url': function(test) {
+    var bitly = new Bitly(bitly_user, bitly_key);
+    test.ok(true, bitly._urlCheck('http://tanepiper.com/test?q=test'));
+    test.done();
+  },
+
   'shorten url': function(test) {
     var bitly = new Bitly(bitly_user, bitly_key);
     bitly.shorten('http://tanepiper.com', function(error, result) {
@@ -218,7 +224,7 @@ module.exports = {
       test.ifError(error);
       test.deepEqual(result.status_code, 200);
       test.done();
-    })
+    });
   }
 
-}
+};
