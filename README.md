@@ -3,6 +3,8 @@ node-bitly - Bitly API for nodejs
 
 [![Build Status](https://secure.travis-ci.org/tanepiper/node-bitly.png)](http://travis-ci.org/tanepiper/node-bitly)
 
+[![NPM version](https://badge.fury.io/js/bitly.png)](http://badge.fury.io/js/bitly)
+
 This module provides calls to the [Bitly](http://bitly.com) API for [Nodejs](http://nodejs.org).
 For more information on the API request and responses visit the [Bitly API docs](http://code.google.com/p/bitly-api/wiki/ApiDocumentation)
 
