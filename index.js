@@ -122,10 +122,15 @@ Bitly.prototype._sortUrlsAndHash = function(items, query) {
 /**
  * Request to shorten one long url
  * @param  {String} longUrl The URL to be shortened
+ * @param  {String} domain The domain to use (optional)
  * @param  {Function} cb The callback function with the results
  * @return {void}
  */
-Bitly.prototype.shorten = function(longUrl, cb) {
+Bitly.prototype.shorten = function(longUrl, domain, cb) {
+  if (typeof(domain) == 'function') {
+    cb = domain;
+    domain = null;
+  }
   var query = {
     login: this.config.login,
     apiKey: this.config.api_key,
@@ -133,6 +138,10 @@ Bitly.prototype.shorten = function(longUrl, cb) {
     longUrl: longUrl,
     domain: this.config.domain
   };
+
+  if (domain) {
+    query.domain = domain;
+  }
 
   this._doRequest(this._generateNiceUrl(query, 'shorten'), cb);
 };
