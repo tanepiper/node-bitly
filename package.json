@@ -7,7 +7,7 @@
     "shortner",
     "util"
   ],
-  "version": "1.2.5",
+  "version": "1.3.0",
   "author": "Tane Piper <piper.tane@gmail.com>",
   "contributors": [
     {
@@ -30,13 +30,13 @@
     "url": "http://github.com/tanepiper/node-bitly.git"
   },
   "engines": {
-    "node": ">= 0.4.0"
+    "node": ">= 0.10.0"
   },
   "scripts": {
     "test": "node_modules/.bin/nodeunit test"
   },
   "devDependencies": {
-    "nodeunit": ">=0.6.2"
+    "nodeunit": "^0.9.1"
   },
   "dependencies": {
     "q": "^1.4.1"

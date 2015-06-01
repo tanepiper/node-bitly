@@ -18,6 +18,11 @@ Usage
 -----
     var Bitly = require('bitly');
     var bitly = new Bitly('<YOUR USERNAME>', '<YOUR API KEY>');
+    
+    
+    /**
+     * With callback
+     */
     bitly.shorten('https://github.com/tanepiper/node-bitly', function(err, response) {
       if (err) throw err;
 
@@ -26,6 +31,19 @@ Usage
 
       // Do something with data
     });
+    
+    /**
+     * With promise
+     */
+    bitly.shorten('https://github.com/tanepiper/node-bitly')
+      .then(function(response) {
+        // See http://code.google.com/p/bitly-api/wiki/ApiDocumentation for format of returned object
+        var short_url = response.data.url
+
+        // Do something with data
+      }, function(error) {
+        throw error;
+      });
 
 Tests
 -----
