@@ -1,24 +1,44 @@
 {
   "name": "bitly",
   "description": "A Bit.ly API library for Node.JS",
-  "tags": ["url", "bitly", "shortner", "util"],
+  "tags": [
+    "url",
+    "bitly",
+    "shortner",
+    "util"
+  ],
   "version": "1.2.5",
   "author": "Tane Piper <piper.tane@gmail.com>",
   "contributors": [
-    { "name": "Tane Piper", "email": "piper.tane@gmail.com" },
-    { "name": "François de Metz", "email": "francois@2metz.fr" },
-    { "name": "zephrax"},
-    { "name": "jessefulton" }
+    {
+      "name": "Tane Piper",
+      "email": "piper.tane@gmail.com"
+    },
+    {
+      "name": "François de Metz",
+      "email": "francois@2metz.fr"
+    },
+    {
+      "name": "zephrax"
+    },
+    {
+      "name": "jessefulton"
+    }
   ],
   "repository": {
     "type": "git",
     "url": "http://github.com/tanepiper/node-bitly.git"
   },
-  "engines": { "node": ">= 0.4.0" },
+  "engines": {
+    "node": ">= 0.4.0"
+  },
   "scripts": {
     "test": "node_modules/.bin/nodeunit test"
   },
   "devDependencies": {
     "nodeunit": ">=0.6.2"
+  },
+  "dependencies": {
+    "q": "^1.4.1"
   }
 }
