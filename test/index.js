@@ -493,6 +493,24 @@ module.exports = {
       test.ifError(error);
       test.done();
     });
+  },
+
+  'Return error on invalid API key with callback': function(test) {
+    var bitly = new Bitly(bitly_user, 'xxxxxx');
+    bitly.validate(bitly_user, bitly_key, function(error, result) {
+      test.throws(error);
+      test.done();
+    });
+  },
+
+  'Return error on invalid API key with promise': function(test) {
+    var bitly = new Bitly(bitly_user, 'xxxxxx');
+    bitly.validate(bitly_user, bitly_key).then(function(result) {
+      // None
+    }, function(error) {
+      test.throws(error);
+      test.done();
+    });
   }
 
 };

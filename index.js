@@ -87,10 +87,13 @@ Bitly.prototype._doRequest = function(request_query, cb) {
           result = {'status_code': 500, 'status_text': 'JSON Parse Failed'};
         }
 
-        if (deferred) {
-          return deferred.resolve(result);
+        if (result.status_code !== 200) {
+          var error = new Error(result.status_txt);
+          error.code = result.status_code;
+          return deferred ? deferred.reject(error) : cb(error);
         }
-        return cb(null, result);
+        return deferred ? deferred.resolve(result) : cb(null, result);
+
       });
   })
   .on('error', function(e) {
