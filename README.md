@@ -26,7 +26,7 @@ Usage
     bitly.shorten('https://github.com/tanepiper/node-bitly', function(err, response) {
       if (err) throw err;
 
-      // See http://code.google.com/p/bitly-api/wiki/ApiDocumentation for format of returned object
+      // See http://dev.bitly.com/ for format of returned object
       var short_url = response.data.url
 
       // Do something with data
@@ -37,7 +37,7 @@ Usage
      */
     bitly.shorten('https://github.com/tanepiper/node-bitly')
       .then(function(response) {
-        // See http://code.google.com/p/bitly-api/wiki/ApiDocumentation for format of returned object
+        // See http://dev.bitly.com/ for format of returned object
         var short_url = response.data.url
 
         // Do something with data
