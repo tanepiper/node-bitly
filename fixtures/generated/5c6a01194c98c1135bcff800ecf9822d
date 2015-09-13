@@ -1,0 +1,1 @@
+{ "status_code": 200, "status_txt": "OK", "data": { "expand": [ { "short_url": "http:\/\/bit.ly\/1KjIwXl", "long_url": "http:\/\/example.com\/", "user_hash": "1KjIwXl", "global_hash": "VDcn" }, { "hash": "VDcn", "long_url": "http:\/\/example.com\/", "user_hash": "VDcn", "global_hash": "VDcn" } ] } }

@@ -33,10 +33,11 @@
     "node": ">= 0.10.0"
   },
   "scripts": {
-    "test": "node_modules/.bin/nodeunit test"
+    "test": "VCR_MODE=cache node_modules/.bin/nodeunit test"
   },
   "devDependencies": {
-    "nodeunit": "^0.9.1"
+    "nodeunit": "^0.9.1",
+    "sepia": "^2.0.1"
   },
   "dependencies": {
     "q": "^1.4.1"

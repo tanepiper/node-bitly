@@ -1,0 +1,14 @@
+{
+  "statusCode": 200,
+  "headers": {
+    "server": "nginx",
+    "date": "Sun, 13 Sep 2015 16:02:10 GMT",
+    "content-type": "application/json; charset=utf-8",
+    "content-length": "12226",
+    "connection": "keep-alive",
+    "etag": "\"6dd184c61fbb661a16c7997bb5a213c1b64aaabf\""
+  },
+  "url": "http://api-ssl.bitly.com/v3/referrers?format=json&domain=bit.ly&hash=VDcn&access_token=eb1b99efe83c7d029e7600a6b38e32d1c9c2c6d9",
+  "time": 1267,
+  "request": {}
+}

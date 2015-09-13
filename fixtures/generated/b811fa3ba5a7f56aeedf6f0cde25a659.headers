@@ -1,0 +1,14 @@
+{
+  "statusCode": 200,
+  "headers": {
+    "server": "nginx",
+    "date": "Sun, 13 Sep 2015 16:02:07 GMT",
+    "content-type": "application/json; charset=utf-8",
+    "content-length": "97",
+    "connection": "keep-alive",
+    "etag": "\"bb9e548cca26dd7b88413f77fd2d428a8027e3d4\""
+  },
+  "url": "https://api-ssl.bitly.com/v3/bitly_pro_domain?format=json&domain=nyti.ms&access_token=eb1b99efe83c7d029e7600a6b38e32d1c9c2c6d9",
+  "time": 132,
+  "request": {}
+}

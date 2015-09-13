@@ -1,0 +1,1 @@
+{"status_code": 200, "data": {"info": [{"hash": "VDcn", "title": "Example Domain", "created_at": 1227586592, "created_by": "bitly", "global_hash": "VDcn", "user_hash": "VDcn"}, {"title": "Example Domain", "short_url": "http://bit.ly/1KjIwXl", "created_at": 1442158938, "created_by": "bitlynodejsfork", "global_hash": "VDcn", "user_hash": "1KjIwXl"}]}, "status_txt": "OK"}
