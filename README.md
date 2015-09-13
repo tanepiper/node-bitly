@@ -51,15 +51,14 @@ To run tests type `npm test`
 
 Bit.ly Features
 ---------------
-Currently this module does NOT support the OAuth features of the Bitly API.  As such
-this module is limited to the following API methods:
+This module is limited to the following API methods:
 
 * shorten
 * expand
-* validate
 * clicks / clicks_by_minute / clicks_by_day
 * referrers
 * countries
 * bitly_pro_domain
 * lookup
 * info
+* link_edit
