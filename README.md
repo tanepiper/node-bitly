@@ -17,8 +17,9 @@ You can also install via git by cloning: `git clone https://github.com/tanepiper
 Usage
 -----
     var Bitly = require('bitly');
-    var bitly = new Bitly('<YOUR USERNAME>', '<YOUR API KEY>');
-    
+    var bitly = new Bitly('<YOUR ACCESS TOKEN>');
+    // To get your access token, visit https://bitly.com/a/oauth_apps (under Generic Access Token)
+
     
     /**
      * With callback
