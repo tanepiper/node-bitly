@@ -1,0 +1,1 @@
+{"status_code": 200, "data": {"clicks": [{"user_clicks": 65140, "global_hash": "VDcn", "hash": "VDcn", "user_hash": "VDcn", "global_clicks": 65140}, {"short_url": "http://bit.ly/1KjIwXl", "global_hash": "VDcn", "user_clicks": 0, "user_hash": "1KjIwXl", "global_clicks": 65140}]}, "status_txt": "OK"}

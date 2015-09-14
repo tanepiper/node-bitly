@@ -1,0 +1,14 @@
+{
+  "statusCode": 200,
+  "headers": {
+    "server": "nginx",
+    "date": "Sun, 13 Sep 2015 16:02:08 GMT",
+    "content-type": "application/json; charset=utf-8",
+    "content-length": "299",
+    "connection": "keep-alive",
+    "etag": "\"8744be644f00b78fa23582f090e9a7f4d2f8cc36\""
+  },
+  "url": "https://api-ssl.bitly.com/v3/clicks?format=json&domain=bit.ly&shortUrl=http%3A%2F%2Fbit.ly%2F1KjIwXl&hash=VDcn&access_token=eb1b99efe83c7d029e7600a6b38e32d1c9c2c6d9",
+  "time": 78,
+  "request": {}
+}

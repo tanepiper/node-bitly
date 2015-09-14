@@ -1,28 +1,38 @@
 var Bitly = require('../');
+var sepia = require('sepia');
 
-var bitly_user = 'bitlynodejs';
-var bitly_key = 'R_8a2a91d31932dc7fda5468033dfe3c15';
-
+var bitly_token = 'eb1b99efe83c7d029e7600a6b38e32d1c9c2c6d9';
+var bitly;
+var LONG_URL = 'http://example.com/';
+var SHORT_URL = 'http://bit.ly/1KjIwXl';
+var BITLY_HASH = 'VDcn';
 
 module.exports = {
-  'test valid url': function(test) {
-    var bitly = new Bitly(bitly_user, bitly_key);
-    test.ok(true, bitly._urlCheck('http://tanepiper.com/test?q=test'));
+  'setUp': function(callback) {
+    bitly = new Bitly(bitly_token);
+    callback();
+  },
+
+  'tearDown': function(callback) {
+    bitly = undefined;
+    callback();
+  },
+
+  'Test valid url': function(test) {
+    test.ok(true, bitly._urlCheck(LONG_URL));
     test.done();
   },
 
-  'shorten url with callback': function(test) {
-    var bitly = new Bitly(bitly_user, bitly_key);
-    bitly.shorten('http://tanepiper.com', function(error, result) {
+  'Shorten url with callback': function(test) {
+    bitly.shorten(LONG_URL, function(error, result) {
       test.ifError(error);
       test.deepEqual(result.status_code, 200);
       test.done();
     });
   },
 
-  'shorten url with promise': function(test) {
-    var bitly = new Bitly(bitly_user, bitly_key);
-    bitly.shorten('http://tanepiper.com').then(function(result) {
+  'Shorten url with promise': function(test) {
+    bitly.shorten(LONG_URL).then(function(result) {
       test.deepEqual(result.status_code, 200);
       test.done();
     }, function(error) {
@@ -32,7 +42,6 @@ module.exports = {
   },
 
   'Check info on bitly pro-domain with callback': function(test) {
-    var bitly = new Bitly(bitly_user, bitly_key);
     bitly.bitlyProDomain('nyti.ms', function(error, result) {
       test.ifError(error);
       test.deepEqual(result.status_code, 200);
@@ -41,7 +50,6 @@ module.exports = {
   },
 
   'Check info on bitly pro-domain with promise': function(test) {
-    var bitly = new Bitly(bitly_user, bitly_key);
     bitly.bitlyProDomain('nyti.ms').then(function(result) {
       test.deepEqual(result.status_code, 200);
       test.done();
@@ -52,8 +60,7 @@ module.exports = {
   },
 
   'Get info about single short url with callback': function(test) {
-    var bitly = new Bitly(bitly_user, bitly_key);
-    bitly.info('http://bit.ly/9lCnZ9', function(error, result) {
+    bitly.info(SHORT_URL, function(error, result) {
       test.ifError(error);
       test.deepEqual(result.status_code, 200);
       test.done();
@@ -61,8 +68,7 @@ module.exports = {
   },
 
   'Get info about single short url with promise': function(test) {
-    var bitly = new Bitly(bitly_user, bitly_key);
-    bitly.info('http://bit.ly/9lCnZ9').then(function(result) {
+    bitly.info(SHORT_URL).then(function(result) {
       test.deepEqual(result.status_code, 200);
       test.done();
     }, function(error) {
@@ -72,8 +78,7 @@ module.exports = {
   },
 
   'Get info about single hash with callback': function(test) {
-    var bitly = new Bitly(bitly_user, bitly_key);
-    bitly.info('6uBruH', function(error, result) {
+    bitly.info(BITLY_HASH, function(error, result) {
       test.ifError(error);
       test.deepEqual(result.status_code, 200);
       test.done();
@@ -81,8 +86,7 @@ module.exports = {
   },
 
   'Get info about single hash with promise': function(test) {
-    var bitly = new Bitly(bitly_user, bitly_key);
-    bitly.info('6uBruH').then(function(result) {
+    bitly.info(BITLY_HASH).then(function(result) {
       test.deepEqual(result.status_code, 200);
       test.done();
     }, function(error) {
@@ -92,8 +96,7 @@ module.exports = {
   },
 
   'Get info about mixed url and hash with callback': function(test) {
-    var bitly = new Bitly(bitly_user, bitly_key);
-    bitly.info(['http://bit.ly/9lCnZ9', '6uBruH'], function(error, result) {
+    bitly.info([SHORT_URL, BITLY_HASH], function(error, result) {
       test.ifError(error);
       test.deepEqual(result.status_code, 200);
       test.done();
@@ -101,8 +104,7 @@ module.exports = {
   },
 
   'Get info about mixed url and hash with promise': function(test) {
-    var bitly = new Bitly(bitly_user, bitly_key);
-    bitly.info(['http://bit.ly/9lCnZ9', '6uBruH']).then(function(result) {
+    bitly.info([SHORT_URL, BITLY_HASH]).then(function(result) {
       test.deepEqual(result.status_code, 200);
       test.done();
     }, function(error) {
@@ -112,8 +114,7 @@ module.exports = {
   },
 
   'Get clicks for single short url with callback': function(test) {
-    var bitly = new Bitly(bitly_user, bitly_key);
-    bitly.clicks('http://bit.ly/9lCnZ9', function(error, result) {
+    bitly.clicks(SHORT_URL, function(error, result) {
       test.ifError(error);
       test.deepEqual(result.status_code, 200);
       test.done();
@@ -121,8 +122,7 @@ module.exports = {
   },
 
   'Get clicks for single short url with promise': function(test) {
-    var bitly = new Bitly(bitly_user, bitly_key);
-    bitly.clicks('http://bit.ly/9lCnZ9').then(function(result) {
+    bitly.clicks(SHORT_URL).then(function(result) {
       test.deepEqual(result.status_code, 200);
       test.done();
     }, function(error) {
@@ -132,8 +132,7 @@ module.exports = {
   },
 
   'Get clicks for single hash with callback': function(test) {
-    var bitly = new Bitly(bitly_user, bitly_key);
-    bitly.clicks('6uBruH', function(error, result) {
+    bitly.clicks(BITLY_HASH, function(error, result) {
       test.ifError(error);
       test.deepEqual(result.status_code, 200);
       test.done();
@@ -141,8 +140,7 @@ module.exports = {
   },
 
   'Get clicks for single hash with promise': function(test) {
-    var bitly = new Bitly(bitly_user, bitly_key);
-    bitly.clicks('6uBruH').then(function(result) {
+    bitly.clicks(BITLY_HASH).then(function(result) {
       test.deepEqual(result.status_code, 200);
       test.done();
     }, function(error) {
@@ -152,8 +150,7 @@ module.exports = {
   },
 
   'Get clicks for mixed url and hash with callback': function(test) {
-    var bitly = new Bitly(bitly_user, bitly_key);
-    bitly.clicks(['http://bit.ly/9lCnZ9', '6uBruH'], function(error, result) {
+    bitly.clicks([SHORT_URL, BITLY_HASH], function(error, result) {
       test.ifError(error);
       test.deepEqual(result.status_code, 200);
       test.done();
@@ -161,8 +158,7 @@ module.exports = {
   },
 
   'Get clicks for mixed url and hash with promise': function(test) {
-    var bitly = new Bitly(bitly_user, bitly_key);
-    bitly.clicks(['http://bit.ly/9lCnZ9', '6uBruH']).then(function(result) {
+    bitly.clicks([SHORT_URL, BITLY_HASH]).then(function(result) {
       test.deepEqual(result.status_code, 200);
       test.done();
     }, function(error) {
@@ -172,8 +168,7 @@ module.exports = {
   },
 
   'Get clicks by minute for single short url with callback': function(test) {
-    var bitly = new Bitly(bitly_user, bitly_key);
-    bitly.clicksByMinute('http://bit.ly/9lCnZ9', function(error, result) {
+    bitly.clicksByMinute(SHORT_URL, function(error, result) {
       test.ifError(error);
       test.deepEqual(result.status_code, 200);
       test.done();
@@ -181,8 +176,7 @@ module.exports = {
   },
 
   'Get clicks by minute for single short url with promise': function(test) {
-    var bitly = new Bitly(bitly_user, bitly_key);
-    bitly.clicksByMinute('http://bit.ly/9lCnZ9').then(function(result) {
+    bitly.clicksByMinute(SHORT_URL).then(function(result) {
       test.deepEqual(result.status_code, 200);
       test.done();
     }, function(error) {
@@ -192,8 +186,7 @@ module.exports = {
   },
 
   'Get clicks by minute for single hash with callback': function(test) {
-    var bitly = new Bitly(bitly_user, bitly_key);
-    bitly.clicksByMinute('6uBruH', function(error, result) {
+    bitly.clicksByMinute(BITLY_HASH, function(error, result) {
       test.ifError(error);
       test.deepEqual(result.status_code, 200);
       test.done();
@@ -201,8 +194,7 @@ module.exports = {
   },
 
   'Get clicks by minute for single hash with promise': function(test) {
-    var bitly = new Bitly(bitly_user, bitly_key);
-    bitly.clicksByMinute('6uBruH').then(function(result) {
+    bitly.clicksByMinute(BITLY_HASH).then(function(result) {
       test.deepEqual(result.status_code, 200);
       test.done();
     }, function(error) {
@@ -212,8 +204,7 @@ module.exports = {
   },
 
   'Get clicks by minute for mixed url and hash with callback': function(test) {
-    var bitly = new Bitly(bitly_user, bitly_key);
-    bitly.clicksByMinute(['http://bit.ly/9lCnZ9', '6uBruH'], function(error, result) {
+    bitly.clicksByMinute([SHORT_URL, BITLY_HASH], function(error, result) {
       test.ifError(error);
       test.deepEqual(result.status_code, 200);
       test.done();
@@ -221,8 +212,7 @@ module.exports = {
   },
 
   'Get clicks by minute for mixed url and hash with promise': function(test) {
-    var bitly = new Bitly(bitly_user, bitly_key);
-    bitly.clicksByMinute(['http://bit.ly/9lCnZ9', '6uBruH']).then(function(result) {
+    bitly.clicksByMinute([SHORT_URL, BITLY_HASH]).then(function(result) {
       test.deepEqual(result.status_code, 200);
       test.done();
     }, function(error) {
@@ -232,8 +222,7 @@ module.exports = {
   },
 
   'Get clicks by day for single short url with callback': function(test) {
-    var bitly = new Bitly(bitly_user, bitly_key);
-    bitly.clicksByDay('http://bit.ly/9lCnZ9', function(error, result) {
+    bitly.clicksByDay(SHORT_URL, function(error, result) {
       test.ifError(error);
       test.deepEqual(result.status_code, 200);
       test.done();
@@ -241,8 +230,7 @@ module.exports = {
   },
 
   'Get clicks by day for single short url with promise': function(test) {
-    var bitly = new Bitly(bitly_user, bitly_key);
-    bitly.clicksByDay('http://bit.ly/9lCnZ9').then(function(result) {
+    bitly.clicksByDay(SHORT_URL).then(function(result) {
       test.deepEqual(result.status_code, 200);
       test.done();
     }, function(error) {
@@ -252,8 +240,7 @@ module.exports = {
   },
 
   'Get clicks by day for single hash with callback': function(test) {
-    var bitly = new Bitly(bitly_user, bitly_key);
-    bitly.clicksByDay('6uBruH', function(error, result) {
+    bitly.clicksByDay(BITLY_HASH, function(error, result) {
       test.ifError(error);
       test.deepEqual(result.status_code, 200);
       test.done();
@@ -261,8 +248,7 @@ module.exports = {
   },
 
   'Get clicks by day for single hash with promise': function(test) {
-    var bitly = new Bitly(bitly_user, bitly_key);
-    bitly.clicksByDay('6uBruH').then(function(result) {
+    bitly.clicksByDay(BITLY_HASH).then(function(result) {
       test.deepEqual(result.status_code, 200);
       test.done();
     }, function(error) {
@@ -272,8 +258,7 @@ module.exports = {
   },
 
   'Get clicks by day for mixed url and hash with callback': function(test) {
-    var bitly = new Bitly(bitly_user, bitly_key);
-    bitly.clicksByDay(['http://bit.ly/9lCnZ9', '6uBruH'], function(error, result) {
+    bitly.clicksByDay([SHORT_URL, BITLY_HASH], function(error, result) {
       test.ifError(error);
       test.deepEqual(result.status_code, 200);
       test.done();
@@ -281,8 +266,7 @@ module.exports = {
   },
 
   'Get clicks by day for mixed url and hash with promise': function(test) {
-    var bitly = new Bitly(bitly_user, bitly_key);
-    bitly.clicksByDay(['http://bit.ly/9lCnZ9', '6uBruH']).then(function(result) {
+    bitly.clicksByDay([SHORT_URL, BITLY_HASH]).then(function(result) {
       test.deepEqual(result.status_code, 200);
       test.done();
     }, function(error) {
@@ -293,8 +277,7 @@ module.exports = {
 
 
   'Get referrers for single short url with callback': function(test) {
-    var bitly = new Bitly(bitly_user, bitly_key);
-    bitly.referrers('http://bit.ly/9lCnZ9', function(error, result) {
+    bitly.referrers(SHORT_URL, function(error, result) {
       test.ifError(error);
       test.deepEqual(result.status_code, 200);
       test.done();
@@ -302,8 +285,7 @@ module.exports = {
   },
 
   'Get referrers for single short url with promise': function(test) {
-    var bitly = new Bitly(bitly_user, bitly_key);
-    bitly.referrers('http://bit.ly/9lCnZ9').then(function(result) {
+    bitly.referrers(SHORT_URL).then(function(result) {
       test.deepEqual(result.status_code, 200);
       test.done();
     }, function(error) {
@@ -313,8 +295,7 @@ module.exports = {
   },
 
   'Get referrers for single hash with callback': function(test) {
-    var bitly = new Bitly(bitly_user, bitly_key);
-    bitly.referrers('6uBruH', function(error, result) {
+    bitly.referrers(BITLY_HASH, function(error, result) {
       test.ifError(error);
       test.deepEqual(result.status_code, 200);
       test.done();
@@ -322,8 +303,7 @@ module.exports = {
   },
 
   'Get referrers for single hash with promise': function(test) {
-    var bitly = new Bitly(bitly_user, bitly_key);
-    bitly.referrers('6uBruH').then(function(result) {
+    bitly.referrers(BITLY_HASH).then(function(result) {
       test.deepEqual(result.status_code, 200);
       test.done();
     }, function(error) {
@@ -333,8 +313,7 @@ module.exports = {
   },
 
   'Get countries for single short url with callback': function(test) {
-    var bitly = new Bitly(bitly_user, bitly_key);
-    bitly.countries('http://bit.ly/9lCnZ9', function(error, result) {
+    bitly.countries(SHORT_URL, function(error, result) {
       test.ifError(error);
       test.deepEqual(result.status_code, 200);
       test.done();
@@ -342,8 +321,7 @@ module.exports = {
   },
 
   'Get countries for single short url with promise': function(test) {
-    var bitly = new Bitly(bitly_user, bitly_key);
-    bitly.countries('http://bit.ly/9lCnZ9').then(function(result) {
+    bitly.countries(SHORT_URL).then(function(result) {
       test.deepEqual(result.status_code, 200);
       test.done();
     }, function(error) {
@@ -354,8 +332,7 @@ module.exports = {
 
 
   'Get countries for single hash with callback': function(test) {
-    var bitly = new Bitly(bitly_user, bitly_key);
-    bitly.countries('6uBruH', function(error, result) {
+    bitly.countries(BITLY_HASH, function(error, result) {
       test.ifError(error);
       test.deepEqual(result.status_code, 200);
       test.done();
@@ -363,8 +340,7 @@ module.exports = {
   },
 
   'Get countries for single hash with promise': function(test) {
-    var bitly = new Bitly(bitly_user, bitly_key);
-    bitly.countries('6uBruH').then(function(result) {
+    bitly.countries(BITLY_HASH).then(function(result) {
       test.deepEqual(result.status_code, 200);
       test.done();
     }, function(error) {
@@ -374,8 +350,7 @@ module.exports = {
   },
 
   'Look up information about 1 long url with callback': function(test) {
-    var bitly = new Bitly(bitly_user, bitly_key);
-    bitly.lookup('http://tanepiper.com', function(error, result) {
+    bitly.lookup(LONG_URL, function(error, result) {
       test.ifError(error);
       test.deepEqual(result.status_code, 200);
       test.done();
@@ -383,8 +358,7 @@ module.exports = {
   },
 
   'Look up information about 1 long url with promise': function(test) {
-    var bitly = new Bitly(bitly_user, bitly_key);
-    bitly.lookup('http://tanepiper.com').then(function(result) {
+    bitly.lookup(LONG_URL).then(function(result) {
       test.deepEqual(result.status_code, 200);
       test.done();
     }, function(error) {
@@ -394,8 +368,7 @@ module.exports = {
   },
 
   'Look up information about multiple long url with callback': function(test) {
-    var bitly = new Bitly(bitly_user, bitly_key);
-    bitly.lookup(['http://tanepiper.com', 'http://nodejs.org'], function(error, result) {
+    bitly.lookup([LONG_URL, 'http://nodejs.org'], function(error, result) {
       test.ifError(error);
       test.deepEqual(result.status_code, 200);
       test.done();
@@ -403,8 +376,7 @@ module.exports = {
   },
 
   'Look up information about multiple long url with promise': function(test) {
-    var bitly = new Bitly(bitly_user, bitly_key);
-    bitly.lookup(['http://tanepiper.com', 'http://nodejs.org']).then(function(result) {
+    bitly.lookup([LONG_URL, 'http://nodejs.org']).then(function(result) {
       test.deepEqual(result.status_code, 200);
       test.done();
     }, function(error) {
@@ -414,8 +386,7 @@ module.exports = {
   },
 
   'Expand for single short url with callback': function(test) {
-    var bitly = new Bitly(bitly_user, bitly_key);
-    bitly.expand('http://bit.ly/9lCnZ9', function(error, result) {
+    bitly.expand(SHORT_URL, function(error, result) {
       test.ifError(error);
       test.deepEqual(result.status_code, 200);
       test.done();
@@ -423,8 +394,7 @@ module.exports = {
   },
 
   'Expand for single short url with promise': function(test) {
-    var bitly = new Bitly(bitly_user, bitly_key);
-    bitly.expand('http://bit.ly/9lCnZ9').then(function(result) {
+    bitly.expand(SHORT_URL).then(function(result) {
       test.deepEqual(result.status_code, 200);
       test.done();
     }, function(error) {
@@ -435,8 +405,7 @@ module.exports = {
 
 
   'Expand for single hash with callback': function(test) {
-    var bitly = new Bitly(bitly_user, bitly_key);
-    bitly.expand('6uBruH', function(error, result) {
+    bitly.expand(BITLY_HASH, function(error, result) {
       test.ifError(error);
       test.deepEqual(result.status_code, 200);
       test.done();
@@ -444,8 +413,7 @@ module.exports = {
   },
 
   'Expand for single hash with promise': function(test) {
-    var bitly = new Bitly(bitly_user, bitly_key);
-    bitly.expand('6uBruH').then(function(result) {
+    bitly.expand(BITLY_HASH).then(function(result) {
       test.deepEqual(result.status_code, 200);
       test.done();
     }, function(error) {
@@ -455,8 +423,7 @@ module.exports = {
   },
 
   'Expand for mixed url and hash with callback': function(test) {
-    var bitly = new Bitly(bitly_user, bitly_key);
-    bitly.expand(['http://bit.ly/9lCnZ9', '6uBruH'], function(error, result) {
+    bitly.expand([SHORT_URL, BITLY_HASH], function(error, result) {
       test.ifError(error);
       test.deepEqual(result.status_code, 200);
       test.done();
@@ -464,8 +431,7 @@ module.exports = {
   },
 
   'Expand for mixed url and hash with promise': function(test) {
-    var bitly = new Bitly(bitly_user, bitly_key);
-    bitly.expand(['http://bit.ly/9lCnZ9', '6uBruH']).then(function(result) {
+    bitly.expand([SHORT_URL, BITLY_HASH]).then(function(result) {
       test.deepEqual(result.status_code, 200);
       test.done();
     }, function(error) {
@@ -474,43 +440,71 @@ module.exports = {
     });
   },
 
-
-  'Validate any bitly user and API key with callback': function(test) {
-    var bitly = new Bitly(bitly_user, bitly_key);
-    bitly.validate(bitly_user, bitly_key, function(error, result) {
+  'Edit the title of an existing link': function(test) {
+    test.expect(2);
+    bitly.linkEdit('title', SHORT_URL, 'Edited title', function(error, result) {
       test.ifError(error);
       test.deepEqual(result.status_code, 200);
       test.done();
     });
   },
 
-  'Validate any bitly user and API key with promise': function(test) {
-    var bitly = new Bitly(bitly_user, bitly_key);
-    bitly.validate(bitly_user, bitly_key).then(function(result) {
+  'Edit the note of an existing link': function(test) {
+    test.expect(2);
+    bitly.linkEdit('note', SHORT_URL, 'Edited note', function(error, result) {
+      test.ifError(error);
       test.deepEqual(result.status_code, 200);
       test.done();
-    }, function(error) {
+    });
+  },
+
+  'Edit the private status of an existing link': function(test) {
+    test.expect(2);
+    bitly.linkEdit('private', SHORT_URL, 'true', function(error, result) {
       test.ifError(error);
+      test.deepEqual(result.status_code, 200);
       test.done();
     });
   },
 
-  'Return error on invalid API key with callback': function(test) {
-    var bitly = new Bitly(bitly_user, 'xxxxxx');
-    bitly.validate(bitly_user, bitly_key, function(error, result) {
-      test.throws(error);
+  'Edit the user timestamp of an existing link': function(test) {
+    test.expect(2);
+    bitly.linkEdit('user_ts', SHORT_URL, '522585000', function(error, result) {
+      test.ifError(error);
+      test.deepEqual(result.status_code, 200);
       test.done();
     });
   },
 
-  'Return error on invalid API key with promise': function(test) {
-    var bitly = new Bitly(bitly_user, 'xxxxxx');
-    bitly.validate(bitly_user, bitly_key).then(function(result) {
-      // None
-    }, function(error) {
-      test.throws(error);
+  'Edit the archived status of an existing link': function(test) {
+    test.expect(2);
+    bitly.linkEdit('archived', SHORT_URL, 'true', function(error, result) {
+      test.ifError(error);
+      test.deepEqual(result.status_code, 200);
       test.done();
     });
+  },
+
+  'Takes an array of metadata to edit': function(test) {
+    test.expect(2);
+    bitly.linkEdit(['title', 'note'], SHORT_URL, ['new title', 'new note'], function(error, result) {
+      test.ifError(error);
+      test.deepEqual(result.status_code, 200);
+      test.done();
+    });
+  },
+
+  "Throws if trying to edit a non existent link": function(test) {
+    test.expect(1);
+    test.throws(bitly.linkEdit('tite', 'http://bit.ly/invalidhash', 'new title', function(error, result) {
+      test.done();
+    }));
+  },
+
+  "Throws if trying to edit a non existent metadata parameter": function(test) {
+    test.expect(1);
+    test.throws(bitly.linkEdit('normality', SHORT_URL, 'restored', function(error, result) {
+      test.done();
+    }));
   }
-
 };

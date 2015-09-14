@@ -8,7 +8,7 @@
 
 var q = require('q');
 var url = require('url');
-var http = require('http');
+var https = require('https');
 
 /**
  * The main Bitly constructor, takes the users login, api key and additional options
@@ -16,19 +16,18 @@ var http = require('http');
  * @param {String} api_key The users API key
  * @param {Object} options Optional options
  */
-var Bitly = function(login, api_key, options) {
+var Bitly = function(access_token, options) {
   // Set default options
   options = options || {
     format: 'json',
-    api_url: 'api.bit.ly',
+    api_url: 'api-ssl.bitly.com',
     api_version: 'v3',
     domain: 'bit.ly'
   };
 
   // Set up the config for requests being made with the instance of this
   this.config = {
-    login: login,
-    api_key: api_key,
+    access_token: access_token,
     format: options.format,
     api_url: options.api_url,
     api_version: options.api_version,
@@ -46,8 +45,11 @@ var Bitly = function(login, api_key, options) {
  * @return {Object} The URL object for this request
  */
 Bitly.prototype._generateNiceUrl = function(query, method) {
+  // Make sure the access_token gets sent with every query
+  query['access_token'] = this.config.access_token;
+
   var result = url.parse(url.format({
-    protocol: 'http',
+    protocol: 'https',
     hostname: this.config.api_url,
     pathname: '/' + this.config.api_version + '/' + method,
     query: query
@@ -73,7 +75,7 @@ Bitly.prototype._doRequest = function(request_query, cb) {
   }
 
   // Pass the requested URL as an object to the get request
-  http.get(request_query, function(res) {
+  https.get(request_query, function(res) {
     var data = [];
 
     res
@@ -154,8 +156,6 @@ Bitly.prototype.shorten = function(longUrl, domain, cb) {
     domain = null;
   }
   var query = {
-    login: this.config.login,
-    apiKey: this.config.api_key,
     format: this.config.format,
     longUrl: longUrl,
     domain: this.config.domain
@@ -176,8 +176,6 @@ Bitly.prototype.shorten = function(longUrl, domain, cb) {
  */
 Bitly.prototype.expand = function(items, cb) {
   var query = {
-    login: this.config.login,
-    apiKey: this.config.api_key,
     format: this.config.format,
     domain: this.config.domain
   };
@@ -200,8 +198,6 @@ Bitly.prototype.expand = function(items, cb) {
  */
 Bitly.prototype.clicks = function(items, cb) {
   var query = {
-    login: this.config.login,
-    apiKey: this.config.api_key,
     format: this.config.format,
     domain: this.config.domain
   };
@@ -224,8 +220,6 @@ Bitly.prototype.clicks = function(items, cb) {
  */
 Bitly.prototype.clicksByMinute = function(items, cb) {
   var query = {
-    login: this.config.login,
-    apiKey: this.config.api_key,
     format: this.config.format,
     domain: this.config.domain
   };
@@ -249,8 +243,6 @@ Bitly.prototype.clicksByMinute = function(items, cb) {
  */
 Bitly.prototype.clicksByDay = function(items, cb) {
   var query = {
-    login: this.config.login,
-    apiKey: this.config.api_key,
     format: this.config.format,
     domain: this.config.domain
   };
@@ -273,8 +265,6 @@ Bitly.prototype.clicksByDay = function(items, cb) {
  */
 Bitly.prototype.lookup = function(links, cb) {
   var query = {
-    login: this.config.login,
-    apiKey: this.config.api_key,
     format: this.config.format,
     url: links,
     domain: this.config.domain
@@ -292,8 +282,6 @@ Bitly.prototype.lookup = function(links, cb) {
  */
 Bitly.prototype.info = function(items, cb) {
   var query = {
-    login: this.config.login,
-    apiKey: this.config.api_key,
     format: this.config.format,
     domain: this.config.domain
   };
@@ -319,8 +307,6 @@ Bitly.prototype.info = function(items, cb) {
  */
 Bitly.prototype.referrers = function(link, cb) {
   var query = {
-    login: this.config.login,
-    apiKey: this.config.api_key,
     format: this.config.format,
     domain: this.config.domain
   };
@@ -338,8 +324,6 @@ Bitly.prototype.referrers = function(link, cb) {
  */
 Bitly.prototype.countries = function(link, cb) {
   var query = {
-    login: this.config.login,
-    apiKey: this.config.api_key,
     format: this.config.format,
     domain: this.config.domain
   };
@@ -357,8 +341,6 @@ Bitly.prototype.countries = function(link, cb) {
  */
 Bitly.prototype.bitlyProDomain = function(domain, cb) {
   var query = {
-    login: this.config.login,
-    apiKey: this.config.api_key,
     format: this.config.format,
     domain: domain
   };
@@ -367,22 +349,35 @@ Bitly.prototype.bitlyProDomain = function(domain, cb) {
 };
 
 /**
- * Request to validate that a login + API key are enabled with Bitly
- * @param  {String} x_login   The login to be validated
- * @param  {String} x_apiKey  The API key to be validated
- * @param  {Function=} cb The callback
+ * Edit an existing link's metadata
+ * @param {String|Array} metadata_field Metadata field to edit (title, note, private, user_ts or archived). To edit
+ * multiple fields, pass an array of field names as strings, e.g. ['title', 'note']
+ * @param {String} link The Bitlink to be edited (requires protocol, i.e "example.com" won't work but "http://example.com"
+ * will)
+ * @param {String|Array} new_value The new value for the edited metadata. If you pass an array to metadata_field, you
+ * have to pass an array to new_value. The index have to match those in metadata_field, e.g. metadata_field[0] will be
+ * changed to new_value[0] etc.
+ * @param {Function=} cb The callback
  * @return {Promise|void}
  */
-Bitly.prototype.validate = function(x_login, x_apiKey, cb) {
+Bitly.prototype.linkEdit = function(metadata_field, link, new_value, cb) {
   var query = {
-    login: this.config.login,
-    apiKey: this.config.api_key,
-    format: this.config.format,
-    x_login: x_login,
-    x_apiKey: x_apiKey
+    link: link
   };
 
-  return this._doRequest(this._generateNiceUrl(query, 'validate'), cb);
+  // We can use an array of fields and matching values to edit multiple metadata fields or strings to edit only a
+  // single one
+  if(Array.isArray(metadata_field) && Array.isArray(new_value)) {
+    query['edit'] = metadata_field.join(',');
+    metadata_field.forEach(function mapMetadataToValue(field, index) {
+      query[field] = new_value[index];
+    });
+  } else {
+    query['edit'] = metadata_field;
+    query[metadata_field] = new_value;
+  }
+
+  return this._doRequest(this._generateNiceUrl(query, 'user/link_edit'), cb);
 };
 
 // Export as main entry point in this module
