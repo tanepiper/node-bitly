@@ -62,4 +62,5 @@ This module is limited to the following API methods:
 * bitly_pro_domain
 * lookup
 * info
+* history
 * link_edit
