@@ -16,35 +16,36 @@ You can also install via git by cloning: `git clone https://github.com/tanepiper
 
 Usage
 -----
-    var Bitly = require('bitly');
-    var bitly = new Bitly('<YOUR ACCESS TOKEN>');
-    // To get your access token, visit https://bitly.com/a/oauth_apps (under Generic Access Token)
+```js
+var Bitly = require('bitly');
+var bitly = new Bitly('<YOUR ACCESS TOKEN>');
+// To get your access token, visit https://bitly.com/a/oauth_apps (under Generic Access Token)
 
-    
-    /**
-     * With callback
-     */
-    bitly.shorten('https://github.com/tanepiper/node-bitly', function(err, response) {
-      if (err) throw err;
+/**
+ * With callback
+ */
+bitly.shorten('https://github.com/tanepiper/node-bitly', function(err, response) {
+  if (err) throw err;
 
-      // See http://dev.bitly.com/ for format of returned object
-      var short_url = response.data.url
+  // See http://dev.bitly.com/ for format of returned object
+  var short_url = response.data.url
 
-      // Do something with data
-    });
-    
-    /**
-     * With promise
-     */
-    bitly.shorten('https://github.com/tanepiper/node-bitly')
-      .then(function(response) {
-        // See http://dev.bitly.com/ for format of returned object
-        var short_url = response.data.url
+  // Do something with data
+});
 
-        // Do something with data
-      }, function(error) {
-        throw error;
-      });
+/**
+ * With promise
+ */
+bitly.shorten('https://github.com/tanepiper/node-bitly')
+  .then(function(response) {
+    // See http://dev.bitly.com/ for format of returned object
+    var short_url = response.data.url
+
+    // Do something with data
+  }, function(error) {
+    throw error;
+  });
+```
 
 Tests
 -----
