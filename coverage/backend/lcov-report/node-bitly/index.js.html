@@ -1,0 +1,1203 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for node-bitly\index.js</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="../prettify.css">
+    <link rel="stylesheet" href="../base.css">
+    <style type='text/css'>
+        div.coverage-summary .sorter {
+            background-image: url(../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class="header low">
+    <h1>Code coverage report for <span class="entity">node-bitly\index.js</span></h1>
+    <h2>
+        Statements: <span class="metric">22.22% <small>(26 / 117)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Branches: <span class="metric">3.85% <small>(2 / 52)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Functions: <span class="metric">9.52% <small>(2 / 21)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Lines: <span class="metric">22.22% <small>(26 / 117)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Ignored: <span class="metric">2 branches</span> &nbsp;&nbsp;&nbsp;&nbsp;
+    </h2>
+    <div class="path"><a href="../index.html">All files</a> &#187; <a href="index.html">node-bitly/</a> &#187; index.js</div>
+</div>
+<div class="body">
+<pre><table class="coverage">
+<tr><td class="line-count">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259
+260
+261
+262
+263
+264
+265
+266
+267
+268
+269
+270
+271
+272
+273
+274
+275
+276
+277
+278
+279
+280
+281
+282
+283
+284
+285
+286
+287
+288
+289
+290
+291
+292
+293
+294
+295
+296
+297
+298
+299
+300
+301
+302
+303
+304
+305
+306
+307
+308
+309
+310
+311
+312
+313
+314
+315
+316
+317
+318
+319
+320
+321
+322
+323
+324
+325
+326
+327
+328
+329
+330
+331
+332
+333
+334
+335
+336
+337
+338
+339
+340
+341
+342
+343
+344
+345
+346
+347
+348
+349
+350
+351
+352
+353
+354
+355
+356
+357
+358
+359
+360
+361
+362
+363
+364
+365
+366
+367
+368
+369
+370
+371
+372
+373
+374
+375
+376
+377
+378
+379
+380
+381
+382
+383
+384
+385
+386
+387</td><td class="line-coverage"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">'use strict';
+&nbsp;
+/**
+ * node-bitly - A node module for calling the bitly API
+ * See http://code.google.com/p/bitly-api/wiki/ApiDocumentation for details
+ * about the API requests and responses
+ * Copyright (c) 2011 Tane Piper
+ * MIT Licence
+ */
+&nbsp;
+var q = require('q');
+var _ = require('lodash');
+var url = require('url');
+var https = require('https');
+&nbsp;
+/**
+ * The main Bitly constructor, takes the users login, api key and additional options
+ * @param {String} accessToken The API OAuth access token
+ * @param {Object} options Optional options
+ */
+var Bitly = function (accessToken, options) {
+  // Set default options
+  this.config = _.defaults({}, options, {
+    format: 'json',
+    api_url: 'api-ssl.bitly.com',
+    api_version: 'v3',
+    domain: 'bit.ly'
+  });
+&nbsp;
+  // Set up the config for requests being made with the instance of this
+  this.config.access_token = accessToken;
+&nbsp;
+  return this;
+};
+&nbsp;
+/**
+ * Generates the URL object to be passed to the HTTP request for a specific
+ * API method call
+ * @param  {Object} query  The query object
+ * @param  {String} method The Bit.ly method to call with the request
+ * @return {Object} The URL object for this request
+ */
+Bitly.prototype._generateNiceUrl = function (query, method) {
+  // Make sure the access_token gets sent with every query
+&nbsp;
+  query = _.defaults({}, query, {
+    access_token: this.config.access_token
+  });
+&nbsp;
+  return url.parse(url.format({
+    protocol: 'https',
+    hostname: this.config.api_url,
+    pathname: '/' + this.config.api_version + '/' + method,
+    query: query
+  }));
+};
+&nbsp;
+/**
+ * Function to do a HTTP Get request with the current query
+ * @param  {Object} request_query The current query object
+ * @param  {Function=} cb The callback function for the returned data
+ * @return {Promise|void}
+ */
+Bitly.prototype._doRequest = <span class="fstat-no" title="function not covered" >function (request_query, cb) {</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  var deferred;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  if (!cb || typeof !cb === 'function') {</span>
+<span class="cstat-no" title="statement not covered" >    deferred = q.defer();</span>
+  }
+&nbsp;
+  // Pass the requested URL as an object to the get request
+<span class="cstat-no" title="statement not covered" >  https.get(request_query, <span class="fstat-no" title="function not covered" >function (res) {</span></span>
+<span class="cstat-no" title="statement not covered" >      var data = [];</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      res</span>
+        .on('data', <span class="fstat-no" title="function not covered" >function (chunk) {</span>
+<span class="cstat-no" title="statement not covered" >          data.push(chunk);</span>
+        })
+        .on('end', <span class="fstat-no" title="function not covered" >function () {</span>
+<span class="cstat-no" title="statement not covered" >          var urldata = data.join('').trim();</span>
+<span class="cstat-no" title="statement not covered" >          var result;</span>
+<span class="cstat-no" title="statement not covered" >          try {</span>
+<span class="cstat-no" title="statement not covered" >            result = JSON.parse(urldata);</span>
+          } catch (exp) {
+<span class="cstat-no" title="statement not covered" >            result = { 'status_code': 500, 'status_text': 'JSON Parse Failed' };</span>
+          }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >          if (result.status_code !== 200) {</span>
+<span class="cstat-no" title="statement not covered" >            var error = new Error(result.status_txt);</span>
+<span class="cstat-no" title="statement not covered" >            error.code = result.status_code;</span>
+<span class="cstat-no" title="statement not covered" >            return deferred ? deferred.reject(error) : cb(error);</span>
+          }
+<span class="cstat-no" title="statement not covered" >          return deferred ? deferred.resolve(result) : cb(null, result);</span>
+&nbsp;
+        });
+    })
+    .on('error', <span class="fstat-no" title="function not covered" >function (error) {</span>
+<span class="cstat-no" title="statement not covered" >      if (deferred) {</span>
+<span class="cstat-no" title="statement not covered" >        return deferred.reject(error);</span>
+      }
+<span class="cstat-no" title="statement not covered" >      return cb(error);</span>
+    });
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  if (deferred) {</span>
+<span class="cstat-no" title="statement not covered" >    return deferred.promise;</span>
+  }
+};
+&nbsp;
+/**
+ * Function to check if a passed string is a valid URL
+ * @param  {String} str The URL string to be checked
+ * @return {Boolean}
+ */
+Bitly.prototype._urlCheck = <span class="fstat-no" title="function not covered" >function (str) {</span>
+<span class="cstat-no" title="statement not covered" >  var v = new RegExp();</span>
+<span class="cstat-no" title="statement not covered" >  v.compile('^[A-Za-z]+://[A-Za-z0-9-_]+\\.[A-Za-z0-9-_%&amp;\\?\/.=]+$');</span>
+<span class="cstat-no" title="statement not covered" >  return v.test(str);</span>
+};
+&nbsp;
+/**
+ * Function to check through an array of items to check for short urls or hashes
+ * @param  {Array} items The array of items to be checked
+ * @param  {Object} query The query object
+ * @return {void}
+ */
+Bitly.prototype._sortUrlsAndHash = <span class="fstat-no" title="function not covered" >function (items, query) {</span>
+<span class="cstat-no" title="statement not covered" >  var shortUrl = [];</span>
+<span class="cstat-no" title="statement not covered" >  var hash = [];</span>
+<span class="cstat-no" title="statement not covered" >  var i = 0, j = items.length;</span>
+<span class="cstat-no" title="statement not covered" >  for (; i &lt; j; i++) {</span>
+<span class="cstat-no" title="statement not covered" >    if (this._urlCheck(items[i])) {</span>
+<span class="cstat-no" title="statement not covered" >      shortUrl.push(items[i]);</span>
+    } else {
+<span class="cstat-no" title="statement not covered" >      hash.push(items[i]);</span>
+    }
+  }
+  /* istanbul ignore else */
+<span class="cstat-no" title="statement not covered" >  if (shortUrl.length &gt; 0) {</span>
+<span class="cstat-no" title="statement not covered" >    query.shortUrl = shortUrl;</span>
+  }
+&nbsp;
+  /* istanbul ignore else */
+<span class="cstat-no" title="statement not covered" >  if (hash.length &gt; 0) {</span>
+<span class="cstat-no" title="statement not covered" >    query.hash = hash;</span>
+  }
+};
+&nbsp;
+/**
+ * Request to shorten one long url
+ * @param  {String} longUrl The URL to be shortened
+ * @param  {String=} domain The domain to use (optional)
+ * @param  {Function=} cb The callback function with the results
+ * @return {Promise|void}
+ */
+Bitly.prototype.shorten = <span class="fstat-no" title="function not covered" >function (longUrl, domain, cb) {</span>
+<span class="cstat-no" title="statement not covered" >  if (typeof(domain) == 'function') {</span>
+<span class="cstat-no" title="statement not covered" >    cb = domain;</span>
+<span class="cstat-no" title="statement not covered" >    domain = null;</span>
+  }
+<span class="cstat-no" title="statement not covered" >  var query = {</span>
+    format: this.config.format,
+    longUrl: longUrl,
+    domain: this.config.domain
+  };
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  if (domain) {</span>
+<span class="cstat-no" title="statement not covered" >    query.domain = domain;</span>
+  }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  return this._doRequest(this._generateNiceUrl(query, 'shorten'), cb);</span>
+};
+&nbsp;
+/**
+ * Request to expand a single short url, short hash or mixed array or items
+ * @param  {String|Array} items  The string or array of short urls and/or hashes to expand
+ * @param  {Function=} cb The callback function with the results
+ * @return {Promise|void}
+ */
+Bitly.prototype.expand = <span class="fstat-no" title="function not covered" >function (items, cb) {</span>
+<span class="cstat-no" title="statement not covered" >  var query = {</span>
+    format: this.config.format,
+    domain: this.config.domain
+  };
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  if (typeof items === 'string') {</span>
+<span class="cstat-no" title="statement not covered" >    var type = (this._urlCheck(items)) ? 'shortUrl' : 'hash';</span>
+<span class="cstat-no" title="statement not covered" >    query[type] = items;</span>
+  } else {
+<span class="cstat-no" title="statement not covered" >    this._sortUrlsAndHash(items, query);</span>
+  }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  return this._doRequest(this._generateNiceUrl(query, 'expand'), cb);</span>
+};
+&nbsp;
+/**
+ * Request to get clicks for a single short url, short hash or mixed array or items
+ * @param  {String|Array} items  The string or array of short urls and/or hashes to expand
+ * @param  {Function=} cb The callback function
+ * @return {Promise|void}
+ */
+Bitly.prototype.clicks = <span class="fstat-no" title="function not covered" >function (items, cb) {</span>
+<span class="cstat-no" title="statement not covered" >  var query = {</span>
+    format: this.config.format,
+    domain: this.config.domain
+  };
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  if (typeof items === 'string') {</span>
+<span class="cstat-no" title="statement not covered" >    var type = (this._urlCheck(items)) ? 'shortUrl' : 'hash';</span>
+<span class="cstat-no" title="statement not covered" >    query[type] = items;</span>
+  } else {
+<span class="cstat-no" title="statement not covered" >    this._sortUrlsAndHash(items, query);</span>
+  }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  return this._doRequest(this._generateNiceUrl(query, 'clicks'), cb);</span>
+};
+&nbsp;
+/**
+ * Request to get clicks by minute for a single short url, short hash or mixed array or items
+ * @param  {String|Array} items  The string or array of short urls and/or hashes to expand
+ * @param  {Function=} cb The callback function
+ * @return {Promise|void}
+ */
+Bitly.prototype.clicksByMinute = <span class="fstat-no" title="function not covered" >function (items, cb) {</span>
+<span class="cstat-no" title="statement not covered" >  var query = {</span>
+    format: this.config.format,
+    domain: this.config.domain
+  };
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  if (typeof items === 'string') {</span>
+<span class="cstat-no" title="statement not covered" >    var type = (this._urlCheck(items)) ? 'shortUrl' : 'hash';</span>
+<span class="cstat-no" title="statement not covered" >    query[type] = items;</span>
+  } else {
+<span class="cstat-no" title="statement not covered" >    this._sortUrlsAndHash(items, query);</span>
+  }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  return this._doRequest(this._generateNiceUrl(query, 'clicks_by_minute'), cb);</span>
+&nbsp;
+};
+&nbsp;
+/**
+ * Request to get clicks by day for a single short url, short hash or mixed array or items
+ * @param  {String|Array} items  The string or array of short urls and/or hashes to expand
+ * @param  {Function=} cb The callback function
+ * @return {Promise|void}
+ */
+Bitly.prototype.clicksByDay = <span class="fstat-no" title="function not covered" >function (items, cb) {</span>
+<span class="cstat-no" title="statement not covered" >  var query = {</span>
+    format: this.config.format,
+    domain: this.config.domain
+  };
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  if (typeof items === 'string') {</span>
+<span class="cstat-no" title="statement not covered" >    var type = (this._urlCheck(items)) ? 'shortUrl' : 'hash';</span>
+<span class="cstat-no" title="statement not covered" >    query[type] = items;</span>
+  } else {
+<span class="cstat-no" title="statement not covered" >    this._sortUrlsAndHash(items, query);</span>
+  }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  return this._doRequest(this._generateNiceUrl(query, 'clicks_by_day'), cb);</span>
+};
+&nbsp;
+/**
+ * Request to get look up an existing bitly link for a long url or array of urls
+ * @param  {String|Array} links  The string or array of long urls
+ * @param  {Function=} cb The callback function
+ * @return {Promise|void}
+ */
+Bitly.prototype.lookup = <span class="fstat-no" title="function not covered" >function (links, cb) {</span>
+<span class="cstat-no" title="statement not covered" >  var query = {</span>
+    format: this.config.format,
+    url: links,
+    domain: this.config.domain
+  };
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  return this._doRequest(this._generateNiceUrl(query, 'lookup'), cb);</span>
+};
+&nbsp;
+/**
+ * Request to get clicks by day for a single short url, short hash or mixed array or items
+ * @param  {String|Array} items  The string or array of short urls and/or hashes to expand
+ * @param  {Function=} cb The callback function
+ * @return {Promise|void}
+ */
+Bitly.prototype.info = <span class="fstat-no" title="function not covered" >function (items, cb) {</span>
+<span class="cstat-no" title="statement not covered" >  var query = {</span>
+    format: this.config.format,
+    domain: this.config.domain
+  };
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  if (typeof items === 'string') {</span>
+<span class="cstat-no" title="statement not covered" >    var type = (this._urlCheck(items)) ? 'shortUrl' : 'hash';</span>
+<span class="cstat-no" title="statement not covered" >    query[type] = items;</span>
+  } else {
+<span class="cstat-no" title="statement not covered" >    this._sortUrlsAndHash(items, query);</span>
+  }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  return this._doRequest(this._generateNiceUrl(query, 'info'), cb);</span>
+};
+&nbsp;
+&nbsp;
+/**
+ * Request the informations on all referrers for a short url.  This function only
+ * accepts one url (as per the limit of the bitly API)
+ * @param  {String} link The link be checked
+ * @param  {Function=} cb The callback function
+ * @return {Promise|void}
+ */
+Bitly.prototype.referrers = <span class="fstat-no" title="function not covered" >function (link, cb) {</span>
+<span class="cstat-no" title="statement not covered" >  var query = {</span>
+    format: this.config.format,
+    domain: this.config.domain
+  };
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  query[(this._urlCheck(link)) ? 'shortUrl' : 'hash'] = link;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  return this._doRequest(this._generateNiceUrl(query, 'referrers'), cb);</span>
+};
+&nbsp;
+/**
+ * Request the information on all countries for a short url.  This function only
+ * accepts one url (as per the limit of the bitly API)
+ * @param {String} link The link to be checked
+ * @param  {Function=} cb The callback function
+ * @return {Promise|void}
+ */
+Bitly.prototype.countries = <span class="fstat-no" title="function not covered" >function (link, cb) {</span>
+<span class="cstat-no" title="statement not covered" >  var query = {</span>
+    format: this.config.format,
+    domain: this.config.domain
+  };
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  query[(this._urlCheck(link)) ? 'shortUrl' : 'hash'] = link;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  return this._doRequest(this._generateNiceUrl(query, 'countries'), cb);</span>
+};
+&nbsp;
+/**
+ * Request to confirm a pro-domain it set up with bitly
+ * @param  {String} domain The domain to be checked
+ * @param  {Function=} cb The callback function
+ * @return {Promise|void}
+ */
+Bitly.prototype.bitlyProDomain = <span class="fstat-no" title="function not covered" >function (domain, cb) {</span>
+<span class="cstat-no" title="statement not covered" >  var query = {</span>
+    format: this.config.format,
+    domain: domain
+  };
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  return this._doRequest(this._generateNiceUrl(query, 'bitly_pro_domain'), cb);</span>
+};
+&nbsp;
+/**
+ * Edit an existing link's metadata
+ * @param {String|Array} metadata_field Metadata field to edit (title, note, private, user_ts or archived). To edit
+ * multiple fields, pass an array of field names as strings, e.g. ['title', 'note']
+ * @param {String} link The Bitlink to be edited
+ * (requires protocol, i.e "example.com" won't work but "http://example.com" will)
+ * @param {String|Array} new_value The new value for the edited metadata. If you pass an array to metadata_field, you
+ * have to pass an array to new_value. The index have to match those in metadata_field, e.g. metadata_field[0] will be
+ * changed to new_value[0] etc.
+ * @param {Function=} cb The callback
+ * @return {Promise|void}
+ */
+Bitly.prototype.linkEdit = <span class="fstat-no" title="function not covered" >function (metadata_field, link, new_value, cb) {</span>
+<span class="cstat-no" title="statement not covered" >  var query = {</span>
+    link: link
+  };
+&nbsp;
+  // We can use an array of fields and matching values to edit multiple metadata fields or strings to edit only a
+  // single one
+<span class="cstat-no" title="statement not covered" >  if (Array.isArray(metadata_field) &amp;&amp; Array.isArray(new_value)) {</span>
+<span class="cstat-no" title="statement not covered" >    query['edit'] = metadata_field.join(',');</span>
+<span class="cstat-no" title="statement not covered" >    metadata_field.forEach(<span class="fstat-no" title="function not covered" >function mapMetadataToValue (field, index) {</span></span>
+<span class="cstat-no" title="statement not covered" >      query[field] = new_value[index];</span>
+    });
+  } else {
+<span class="cstat-no" title="statement not covered" >    query['edit'] = metadata_field;</span>
+<span class="cstat-no" title="statement not covered" >    query[metadata_field] = new_value;</span>
+  }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  return this._doRequest(this._generateNiceUrl(query, 'user/link_edit'), cb);</span>
+};
+&nbsp;
+// Export as main entry point in this module
+module.exports = Bitly;
+&nbsp;</pre></td></tr>
+</table></pre>
+
+</div>
+<div class="footer">
+    <div class="meta">Generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Thu Oct 08 2015 14:58:15 GMT+0100 (GMT Summer Time)</div>
+</div>
+<script src="../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../sorter.js"></script>
+</body>
+</html>
