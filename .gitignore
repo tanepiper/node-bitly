@@ -1,5 +1,6 @@
 node_modules/
 fixtures/
+coverage/
 *.log
 *.tpm
 .idea/
