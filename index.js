@@ -349,6 +349,20 @@ Bitly.prototype.bitlyProDomain = function(domain, cb) {
 };
 
 /**
+ * Request entries from a user's link history in reverse chronological order
+ * @param  {Function=} cb The callback function
+ * @return {Promise|void}
+ */
+Bitly.prototype.history = function(cb) {
+  var query = {
+    // @todo Implement optional parameters:
+    //   http://dev.bitly.com/user_info.html#v3_user_link_history
+  };
+
+  return this._doRequest(this._generateNiceUrl(query, 'user/link_history'), cb);
+};
+
+/**
  * Edit an existing link's metadata
  * @param {String|Array} metadata_field Metadata field to edit (title, note, private, user_ts or archived). To edit
  * multiple fields, pass an array of field names as strings, e.g. ['title', 'note']
