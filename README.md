@@ -22,6 +22,13 @@ You can also install via git by cloning: `git clone https://github.com/tanepiper
 
 ## Usage
 
+This library uses the API provided by bitly and requires an OAuth token to use.
+To get your access token, visit https://bitly.com/a/oauth_apps (under Generic Access Token)
+
+See http://dev.bitly.com/ for format of returned objects from the API
+
+#### Code
+
 ```js
 // For ES2015/ES6
 
@@ -40,13 +47,10 @@ bitly.shorten('http://nodejs.org', (response) => {
 
 var Bitly = require('bitly');
 var bitly = new Bitly('<YOUR ACCESS TOKEN>');
-// To get your access token, visit https://bitly.com/a/oauth_apps (under Generic Access Token)
 
 bitly.shorten('https://github.com/tanepiper/node-bitly')
   .then(function(response) {
-    // See http://dev.bitly.com/ for format of returned object
     var short_url = response.data.url
-
     // Do something with data
   }, function(error) {
     throw error;
