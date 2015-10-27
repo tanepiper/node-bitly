@@ -12,7 +12,8 @@ For more information on the API request and responses visit the [Bitly API docs]
 
 From version 4.0 of this library, the callback in methods have been removed and the library only provides
 promises for each method response.  The library has also been re-written in ES2015/ES6. The transpiled version
-is only distributed via NPM, or can be created the command `npm run compile` if you fork the source.
+is only distributed via NPM, or can be created the command `npm run compile` if you fork the source. Finally
+support is no longer provided for `node < 0.12`.
 
 ## Installation
 
