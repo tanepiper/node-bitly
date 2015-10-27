@@ -1,7 +1,7 @@
 'use strict';
 
-var Bitly = require('../src/bitly');
-var expect = require('chai').expect;
+import Bitly from '../src/bitly';
+import {expect} from 'chai';
 
 describe('node-bitly tests', () => {
 

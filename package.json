@@ -5,7 +5,12 @@
     "type": "MIT",
     "url": "http://www.opensource.org/licenses/mit-license.php"
   },
-  "tags": ["url", "bitly", "shortner", "util"],
+  "tags": [
+    "url",
+    "bitly",
+    "shortner",
+    "util"
+  ],
   "version": "4.0.0",
   "author": {
     "name": "Tane Piper",
@@ -41,7 +46,7 @@
     "url": "https://github.com/tanepiper/node-bitly.git"
   },
   "bugs": {
-    "url" : "https://github.com/tanepiper/node-bitly/issues"
+    "url": "https://github.com/tanepiper/node-bitly/issues"
   },
   "engines": {
     "node": ">= 0.12.0"
@@ -49,11 +54,13 @@
   "scripts": {
     "compile": "babel --source-maps --out-dir lib/ src/",
     "test": "node_modules/.bin/mocha test/ --recursive --compilers js:babel/register",
+    "coverage": "node_modules/.bin/istanbul cover node_modules/mocha/bin/_mocha -- --compilers js:babel/register --colors --reporter dot test/",
     "prepublish": "npm run compile"
   },
   "devDependencies": {
     "babel": "^5.8.29",
     "chai": "^3.4.0",
+    "istanbul": "^0.4.0",
     "mocha": "^2.3.3",
     "sepia": "^2.0.1"
   },
