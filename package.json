@@ -1,14 +1,17 @@
 {
   "name": "bitly",
   "description": "A Bit.ly API library for Node.JS",
-  "tags": [
-    "url",
-    "bitly",
-    "shortner",
-    "util"
-  ],
-  "version": "3.0.3",
-  "author": "Tane Piper <piper.tane@gmail.com>",
+  "license": {
+    "type": "MIT",
+    "url": "http://www.opensource.org/licenses/mit-license.php"
+  },
+  "tags": ["url", "bitly", "shortner", "util"],
+  "version": "4.0.0",
+  "author": {
+    "name": "Tane Piper",
+    "email": "piper.tane@gmail.com",
+    "url": "https://github.com/tanepiper"
+  },
   "contributors": [
     {
       "name": "Tane Piper",
@@ -35,19 +38,28 @@
   ],
   "repository": {
     "type": "git",
-    "url": "http://github.com/tanepiper/node-bitly.git"
+    "url": "https://github.com/tanepiper/node-bitly.git"
+  },
+  "bugs": {
+    "url" : "https://github.com/tanepiper/node-bitly/issues"
   },
   "engines": {
-    "node": ">= 0.10.0"
+    "node": ">= 0.12.0"
   },
   "scripts": {
-    "test": "VCR_MODE=cache node_modules/.bin/nodeunit test"
+    "compile": "babel --source-maps --out-dir lib/ src/",
+    "test": "node_modules/.bin/mocha test/ --recursive --compilers js:babel/register",
+    "prepublish": "npm run compile"
   },
   "devDependencies": {
-    "nodeunit": "^0.9.1",
+    "babel": "^5.8.29",
+    "chai": "^3.4.0",
+    "mocha": "^2.3.3",
     "sepia": "^2.0.1"
   },
   "dependencies": {
-    "q": "^1.4.1"
-  }
+    "q": "^1.4.1",
+    "valid-url": "^1.0.9"
+  },
+  "main": "lib/bitly.js"
 }

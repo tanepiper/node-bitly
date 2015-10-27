@@ -4,3 +4,4 @@ coverage/
 *.log
 *.tpm
 .idea/
+lib/
