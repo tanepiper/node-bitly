@@ -1,7 +1,8 @@
 'use strict';
 
 import Bitly from '../src/bitly';
-import {expect} from 'chai';
+import { expect } from 'chai';
+import 'sepia';
 
 describe('node-bitly tests', () => {
 

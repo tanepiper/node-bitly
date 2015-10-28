@@ -1,7 +1,6 @@
 'use strict';
 
 import * as url from 'url';
-import * as Q from 'q';
 import * as https from 'https';
 import * as validUrl from 'valid-url';
 
@@ -11,7 +10,7 @@ class Bitly {
    * The main Bitly constructor, takes the users login, api key and additional options
    * @constructor
    * @param {String} accessToken OAuth access token
-   * @param {Object} config Optional config object
+   * @param {Object=} config Optional config object
    * @returns {Bitly}
    */
   constructor (accessToken, config) {
@@ -61,16 +60,13 @@ class Bitly {
    */
   doRequest (request_query) {
 
-    var deferred = Q.defer();
-
-    // Pass the requested URL as an object to the get request
-    https.get(request_query, (res) => {
+    return new Promise((resolve, reject) => {
+      // Pass the requested URL as an object to the get request
+      https.get(request_query, (res) => {
         var data = [];
 
         res
-          .on('data', (chunk) => {
-            data.push(chunk.toString());
-          })
+          .on('data', (chunk) => { data.push(chunk.toString()); })
           .on('end', () => {
             var urlData = data.join('').trim();
             var result;
@@ -83,17 +79,13 @@ class Bitly {
             if (result.status_code !== 200) {
               var error = new Error(result.status_txt);
               error.code = result.status_code;
-              return deferred.reject(error);
+              return reject(error);
             }
-            return deferred.resolve(result);
-
+            return resolve(result);
           });
-      })
-      .on('error', (error) => {
-        return deferred.reject(error);
-      });
-
-    return deferred.promise;
+        })
+        .on('error', (error) => { return reject(error); });
+    });
   }
 
   /**
