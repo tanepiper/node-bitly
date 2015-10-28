@@ -2,6 +2,7 @@ lib/*.map
 src/
 .idea/
 coverage/
+fixtures/
 .eslintrc
 .gitignore
 .travis.yml
