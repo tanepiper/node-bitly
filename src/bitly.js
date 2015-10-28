@@ -2,6 +2,7 @@
 
 import { parse as urlParse, format as urlFormat } from 'url';
 import { isUri } from 'valid-url';
+import { create as createError } from 'boom';
 import 'isomorphic-fetch';
 
 class Bitly {
@@ -46,49 +47,20 @@ class Bitly {
 
   /**
    * Function to do a HTTP Get request with the current query
-   * @param  {Object} request_query The current query object
+   * @param  {Object} requestUri The current query object
    * @return {Promise}
    */
-  doRequest (request_query) {
+  doRequest (requestUri) {
 
-    return fetch(request_query)
-      .then((response) => {
-        if (response.status >= 400) {
-          return new Error (response.status_txt);
-        }
-        return new Error (response.status_txt);
-        //return response.json();
-      }, (error) => {
-        return error;
-      });
-
-
-    //return new Promise((resolve, reject) => {
-      // Pass the requested URL as an object to the get request
-      //fetch(request_query, (res) => {
-      //  var data = [];
-      //
-      //  res
-      //    .on('data', (chunk) => { data.push(chunk.toString()); })
-      //    .on('end', () => {
-      //      var urlData = data.join('').trim();
-      //      var result;
-      //      try {
-      //        result = JSON.parse(urlData);
-      //      } catch (exp) {
-      //        result = { 'status_code': 500, 'status_text': 'JSON Parse Failed' };
-      //      }
-      //
-      //      if (result.status_code !== 200) {
-      //        var error = new Error(result.status_txt);
-      //        error.code = result.status_code;
-      //        return reject(error);
-      //      }
-      //      return resolve(result);
-      //    });
-      //  })
-      //  .on('error', (error) => { return reject(error); });
-    //});
+    return new Promise((resolve, reject) => {
+      return fetch(requestUri)
+        .then((response) => {
+          if (response.status >= 400) {
+            return reject(createError(response.status, response.statusText, response));
+          }
+          return resolve(response.json());
+        });
+    });
   }
 
   /**
