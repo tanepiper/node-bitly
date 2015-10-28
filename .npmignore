@@ -1,1 +1,7 @@
 src/
+.idea/
+coverage/
+.eslintrc
+.gitignore
+.travis.yml
+
