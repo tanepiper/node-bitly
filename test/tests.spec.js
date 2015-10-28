@@ -27,12 +27,6 @@ describe('node-bitly tests', () => {
     });
   });
 
-  describe('test valid url', () => {
-    it('should return that a url passed is valid', () => {
-      expect(bitly.urlCheck(LONG_URL)).to.be.true;
-    });
-  });
-
   describe('shorten url', () => {
     it('should return a success', (done) => {
       bitly.shorten(LONG_URL).then((result) => {

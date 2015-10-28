@@ -65,6 +65,7 @@
     "sepia": "^2.0.1"
   },
   "dependencies": {
+    "isomorphic-fetch": "^2.2.0",
     "valid-url": "^1.0.9"
   },
   "main": "lib/bitly.js"

@@ -1,8 +1,8 @@
 'use strict';
 
-import * as url from 'url';
-import * as https from 'https';
-import * as validUrl from 'valid-url';
+import { parse as urlParse, format as urlFormat } from 'url';
+import { isUri } from 'valid-url';
+import 'isomorphic-fetch';
 
 class Bitly {
 
@@ -36,21 +36,12 @@ class Bitly {
     // Make sure the access_token gets sent with every query
     query['access_token'] = this.config.access_token;
 
-    return url.parse(url.format({
+    return urlParse(urlFormat({
       protocol: 'https',
       hostname: this.config.api_url,
       pathname: '/' + this.config.api_version + '/' + method,
       query: query
     }));
-  }
-
-  /**
-   * Function to check if a passed string is a valid URL
-   * @param  {String} str The URL string to be checked
-   * @return {Boolean}
-   */
-  urlCheck (str) {
-    return !!validUrl.isUri(str);
   }
 
   /**
@@ -60,32 +51,44 @@ class Bitly {
    */
   doRequest (request_query) {
 
-    return new Promise((resolve, reject) => {
+    return fetch(request_query)
+      .then((response) => {
+        if (response.status >= 400) {
+          return new Error (response.status_txt);
+        }
+        return new Error (response.status_txt);
+        //return response.json();
+      }, (error) => {
+        return error;
+      });
+
+
+    //return new Promise((resolve, reject) => {
       // Pass the requested URL as an object to the get request
-      https.get(request_query, (res) => {
-        var data = [];
-
-        res
-          .on('data', (chunk) => { data.push(chunk.toString()); })
-          .on('end', () => {
-            var urlData = data.join('').trim();
-            var result;
-            try {
-              result = JSON.parse(urlData);
-            } catch (exp) {
-              result = { 'status_code': 500, 'status_text': 'JSON Parse Failed' };
-            }
-
-            if (result.status_code !== 200) {
-              var error = new Error(result.status_txt);
-              error.code = result.status_code;
-              return reject(error);
-            }
-            return resolve(result);
-          });
-        })
-        .on('error', (error) => { return reject(error); });
-    });
+      //fetch(request_query, (res) => {
+      //  var data = [];
+      //
+      //  res
+      //    .on('data', (chunk) => { data.push(chunk.toString()); })
+      //    .on('end', () => {
+      //      var urlData = data.join('').trim();
+      //      var result;
+      //      try {
+      //        result = JSON.parse(urlData);
+      //      } catch (exp) {
+      //        result = { 'status_code': 500, 'status_text': 'JSON Parse Failed' };
+      //      }
+      //
+      //      if (result.status_code !== 200) {
+      //        var error = new Error(result.status_txt);
+      //        error.code = result.status_code;
+      //        return reject(error);
+      //      }
+      //      return resolve(result);
+      //    });
+      //  })
+      //  .on('error', (error) => { return reject(error); });
+    //});
   }
 
   /**
@@ -98,7 +101,7 @@ class Bitly {
     var shortUrl = [];
     var hash = [];
     items.forEach((item) => {
-      this.urlCheck(item) ? shortUrl.push(item) : hash.push(item);
+      isUri(item) ? shortUrl.push(item) : hash.push(item);
     });
 
     if (shortUrl.length > 0) {
@@ -137,7 +140,7 @@ class Bitly {
     };
 
     if (typeof items === 'string') {
-      query[this.urlCheck(items) ? 'shortUrl' : 'hash'] = items;
+      query[isUri(items) ? 'shortUrl' : 'hash'] = items;
     } else {
       this.sortUrlsAndHash(items, query);
     }
@@ -157,7 +160,7 @@ class Bitly {
     };
 
     if (typeof items === 'string') {
-      query[this.urlCheck(items) ? 'shortUrl' : 'hash'] = items;
+      query[isUri(items) ? 'shortUrl' : 'hash'] = items;
     } else {
       this.sortUrlsAndHash(items, query);
     }
@@ -177,7 +180,7 @@ class Bitly {
     };
 
     if (typeof items === 'string') {
-      query[this.urlCheck(items) ? 'shortUrl' : 'hash'] = items;
+      query[isUri(items) ? 'shortUrl' : 'hash'] = items;
     } else {
       this.sortUrlsAndHash(items, query);
     }
@@ -198,7 +201,7 @@ class Bitly {
     };
 
     if (typeof items === 'string') {
-      query[this.urlCheck(items) ? 'shortUrl' : 'hash'] = items;
+      query[isUri(items) ? 'shortUrl' : 'hash'] = items;
     } else {
       this.sortUrlsAndHash(items, query);
     }
@@ -234,7 +237,7 @@ class Bitly {
     };
 
     if (typeof items === 'string') {
-      query[this.urlCheck(items) ? 'shortUrl' : 'hash'] = items;
+      query[isUri(items) ? 'shortUrl' : 'hash'] = items;
     } else {
       this.sortUrlsAndHash(items, query);
     }
@@ -255,7 +258,7 @@ class Bitly {
       domain: this.config.domain
     };
 
-    query[this.urlCheck(link) ? 'shortUrl' : 'hash'] = link;
+    query[isUri(link) ? 'shortUrl' : 'hash'] = link;
 
     return this.doRequest(this.generateNiceUrl(query, 'referrers'));
   }
@@ -271,7 +274,7 @@ class Bitly {
       domain: this.config.domain
     };
 
-    query[this.urlCheck(link) ? 'shortUrl' : 'hash'] = link;
+    query[isUri(link) ? 'shortUrl' : 'hash'] = link;
 
     return this.doRequest(this.generateNiceUrl(query, 'countries'));
   }
