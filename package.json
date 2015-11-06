@@ -1,17 +1,15 @@
 {
   "name": "bitly",
   "description": "A Bit.ly API library for Node.JS",
-  "license": {
-    "type": "MIT",
-    "url": "http://www.opensource.org/licenses/mit-license.php"
-  },
-  "tags": [
+  "license": "MIT",
+  "keywords": [
     "url",
     "bitly",
     "shortner",
     "util"
   ],
-  "version": "4.0.1",
+  "homepage": "https://github.com/tanepiper/node-bitly",
+  "version": "4.1.1",
   "author": {
     "name": "Tane Piper",
     "email": "piper.tane@gmail.com",
@@ -65,6 +63,8 @@
     "sepia": "^2.0.1"
   },
   "dependencies": {
+    "boom": "^2.10.0",
+    "isomorphic-fetch": "^2.2.0",
     "valid-url": "^1.0.9"
   },
   "main": "lib/bitly.js"

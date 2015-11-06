@@ -1,8 +1,9 @@
 'use strict';
 
-import * as url from 'url';
-import * as https from 'https';
-import * as validUrl from 'valid-url';
+import { parse as urlParse, format as urlFormat } from 'url';
+import { isUri } from 'valid-url';
+import { create as createError } from 'boom';
+import 'isomorphic-fetch';
 
 class Bitly {
 
@@ -36,7 +37,7 @@ class Bitly {
     // Make sure the access_token gets sent with every query
     query['access_token'] = this.config.access_token;
 
-    return url.parse(url.format({
+    return urlParse(urlFormat({
       protocol: 'https',
       hostname: this.config.api_url,
       pathname: '/' + this.config.api_version + '/' + method,
@@ -45,46 +46,20 @@ class Bitly {
   }
 
   /**
-   * Function to check if a passed string is a valid URL
-   * @param  {String} str The URL string to be checked
-   * @return {Boolean}
-   */
-  urlCheck (str) {
-    return !!validUrl.isUri(str);
-  }
-
-  /**
    * Function to do a HTTP Get request with the current query
-   * @param  {Object} request_query The current query object
+   * @param  {Object} requestUri The current query object
    * @return {Promise}
    */
-  doRequest (request_query) {
+  doRequest (requestUri) {
 
     return new Promise((resolve, reject) => {
-      // Pass the requested URL as an object to the get request
-      https.get(request_query, (res) => {
-        var data = [];
-
-        res
-          .on('data', (chunk) => { data.push(chunk.toString()); })
-          .on('end', () => {
-            var urlData = data.join('').trim();
-            var result;
-            try {
-              result = JSON.parse(urlData);
-            } catch (exp) {
-              result = { 'status_code': 500, 'status_text': 'JSON Parse Failed' };
-            }
-
-            if (result.status_code !== 200) {
-              var error = new Error(result.status_txt);
-              error.code = result.status_code;
-              return reject(error);
-            }
-            return resolve(result);
-          });
-        })
-        .on('error', (error) => { return reject(error); });
+      return fetch(requestUri)
+        .then((response) => {
+          if (response.status >= 400) {
+            return reject(createError(response.status, response.statusText, response));
+          }
+          return resolve(response.json());
+        });
     });
   }
 
@@ -95,10 +70,15 @@ class Bitly {
    * @return {void}
   */
   sortUrlsAndHash (items, query) {
-    var shortUrl = [];
-    var hash = [];
+    let shortUrl = [];
+    let hash = [];
+
+    // If only passed one item, put in array for url checking
+    if (typeof items === 'string') {
+      items = [items];
+    }
     items.forEach((item) => {
-      this.urlCheck(item) ? shortUrl.push(item) : hash.push(item);
+      isUri(item) ? shortUrl.push(item) : hash.push(item);
     });
 
     if (shortUrl.length > 0) {
@@ -113,7 +93,7 @@ class Bitly {
    * Request to shorten one long url
    * @param  {String} longUrl The URL to be shortened
    * @param  {String=} domain The domain to use (optional)
-   * @return {Promise|void}
+   * @return {Promise}
    */
   shorten (longUrl, domain) {
     var query = {
@@ -128,7 +108,7 @@ class Bitly {
   /**
    * Request to expand a single short url, short hash or mixed array or items
    * @param  {String|Array} items  The string or array of short urls and/or hashes to expand
-   * @return {Promise|void}
+   * @return {Promise}
    */
   expand (items) {
     var query = {
@@ -136,11 +116,7 @@ class Bitly {
       domain: this.config.domain
     };
 
-    if (typeof items === 'string') {
-      query[this.urlCheck(items) ? 'shortUrl' : 'hash'] = items;
-    } else {
-      this.sortUrlsAndHash(items, query);
-    }
+    this.sortUrlsAndHash(items, query);
 
     return this.doRequest(this.generateNiceUrl(query, 'expand'));
   }
@@ -148,7 +124,7 @@ class Bitly {
   /**
    * Request to get clicks for a single short url, short hash or mixed array or items
    * @param  {String|Array} items  The string or array of short urls and/or hashes to expand
-   * @return {Promise|void}
+   * @return {Promise}
    */
   clicks (items) {
     var query = {
@@ -156,11 +132,7 @@ class Bitly {
       domain: this.config.domain
     };
 
-    if (typeof items === 'string') {
-      query[this.urlCheck(items) ? 'shortUrl' : 'hash'] = items;
-    } else {
-      this.sortUrlsAndHash(items, query);
-    }
+    this.sortUrlsAndHash(items, query);
 
     return this.doRequest(this.generateNiceUrl(query, 'clicks'));
   }
@@ -168,7 +140,7 @@ class Bitly {
   /**
    * Request to get clicks by minute for a single short url, short hash or mixed array or items
    * @param  {String|Array} items  The string or array of short urls and/or hashes to expand
-   * @return {Promise|void}
+   * @return {Promise}
    */
   clicksByMinute (items) {
     var query = {
@@ -176,11 +148,7 @@ class Bitly {
       domain: this.config.domain
     };
 
-    if (typeof items === 'string') {
-      query[this.urlCheck(items) ? 'shortUrl' : 'hash'] = items;
-    } else {
-      this.sortUrlsAndHash(items, query);
-    }
+    this.sortUrlsAndHash(items, query);
 
     return this.doRequest(this.generateNiceUrl(query, 'clicks_by_minute'));
 
@@ -189,7 +157,7 @@ class Bitly {
   /**
    * Request to get clicks by day for a single short url, short hash or mixed array or items
    * @param  {String|Array} items  The string or array of short urls and/or hashes to expand
-   * @return {Promise|void}
+   * @return {Promise}
    */
   clicksByDay (items) {
     var query = {
@@ -197,11 +165,7 @@ class Bitly {
       domain: this.config.domain
     };
 
-    if (typeof items === 'string') {
-      query[this.urlCheck(items) ? 'shortUrl' : 'hash'] = items;
-    } else {
-      this.sortUrlsAndHash(items, query);
-    }
+    this.sortUrlsAndHash(items, query);
 
     return this.doRequest(this.generateNiceUrl(query, 'clicks_by_day'));
   }
@@ -209,7 +173,7 @@ class Bitly {
   /**
    * Request to get look up an existing bitly link for a long url or array of urls
    * @param  {String|Array} links  The string or array of long urls
-   * @return {Promise|void}
+   * @return {Promise}
    */
   lookup (links) {
     var query = {
@@ -225,7 +189,7 @@ class Bitly {
   /**
    * Request to get clicks by day for a single short url, short hash or mixed array or items
    * @param  {String|Array} items  The string or array of short urls and/or hashes to expand
-   * @return {Promise|void}
+   * @return {Promise}
    */
   info (items) {
     var query = {
@@ -233,11 +197,7 @@ class Bitly {
       domain: this.config.domain
     };
 
-    if (typeof items === 'string') {
-      query[this.urlCheck(items) ? 'shortUrl' : 'hash'] = items;
-    } else {
-      this.sortUrlsAndHash(items, query);
-    }
+    this.sortUrlsAndHash(items, query);
 
     return this.doRequest(this.generateNiceUrl(query, 'info'));
   }
@@ -247,7 +207,7 @@ class Bitly {
    * Request the informations on all referrers for a short url.  This function only
    * accepts one url (as per the limit of the bitly API)
    * @param  {String} link The link be checked
-   * @return {Promise|void}
+   * @return {Promise}
    */
   referrers (link) {
     var query = {
@@ -255,7 +215,7 @@ class Bitly {
       domain: this.config.domain
     };
 
-    query[this.urlCheck(link) ? 'shortUrl' : 'hash'] = link;
+    query[isUri(link) ? 'shortUrl' : 'hash'] = link;
 
     return this.doRequest(this.generateNiceUrl(query, 'referrers'));
   }
@@ -263,7 +223,7 @@ class Bitly {
   /**
    * Request the information on all countries for a short url.  This function only
    * accepts one url (as per the limit of the bitly API)
-   * @return {Promise|void}
+   * @return {Promise}
    */
   countries (link) {
     var query = {
@@ -271,7 +231,7 @@ class Bitly {
       domain: this.config.domain
     };
 
-    query[this.urlCheck(link) ? 'shortUrl' : 'hash'] = link;
+    query[isUri(link) ? 'shortUrl' : 'hash'] = link;
 
     return this.doRequest(this.generateNiceUrl(query, 'countries'));
   }
@@ -279,7 +239,7 @@ class Bitly {
   /**
    * Request to confirm a pro-domain it set up with bitly
    * @param  {String} domain The domain to be checked
-   * @return {Promise|void}
+   * @return {Promise}
    */
   bitlyProDomain (domain) {
     var query = {
@@ -292,7 +252,7 @@ class Bitly {
 
   /**
    * Request entries from a user's link history in reverse chronological order
-   * @return {Promise|void}
+   * @return {Promise}
    */
   history () {
     var query = {
@@ -313,7 +273,7 @@ class Bitly {
    * have to pass an array to new_value. The index have to match those in metadata_field, e.g. metadata_field[0] will
    *   be
    * changed to new_value[0] etc.
-   * @return {Promise|void}
+   * @return {Promise}
    */
   linkEdit (metadata_field, link, new_value) {
     var query = {
