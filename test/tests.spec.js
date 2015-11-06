@@ -1,211 +1,330 @@
 'use strict';
 
-import Bitly from '../src/bitly';
-import { expect } from 'chai';
-import 'sepia';
+require('sepia');
 
-describe('node-bitly tests', () => {
+const Code = require('code');
+const Lab = require('lab');
+const Bitly = require('../src/bitly');
+
+const lab = exports.lab = Lab.script();
+
+const bitly_token = 'eb1b99efe83c7d029e7600a6b38e32d1c9c2c6d9';
+const LONG_URL = 'http://example.com';
+const SHORT_URL = 'http://bit.ly/1KjIwXl';
+const BITLY_HASH = 'VDcn';
+
+lab.experiment('The module', () => {
 
   let bitly;
-  let bitly_token = 'eb1b99efe83c7d029e7600a6b38e32d1c9c2c6d9';
-  const LONG_URL = 'http://example.com';
-  const SHORT_URL = 'http://bit.ly/1KjIwXl';
-  const BITLY_HASH = 'VDcn';
 
-  beforeEach(() => {
+  lab.beforeEach((done) => {
     bitly = new Bitly(bitly_token);
+    done();
   });
 
-  afterEach(() => {
+  lab.afterEach((done) => {
     bitly = undefined;
+    done();
   });
 
-  describe('module instantiation', () => {
-    it('should be a valid object with configuration and methods', () => {
-      expect(bitly.config).to.be.an('object');
-      expect(bitly.config).to.have.property('access_token').and.to.equal(bitly_token);
-    });
+  lab.test('should be a valid object with configuration and methods', (done) => {
+    Code.expect(bitly.config).to.be.an.object();
+    Code.expect(bitly.config).to.deep.include({ access_token: bitly_token });
+    done();
+  });
+});
+
+lab.experiment('shorten url', () => {
+
+  let bitly;
+
+  lab.beforeEach((done) => {
+    bitly = new Bitly(bitly_token);
+    done();
   });
 
-  describe('shorten url', () => {
-    it('should return a success', (done) => {
-      bitly.shorten(LONG_URL).then((result) => {
-        expect(result).to.have.property('status_code').and.to.equal(200);
-        done();
-      }, done);
-    });
+  lab.afterEach((done) => {
+    bitly = undefined;
+    done();
   });
 
-  describe('Check info on bitly pro-domain', () => {
-    it('should return a success', (done) => {
-      bitly.bitlyProDomain('nyti.ms').then((result) => {
-        expect(result).to.have.property('status_code').and.to.equal(200);
-        done();
-      }, done);
-    });
+  lab.test('should return a success', (done) => {
+
+    bitly.shorten(LONG_URL).then((result) => {
+      Code.expect(result).to.deep.include({ status_code: 200 });
+      done();
+    }, done);
+  });
+});
+
+lab.experiment('bitly pro-domain', () => {
+
+  let bitly;
+
+  lab.beforeEach((done) => {
+    bitly = new Bitly(bitly_token);
+    done();
   });
 
-  describe('Get info about domain or hash', () => {
-    it('should return a success for a short url', (done) => {
-      bitly.info(SHORT_URL).then((result) => {
-        expect(result).to.have.property('status_code').and.to.equal(200);
-        done();
-      }, done);
-    });
-
-    it('should return a success for a hash', (done) => {
-      bitly.info(BITLY_HASH).then((result) => {
-        expect(result).to.have.property('status_code').and.to.equal(200);
-        done();
-      }, done);
-    });
-
-    it('should return a success for a hash and short url mixed', (done) => {
-      bitly.info([SHORT_URL, BITLY_HASH]).then((result) => {
-        expect(result).to.have.property('status_code').and.to.equal(200);
-        done();
-      }, done);
-    });
+  lab.afterEach((done) => {
+    bitly = undefined;
+    done();
   });
 
-  describe('Get info on click', () => {
-    it('should return a success for a short url', (done) => {
-      bitly.clicks(SHORT_URL).then((result) => {
-        expect(result).to.have.property('status_code').and.to.equal(200);
-        done();
-      }, done);
-    });
+  lab.test('should return a success', (done) => {
 
-    it('should return a success for a hash', (done) => {
-      bitly.clicks(BITLY_HASH).then((result) => {
-        expect(result).to.have.property('status_code').and.to.equal(200);
-        done();
-      }, done);
-    });
+    bitly.bitlyProDomain('nyti.ms').then((result) => {
+      Code.expect(result).to.deep.include({ status_code: 200 });
+      done();
+    }, done);
+  });
+});
 
-    it('should return a success for a hash and short url mixed', (done) => {
-      bitly.clicks([SHORT_URL, BITLY_HASH]).then((result) => {
-        expect(result).to.have.property('status_code').and.to.equal(200);
-        done();
-      }, done);
-    });
+lab.experiment('expand url', () => {
+
+  let bitly;
+
+  lab.beforeEach((done) => {
+    bitly = new Bitly(bitly_token);
+    done();
   });
 
-  describe('Get info on clicks by minute', () => {
-    it('should return a success for a short url', (done) => {
-      bitly.clicksByMinute(SHORT_URL).then((result) => {
-        expect(result).to.have.property('status_code').and.to.equal(200);
-        done();
-      }, done);
-    });
-
-    it('should return a success for a hash', (done) => {
-      bitly.clicksByMinute(BITLY_HASH).then((result) => {
-        expect(result).to.have.property('status_code').and.to.equal(200);
-        done();
-      }, done);
-    });
-
-    it('should return a success for a hash and short url mixed', (done) => {
-      bitly.clicksByMinute([SHORT_URL, BITLY_HASH]).then((result) => {
-        expect(result).to.have.property('status_code').and.to.equal(200);
-        done();
-      }, done);
-    });
+  lab.afterEach((done) => {
+    bitly = undefined;
+    done();
   });
 
-  describe('Get info on clicks by day', () => {
-    it('should return a success for a short url', (done) => {
-      bitly.clicksByDay(SHORT_URL).then((result) => {
-        expect(result).to.have.property('status_code').and.to.equal(200);
-        done();
-      }, done);
-    });
+  lab.test('should return a success for short url', (done) => {
 
-    it('should return a success for a hash', (done) => {
-      bitly.clicksByDay(BITLY_HASH).then((result) => {
-        expect(result).to.have.property('status_code').and.to.equal(200);
-        done();
-      }, done);
-    });
-
-    it('should return a success for a hash and short url mixed', (done) => {
-      bitly.clicksByDay([SHORT_URL, BITLY_HASH]).then((result) => {
-        expect(result).to.have.property('status_code').and.to.equal(200);
-        done();
-      }, done);
-    });
+    bitly.expand(SHORT_URL).then((result) => {
+      Code.expect(result).to.deep.include({ status_code: 200 });
+      done();
+    }, done);
   });
 
-  describe('Get referrers', () => {
-    it('should return a success for a short url', (done) => {
-      bitly.referrers(SHORT_URL).then((result) => {
-        expect(result).to.have.property('status_code').and.to.equal(200);
-        done();
-      }, done);
-    });
+  lab.test('should return a success for hash', (done) => {
 
-    it('should return a success for a hash', (done) => {
-      bitly.referrers(BITLY_HASH).then((result) => {
-        expect(result).to.have.property('status_code').and.to.equal(200);
-        done();
-      }, done);
-    });
+    bitly.expand(BITLY_HASH).then((result) => {
+      Code.expect(result).to.deep.include({ status_code: 200 });
+      done();
+    }, done);
   });
 
-  describe('Get countries', () => {
-    it('should return a success for a short url', (done) => {
-      bitly.countries(SHORT_URL).then((result) => {
-        expect(result).to.have.property('status_code').and.to.equal(200);
-        done();
-      }, done);
-    });
+  lab.test('should return a success for mixed url hash', (done) => {
 
-    it('should return a success for a hash', (done) => {
-      bitly.countries(BITLY_HASH).then((result) => {
-        expect(result).to.have.property('status_code').and.to.equal(200);
-        done();
-      }, done);
-    });
+    bitly.expand([SHORT_URL, BITLY_HASH]).then((result) => {
+      Code.expect(result).to.deep.include({ status_code: 200 });
+      done();
+    }, done);
+  });
+});
+
+lab.experiment('Get info about domain or hash', () => {
+
+  let bitly;
+
+  lab.beforeEach((done) => {
+    bitly = new Bitly(bitly_token);
+    done();
   });
 
-  describe('Get information about a URL', () => {
-    it('should return a success for 1', (done) => {
-      bitly.lookup(LONG_URL).then((result) => {
-        expect(result).to.have.property('status_code').and.to.equal(200);
-        done();
-      }, done);
-    });
-
-    it('should return a success for multiple urls', (done) => {
-      bitly.lookup([LONG_URL, 'http://nodejs.org']).then((result) => {
-        expect(result).to.have.property('status_code').and.to.equal(200);
-        done();
-      }, done);
-    });
+  lab.afterEach((done) => {
+    bitly = undefined;
+    done();
   });
 
-  describe('Expand URLs', () => {
-    it('should return a success for a short url', (done) => {
-      bitly.expand(SHORT_URL).then((result) => {
-        expect(result).to.have.property('status_code').and.to.equal(200);
-        done();
-      }, done);
-    });
+  lab.test('should return a success for short url', (done) => {
 
-    it('should return a success for a hash', (done) => {
-      bitly.expand(BITLY_HASH).then((result) => {
-        expect(result).to.have.property('status_code').and.to.equal(200);
-        done();
-      }, done);
-    });
-
-    it('should return a success for a hash and short url mixed', (done) => {
-      bitly.expand([SHORT_URL, BITLY_HASH]).then((result) => {
-        expect(result).to.have.property('status_code').and.to.equal(200);
-        done();
-      }, done);
-    });
+    bitly.info(SHORT_URL).then((result) => {
+      Code.expect(result).to.deep.include({ status_code: 200 });
+      done();
+    }, done);
   });
 
+  lab.test('should return a success for hash', (done) => {
+
+    bitly.info(BITLY_HASH).then((result) => {
+      Code.expect(result).to.deep.include({ status_code: 200 });
+      done();
+    }, done);
+  });
+
+  lab.test('should return a success for mixed url hash', (done) => {
+
+    bitly.info([SHORT_URL, BITLY_HASH]).then((result) => {
+      Code.expect(result).to.deep.include({ status_code: 200 });
+      done();
+    }, done);
+  });
+});
+
+lab.experiment('Get info on click', () => {
+
+  let bitly;
+
+  lab.beforeEach((done) => {
+    bitly = new Bitly(bitly_token);
+    done();
+  });
+
+  lab.afterEach((done) => {
+    bitly = undefined;
+    done();
+  });
+
+  lab.test('should return a success for short url', (done) => {
+
+    bitly.clicks(SHORT_URL).then((result) => {
+      Code.expect(result).to.deep.include({ status_code: 200 });
+      done();
+    }, done);
+  });
+
+  lab.test('should return a success for hash', (done) => {
+
+    bitly.clicks(BITLY_HASH).then((result) => {
+      Code.expect(result).to.deep.include({ status_code: 200 });
+      done();
+    }, done);
+  });
+
+  lab.test('should return a success for mixed url hash', (done) => {
+
+    bitly.clicks([SHORT_URL, BITLY_HASH]).then((result) => {
+      Code.expect(result).to.deep.include({ status_code: 200 });
+      done();
+    }, done);
+  });
+});
+
+lab.experiment('clicks by day', () => {
+
+  let bitly;
+
+  lab.beforeEach((done) => {
+    bitly = new Bitly(bitly_token);
+    done();
+  });
+
+  lab.afterEach((done) => {
+    bitly = undefined;
+    done();
+  });
+
+  lab.test('should return a success for short url', (done) => {
+
+    bitly.clicksByDay(SHORT_URL).then((result) => {
+      Code.expect(result).to.deep.include({ status_code: 200 });
+      done();
+    }, done);
+  });
+
+  lab.test('should return a success for hash', (done) => {
+
+    bitly.clicksByDay(BITLY_HASH).then((result) => {
+      Code.expect(result).to.deep.include({ status_code: 200 });
+      done();
+    }, done);
+  });
+
+  lab.test('should return a success for mixed url hash', (done) => {
+
+    bitly.clicksByDay([SHORT_URL, BITLY_HASH]).then((result) => {
+      Code.expect(result).to.deep.include({ status_code: 200 });
+      done();
+    }, done);
+  });
+});
+
+lab.experiment('Get referrers', () => {
+
+  let bitly;
+
+  lab.beforeEach((done) => {
+    bitly = new Bitly(bitly_token);
+    done();
+  });
+
+  lab.afterEach((done) => {
+    bitly = undefined;
+    done();
+  });
+
+  lab.test('should return a success for short url', (done) => {
+
+    bitly.referrers(SHORT_URL).then((result) => {
+      Code.expect(result).to.deep.include({ status_code: 200 });
+      done();
+    }, done);
+  });
+
+  lab.test('should return a success for hash', (done) => {
+
+    bitly.referrers(BITLY_HASH).then((result) => {
+      Code.expect(result).to.deep.include({ status_code: 200 });
+      done();
+    }, done);
+  });
+});
+
+lab.experiment('Get countries', () => {
+
+  let bitly;
+
+  lab.beforeEach((done) => {
+    bitly = new Bitly(bitly_token);
+    done();
+  });
+
+  lab.afterEach((done) => {
+    bitly = undefined;
+    done();
+  });
+
+  lab.test('should return a success for short url', (done) => {
+
+    bitly.countries(SHORT_URL).then((result) => {
+      Code.expect(result).to.deep.include({ status_code: 200 });
+      done();
+    }, done);
+  });
+
+  lab.test('should return a success for hash', (done) => {
+
+    bitly.countries(BITLY_HASH).then((result) => {
+      Code.expect(result).to.deep.include({ status_code: 200 });
+      done();
+    }, done);
+  });
+});
+
+lab.experiment('Get info', () => {
+
+  let bitly;
+
+  lab.beforeEach((done) => {
+    bitly = new Bitly(bitly_token);
+    done();
+  });
+
+  lab.afterEach((done) => {
+    bitly = undefined;
+    done();
+  });
+
+  lab.test('should return a success for short url', (done) => {
+
+    bitly.lookup(LONG_URL).then((result) => {
+      Code.expect(result).to.deep.include({ status_code: 200 });
+      done();
+    }, done);
+  });
+
+  lab.test('should return a success for hash', (done) => {
+
+    bitly.lookup([LONG_URL, 'http://nodejs.org']).then((result) => {
+      Code.expect(result).to.deep.include({ status_code: 200 });
+      done();
+    }, done);
+  });
 });

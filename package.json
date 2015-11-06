@@ -50,16 +50,12 @@
     "node": ">= 0.12.0"
   },
   "scripts": {
-    "compile": "babel --source-maps --out-dir lib/ src/",
-    "test": "node_modules/.bin/mocha test/ --recursive --compilers js:babel/register",
-    "coverage": "node_modules/.bin/istanbul cover node_modules/mocha/bin/_mocha -- --compilers js:babel/register --colors --reporter dot test/",
-    "prepublish": "npm run compile"
+    "test": "lab -t 100",
+    "coverage": "lab -r html -o coverage.html"
   },
   "devDependencies": {
-    "babel": "^6.0.15",
-    "chai": "^3.4.0",
-    "istanbul": "^0.4.0",
-    "mocha": "^2.3.3",
+    "code": "^2.0.1",
+    "lab": "^7.2.0",
     "sepia": "^2.0.1"
   },
   "dependencies": {
