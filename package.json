@@ -56,14 +56,14 @@
     "prepublish": "npm run compile"
   },
   "devDependencies": {
-    "babel": "^5.8.29",
+    "babel": "^6.0.15",
     "chai": "^3.4.0",
     "istanbul": "^0.4.0",
     "mocha": "^2.3.3",
     "sepia": "^2.0.1"
   },
   "dependencies": {
-    "boom": "^2.10.0",
+    "boom": "^3.0.0",
     "isomorphic-fetch": "^2.2.0",
     "valid-url": "^1.0.9"
   },
