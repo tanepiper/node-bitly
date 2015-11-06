@@ -1,9 +1,10 @@
 'use strict';
 
-import { parse as urlParse, format as urlFormat } from 'url';
-import { isUri } from 'valid-url';
-import { create as createError } from 'boom';
-import 'isomorphic-fetch';
+const url = require('url');
+const isUri = require('valid-url').isUri;
+const Boom = require('boom');
+
+require('isomorphic-fetch');
 
 class Bitly {
 
@@ -37,7 +38,7 @@ class Bitly {
     // Make sure the access_token gets sent with every query
     query['access_token'] = this.config.access_token;
 
-    return urlParse(urlFormat({
+    return url.parse(url.format({
       protocol: 'https',
       hostname: this.config.api_url,
       pathname: '/' + this.config.api_version + '/' + method,
@@ -56,7 +57,7 @@ class Bitly {
       return fetch(requestUri)
         .then((response) => {
           if (response.status >= 400) {
-            return reject(createError(response.status, response.statusText, response));
+            return reject(Boom.create(response.status, response.statusText, response));
           }
           return resolve(response.json());
         });
@@ -296,4 +297,4 @@ class Bitly {
   }
 }
 
-export default Bitly;
+module.exports = Bitly;
