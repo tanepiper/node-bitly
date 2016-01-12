@@ -18,12 +18,12 @@ class Bitly {
   constructor (accessToken, config) {
 
     // Set up the config for requests being made with the instance of this
-    this.config = Object.assign({ access_token: accessToken }, config, {
+    this.config = Object.assign({ access_token: accessToken }, {
       format: 'json',
       api_url: 'api-ssl.bitly.com',
       api_version: 'v3',
       domain: 'bit.ly'
-    });
+    }, config);
   }
 
 
