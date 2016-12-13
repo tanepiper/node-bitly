@@ -73,7 +73,8 @@ class Bitly {
   sortUrlsAndHash (items, query) {
     let shortUrl = [];
     let hash = [];
-
+	// If items is empty or null, create an empty array in either case
+	items = items || []; 
     // If only passed one item, put in array for url checking
     if (typeof items === 'string') {
       items = [items];
