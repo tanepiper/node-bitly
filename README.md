@@ -39,11 +39,12 @@ import Bitly from 'bitly';
 
 let bitly = new Bitly('<YOUR ACCESS TOKEN>');
 
-bitly.shorten('http://nodejs.org', (response) => {
-  console.log(response);
-}, (error) => {
-  console.log(error);
-});
+bitly.shorten('http://nodejs.org')
+  .then((response) => {
+    console.log(response);
+  }, (error) => {
+    console.log(error);
+  });
 
 
 // For ES5
