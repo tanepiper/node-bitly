@@ -61,4 +61,10 @@ describe('sortUrlsAndHash', () => {
         expect(shortUrl.length).to.equal(1);
         expect(hash.length).to.equal(1);
     });
+
+    it ('should never return falsy values', () => {
+      const { shortUrl, hash } = sortUrlsAndHash([false, null, undefined]);
+      expect(shortUrl.length).to.equal(0);
+      expect(hash.length).to.equal(0);
+    })
 });

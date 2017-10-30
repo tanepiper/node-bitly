@@ -69,7 +69,7 @@ const doRequest = async ({ uri }) => {
 */
 const sortUrlsAndHash = (unsortedItems, result = { shortUrl: [], hash: [] }) => {
     (Array.isArray(unsortedItems) ? unsortedItems : [unsortedItems]).map(
-        item => (isUri(item) ? result.shortUrl.push(item) : result.hash.push(item))
+        item => (isUri(item) ? result.shortUrl.push(item) : typeof item === 'string' && result.hash.push(item))
     );
     return result;
 };
