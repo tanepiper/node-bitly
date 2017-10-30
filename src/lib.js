@@ -1,5 +1,6 @@
 const url = require('url');
 const http = require('http');
+const isUri = require('valid-url').isUri;
 
 /**
    * Generates the URL object to be passed to the HTTP request for a specific
@@ -49,6 +50,26 @@ const doMethod = async ({ method, accessToken, data, domain, format }) => {
     };
     keys.forEach(key => (query[key] = data[key]));
     return await doRequest(generateNiceUrl({ query, method }));
+};
+
+/**
+* Function to check through an array of items to check for short urls or hashes
+* @param  {Array} items The array of items to be checked
+* @param  {Object} query The query object
+* @return {void}
+*/
+const sortUrlsAndHash = ({ items = [], query: {} }) => {
+    const shortUrl = [];
+    const hash = [];
+
+    // If only passed one item, put in array for url checking
+    if (typeof items === 'string') {
+        items = [items];
+    }
+    items.forEach(item => (isUri(item) ? shortUrl.push(item) : hash.push(item)));
+
+    if (shortUrl.length > 0) query.shortUrl = shortUrl;
+    if (hash.length > 0) query.hash = hash;
 };
 
 const bitly = async (
