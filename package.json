@@ -60,6 +60,8 @@
     "sepia": "^2.0.2"
   },
   "dependencies": {
+    "request": "^2.83.0",
+    "request-promise": "^4.2.2",
     "valid-url": "^1.0.9"
   },
   "main": "lib/bitly.js"

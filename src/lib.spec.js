@@ -40,36 +40,29 @@ describe('generateUrl', () => {
 describe('doRequest', () => {
     before(() => {});
 
-    it('makes a request with a generateUrl url', async (done) => {
-        const uri = generateUrl({ accessToken: process.env.BITLY_API_KEY, method: 'shorten', data: { longUrl: 'http://example.com'} });
-        const result = await doRequest({ uri: uri.href });
-        const { statusCode } = result;
-
-        const data = [];
-        result.on('data', data => {
-          console.log(data);
+    it('makes a request with a generateUrl url', async () => {
+        const uri = generateUrl({
+            accessToken: process.env.BITLY_API_KEY,
+            method: 'shorten',
+            data: { longUrl: 'http://example.com' }
         });
-        result.on('end', () => {
-          expect(data.join('')).to.equal('')
-        });
-        expect(statusCode).to.equal(200);
+        try {
+            const result = await doRequest({ uri: uri.href });
+            const jsonResult = JSON.parse(result);
+            expect(jsonResult).to.deep.equal({
+                status_code: 200,
+                status_txt: 'OK',
+                data: {
+                    url: 'http://bit.ly/1KjIwXl',
+                    hash: '1KjIwXl',
+                    global_hash: 'VDcn',
+                    long_url: 'http://example.com/',
+                    new_hash: 0
+                }
+            });
+            return true;
+        } catch (e) {
+            throw e;
+        }
     });
 });
-
-// describe('generateQuery', () => {
-//     it('should generate a querypart for a request', () => {
-//         const result = generateQuery({ accessToken: 'foobar', data: { foo: 'bar', moo: [1, 2] } });
-//         expect(result).to.deep.equal({
-//             access_token: 'foobar',
-//             foo: 'bar',
-//             moo: [1, 2],
-//             domain: 'bit.ly',
-//             format: 'json'
-//         });
-//     });
-
-//     it('should generate a nice url', () => {
-//         const query = generateQuery({ accessToken: 'foobar', data: { foo: 'bar', moo: [1, 2] } });
-//         const result = generateNiceUrl({ accessToken: 'iamatoken', method: 'foo', query });
-//     });
-// });

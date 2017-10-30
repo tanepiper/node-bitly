@@ -1,5 +1,6 @@
+const { promisify } = require('util');
 const url = require('url');
-const http = require('https');
+const request = require('request-promise');
 const isUri = require('valid-url').isUri;
 
 /**
@@ -46,21 +47,13 @@ const generateUrl = ({
 };
 
 const doRequest = async ({ uri }) => {
-    return new Promise(async (resolve, reject) => {
-        try {
-            const req = await http.get(uri);
-            req.on('response', res => {
-                resolve(res);
-            });
-
-            req.on('error', err => {
-                reject(err);
-            });
-        } catch (e) {
-            console.log('Request Failed');
-            throw e;
-        }
-    });
+    try {
+        const req = await request({ uri });
+        return req;
+    } catch (e) {
+        console.log('Request Failed');
+        throw e;
+    }
 };
 
 // const doMethod = async ({ method, accessToken, data, domain, format }) => {
@@ -103,5 +96,5 @@ const doRequest = async ({ uri }) => {
 
 module.exports = {
     generateUrl,
-    doRequest,
+    doRequest
 };
