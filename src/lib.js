@@ -46,10 +46,11 @@ const generateUrl = ({
     );
 };
 
-const doRequest = async ({ uri }) => {
+const doRequest = async ({ accessToken, method, data, ...args }) => {
+    const uri = generateUrl({ accessToken, method, data, ...args });
     try {
         const req = await request({ uri });
-        return req;
+        return JSON.parse(req);
     } catch (e) {
         console.log('Request Failed');
         throw e;

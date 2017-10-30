@@ -25,19 +25,31 @@ describe('generateUrl', () => {
     });
 });
 
+describe('sortUrlsAndHash', () => {
+    it('takes urls and hashes and appends them correctly', () => {
+        const { shortUrl, hash } = sortUrlsAndHash(['http://example.com', '1KjIwXl']);
+        expect(shortUrl.length).to.equal(1);
+        expect(hash.length).to.equal(1);
+    });
+
+    it('should never return falsy values', () => {
+        const { shortUrl, hash } = sortUrlsAndHash([false, null, undefined]);
+        expect(shortUrl.length).to.equal(0);
+        expect(hash.length).to.equal(0);
+    });
+});
+
 describe('doRequest', () => {
     before(() => {});
 
     it('makes a request with a generateUrl url', async () => {
-        const uri = generateUrl({
-            accessToken: process.env.BITLY_API_KEY,
-            method: 'shorten',
-            data: { longUrl: 'http://example.com' }
-        });
         try {
-            const result = await doRequest({ uri: uri.href });
-            const jsonResult = JSON.parse(result);
-            expect(jsonResult).to.deep.equal({
+            const result = await doRequest({
+                accessToken: process.env.BITLY_API_KEY,
+                method: 'shorten',
+                data: { longUrl: 'http://example.com' }
+            });
+            expect(result).to.deep.equal({
                 status_code: 200,
                 status_txt: 'OK',
                 data: {
@@ -53,18 +65,4 @@ describe('doRequest', () => {
             throw e;
         }
     });
-});
-
-describe('sortUrlsAndHash', () => {
-    it('takes urls and hashes and appends them correctly', () => {
-        const { shortUrl, hash } = sortUrlsAndHash(['http://example.com', '1KjIwXl']);
-        expect(shortUrl.length).to.equal(1);
-        expect(hash.length).to.equal(1);
-    });
-
-    it ('should never return falsy values', () => {
-      const { shortUrl, hash } = sortUrlsAndHash([false, null, undefined]);
-      expect(shortUrl.length).to.equal(0);
-      expect(hash.length).to.equal(0);
-    })
 });
