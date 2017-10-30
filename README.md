@@ -1,6 +1,6 @@
 # node-bitly - Bitly API for nodejs
 
-[![Build Status](https://secure.travis-ci.org/tanepiper/node-bitly.png)](http://travis-ci.org/tanepiper/node-bitly)
+[![CircleCI](https://circleci.com/gh/tanepiper/node-bitly/tree/refactor.svg?style=svg)](https://circleci.com/gh/tanepiper/node-bitly/tree/refactor)
 
 [![NPM version](https://badge.fury.io/js/bitly.png)](http://badge.fury.io/js/bitly)
 
