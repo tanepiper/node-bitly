@@ -54,13 +54,13 @@
     "coverage": "lab -r html -o coverage.html"
   },
   "devDependencies": {
-    "code": "^2.0.1",
-    "lab": "^7.2.0",
-    "sepia": "^2.0.1"
+    "code": "^5.1.0",
+    "lab": "^15.1.1",
+    "sepia": "^2.0.2"
   },
   "dependencies": {
-    "boom": "^3.0.0",
-    "isomorphic-fetch": "^2.2.0",
+    "boom": "^6.0.0",
+    "isomorphic-fetch": "^2.2.1",
     "valid-url": "^1.0.9"
   },
   "main": "lib/bitly.js"

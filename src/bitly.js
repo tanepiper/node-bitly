@@ -1,270 +1,219 @@
 'use strict';
 
-const url = require('url');
 const isUri = require('valid-url').isUri;
-const Boom = require('boom');
 
-require('isomorphic-fetch');
+const { generateNiceUrl, doRequest, doMethod } = require('./lib');
 
 class Bitly {
-
-  /**
+    /**
    * The main Bitly constructor, takes the users login, api key and additional options
    * @constructor
    * @param {String} accessToken OAuth access token
    * @param {Object=} config Optional config object
    * @returns {Bitly}
    */
-  constructor (accessToken, config) {
+    constructor(accessToken, config) {
+        // Set up the config for requests being made with the instance of this
+        this.config = Object.assign({ accessToken: accessToken }, config);
+    }
 
-    // Set up the config for requests being made with the instance of this
-    this.config = Object.assign({ access_token: accessToken }, config, {
-      format: 'json',
-      api_url: 'api-ssl.bitly.com',
-      api_version: 'v3',
-      domain: 'bit.ly'
-    });
-  }
-
-
-  /**
-   * Generates the URL object to be passed to the HTTP request for a specific
-   * API method call
-   * @param  {Object} query  The query object
-   * @param  {String} method The Bit.ly method to call with the request
-   * @return {Object} The URL object for this request
-   */
-  generateNiceUrl (query, method) {
-    // Make sure the access_token gets sent with every query
-    query['access_token'] = this.config.access_token;
-
-    return url.parse(url.format({
-      protocol: 'https',
-      hostname: this.config.api_url,
-      pathname: '/' + this.config.api_version + '/' + method,
-      query: query
-    }));
-  }
-
-  /**
-   * Function to do a HTTP Get request with the current query
-   * @param  {Object} requestUri The current query object
-   * @return {Promise}
-   */
-  doRequest (requestUri) {
-
-    return new Promise((resolve, reject) => {
-      return fetch(requestUri)
-        .then((response) => {
-          if (response.status >= 400) {
-            return reject(Boom.create(response.status, response.statusText, response));
-          }
-          return resolve(response.json());
-        });
-    });
-  }
-
-  /**
+    /**
    * Function to check through an array of items to check for short urls or hashes
    * @param  {Array} items The array of items to be checked
    * @param  {Object} query The query object
    * @return {void}
   */
-  sortUrlsAndHash (items, query) {
-    let shortUrl = [];
-    let hash = [];
+    sortUrlsAndHash(items, query) {
+        let shortUrl = [];
+        let hash = [];
 
-    // If only passed one item, put in array for url checking
-    if (typeof items === 'string') {
-      items = [items];
-    }
-    items.forEach((item) => {
-      isUri(item) ? shortUrl.push(item) : hash.push(item);
-    });
+        // If only passed one item, put in array for url checking
+        if (typeof items === 'string') {
+            items = [items];
+        }
+        items.forEach(item => {
+            isUri(item) ? shortUrl.push(item) : hash.push(item);
+        });
 
-    if (shortUrl.length > 0) {
-      query.shortUrl = shortUrl;
+        if (shortUrl.length > 0) query.shortUrl = shortUrl;
+        if (hash.length > 0) query.hash = hash;
     }
-    if (hash.length > 0) {
-      query.hash = hash;
-    }
-  }
 
-  /**
+    /**
    * Request to shorten one long url
    * @param  {String} longUrl The URL to be shortened
    * @param  {String=} domain The domain to use (optional)
    * @return {Promise}
    */
-  shorten (longUrl, domain) {
-    var query = {
-      format: this.config.format,
-      longUrl: longUrl,
-      domain: domain ? domain : this.config.domain
-    };
+    async shorten({ longUrl, domain, accessToken } = { accessToken: this.config.accessToken }) {
+        return await doMethod({ method: 'shorten', accessToken, domain, data: { longUrl } });
+    }
 
-    return this.doRequest(this.generateNiceUrl(query, 'shorten'));
-  }
-
-  /**
+    /**
    * Request to expand a single short url, short hash or mixed array or items
    * @param  {String|Array} items  The string or array of short urls and/or hashes to expand
    * @return {Promise}
    */
-  expand (items) {
-    var query = {
-      format: this.config.format,
-      domain: this.config.domain
-    };
+    async expand(items) {
+        var query = {
+            format: this.config.format,
+            domain: this.config.domain,
+            access_token: this.config.accessToken
+        };
 
-    this.sortUrlsAndHash(items, query);
+        this.sortUrlsAndHash(items, query);
 
-    return this.doRequest(this.generateNiceUrl(query, 'expand'));
-  }
+        return await doRequest(generateNiceUrl({ query, method: 'expand' }));
+    }
 
-  /**
+    /**
    * Request to get clicks for a single short url, short hash or mixed array or items
    * @param  {String|Array} items  The string or array of short urls and/or hashes to expand
    * @return {Promise}
    */
-  clicks (items) {
-    var query = {
-      format: this.config.format,
-      domain: this.config.domain
-    };
+    async clicks(items) {
+        var query = {
+            format: this.config.format,
+            domain: this.config.domain,
+            access_token: this.config.accessToken
+        };
 
-    this.sortUrlsAndHash(items, query);
+        this.sortUrlsAndHash(items, query);
 
-    return this.doRequest(this.generateNiceUrl(query, 'clicks'));
-  }
+        return await doRequest(generateNiceUrl({ query, method: 'clicks' }));
+    }
 
-  /**
+    /**
    * Request to get clicks by minute for a single short url, short hash or mixed array or items
    * @param  {String|Array} items  The string or array of short urls and/or hashes to expand
    * @return {Promise}
    */
-  clicksByMinute (items) {
-    var query = {
-      format: this.config.format,
-      domain: this.config.domain
-    };
+    async clicksByMinute(items) {
+        var query = {
+            format: this.config.format,
+            domain: this.config.domain,
+            access_token: this.config.accessToken
+        };
 
-    this.sortUrlsAndHash(items, query);
+        this.sortUrlsAndHash(items, query);
 
-    return this.doRequest(this.generateNiceUrl(query, 'clicks_by_minute'));
+        return await doRequest(generateNiceUrl({ query, method: 'clicks_by_minute' }));
+    }
 
-  }
-
-  /**
+    /**
    * Request to get clicks by day for a single short url, short hash or mixed array or items
    * @param  {String|Array} items  The string or array of short urls and/or hashes to expand
    * @return {Promise}
    */
-  clicksByDay (items) {
-    var query = {
-      format: this.config.format,
-      domain: this.config.domain
-    };
+    async clicksByDay(items) {
+        var query = {
+            format: this.config.format,
+            domain: this.config.domain,
+            access_token: this.config.accessToken
+        };
 
-    this.sortUrlsAndHash(items, query);
+        this.sortUrlsAndHash(items, query);
 
-    return this.doRequest(this.generateNiceUrl(query, 'clicks_by_day'));
-  }
+        return await doRequest(generateNiceUrl({ query, method: 'clicks_by_day' }));
+    }
 
-  /**
+    /**
    * Request to get look up an existing bitly link for a long url or array of urls
    * @param  {String|Array} links  The string or array of long urls
    * @return {Promise}
    */
-  lookup (links) {
-    var query = {
-      format: this.config.format,
-      url: links,
-      domain: this.config.domain
-    };
+    async lookup(links) {
+        var query = {
+            format: this.config.format,
+            url: links,
+            domain: this.config.domain,
+            access_token: this.config.accessToken
+        };
 
-    return this.doRequest(this.generateNiceUrl(query, 'lookup'));
+        return await doRequest(generateNiceUrl({ query, method: 'lookup' }));
+    }
 
-  }
-
-  /**
+    /**
    * Request to get clicks by day for a single short url, short hash or mixed array or items
    * @param  {String|Array} items  The string or array of short urls and/or hashes to expand
    * @return {Promise}
    */
-  info (items) {
-    var query = {
-      format: this.config.format,
-      domain: this.config.domain
-    };
+    async info(items) {
+        var query = {
+            format: this.config.format,
+            domain: this.config.domain,
+            access_token: this.config.accessToken
+        };
 
-    this.sortUrlsAndHash(items, query);
+        this.sortUrlsAndHash(items, query);
 
-    return this.doRequest(this.generateNiceUrl(query, 'info'));
-  }
+        return await doRequest(generateNiceUrl({ query, method: 'info' }));
+    }
 
-
-  /**
+    /**
    * Request the informations on all referrers for a short url.  This function only
    * accepts one url (as per the limit of the bitly API)
    * @param  {String} link The link be checked
    * @return {Promise}
    */
-  referrers (link) {
-    var query = {
-      format: this.config.format,
-      domain: this.config.domain
-    };
+    async referrers(link) {
+        var query = {
+            format: this.config.format,
+            domain: this.config.domain,
+            access_token: this.config.accessToken
+        };
 
-    query[isUri(link) ? 'shortUrl' : 'hash'] = link;
+        query[isUri(link) ? 'shortUrl' : 'hash'] = link;
 
-    return this.doRequest(this.generateNiceUrl(query, 'referrers'));
-  }
+        return await doRequest(generateNiceUrl({ query, method: 'referrers' }));
+    }
 
-  /**
+    /**
    * Request the information on all countries for a short url.  This function only
    * accepts one url (as per the limit of the bitly API)
    * @return {Promise}
    */
-  countries (link) {
-    var query = {
-      format: this.config.format,
-      domain: this.config.domain
-    };
+    async countries(link) {
+        var query = {
+            format: this.config.format,
+            domain: this.config.domain,
+            access_token: this.config.accessToken
+        };
 
-    query[isUri(link) ? 'shortUrl' : 'hash'] = link;
+        query[isUri(link) ? 'shortUrl' : 'hash'] = link;
 
-    return this.doRequest(this.generateNiceUrl(query, 'countries'));
-  }
+        return await doRequest(generateNiceUrl({ query, method: 'countries' }));
+    }
 
-  /**
+    /**
    * Request to confirm a pro-domain it set up with bitly
    * @param  {String} domain The domain to be checked
    * @return {Promise}
    */
-  bitlyProDomain (domain) {
-    var query = {
-      format: this.config.format,
-      domain: domain
-    };
+    async bitlyProDomain(domain) {
+        var query = {
+            format: this.config.format,
+            domain: domain,
+            access_token: this.config.accessToken
+        };
 
-    return this.doRequest(this.generateNiceUrl(query, 'bitly_pro_domain'));
-  }
+        return await doRequest(generateNiceUrl({ query, method: 'bitly_pro_domain' }));
+    }
 
-  /**
+    /**
    * Request entries from a user's link history in reverse chronological order
    * @return {Promise}
    */
-  history () {
-    var query = {
-      // @todo Implement optional parameters:
-      //   http://dev.bitly.com/user_info.html#v3_user_link_history
-    };
+    async history() {
+        var query = {
+            // @todo Implement optional parameters:
+            //   http://dev.bitly.com/user_info.html#v3_user_link_history
+        };
 
-    return this.doRequest(this.generateNiceUrl(query, 'user/link_history'));
-  }
+        return await doRequest(generateNiceUrl({ query, method: 'user/link_history' }));
+    }
 
-  /**
+    /**
    * Edit an existing link's metadata
    * @param {String|Array} metadata_field Metadata field to edit (title, note, private, user_ts or archived). To edit
    * multiple fields, pass an array of field names as strings, e.g. ['title', 'note']
@@ -276,25 +225,25 @@ class Bitly {
    * changed to new_value[0] etc.
    * @return {Promise}
    */
-  linkEdit (metadata_field, link, new_value) {
-    var query = {
-      link: link
-    };
+    async linkEdit(metadata_field, link, new_value) {
+        var query = {
+            link: link
+        };
 
-    // We can use an array of fields and matching values to edit multiple metadata fields or strings to edit only a
-    // single one
-    if (Array.isArray(metadata_field) && Array.isArray(new_value)) {
-      query['edit'] = metadata_field.join(',');
-      metadata_field.forEach((field, index) => {
-        query[field] = new_value[index];
-      });
-    } else {
-      query['edit'] = metadata_field;
-      query[metadata_field] = new_value;
+        // We can use an array of fields and matching values to edit multiple metadata fields or strings to edit only a
+        // single one
+        if (Array.isArray(metadata_field) && Array.isArray(new_value)) {
+            query['edit'] = metadata_field.join(',');
+            metadata_field.forEach((field, index) => {
+                query[field] = new_value[index];
+            });
+        } else {
+            query['edit'] = metadata_field;
+            query[metadata_field] = new_value;
+        }
+
+        return await doRequest(generateNiceUrl({ query, method: 'user/link_edit' }));
     }
-
-    return this.doRequest(this.generateNiceUrl(query, 'user/link_edit'));
-  }
 }
 
 module.exports = Bitly;
