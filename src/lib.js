@@ -72,11 +72,21 @@ const sortUrlsAndHash = (unsortedItems, result = { shortUrl: [], hash: [] }) => 
     (Array.isArray(unsortedItems) ? unsortedItems : [unsortedItems]).map(
         item => (isUri(item) ? result.shortUrl.push(item) : typeof item === 'string' && result.hash.push(item))
     );
+    //console.log(result);
+    return result;
+};
+
+const generateQuery = args => {
+    const result = args.reduce((prev, key) => {
+        prev[key] = args[key];
+        return prev;
+    }, {});
     return result;
 };
 
 module.exports = {
     generateUrl,
+    generateQuery,
     doRequest,
     sortUrlsAndHash
 };

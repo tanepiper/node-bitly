@@ -1,3 +1,9 @@
+(function (global, factory) {
+	typeof exports === 'object' && typeof module !== 'undefined' ? factory() :
+	typeof define === 'function' && define.amd ? define(factory) :
+	(factory());
+}(this, (function () { 'use strict';
+
 'use strict';
 
 const { doRequest, sortUrlsAndHash, generateQuery } = require('./lib');
@@ -28,31 +34,10 @@ module.exports = (accessToken, config) => {
     const expand = async (items, ...args) =>
         await doRequest({ method: 'expand', accessToken, data: sortUrlsAndHash(items), query: generateQuery(args) });
 
-    /**
-       * Request to get clicks for a single short url, short hash or mixed array or items
-       * @param  {String|Array} items  The string or array of short urls and/or hashes to expand
-       * @return {Promise}
-       */
-    const clicks = async (items, ...args) =>
-        await doRequest({ method: 'clicks', accessToken, data: sortUrlsAndHash(items), query: generateQuery(args) });
-
-    /**
-    * Request to get clicks by minute for a single short url, short hash or mixed array or items
-    * @param  {String|Array} items  The string or array of short urls and/or hashes to expand
-    * @return {Promise}
-    */
-    const clicksByMinute = async (items, ...args) =>
-        await doRequest({
-            method: 'clicks_by_minute',
-            accessToken,
-            data: sortUrlsAndHash(items),
-            query: generateQuery(args)
-        });
-
     return {
         shorten,
-        expand,
-        clicks,
-        clicksByMinute
+        expand
     };
 };
+
+})));
