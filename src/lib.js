@@ -62,21 +62,16 @@ const doRequest = async ({ uri }) => {
 
 /**
 * Function to check through an array of items to check for short urls or hashes
+* If only passed one item, put in array for url checking
 * @param  {Array} unsortedItems The array of items to be checked
 * @param  {Object} query The query object
 * @return {void}
 */
-const sortUrlsAndHash = unsortedItems => {
-    const shortUrl = [];
-    const hash = [];
-    const result = {};
-
-    // If only passed one item, put in array for url checking
-    (Array.isArray(unsortedItems) ? unsortedItems : [unsortedItems]).forEach(
-        item => (isUri(item) ? shortUrl.push(item) : hash.push(item))
+const sortUrlsAndHash = (unsortedItems, result = { shortUrl: [], hash: [] }) => {
+    (Array.isArray(unsortedItems) ? unsortedItems : [unsortedItems]).map(
+        item => (isUri(item) ? result.shortUrl.push(item) : result.hash.push(item))
     );
-
-    return { shortUrl: shortUrl.length > 0 ? shortUrl : [], hash: hash.length > 0 ? hash : [] };
+    return result;
 };
 
 module.exports = {
