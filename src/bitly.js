@@ -54,7 +54,7 @@ class Bitly {
    * @param  {String|Array} items  The string or array of short urls and/or hashes to expand
    * @return {Promise}
    */
-    async expand(items) {
+    async expand({items, accessToken) {
         var query = {
             format: this.config.format,
             domain: this.config.domain,

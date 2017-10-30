@@ -12,7 +12,7 @@ const http = require('http');
    * @param {object} query Query object to pass to the API
    * @return {Object} The URL object for this request
    */
-const generateNiceUrl = ({ accessToken, apiUrl, apiVersion, method, query }) =>
+const generateNiceUrl = ({ accessToken, method, apiUrl = 'api-ssl.bitly.com', apiVersion = 'v3', query = {} }) =>
     url.parse(
         url.format({
             protocol: 'https',
@@ -23,14 +23,21 @@ const generateNiceUrl = ({ accessToken, apiUrl, apiVersion, method, query }) =>
     );
 
 const doRequest = async ({ url }) => {
-    try {
-        const res = await http.get(url);
-        const { statusCode } = res;
-        console.log(statusCode);
-    } catch (e) {
-        console.log('Request Failed');
-        throw e;
-    }
+    return new Promise(async (resolve, reject) => {
+        try {
+            const req = await http.get(url);
+            req.on('response', res => {
+                resolve(res);
+            });
+
+            req.on('error', err => {
+                reject(err);
+            });
+        } catch (e) {
+            console.log('Request Failed');
+            throw e;
+        }
+    });
 };
 
 const doMethod = async ({ method, accessToken, data, domain, format }) => {
@@ -47,9 +54,7 @@ const doMethod = async ({ method, accessToken, data, domain, format }) => {
 const bitly = async (
     { accessToken, domain, format } = {
         format: 'json',
-        domain: 'bit.ly',
-        apiUrl: 'api-ssl.bitly.com',
-        apiVersion: 'v3'
+        domain: 'bit.ly'
     }
 ) => {
     const bitlyInstance = { accessToken, domain, format };

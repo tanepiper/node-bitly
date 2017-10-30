@@ -47,20 +47,18 @@
     "url": "https://github.com/tanepiper/node-bitly/issues"
   },
   "engines": {
-    "node": ">= 0.12.0"
+    "node": ">= 8.8.1"
   },
   "scripts": {
-    "test": "lab -t 100",
+    "test": "mocha --reporter list src/*.spec.js",
     "coverage": "lab -r html -o coverage.html"
   },
   "devDependencies": {
-    "code": "^5.1.0",
-    "lab": "^15.1.1",
+    "chai": "^4.1.2",
+    "mocha": "^4.0.1",
     "sepia": "^2.0.2"
   },
   "dependencies": {
-    "boom": "^6.0.0",
-    "isomorphic-fetch": "^2.2.1",
     "valid-url": "^1.0.9"
   },
   "main": "lib/bitly.js"
