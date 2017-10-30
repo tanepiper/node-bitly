@@ -2,7 +2,7 @@ const expect = require('chai').expect;
 
 require('../test/bootstrap');
 
-const { generateUrl, doRequest } = require('../src/lib');
+const { generateUrl, doRequest, sortUrlsAndHash } = require('../src/lib');
 
 describe('generateUrl', () => {
     it('should return a default url', () => {
@@ -52,5 +52,13 @@ describe('doRequest', () => {
         } catch (e) {
             throw e;
         }
+    });
+});
+
+describe('sortUrlsAndHash', () => {
+    it('takes urls and hashes and appends them correctly', () => {
+        const { shortUrl, hash } = sortUrlsAndHash(['http://example.com', '1KjIwXl']);
+        expect(shortUrl.length).to.equal(1);
+        expect(hash.length).to.equal(1);
     });
 });

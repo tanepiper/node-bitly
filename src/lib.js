@@ -60,41 +60,27 @@ const doRequest = async ({ uri }) => {
 //     return await doRequest(generateUrl({ query, method }));
 // };
 
-// /**
-// * Function to check through an array of items to check for short urls or hashes
-// * @param  {Array} items The array of items to be checked
-// * @param  {Object} query The query object
-// * @return {void}
-// */
-// const sortUrlsAndHash = ({ items = [], query: {} }) => {
-//     const shortUrl = [];
-//     const hash = [];
-
-//     // If only passed one item, put in array for url checking
-//     if (typeof items === 'string') {
-//         items = [items];
-//     }
-//     items.forEach(item => (isUri(item) ? shortUrl.push(item) : hash.push(item)));
-
-//     if (shortUrl.length > 0) query.shortUrl = shortUrl;
-//     if (hash.length > 0) query.hash = hash;
-// };
-
-// const bitly = async (
-//     { accessToken, domain, format } = {
-//         format: 'json',
-//         domain: 'bit.ly'
-//     }
-// ) => {
-//     const bitlyInstance = { accessToken, domain, format };
-// };
-
 /**
- * @module node-bitly.lib
- * @exports { generateUrl }
- */
+* Function to check through an array of items to check for short urls or hashes
+* @param  {Array} unsortedItems The array of items to be checked
+* @param  {Object} query The query object
+* @return {void}
+*/
+const sortUrlsAndHash = unsortedItems => {
+    const shortUrl = [];
+    const hash = [];
+    const result = {};
+
+    // If only passed one item, put in array for url checking
+    (Array.isArray(unsortedItems) ? unsortedItems : [unsortedItems]).forEach(
+        item => (isUri(item) ? shortUrl.push(item) : hash.push(item))
+    );
+
+    return { shortUrl: shortUrl.length > 0 ? shortUrl : [], hash: hash.length > 0 ? hash : [] };
+};
 
 module.exports = {
     generateUrl,
-    doRequest
+    doRequest,
+    sortUrlsAndHash
 };
