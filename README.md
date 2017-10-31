@@ -9,12 +9,7 @@
 This module provides calls to the [Bitly](http://bitly.com) API for [Nodejs](http://nodejs.org).
 For more information on the API request and responses visit the [Bitly API docs](http://dev.bitly.com/api.html)
 
-
-
-From version 4.0 of this library, the callback in methods have been removed and the library only provides
-promises for each method response.  The library has also been re-written in ES2015/ES6. The transpiled version
-is only distributed via NPM, or can be created the command `npm run compile` if you fork the source. Finally
-support is no longer provided for `node < 0.12`.
+Version 5 of this library only support `Node 8.x.x` and above as it uses `async/await`
 
 ## Installation
 
@@ -32,31 +27,33 @@ See http://dev.bitly.com/ for format of returned objects from the API
 #### Code
 
 ```js
-// For ES2015/ES6
+const BitlyClient = require('bitly');
+const bitly = BitleyClient('<accessToken>');
 
-import Bitly from 'bitly';
+const myFunc = async(uri = 'https://github.com/tanepiper/node-bitly') => {
+  try {
+    return await bitly.shorten(uri);
+  } catch(e) {
+    throw e;
+  }
+}
+```
 
-let bitly = new Bitly('<YOUR ACCESS TOKEN>');
+You can also do raw requests to any Bitly endpoint.  With this you need to pass the access
+token to the method
 
-bitly.shorten('http://nodejs.org', (response) => {
-  console.log(response);
-}, (error) => {
-  console.log(error);
-});
+```js
+const BitlyClient = require('bitly');
+const MY_API_TOKEN = '<accessToken>';
+const bitly = BitleyClient(MY_API_TOKEN);
 
-
-// For ES5
-
-var Bitly = require('bitly');
-var bitly = new Bitly('<YOUR ACCESS TOKEN>');
-
-bitly.shorten('https://github.com/tanepiper/node-bitly')
-  .then(function(response) {
-    var short_url = response.data.url
-    // Do something with data
-  }, function(error) {
-    throw error;
-  });
+const myFunc = async(method, data) => {
+  try {
+    return await bitly.doRequest({accessToken: MY_API_TOKEN, method, data});
+  } catch(e) {
+    throw e;
+  }
+}
 ```
 
 ## Tests
@@ -66,13 +63,10 @@ To run tests type `npm test`. For coverage type `npm run coverage`
 
 This module is limited to the following API methods:
 
+* info
 * shorten
 * expand
 * clicks / clicks_by_minute / clicks_by_day
 * referrers
 * countries
-* bitly_pro_domain
 * lookup
-* info
-* history
-* link_edit

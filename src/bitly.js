@@ -123,5 +123,7 @@ module.exports = (accessToken, config) => {
     info,
     referrers,
     countries,
+    doRequest,
+    sortUrlsAndHash,
   };
 };
