@@ -74,5 +74,5 @@
     "request-promise": "^4.2.2",
     "valid-url": "^1.0.9"
   },
-  "main": "dist/index.js"
+  "main": "src/bitly.js"
 }
