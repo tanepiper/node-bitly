@@ -83,7 +83,7 @@ jobs:
       - checkout
       - attach_workspace:
           at: ~/
-      run:
+      - run:
         name: Running Distribution
         command: ./deploy-production.sh
 
@@ -96,8 +96,8 @@ jobs:
       - checkout
       - attach_workspace:
           at: ~/
-      run:
-        name: Running Distribution
+      - run:
+        name: Running Beta Distribution
         command: ./deploy-beta.sh
 
 workflows:
