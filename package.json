@@ -51,7 +51,7 @@
   },
   "scripts": {
     "test": "VCR_MODE=cache mocha --reporter list src/*.spec.js",
-    "coverage": "lab -r html -o coverage.html"
+    "build": "webpack --config=webpack.config.js"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",

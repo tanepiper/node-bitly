@@ -38,7 +38,6 @@ const generateUrl = (
 };
 
 const doRequest = async ({ accessToken, config, method, data }) => {
-  console.log(accessToken);
   const uri = generateUrl(accessToken, method, data, config);
   //console.log(uri);
   try {
