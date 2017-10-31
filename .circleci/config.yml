@@ -74,6 +74,32 @@ jobs:
           name: Building Distribution
           command: npm run build
 
+  run_distribution:
+    <<: *defaults
+    branches:
+      only:
+        - master
+    steps:
+      - checkout
+      - attach_workspace:
+          at: ~/
+      run:
+        name: Running Distribution
+        command: ./deploy-production.sh
+
+  run_distribution_beta:
+    <<: *defaults
+    branches:
+      ignore:
+        - master
+    steps:
+      - checkout
+      - attach_workspace:
+          at: ~/
+      run:
+        name: Running Distribution
+        command: ./deploy-beta.sh
+
 workflows:
   version: 2
   test-and-build:
@@ -93,3 +119,9 @@ workflows:
             - run_tests_8
             - run_tests_6
             - run_tests_4
+      - run_distribution:
+          requires:
+            - run_build
+      - run_distribution_beta:
+          requires:
+            - run_build
