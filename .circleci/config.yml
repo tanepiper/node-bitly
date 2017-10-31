@@ -52,11 +52,12 @@ jobs:
 
 workflows:
   version: 2
-  jobs:
-    - install
-    - test:
-      requires:
-        - install
-    - build:
-      requires:
-        - test
+  do_it:
+    jobs:
+      - install
+      - test:
+        requires:
+          - install
+      - build:
+        requires:
+          - test
