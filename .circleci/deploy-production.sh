@@ -16,7 +16,7 @@ git config --global user.email piper.tane@gmail.com
 
 echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> ~/.npmrc
 
-npm version $PACKAGE_VERSION-beta-$CIRCLE_BUILD_NUM -m "node-bitly %s"
+npm version patch -m "node-bitly %s"
 npm publish
 
 PACKAGE_VERSION=$(cat package.json | grep version | head -1 | awk -F: '{ print $2 }' | sed 's/[\",]//g' | tr -d '[[:space:]]') && git tag $PACKAGE_VERSION && git push --tags
