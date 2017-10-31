@@ -55,8 +55,8 @@ workflows:
     jobs:
       - run_install
       - run_tests:
-        requires:
-          - run_install
+          requires:
+            - run_install
       - run_build:
-        requires:
-          - run_tests
+          requires:
+            - run_tests
