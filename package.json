@@ -45,6 +45,8 @@
     "node": ">= 4.4.x"
   },
   "scripts": {
+    "pretest": "npm run build",
+    "prepublishOnly": "npm run build",
     "test": "VCR_MODE=cache mocha --reporter list src/*.spec.js",
     "build": "webpack --config=webpack.config.js"
   },
@@ -67,5 +69,5 @@
     "request-promise": "^4.2.2",
     "valid-url": "^1.0.9"
   },
-  "main": "src/bitly.js"
+  "main": "dist/bitly.js"
 }

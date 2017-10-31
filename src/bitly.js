@@ -1,4 +1,4 @@
-const { doRequest, sortUrlsAndHash } = require('./lib');
+const { doRequest, sortUrlsAndHash, generateUrl } = require('./lib');
 
 /**
  * The main Bitly constructor, takes the users login, api key and additional options
@@ -125,5 +125,6 @@ module.exports = (accessToken, config) => {
     countries,
     doRequest,
     sortUrlsAndHash,
+    generateUrl,
   };
 };

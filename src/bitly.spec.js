@@ -7,7 +7,7 @@ const EXAMPLE_URL_BITLY = 'http://bit.ly/2hpSRbP';
 
 require('../test/bootstrap');
 
-const bitlyClient = require('../src/bitly');
+const bitlyClient = require('../');
 
 describe('Bitly client', () => {
     let bitly;

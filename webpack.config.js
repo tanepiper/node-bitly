@@ -9,7 +9,9 @@ module.exports = {
     target: 'node',
     output: {
         path: Path.join(__dirname, 'dist'),
-        filename: 'index.js'
+        filename: 'bitly.js',
+        libraryTarget: 'commonjs2',
+        library: 'bitly'
     },
     externals: [nodeExternals()],
     resolve: {
