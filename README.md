@@ -9,7 +9,8 @@
 This module provides calls to the [Bitly](http://bitly.com) API for [Nodejs](http://nodejs.org).
 For more information on the API request and responses visit the [Bitly API docs](http://dev.bitly.com/api.html)
 
-Version 5 of this library only support `Node 8.x.x` and above as it uses `async/await`
+`node-bitly` is programmed with ES7 `async/await` but uses the `typescript` compiler to ES5, so the library has
+been tested back to support `node v4.8.4`
 
 ## Installation
 
@@ -24,7 +25,7 @@ To get your access token, visit https://bitly.com/a/oauth_apps (under Generic Ac
 
 See http://dev.bitly.com/ for format of returned objects from the API
 
-#### Code
+### Code
 
 ```js
 const BitlyClient = require('bitly');
@@ -37,6 +38,18 @@ const myFunc = async(uri = 'https://github.com/tanepiper/node-bitly') => {
     throw e;
   }
 }
+```
+
+If you are not using `node 8` then you can still use the library with `Promise` values:
+
+```js
+const BitlyClient = require('bitly');
+const bitly = BitleyClient('<accessToken>');
+
+const uri = 'https://github.com/tanepiper/node-bitly';
+bitly.shorten(uri).then(result => {
+  console.log(result);
+});
 ```
 
 You can also do raw requests to any Bitly endpoint.  With this you need to pass the access
@@ -56,8 +69,9 @@ const myFunc = async(method, data) => {
 }
 ```
 
-## Tests
-To run tests type `npm test`. For coverage type `npm run coverage`
+### Tests
+
+To run tests type `npm test`.
 
 ### Bit.ly Features
 
