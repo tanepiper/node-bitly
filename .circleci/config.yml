@@ -114,16 +114,16 @@ workflows:
             - run_tests_6
             - run_tests_4
       - run_distribution:
+          requires:
+            - run_build
           filters:
             branches:
               only:
                 - master
+      - run_distribution_beta:
           requires:
             - run_build
-      - run_distribution_beta:
           filters:
             branches:
               ignore:
                 - master
-          requires:
-            - run_build
