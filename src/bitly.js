@@ -1,11 +1,12 @@
 const { doRequest, sortUrlsAndHash, generateUrl } = require('./lib');
 
 /**
- * The main Bitly constructor, takes the users login, api key and additional options
- * @constructor
+ * This is the main Bitly module that returns an object of methods.  You need to pass in your
+ * OAuth access token, as well as an optional config object. You are returned several helper
+ * methods, as well as access to a method to pass any bitly api request to
  * @module node-bitly
- * @param {String} config,OAuth access token
- * @param {Object=} config Optional config object
+ * @param {string} accessToken The access token, this from an OAuth session
+ * @param {object=} config Optional config object
  * @returns {Bitly}
  */
 module.exports = (accessToken, config) => {
@@ -128,3 +129,17 @@ module.exports = (accessToken, config) => {
     generateUrl,
   };
 };
+
+/**
+ * Bitly object definition
+ * @typedef {object} Bitly
+ * @property {Function} shorten Function that takes a url and shortens it. Accepts valid URL.
+ * @property {Function} expends Function that gets long urls for short urls. Accepts string or array of strings.
+ * @property {Function} clicks Function that gets the number of clicks of short urls. Accepts string or array of strings.
+ * @property {Function} clicksByMinute Function that gets the number of clicks by minute for short urls. Accepts string or array of strings.
+ * @property {Function} clicksByDay Function that gets the number of clicks by day for short urls. Accepts string or array of strings.
+ * @property {Function} lookup Function that takes a url looks up data. Accepts valid URL.
+ * @property {Function} info Function that takes a url and gets info. Accepts valid URL.
+ * @property {Function} referrers Function that gets referrers for urls. Accepts valid URL.
+ * @property {Function} countries Function that gets click by countries for urls. Accepts valid URL.
+ */

@@ -60,6 +60,8 @@
     "babel-plugin-transform-runtime": "^6.23.0",
     "chai": "^4.1.2",
     "eslint": "^4.10.0",
+    "jsdoc-babel": "^0.3.0",
+    "jsdoc-webpack-plugin-v2": "^2.0.2",
     "mocha": "^4.0.1",
     "mocha-webpack": "^1.0.1",
     "sepia": "^2.0.2",
