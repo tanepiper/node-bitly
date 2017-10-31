@@ -10,7 +10,7 @@ defaults: &defaults
     - image: circleci/node:8.8.1
 
 jobs:
-  install:
+  run_install:
     <<: *defaults
     steps:
       - checkout
@@ -27,37 +27,36 @@ jobs:
           key: node-bitly-{{ .Branch }}-{{ checksum "package.json" }}
       - persist_to_workspace:
           root: ~/
-          paths:
-            - repo
+          paths: repo
 
-  test:
+  run_tests:
     <<: *defaults
     steps:
       - checkout
       - attach_workspace:
-          at: ~/
+          at: ~/repo
       - run:
           name: Running tests
-          command: npm run test
+          command: npm test
 
-  build:
+  run_build:
     <<: *defaults
     steps:
       - checkout
       - attach_workspace:
-          at: ~/
+          at: ~/repo
       - run:
           name: Building Distribution
           command: npm run build
 
 workflows:
   version: 2
-  do_it:
+  test-and-build:
     jobs:
-      - install
-      - test:
+      - run_install
+      - run_tests:
         requires:
-          - install
-      - build:
+          - run_install
+      - run_build:
         requires:
-          - test
+          - run_tests
