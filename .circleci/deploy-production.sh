@@ -19,6 +19,6 @@ echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> ~/.npmrc
 npm version patch -m "node-bitly %s"
 npm publish
 
-PACKAGE_VERSION=$(cat package.json | grep version | head -1 | awk -F: '{ print $2 }' | sed 's/[\",]//g' | tr -d '[[:space:]]') && git tag $PACKAGE_VERSION && git push --tags
+PACKAGE_VERSION=$(cat package.json | grep version | head -1 | awk -F: '{ print $2 }' | sed 's/[\",]//g' | tr -d '[[:space:]]') && git tag $PACKAGE_VERSION && git push --tags && git push
 
 echo "Release done"
