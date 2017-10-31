@@ -24,7 +24,7 @@ npm publish --tag beta
 
 git add .
 git commit -m "$NEW_PACKAGE_VERSION"
-git tag $NEW_PACKAGE_VERSION
+git tag "$CIRCLE_BRANCH-$NEW_PACKAGE_VERSION"
 git push --tags
 git push --set-upstream origin $CIRCLE_BRANCH
 
