@@ -19,7 +19,7 @@ git config --global user.email piper.tane@gmail.com
 
 echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> ~/.npmrc
 
-npm version NEW_PACKAGE_VERSION -m "$CIRCLE_BRANCH %s"
+npm version $NEW_PACKAGE_VERSION -m "$CIRCLE_BRANCH %s"
 npm publish --tag beta
 
 git add .
