@@ -90,6 +90,9 @@ jobs:
       - checkout
       - attach_workspace:
           at: ~/
+      - add-ssh-keys:
+        fingerprints:
+          - "58:a0:03:43:27:f0:9b:d2:ce:b1:dc:af:77:c7:b1:6a"
       - run:
           name: Running Beta Distribution
           command: ./.circleci/deploy-beta.sh
