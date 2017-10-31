@@ -47,8 +47,8 @@ jobs:
       - attach_workspace:
           at: ~/
       - run:
-        name: Building Distribution
-        command: npm run build
+          name: Building Distribution
+          command: npm run build
 
 workflows:
   version: 2
