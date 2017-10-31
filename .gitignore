@@ -5,3 +5,5 @@ coverage/
 *.tpm
 .idea/
 lib/
+.vscode
+dist/

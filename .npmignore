@@ -1,9 +1,3 @@
-lib/*.map
-src/
-.idea/
-coverage/
+.circleci/
+.vscode
 fixtures/
-.eslintrc
-.gitignore
-.travis.yml
-
