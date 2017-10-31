@@ -7,7 +7,7 @@ version: 2
 defaults: &defaults
   working_directory: ~/repo
   docker:
-    - image: circleci/node:8.8.1
+    - image: circleci/node:8
 
 jobs:
   run_install:
@@ -29,7 +29,7 @@ jobs:
           root: ~/
           paths: repo
 
-  run_tests:
+  run_tests_8:
     <<: *defaults
     steps:
       - checkout
@@ -39,7 +39,32 @@ jobs:
           name: Running tests
           command: npm test
 
-  run_build:
+  run_tests_6:
+    working_directory: ~/repo
+    docker:
+      - image: circleci/node:6
+    steps:
+      - checkout
+      - attach_workspace:
+          at: ~/
+      - run:
+          name: Running tests
+          command: npm test
+
+  run_tests_4:
+    working_directory: ~/repo
+    docker:
+      - image: circleci/node:4
+    steps:
+      - checkout
+      - attach_workspace:
+          at: ~/
+      - run:
+          name: Running tests
+          command: npm test
+  
+
+  build:
     <<: *defaults
     steps:
       - checkout
@@ -49,14 +74,62 @@ jobs:
           name: Building Distribution
           command: npm run build
 
+  run_distribution:
+    <<: *defaults
+    steps:
+      - checkout
+      - attach_workspace:
+          at: ~/
+      - add-ssh-keys:
+          fingerprints:
+            - "58:a0:03:43:27:f0:9b:d2:ce:b1:dc:af:77:c7:b1:6a"
+      - run:
+          name: Running Distribution
+          command: ./deploy-production.sh
+
+  run_distribution_beta:
+    <<: *defaults
+    steps:
+      - checkout
+      - attach_workspace:
+          at: ~/
+      - add-ssh-keys:
+          fingerprints:
+            - "58:a0:03:43:27:f0:9b:d2:ce:b1:dc:af:77:c7:b1:6a"
+      - run:
+          name: Running Beta Distribution
+          command: ./.circleci/deploy-beta.sh
+
 workflows:
   version: 2
   test-and-build:
     jobs:
       - run_install
-      - run_tests:
+      - run_tests_8:
           requires:
             - run_install
-      - run_build:
+      - run_tests_6:
           requires:
-            - run_tests
+            - run_install
+      - run_tests_4:
+          requires:
+            - run_install
+      - build:
+          requires:
+            - run_tests_8
+            - run_tests_6
+            - run_tests_4
+      - run_distribution:
+          requires:
+            - build
+          filters:
+            branches:
+              only:
+                - master
+      - run_distribution_beta:
+          requires:
+            - build
+          filters:
+            branches:
+              ignore:
+                - master

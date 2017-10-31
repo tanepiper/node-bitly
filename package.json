@@ -51,16 +51,18 @@
   },
   "scripts": {
     "prepublishOnly": "npm test && npm run build",
-    "test": "VCR_MODE=cache mocha --reporter list src/*.spec.js",
+    "test": "VCR_MODE=cache mocha-webpack --reporter list src/*.spec.js",
     "build": "webpack --config=webpack.config.js"
   },
   "devDependencies": {
     "@babel/preset-env": "^7.0.0-beta.4",
     "babel-core": "^6.26.0",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-plugin-transform-runtime": "^6.23.0",
     "chai": "^4.1.2",
     "eslint": "^4.10.0",
     "mocha": "^4.0.1",
+    "mocha-webpack": "^1.0.1",
     "sepia": "^2.0.2",
     "ts-loader": "^3.1.1",
     "typescript": "^2.6.1",
