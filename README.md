@@ -10,7 +10,6 @@ This module provides calls to the [Bitly](http://bitly.com) API for [Nodejs](htt
 For more information on the API request and responses visit the [Bitly API docs](http://dev.bitly.com/api.html)
 
 
-### **** Important update from Version 4 onwards ****
 
 From version 4.0 of this library, the callback in methods have been removed and the library only provides
 promises for each method response.  The library has also been re-written in ES2015/ES6. The transpiled version

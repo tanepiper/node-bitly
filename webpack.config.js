@@ -2,15 +2,7 @@ const Path = require('path');
 var webpack = require('webpack');
 var fs = require('fs');
 
-var nodeModules = {};
-fs
-    .readdirSync('node_modules')
-    .filter(function(x) {
-        return ['.bin'].indexOf(x) === -1;
-    })
-    .forEach(function(mod) {
-        nodeModules[mod] = 'commonjs ' + mod;
-    });
+var nodeExternals = require('webpack-node-externals');
 
 module.exports = {
     entry: ['babel-polyfill', Path.join(__dirname, 'src', 'bitly.js')],
@@ -19,9 +11,9 @@ module.exports = {
         path: Path.join(__dirname, 'dist'),
         filename: 'index.js'
     },
-    externals: nodeModules,
+    externals: [nodeExternals()],
     resolve: {
-        modules: [Path.resolve(__dirname, '/src'), 'node_modules/'],
+        modules: [Path.resolve(__dirname, '/src'), Path.resolve(__dirname, 'node_modules/')],
         descriptionFiles: ['package.json']
     },
     module: {
