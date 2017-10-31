@@ -29,7 +29,7 @@ jobs:
           root: ~/
           paths: repo
 
-  run_tests:
+  run_tests_8:
     <<: *defaults
     steps:
       - checkout
@@ -38,6 +38,31 @@ jobs:
       - run:
           name: Running tests
           command: npm test
+
+  run_tests_6:
+    working_directory: ~/repo
+    docker:
+      - image: circleci/node:6
+    steps:
+      - checkout
+      - attach_workspace:
+          at: ~/
+      - run:
+          name: Running tests
+          command: npm rebuild && npm test
+
+  run_tests_4:
+    working_directory: ~/repo
+    docker:
+      - image: circleci/node:4
+    steps:
+      - checkout
+      - attach_workspace:
+          at: ~/
+      - run:
+          name: Running tests
+          command: npm rebuild && npm test
+  
 
   run_build:
     <<: *defaults
@@ -54,9 +79,17 @@ workflows:
   test-and-build:
     jobs:
       - run_install
-      - run_tests:
+      - run_tests_8:
+          requires:
+            - run_install
+      - run_tests_6:
+          requires:
+            - run_install
+      - run_tests_4:
           requires:
             - run_install
       - run_build:
           requires:
-            - run_tests
+            - run_tests_8
+            - run_tests_6
+            - run_tests_4
