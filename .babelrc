@@ -1,5 +1,5 @@
 {
-    "plugins": ["node_modules/jsdoc-babel", "transform-object-rest-spread", "transform-runtime"],
+    "plugins": ["transform-object-rest-spread", "transform-runtime"],
     "presets": [
         [
             "@babel/env",

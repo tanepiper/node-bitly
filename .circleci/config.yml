@@ -84,7 +84,7 @@ jobs:
           at: ~/
       - run:
           name: Building Distribution
-          command: npm run build
+          command: npm run build && npm run docs
 
   run_distribution:
     <<: *defaults

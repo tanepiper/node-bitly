@@ -1,7 +1,17 @@
 {
-    "plugins": [],
+    "plugins": ["node_modules/jsdoc-babel", "plugins/markdown"],
     "sourceType": "module",
     "source": {
         "include": "./src/bitly.js"
+    },
+    "opts": {
+        "destination": "./docs"
+    },
+    "tags": {
+        "allowUnknownTags": true
+    },
+    "babel": {
+        "presets": ["es2017"],
+        "babelrc": false
     }
 }
