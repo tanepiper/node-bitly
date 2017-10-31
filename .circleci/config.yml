@@ -92,7 +92,7 @@ jobs:
           at: ~/
       - run:
           name: Running Beta Distribution
-          command: ./deploy-beta.sh
+          command: ./.circleci/deploy-beta.sh
 
 workflows:
   version: 2
