@@ -9,7 +9,7 @@
     "util"
   ],
   "homepage": "https://github.com/tanepiper/node-bitly",
-  "version": "5.0.2-beta1",
+  "version": "5.0.2-beta1.1",
   "author": {
     "name": "Tane Piper",
     "email": "piper.tane@gmail.com",
@@ -76,5 +76,5 @@
     "request-promise": "^4.2.2",
     "valid-url": "^1.0.9"
   },
-  "main": "src/bitly.js"
+  "main": "dist/bitly.js"
 }
