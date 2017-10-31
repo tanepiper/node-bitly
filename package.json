@@ -50,7 +50,7 @@
     "node": ">= 8.0.x"
   },
   "scripts": {
-    "prepublishOnly": "npm test && npm run build",
+    "prepublishOnly": "npm test",
     "test": "VCR_MODE=cache mocha --reporter list src/*.spec.js",
     "build": "webpack --config=webpack.config.js"
   },
@@ -73,5 +73,5 @@
     "request-promise": "^4.2.2",
     "valid-url": "^1.0.9"
   },
-  "main": "dist/bitly.js"
+  "main": "src/bitly.js"
 }
