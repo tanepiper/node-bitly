@@ -4,12 +4,7 @@ set -o errexit -o noclobber -o nounset -o pipefail
 
 echo "Doing NPM Beta Release branch: $CIRCLE_BRANCH"
 
-PACKAGE_VERSION=$(cat package.json \
-  | grep version \
-  | head -1 \
-  | awk -F: '{ print $2 }' \
-  | sed 's/[",]//g' \
-  | tr -d '[[:space:]]')
+PACKAGE_VERSION=$(grep -m1 version package.json | awk -F: '{ print $2 }' | sed 's/[", ]//g')
 
 NEW_PACKAGE_VERSION=$PACKAGE_VERSION-beta-$CIRCLE_BUILD_NUM
 
