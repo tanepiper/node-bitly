@@ -1,5 +1,5 @@
 const expect = require('chai').expect;
-
+require('sepia');
 require('../test/bootstrap');
 
 const { generateUrl, doRequest, sortUrlsAndHash } = require('../src/lib');
