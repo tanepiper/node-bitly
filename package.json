@@ -50,7 +50,6 @@
     "node": ">= 8.0.x"
   },
   "scripts": {
-    "prepublishOnly": "npm test && npm run build",
     "test": "VCR_MODE=cache mocha-webpack --reporter list src/*.spec.js",
     "build": "webpack --config=webpack.config.js"
   },
