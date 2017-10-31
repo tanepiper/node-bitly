@@ -7,6 +7,7 @@ var nodeExternals = require('webpack-node-externals');
 module.exports = {
     entry: ['babel-polyfill', Path.join(__dirname, 'src', 'bitly.js')],
     target: 'node',
+    devtool: 'sourcemap',
     output: {
         path: Path.join(__dirname, 'dist'),
         filename: 'bitly.js',
@@ -15,6 +16,7 @@ module.exports = {
     },
     externals: [nodeExternals()],
     resolve: {
+        extensions: ['.ts', '.js'],
         modules: [Path.resolve(__dirname, '/src'), Path.resolve(__dirname, 'node_modules/')],
         descriptionFiles: ['package.json']
     },
@@ -23,10 +25,7 @@ module.exports = {
             {
                 test: /\.js$/,
                 exclude: [/node_modules/, '*.spec.js'],
-                loader: 'babel-loader', // or just "babel"
-                query: {
-                    presets: ['es2015']
-                }
+                loader: 'ts-loader', // or just "babel"
             }
         ]
     }

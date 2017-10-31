@@ -1,0 +1,14 @@
+{
+    "compilerOptions": {
+        "target": "es5",
+        "module": "commonjs",
+        "lib": ["es7"],
+        "allowJs": true,
+        "strict": false,
+        "noImplicitAny": false,
+        "strictNullChecks": false,
+        "noUnusedLocals": true,
+        "noUnusedParameters": true
+    },
+    "files": ["./src/bitly.js", "./src/lib.js"]
+}
