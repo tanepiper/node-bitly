@@ -76,9 +76,6 @@ jobs:
 
   run_distribution:
     <<: *defaults
-    branches:
-      only:
-        - master
     steps:
       - checkout
       - attach_workspace:
@@ -89,9 +86,6 @@ jobs:
 
   run_distribution_beta:
     <<: *defaults
-    branches:
-      ignore:
-        - master
     steps:
       - checkout
       - attach_workspace:
@@ -120,8 +114,16 @@ workflows:
             - run_tests_6
             - run_tests_4
       - run_distribution:
+          filters:
+            branches:
+              only:
+                - master
           requires:
             - run_build
       - run_distribution_beta:
+          filters:
+            branches:
+              ignore:
+                - master
           requires:
             - run_build
