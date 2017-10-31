@@ -85,7 +85,7 @@ jobs:
             - "58:a0:03:43:27:f0:9b:d2:ce:b1:dc:af:77:c7:b1:6a"
       - run:
           name: Running Distribution
-          command: ./deploy-production.sh
+          command: ./circleci/deploy-production.sh
 
   run_distribution_beta:
     <<: *defaults
