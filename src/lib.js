@@ -49,10 +49,6 @@ const doRequest = async ({ accessToken, config, method, data }) => {
   }
 };
 
-// const doMethod = async ({ method, accessToken, data, domain, format }) => {
-//     return await doRequest(generateUrl({ query, method }));
-// };
-
 /**
 * Function to check through an array of items to check for short urls or hashes
 * If only passed one item, put in array for url checking
@@ -69,17 +65,8 @@ const sortUrlsAndHash = (unsortedItems, result = { shortUrl: [], hash: [] }) => 
   return result;
 };
 
-const generateQuery = args => {
-  const result = args.reduce((prev, key) => {
-    prev[key] = args[key];
-    return prev;
-  }, {});
-  return result;
-};
-
 module.exports = {
   generateUrl,
-  generateQuery,
   doRequest,
   sortUrlsAndHash,
 };
