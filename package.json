@@ -42,10 +42,9 @@
     "url": "https://github.com/tanepiper/node-bitly/issues"
   },
   "engines": {
-    "node": ">= 4.4.x"
+    "node": ">= 8.0.x"
   },
   "scripts": {
-    "pretest": "npm run build",
     "prepublishOnly": "npm run build",
     "test": "VCR_MODE=cache mocha --reporter list src/*.spec.js",
     "build": "webpack --config=webpack.config.js"

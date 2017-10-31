@@ -2,7 +2,7 @@ const expect = require('chai').expect;
 require('sepia');
 require('../test/bootstrap');
 
-const { generateUrl, sortUrlsAndHash } = require('../src/lib');
+const { generateUrl, sortUrlsAndHash } = require('./lib');
 
 describe('generateUrl', () => {
     it('should return a default url', () => {
