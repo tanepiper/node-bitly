@@ -12,7 +12,7 @@ const bitlyClient = require('../src/bitly');
 describe('Bitly client', () => {
     let bitly;
     before(() => {
-        bitly = bitlyClient(process.env.BITLY_API_KEY);
+        bitly = bitlyClient({ accessToken: process.env.BITLY_API_KEY });
     });
 
     describe('shorten', () => {

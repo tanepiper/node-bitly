@@ -1,4 +1,3 @@
-const { promisify } = require('util');
 const url = require('url');
 const request = require('request-promise');
 const isUri = require('valid-url').isUri;
@@ -13,27 +12,20 @@ const isUri = require('valid-url').isUri;
  * @example
  * generateUrl({method: 'shorten', accessKey: 'myaccessKey', data: { longUrl: 'https://github.com/tanepiper/node-bitly' } });
  */
-const generateUrl = ({
+const generateUrl = (
     accessToken,
     method,
     data = {},
-    apiUrl = 'api-ssl.bitly.com',
-    apiVersion = 'v3',
-    domain = 'bit.ly',
-    format = 'json',
-    query = {}
-}) => {
-    const keys = Object.keys(data);
+    { apiUrl = 'api-ssl.bitly.com', apiVersion = 'v3', domain = 'bit.ly', format = 'json' } = {}
+) => {
+    const newQuery = Object.assign({
+        access_token: accessToken,
+        domain,
+        format
+    });
 
-    const newQuery = Object.assign(
-        {
-            access_token: accessToken,
-            domain,
-            format
-        },
-        query
-    );
-
+    const keys = Object.keys(data || []);
+    console.log(keys);
     keys.forEach(key => (newQuery[key] = data[key]));
 
     return url.parse(
@@ -46,8 +38,8 @@ const generateUrl = ({
     );
 };
 
-const doRequest = async ({ accessToken, method, data, ...args }) => {
-    const uri = generateUrl({ accessToken, method, data, ...args });
+const doRequest = async ({ accessToken, config, method, data }) => {
+    const uri = generateUrl(accessToken, method, data, config);
     try {
         const req = await request({ uri });
         return JSON.parse(req);

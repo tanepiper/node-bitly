@@ -1,25 +1,24 @@
-const { doRequest, sortUrlsAndHash, generateQuery } = require('./lib');
+const { doRequest, sortUrlsAndHash } = require('./lib');
 
 /**
  * The main Bitly constructor, takes the users login, api key and additional options
  * @constructor
  * @module node-bitly
- * @param {String} accessToken OAuth access token
+ * @param {String} config,OAuth access token
  * @param {Object=} config Optional config object
  * @returns {Bitly}
  */
-module.exports = accessToken => {
+module.exports = (accessToken, config) => {
     /**
     * Request to get clicks by day for a single short url, short hash or mixed array or items
     * @param  {String|Array} items  The string or array of short urls and/or hashes to expand
     * @return {Promise}
     */
-    const info = async (items, ...args) =>
+    const info = async (items) =>
         await doRequest({
-            method: 'info',
-            accessToken,
-            data: sortUrlsAndHash(items),
-            query: generateQuery(args)
+            accessToken: accessToken, method: 'info',
+            config,
+            data: sortUrlsAndHash(items)
         });
     /**
    * Request to shorten one long url
@@ -27,36 +26,34 @@ module.exports = accessToken => {
    * @param  {String=} domain The domain to use (optional)
    * @return {Promise}
    */
-    const shorten = async (longUrl, ...args) =>
-        await doRequest({ method: 'shorten', accessToken, data: { longUrl }, query: generateQuery(args) });
+    const shorten = async (longUrl) => await doRequest({ accessToken: accessToken, method: 'shorten', config, data: { longUrl } });
 
     /**
    * Request to expand a single short url, short hash or mixed array or items
    * @param  {String|Array} items  The string or array of short urls and/or hashes to expand
    * @return {Promise}
    */
-    const expand = async (items, ...args) =>
-        await doRequest({ method: 'expand', accessToken, data: sortUrlsAndHash(items), query: generateQuery(args) });
+    const expand = async (items) =>
+        await doRequest({ accessToken: accessToken, method: 'expand', config, data: sortUrlsAndHash(items) });
 
     /**
        * Request to get clicks for a single short url, short hash or mixed array or items
        * @param  {String|Array} items  The string or array of short urls and/or hashes to expand
        * @return {Promise}
        */
-    const clicks = async (items, ...args) =>
-        await doRequest({ method: 'clicks', accessToken, data: sortUrlsAndHash(items), query: generateQuery(args) });
+    const clicks = async (items) =>
+        await doRequest({ accessToken: accessToken, method: 'clicks', config, data: sortUrlsAndHash(items) });
 
     /**
     * Request to get clicks by minute for a single short url, short hash or mixed array or items
     * @param  {String|Array} items  The string or array of short urls and/or hashes to expand
     * @return {Promise}
     */
-    const clicksByMinute = async (items, ...args) =>
+    const clicksByMinute = async (items) =>
         await doRequest({
-            method: 'clicks_by_minute',
-            accessToken,
-            data: sortUrlsAndHash(items),
-            query: generateQuery(args)
+            accessToken: accessToken, method: 'clicks_by_minute',
+            config,
+            data: sortUrlsAndHash(items)
         });
 
     /**
@@ -64,12 +61,11 @@ module.exports = accessToken => {
     * @param  {String|Array} items  The string or array of short urls and/or hashes to expand
     * @return {Promise}
     */
-    const clicksByDay = async (items, ...args) =>
+    const clicksByDay = async (items) =>
         await doRequest({
-            method: 'clicks_by_day',
-            accessToken,
-            data: sortUrlsAndHash(items),
-            query: generateQuery(args)
+            accessToken: accessToken, method: 'clicks_by_day',
+            config,
+            data: sortUrlsAndHash(items)
         });
 
     /**
@@ -77,12 +73,11 @@ module.exports = accessToken => {
     * @param  {String|Array} links  The string or array of long urls
     * @return {Promise}
     */
-    const lookup = async (items, ...args) =>
+    const lookup = async (items) =>
         await doRequest({
-            method: 'lookup',
-            accessToken,
-            data: { url: items },
-            query: generateQuery(args)
+            accessToken: accessToken, method: 'lookup',
+            config,
+            data: { url: items }
         });
 
     /**
@@ -91,12 +86,11 @@ module.exports = accessToken => {
     * @param  {String} link The link be checked
     * @return {Promise}
     */
-    const referrers = async (item, ...args) =>
+    const referrers = async (item) =>
         await doRequest({
-            method: 'referrers',
-            accessToken,
-            data: sortUrlsAndHash([item]),
-            query: generateQuery(args)
+            accessToken: accessToken, method: 'referrers',
+            config,
+            data: sortUrlsAndHash([item])
         });
 
     /**
@@ -105,12 +99,11 @@ module.exports = accessToken => {
     * @param  {String} link The link be checked
     * @return {Promise}
     */
-    const countries = async (item, ...args) =>
+    const countries = async (item) =>
         await doRequest({
-            method: 'countries',
-            accessToken,
-            data: sortUrlsAndHash([item]),
-            query: generateQuery(args)
+            accessToken: accessToken, method: 'countries',
+            config,
+            data: sortUrlsAndHash([item])
         });
 
     return {

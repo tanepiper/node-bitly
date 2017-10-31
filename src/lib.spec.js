@@ -6,16 +6,14 @@ const { generateUrl, doRequest, sortUrlsAndHash } = require('../src/lib.js');
 
 describe('generateUrl', () => {
     it('should return a default url', () => {
-        const result = generateUrl({ accessToken: 'iamatoken', method: 'foo' });
+        const result = generateUrl('iamatoken', 'foo');
         expect(result.href).to.equal(
             'https://api-ssl.bitly.com/v3/foo?access_token=iamatoken&domain=bit.ly&format=json'
         );
     });
 
     it('should return a custom url', () => {
-        const result = generateUrl({
-            accessToken: 'iamatoken',
-            method: 'foo',
+        const result = generateUrl('iamatoken', 'foo', null, {
             apiUrl: 'api-ssl.myhost.com',
             apiVersion: 'v4'
         });
