@@ -34,7 +34,7 @@ jobs:
     steps:
       - checkout
       - attach_workspace:
-          at: ~/repo
+          at: ~/
       - run:
           name: Running tests
           command: npm test
@@ -44,7 +44,7 @@ jobs:
     steps:
       - checkout
       - attach_workspace:
-          at: ~/repo
+          at: ~/
       - run:
           name: Building Distribution
           command: npm run build
