@@ -1,5 +1,3 @@
-'use strict';
-
 const { doRequest, sortUrlsAndHash, generateQuery } = require('./lib');
 
 /**
