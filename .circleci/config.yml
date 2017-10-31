@@ -55,10 +55,10 @@ workflows:
   install-test-build:
     jobs:
       - install
-      - test
+      - test:
         requires:
           - install
-      - build
+      - build:
         requires:
           - install
           - test
