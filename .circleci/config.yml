@@ -49,7 +49,7 @@ jobs:
           at: ~/
       - run:
           name: Running tests
-          command: npm rebuild && npm test
+          command: npm test
 
   run_tests_4:
     working_directory: ~/repo
@@ -61,7 +61,7 @@ jobs:
           at: ~/
       - run:
           name: Running tests
-          command: npm rebuild && npm test
+          command: npm test
   
 
   run_build:
