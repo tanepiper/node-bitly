@@ -13,21 +13,25 @@ fs
     });
 
 module.exports = {
-    entry: Path.join(__dirname, 'src', 'bitly.js'),
+    entry: ['babel-polyfill', Path.join(__dirname, 'src', 'bitly.js')],
     target: 'node',
     output: {
         path: Path.join(__dirname, 'dist'),
         filename: 'index.js'
     },
     externals: nodeModules,
+    resolve: {
+        modules: [Path.resolve(__dirname, '/src'), 'node_modules/'],
+        descriptionFiles: ['package.json']
+    },
     module: {
         loaders: [
             {
                 test: /\.js$/,
-                exclude: /node_modules/,
+                exclude: [/node_modules/, '*.spec.js'],
                 loader: 'babel-loader', // or just "babel"
                 query: {
-                    presets: ['es2017', 'es2015']
+                    presets: ['es2015']
                 }
             }
         ]
