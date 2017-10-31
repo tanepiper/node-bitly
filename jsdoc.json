@@ -2,16 +2,28 @@
     "plugins": ["plugins/markdown"],
     "sourceType": "module",
     "source": {
-        "include": "./src/bitly.js"
-    },
-    "opts": {
-        "destination": "./docs"
+        "include": ["src", "package.json", "README.md"],
+        "includePattern": ".js$",
+        "excludePattern": "(node_modules/|docs|.spec.js$)"
     },
     "tags": {
-        "allowUnknownTags": true
+        "allowUnknownTags": true,
+        "dictionaries": ["jsdoc"]
+    },
+    "templates": {
+        "cleverLinks": false,
+        "monospaceLinks": true,
+        "useLongnameInNav": false
     },
     "babel": {
         "presets": ["es2017"],
         "babelrc": false
+    },
+    "opts": {
+        "destination": "./docs/",
+        "encoding": "utf8",
+        "private": true,
+        "recurse": true,
+        "template": "./node_modules/minami"
     }
 }

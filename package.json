@@ -53,7 +53,7 @@
     "test": "VCR_MODE=cache mocha-webpack --reporter list src/*.spec.js",
     "build": "webpack --config=webpack.config.js",
     "docs": "jsdoc -c jsdoc.json -R README.md",
-    "lint": "eslint --config=./.eslintrc.json src/**.js" 
+    "lint": "eslint --config=./.eslintrc.json src/**.js"
   },
   "devDependencies": {
     "@babel/preset-env": "^7.0.0-beta.5",
@@ -64,6 +64,7 @@
     "chai": "^4.1.2",
     "eslint": "^4.10.0",
     "jsdoc": "^3.5.5",
+    "minami": "^1.2.3",
     "mocha": "^4.0.1",
     "mocha-webpack": "^1.0.1",
     "sepia": "^2.0.2",
