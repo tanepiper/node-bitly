@@ -20,7 +20,7 @@ git config --global user.email piper.tane@gmail.com
 echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> ~/.npmrc
 
 git add .
-git commit -m "$NEW_PACKAGE_VERSION dependencies"
+git diff-index --quiet HEAD || git commit -m "$NEW_PACKAGE_VERSION dependencies"
 npm version $NEW_PACKAGE_VERSION -m "$CIRCLE_BRANCH %s"
 npm publish --tag beta
 git push --tags
