@@ -9,7 +9,7 @@
     "util"
   ],
   "homepage": "https://github.com/tanepiper/node-bitly",
-  "version": "5.0.4",
+  "version": "5.0.6-beta.541",
   "author": {
     "name": "Tane Piper",
     "email": "piper.tane@gmail.com",
@@ -47,7 +47,7 @@
     "url": "https://github.com/tanepiper/node-bitly/issues"
   },
   "engines": {
-    "node": ">= 8.0.x"
+    "node": ">= 4.8.0"
   },
   "scripts": {
     "test": "VCR_MODE=cache mocha-webpack --reporter list src/*.spec.js",
@@ -67,6 +67,7 @@
     "minami": "^1.2.3",
     "mocha": "^4.0.1",
     "mocha-webpack": "^1.0.1",
+    "np": "^2.16.1",
     "sepia": "^2.0.2",
     "ts-loader": "^3.1.1",
     "typescript": "^2.6.1",
