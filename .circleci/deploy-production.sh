@@ -16,7 +16,7 @@ echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> ~/.npmrc
 
 git add .
 git commit -m "release dependencies"
-npm version $VERSION_COMMAND -m "node-bitly %s"
+npm version "v$PACKAGE_VERSION" -m "node-bitly %s"
 npm publish
 git push --tags
 git push --set-upstream origin $CIRCLE_BRANCH
