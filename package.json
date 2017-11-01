@@ -9,7 +9,7 @@
     "util"
   ],
   "homepage": "https://github.com/tanepiper/node-bitly",
-  "version": "5.0.2",
+  "version": "5.0.4",
   "author": {
     "name": "Tane Piper",
     "email": "piper.tane@gmail.com",
@@ -50,17 +50,21 @@
     "node": ">= 8.0.x"
   },
   "scripts": {
-    "prepublishOnly": "npm test && npm run build",
     "test": "VCR_MODE=cache mocha-webpack --reporter list src/*.spec.js",
-    "build": "webpack --config=webpack.config.js"
+    "build": "webpack --config=webpack.config.js",
+    "docs": "jsdoc -c jsdoc.json -R README.md",
+    "lint": "eslint --config=./.eslintrc.json src/**.js"
   },
   "devDependencies": {
-    "@babel/preset-env": "^7.0.0-beta.4",
+    "@babel/preset-env": "^7.0.0-beta.5",
     "babel-core": "^6.26.0",
+    "babel-eslint": "^8.0.1",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-plugin-transform-runtime": "^6.23.0",
     "chai": "^4.1.2",
     "eslint": "^4.10.0",
+    "jsdoc": "^3.5.5",
+    "minami": "^1.2.3",
     "mocha": "^4.0.1",
     "mocha-webpack": "^1.0.1",
     "sepia": "^2.0.2",

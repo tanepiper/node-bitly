@@ -19,7 +19,7 @@ jobs:
           - node-bitly-{{ .Branch }}-{{ checksum "package.json" }}
       - run:
           name: Install Dependencies
-          command: npm install
+          command: npm upgrade && npm install
       - save_cache:
           paths:
             - node_modules
@@ -31,6 +31,18 @@ jobs:
 
   run_tests_8:
     <<: *defaults
+    steps:
+      - checkout
+      - attach_workspace:
+          at: ~/
+      - run:
+          name: Running tests
+          command: npm test
+  
+  run_tests_9:
+    working_directory: ~/repo
+    docker:
+      - image: circleci/node:9
     steps:
       - checkout
       - attach_workspace:
@@ -72,7 +84,7 @@ jobs:
           at: ~/
       - run:
           name: Building Distribution
-          command: npm run build
+          command: npm run build && npm run docs
 
   run_distribution:
     <<: *defaults
@@ -131,5 +143,5 @@ workflows:
             - build
           filters:
             branches:
-              ignore:
-                - master
+              only:
+                - beta
