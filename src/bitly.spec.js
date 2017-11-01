@@ -25,7 +25,7 @@ describe('Bitly client', () => {
 
   describe('expand', () => {
     it('should expand a url and hash', async () => {
-      const result = await bitly.expand([EXAMPLE_URL, EXAMPLE_URL_HASH]);
+      const result = await bitly.expand([EXAMPLE_URL_BITLY, EXAMPLE_URL_HASH]);
       const { data } = result;
       expect(data.expand.length).to.equal(2);
     });
@@ -33,7 +33,7 @@ describe('Bitly client', () => {
 
   describe('clicks', () => {
     it('should get click numbers for url', async () => {
-      const result = await bitly.clicks(EXAMPLE_URL);
+      const result = await bitly.clicks(EXAMPLE_URL_BITLY);
       const { data } = result;
       expect(data).to.have.property('clicks');
     });
@@ -46,7 +46,7 @@ describe('Bitly client', () => {
 
   describe('clicksByMinute', () => {
     it('should get click numbers for url', async () => {
-      const result = await bitly.clicksByMinute(EXAMPLE_URL);
+      const result = await bitly.clicksByMinute(EXAMPLE_URL_BITLY);
       const { data } = result;
       expect(data).to.have.property('clicks_by_minute');
     });
@@ -67,7 +67,7 @@ describe('Bitly client', () => {
 
   describe('info', () => {
     it('should get info for url', async () => {
-      const result = await bitly.info(EXAMPLE_URL);
+      const result = await bitly.info(EXAMPLE_URL_BITLY);
       const { data } = result;
       expect(data).to.have.property('info');
     });
