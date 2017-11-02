@@ -2,14 +2,14 @@
   "statusCode": 200,
   "headers": {
     "server": "nginx",
-    "date": "Thu, 02 Nov 2017 10:27:36 GMT",
+    "date": "Thu, 02 Nov 2017 10:56:19 GMT",
     "content-type": "application/json; charset=utf-8",
     "content-length": "223",
     "connection": "keep-alive",
     "etag": "\"e9e5a8286d76049d0ee347962f4b9678742997c5\""
   },
   "url": "https://api-ssl.bitly.com:443/v3/info?access_token=eb1b99efe83c7d029e7600a6b38e32d1c9c2c6d9&domain=bit.ly&format=json&shortUrl=http%3A%2F%2Fbit.ly%2F2hpSRbP&",
-  "time": 377,
+  "time": 385,
   "request": {
     "method": "GET",
     "headers": {

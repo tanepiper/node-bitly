@@ -15,7 +15,7 @@ const isUri = require('valid-url').isUri;
 const generateUrl = (
   accessToken,
   method,
-  data = {},
+  data,
   { apiUrl = 'api-ssl.bitly.com', apiVersion = 'v3', domain = 'bit.ly', format = 'json' } = {},
 ) => {
   const newQuery = Object.assign({
@@ -25,7 +25,6 @@ const generateUrl = (
   });
 
   Object.keys(data || []).forEach(key => (newQuery[key] = data[key]));
-  //console.log(newQuery);
 
   return url.parse(
     url.format({
@@ -37,13 +36,13 @@ const generateUrl = (
   );
 };
 
-const doRequest = async ({ accessToken, config, method, data }) => {
+const doRequest = async ({ accessToken, method, data, config }) => {
   const uri = generateUrl(accessToken, method, data, config);
   try {
     const req = await request({ uri });
     return JSON.parse(req);
-  } catch (e) {
-    throw e;
+  } catch (error) {
+    throw error;
   }
 };
 
