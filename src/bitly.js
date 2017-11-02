@@ -228,4 +228,5 @@ module.exports = (accessToken, config) => {
  * @property {Function} info Function that takes a url and gets info. Accepts valid URL.
  * @property {Function} referrers Function that gets referrers for urls. Accepts valid URL.
  * @property {Function} countries Function that gets click by countries for urls. Accepts valid URL.
+ * @property {Function} bitlyRequest Function that allows you to to any bitly request
  */
