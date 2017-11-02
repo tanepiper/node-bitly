@@ -68,6 +68,7 @@
     "eslint": "^4.10.0",
     "jsdoc": "^3.5.5",
     "jsdoc-babel": "^0.3.0",
+    "jsdoc-to-markdown": "^3.0.0",
     "minami": "^1.2.3",
     "mocha": "^4.0.1",
     "mocha-webpack": "^1.0.1",
