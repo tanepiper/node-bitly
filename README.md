@@ -25,6 +25,8 @@ To get your access token, visit https://bitly.com/a/oauth_apps (under Generic Ac
 
 See http://dev.bitly.com/ for format of returned objects from the API
 
+To see the available libary APIs, you can view the [API Documentation](docs/api.md)
+
 ### Code
 
 ```js
@@ -72,15 +74,3 @@ const myFunc = async(method, data) => {
 ### Tests
 
 To run tests type `npm test`.
-
-### Bit.ly Features
-
-This module is limited to the following API methods:
-
-* info
-* shorten
-* expand
-* clicks / clicks_by_minute / clicks_by_day
-* referrers
-* countries
-* lookup

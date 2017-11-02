@@ -1,8 +1,7 @@
 {
-    "plugins": ["plugins/markdown"],
+    "plugins": ["plugins/markdown", "node_modules/jsdoc-babel"],
     "sourceType": "module",
     "source": {
-        "include": ["src", "package.json", "README.md"],
         "includePattern": ".js$",
         "excludePattern": "(node_modules/|docs|.spec.js$)"
     },
@@ -17,6 +16,7 @@
     },
     "babel": {
         "presets": ["es2017"],
+        "plugins": ["transform-async-to-generator"],
         "babelrc": false
     },
     "opts": {
