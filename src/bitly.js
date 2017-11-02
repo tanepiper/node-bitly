@@ -1,6 +1,7 @@
 const { doRequest, sortUrlsAndHash, generateUrl } = require('./lib');
 
 /**
+ *
  * This is the main Bitly module that returns an object of methods.  You need to pass in your
  * OAuth access token, as well as an optional config object. You are returned several helper
  * methods, as well as access to a method to pass any bitly api request to.
@@ -9,9 +10,20 @@ const { doRequest, sortUrlsAndHash, generateUrl } = require('./lib');
  * https://dev.bitly.com/api.html
  *
  * @module node-bitly
+ * @type {function}
  * @param {string} accessToken The access token, this from an OAuth session
  * @param {object=} config Optional config object
  * @returns {Bitly}
+ * @example
+ *  const BitlyClient = require('bitly');
+ *  const bitly = BitleyClient('<accessToken>');
+ *  const myFunc = async(uri = 'https://github.com/tanepiper/node-bitly') => {
+ *    try {
+ *      return await bitly.shorten(uri);
+ *   } catch(e) {
+ *      throw e;
+ *    }
+ *  }
  */
 module.exports = (accessToken, config) => {
   /**
