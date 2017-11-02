@@ -1,4 +1,45 @@
-const { doRequest, sortUrlsAndHash, generateUrl } = require('./lib');
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>bitly.js - Documentation</title>
+
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav>
+    <li class="nav-link nav-home-link"><a href="index.html">Home</a></li><li class="nav-heading">Modules</li><li class="nav-heading"><span class="nav-item-type type-module">M</span><span class="nav-item-name"><a href="module-node-bitly.html">node-bitly</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-node-bitly.html#~bitlyRequest">bitlyRequest</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-node-bitly.html#~clicks">clicks</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-node-bitly.html#~clicksByDay">clicksByDay</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-node-bitly.html#~clicksByMinute">clicksByMinute</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-node-bitly.html#~countries">countries</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-node-bitly.html#~expand">expand</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-node-bitly.html#~info">info</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-node-bitly.html#~lookup">lookup</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-node-bitly.html#~referrers">referrers</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-node-bitly.html#~shorten">shorten</a></span></li><li class="nav-heading"><span class="nav-item-type type-module">M</span><span class="nav-item-name"><a href="node-bitly.module_lib.html">lib</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="node-bitly.module_lib.html#~doRequest">doRequest</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="node-bitly.module_lib.html#~generateUrl">generateUrl</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="node-bitly.module_lib.html#~sortUrlsAndHash">sortUrlsAndHash</a></span></li><li class="nav-heading"><a href="global.html">Globals</a></li>
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">bitly.js</h1>
+    
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>const { doRequest, sortUrlsAndHash, generateUrl } = require('./lib');
 
 /**
  *
@@ -16,7 +57,7 @@ const { doRequest, sortUrlsAndHash, generateUrl } = require('./lib');
  * @returns {Bitly}
  * @example
  *  const BitlyClient = require('bitly');
- *  const bitly = BitleyClient('<accessToken>');
+ *  const bitly = BitleyClient('&lt;accessToken>');
  *  const myFunc = async(uri = 'https://github.com/tanepiper/node-bitly') => {
  *    try {
  *      return await bitly.shorten(uri);
@@ -28,7 +69,7 @@ const { doRequest, sortUrlsAndHash, generateUrl } = require('./lib');
 module.exports = (accessToken, config) => {
   /**
     * This is used to return the page title for a given Bitlink.
-    * @param  {array<string>} items An array of short urls or hashes
+    * @param  {array&lt;string>} items An array of short urls or hashes
     * @return {object} The results of the request
     */
   const info = async (items = []) => {
@@ -59,7 +100,7 @@ module.exports = (accessToken, config) => {
 
   /**
      * Request to expand urls and hashes
-     * @param  {string|array<string>} items A string or array of strings of short urls and hashes.
+     * @param  {string|array&lt;string>} items A string or array of strings of short urls and hashes.
      * @return {object} The results of the request
      */
   const expand = async items => {
@@ -77,7 +118,7 @@ module.exports = (accessToken, config) => {
 
   /**
        * Request to get clicks for urls and hashes
-       * @param  {string|array<string>} items A string or array of strings of short urls and hashes.
+       * @param  {string|array&lt;string>} items A string or array of strings of short urls and hashes.
        * @return {object}
        */
   const clicks = async items => {
@@ -95,7 +136,7 @@ module.exports = (accessToken, config) => {
 
   /**
     * Request to get clicks by minute for urls and hashes
-    * @param  {string|array<string>} items A string or array of strings of short urls and hashes.
+    * @param  {string|array&lt;string>} items A string or array of strings of short urls and hashes.
     * @return {object}
     */
   const clicksByMinute = async items => {
@@ -113,7 +154,7 @@ module.exports = (accessToken, config) => {
 
   /**
     * Request to get clicks by day for urls and hashes
-    * @param  {string|array<string>} items A string or array of strings of short urls and hashes.
+    * @param  {string|array&lt;string>} items A string or array of strings of short urls and hashes.
     * @return {object}
     */
   const clicksByDay = async items => {
@@ -229,3 +270,22 @@ module.exports = (accessToken, config) => {
  * @property {Function} referrers Function that gets referrers for urls. Accepts valid URL.
  * @property {Function} countries Function that gets click by countries for urls. Accepts valid URL.
  */
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<br class="clear">
+
+<footer>
+    Generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Thu Nov 02 2017 12:29:19 GMT+0000 (UTC) using the Minami theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/linenumber.js"></script>
+</body>
+</html>

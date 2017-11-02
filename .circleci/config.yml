@@ -23,11 +23,11 @@ jobs:
       - save_cache:
           paths:
             - node_modules
-            - fixtures
           key: node-bitly-{{ .Branch }}-{{ checksum "package.json" }}
       - persist_to_workspace:
           root: ~/
-          paths: repo
+          paths:
+            - repo
 
   run_tests_8:
     <<: *defaults
@@ -38,7 +38,7 @@ jobs:
       - run:
           name: Running tests
           command: npm test
-  
+
   run_tests_9:
     working_directory: ~/repo
     docker:
@@ -74,7 +74,7 @@ jobs:
       - run:
           name: Running tests
           command: npm test
-  
+
 
   build:
     <<: *defaults
@@ -84,7 +84,11 @@ jobs:
           at: ~/
       - run:
           name: Building Distribution
-          command: npm run build && npm run docs
+          command: ./.circleci/build-dist.sh
+      - persist_to_workspace:
+          root: ~/
+          paths:
+            - repo
 
   run_distribution:
     <<: *defaults
