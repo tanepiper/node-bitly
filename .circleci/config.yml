@@ -23,7 +23,6 @@ jobs:
       - save_cache:
           paths:
             - node_modules
-            - fixtures
           key: node-bitly-{{ .Branch }}-{{ checksum "package.json" }}
       - persist_to_workspace:
           root: ~/
@@ -86,6 +85,10 @@ jobs:
       - run:
           name: Building Distribution
           command: ./.circleci/build-dist.sh
+      - persist_to_workspace:
+          root: ~/
+          paths:
+            - repo
 
   run_distribution:
     <<: *defaults
