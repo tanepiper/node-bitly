@@ -9,7 +9,7 @@
     "util"
   ],
   "homepage": "https://github.com/tanepiper/node-bitly",
-  "version": "5.0.7",
+  "version": "5.0.7-beta.595",
   "author": {
     "name": "Tane Piper",
     "email": "piper.tane@gmail.com",
