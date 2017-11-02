@@ -38,7 +38,7 @@ jobs:
       - run:
           name: Running tests
           command: npm test
-  
+
   run_tests_9:
     working_directory: ~/repo
     docker:
@@ -74,7 +74,7 @@ jobs:
       - run:
           name: Running tests
           command: npm test
-  
+
 
   build:
     <<: *defaults
@@ -84,7 +84,7 @@ jobs:
           at: ~/
       - run:
           name: Building Distribution
-          command: npm run build && npm run docs
+          command: ./.circleci/build-dist.sh
 
   run_distribution:
     <<: *defaults
