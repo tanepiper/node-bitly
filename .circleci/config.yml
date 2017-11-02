@@ -27,7 +27,8 @@ jobs:
           key: node-bitly-{{ .Branch }}-{{ checksum "package.json" }}
       - persist_to_workspace:
           root: ~/
-          paths: repo
+          paths:
+            - repo
 
   run_tests_8:
     <<: *defaults
