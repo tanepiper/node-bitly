@@ -39,12 +39,10 @@ const generateUrl = (
 
 const doRequest = async ({ accessToken, config, method, data }) => {
   const uri = generateUrl(accessToken, method, data, config);
-  //console.log(uri);
   try {
     const req = await request({ uri });
     return JSON.parse(req);
   } catch (e) {
-    console.log('Request Failed');
     throw e;
   }
 };
@@ -61,7 +59,6 @@ const sortUrlsAndHash = (unsortedItems, result = { shortUrl: [], hash: [] }) => 
     item =>
       isUri(item) ? result.shortUrl.push(item) : typeof item === 'string' && result.hash.push(item),
   );
-  //console.log(result);
   return result;
 };
 
