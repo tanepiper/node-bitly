@@ -6,11 +6,12 @@ echo "Building Distribution"
 npm run build
 
 echo "Building new docs"
-DIR=$PWD/docs
+DIR=$RUNNING_DIR/docs
 if [ -d "$DIR" ]; then
     printf '%s\n' "Removing existing docs"
     rm -rf "$DIR"
 fi
+
 mkdir $PWD/docs
 npm run ghdocs
 
