@@ -1,10 +1,6 @@
 # node-bitly - Bitly API for nodejs
 
-[![CircleCI](https://circleci.com/gh/tanepiper/node-bitly/tree/refactor.svg?style=svg)](https://circleci.com/gh/tanepiper/node-bitly/tree/refactor)
-
-[![NPM version](https://badge.fury.io/js/bitly.png)](http://badge.fury.io/js/bitly)
-
-[![Dependencies](https://david-dm.org/tanepiper/node-bitly.svg)](https://david-dm.org/tanepiper/node-bitly)
+[![CircleCI](https://circleci.com/gh/tanepiper/node-bitly.svg?style=svg)](https://circleci.com/gh/tanepiper/node-bitly) [![NPM version](https://badge.fury.io/js/bitly.png)](http://badge.fury.io/js/bitly) [![Dependencies](https://david-dm.org/tanepiper/node-bitly.svg)](https://david-dm.org/tanepiper/node-bitly)
 
 This module provides calls to the [Bitly](http://bitly.com) API for [Nodejs](http://nodejs.org).
 For more information on the API request and responses visit the [Bitly API docs](http://dev.bitly.com/api.html)
