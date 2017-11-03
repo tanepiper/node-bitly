@@ -14,7 +14,7 @@ echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> ~/.npmrc
 
 git add .
 git diff-index --quiet HEAD || git commit -m "Commit changes for $PACKAGE_VERSION"
-git branch --set-upstream $CIRCLE_BRANCH
+
 npm version ${VERSION_COMMAND:-patch} -m "$CIRCLE_BRANCH %s [ci skip]"
 npm publish
 git push --tags

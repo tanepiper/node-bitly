@@ -17,7 +17,7 @@ echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> ~/.npmrc
 echo "Add any build artifacts"
 git add .
 git diff-index --quiet HEAD || git commit -m "Commit changes for $BETA_PACKAGE_VERSION"
-git branch --set-upstream $CIRCLE_BRANCH
+git branch --set-upstream-to $CIRCLE_BRANCH
 
 echo "Version and Publish"
 npm version $BETA_PACKAGE_VERSION -m "$CIRCLE_BRANCH %s [ci skip]"
