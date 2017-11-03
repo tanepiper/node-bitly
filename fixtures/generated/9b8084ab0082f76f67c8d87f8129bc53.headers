@@ -2,7 +2,7 @@
   "statusCode": 200,
   "headers": {
     "server": "nginx",
-    "date": "Thu, 02 Nov 2017 10:56:18 GMT",
+    "date": "Fri, 03 Nov 2017 08:34:40 GMT",
     "content-type": "application/json; charset=utf-8",
     "content-length": "118",
     "connection": "keep-alive",
