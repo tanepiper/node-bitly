@@ -31,157 +31,64 @@ module.exports = (accessToken, config) => {
     * @param  {array<string>} items An array of short urls or hashes
     * @return {object} The results of the request
     */
-  const info = async (items = []) => {
-    try {
-      return await doRequest({
-        accessToken,
-        method: 'info',
-        config,
-        data: sortUrlsAndHash(items),
-      });
-    } catch (error) {
-      throw error;
-    }
-  };
+  const info = async (items = []) => await bitlyRequest('info', sortUrlsAndHash(items));
 
   /**
      * Used to shorted a url
      * @param  {string} longUrl The URL to be shortened
      * @return {object} The results of the request
      */
-  const shorten = async longUrl => {
-    try {
-      return await doRequest({ accessToken, method: 'shorten', config, data: { longUrl } });
-    } catch (error) {
-      throw error;
-    }
-  };
+  const shorten = async longUrl => await bitlyRequest('shorten', { longUrl });
 
   /**
      * Request to expand urls and hashes
      * @param  {string|array<string>} items A string or array of strings of short urls and hashes.
      * @return {object} The results of the request
      */
-  const expand = async items => {
-    try {
-      return await doRequest({
-        accessToken,
-        method: 'expand',
-        config,
-        data: sortUrlsAndHash(items),
-      });
-    } catch (error) {
-      throw error;
-    }
-  };
+  const expand = async items => await bitlyRequest('expand', sortUrlsAndHash(items));
 
   /**
        * Request to get clicks for urls and hashes
        * @param  {string|array<string>} items A string or array of strings of short urls and hashes.
        * @return {object}
        */
-  const clicks = async items => {
-    try {
-      return await doRequest({
-        accessToken,
-        method: 'clicks',
-        config,
-        data: sortUrlsAndHash(items),
-      });
-    } catch (error) {
-      throw error;
-    }
-  };
+  const clicks = async items => await bitlyRequest('clicks', sortUrlsAndHash(items));
 
   /**
     * Request to get clicks by minute for urls and hashes
     * @param  {string|array<string>} items A string or array of strings of short urls and hashes.
     * @return {object}
     */
-  const clicksByMinute = async items => {
-    try {
-      return await doRequest({
-        accessToken,
-        method: 'clicks_by_minute',
-        config,
-        data: sortUrlsAndHash(items),
-      });
-    } catch (error) {
-      throw error;
-    }
-  };
+  const clicksByMinute = async items =>
+    await bitlyRequest('clicks_by_minute', sortUrlsAndHash(items));
 
   /**
     * Request to get clicks by day for urls and hashes
     * @param  {string|array<string>} items A string or array of strings of short urls and hashes.
     * @return {object}
     */
-  const clicksByDay = async items => {
-    try {
-      return await doRequest({
-        accessToken,
-        method: 'clicks_by_day',
-        config,
-        data: sortUrlsAndHash(items),
-      });
-    } catch (error) {
-      throw error;
-    }
-  };
+  const clicksByDay = async items => await bitlyRequest('clicks_by_day', sortUrlsAndHash(items));
 
   /**
     * Lookup a single url
     * @param  {string} url The url to look up
     * @return {object}
     */
-  const lookup = async url => {
-    try {
-      return await doRequest({
-        accessToken,
-        method: 'lookup',
-        config,
-        data: { url },
-      });
-    } catch (error) {
-      throw error;
-    }
-  };
+  const lookup = async url => await bitlyRequest('lookup', { url });
 
   /**
     * Request referrers for a single url
     * @param  {string} uri The uri to look up
     * @return {object}
     */
-  const referrers = async item => {
-    try {
-      return await doRequest({
-        accessToken,
-        method: 'referrers',
-        config,
-        data: sortUrlsAndHash([item]),
-      });
-    } catch (error) {
-      throw error;
-    }
-  };
+  const referrers = async item => await bitlyRequest('referrers', sortUrlsAndHash([item]));
 
   /**
     * Request countries for a single url
     * @param  {string} uri The uri to look up
     * @return {object}
     */
-  const countries = async item => {
-    try {
-      return await doRequest({
-        accessToken,
-        method: 'countries',
-        config,
-        data: sortUrlsAndHash([item]),
-      });
-    } catch (error) {
-      throw error;
-    }
-  };
+  const countries = async item => await bitlyRequest('countries', sortUrlsAndHash([item]));
 
   /**
    * Perform any bitly API request using a method name and passed data object
@@ -191,14 +98,24 @@ module.exports = (accessToken, config) => {
    */
   const bitlyRequest = async (method, data) => {
     try {
-      return await doRequest({
+      const result = await doRequest({
         accessToken,
         method,
         config,
         data,
       });
-    } catch (error) {
-      throw error;
+
+      if (result.status_code >= 200 && result.status_code < 400 ) {
+        return result;
+      }
+
+      const err = new Error(`[node-bitly] Request returned ${result.status_code}: ${result.status_txt}`);
+      err.statusCode = result.status_code
+      err.data = result.data
+      throw err;
+
+    } catch (e) {
+      throw e;
     }
   };
 

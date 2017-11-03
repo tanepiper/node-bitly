@@ -15,6 +15,33 @@ describe('Bitly client', () => {
     bitly = bitlyClient(process.env.BITLY_API_KEY);
   });
 
+  describe('should handle invalid requests', () => {
+    it('it should throw an error', async () => {
+      let err;
+      try {
+        await bitly.shorten(EXAMPLE_URL_BITLY);
+      } catch (error) {
+        err = error;
+      }
+      return expect(err.statusCode).to.equal(500);
+    });
+  });
+
+  describe('should work with bitly api endpoints with no helper', () => {
+    it('should accept any valid bitly url and data object', async() => {
+      try {
+        const {data} = await bitly.bitlyRequest('link/referrers_by_domain', {
+          link: EXAMPLE_URL_BITLY,
+          unit: 'hour',
+          timezone: 'Europe/Amsterdam'
+        });
+        return expect(data).to.have.property('referrers');
+      } catch (error)  {
+        throw error;
+      }
+    })
+  })
+
   describe('shorten', () => {
     it('should shorten a url', async () => {
       try {
