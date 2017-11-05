@@ -60,7 +60,7 @@ const bitly = BitleyClient('<accessToken>');
 
 try {
   return await bitly.bitlyRequest('link/referrers_by_domain', {
-    link: 'https://github.com/tanepiper/node-bitly,
+    link: 'https://github.com/tanepiper/node-bitly',
     unit: 'hour',
     timezone: 'Europe/Amsterdam'
   });
