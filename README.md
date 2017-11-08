@@ -27,7 +27,7 @@ To see the available libary APIs, you can view the [API Documentation](docs/api.
 
 ```js
 const BitlyClient = require('bitly');
-const bitly = BitleyClient('<accessToken>');
+const bitly = BitlyClient('<accessToken>');
 
 try {
   return await bitly.shorten(uri);
@@ -40,7 +40,7 @@ If you are not using `node 8` then you can still use the library with `Promise` 
 
 ```js
 const BitlyClient = require('bitly');
-const bitly = BitleyClient('<accessToken>');
+const bitly = BitlyClient('<accessToken>');
 
 bitly.shorten('https://github.com/tanepiper/node-bitly')
 .then(function(result) {
@@ -56,7 +56,7 @@ token to the method
 
 ```js
 const BitlyClient = require('bitly');
-const bitly = BitleyClient('<accessToken>');
+const bitly = BitlyClient('<accessToken>');
 
 try {
   return await bitly.bitlyRequest('link/referrers_by_domain', {
