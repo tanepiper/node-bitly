@@ -1,23 +1,24 @@
-require('sepia');
-const expect = require('chai').expect;
+import 'sepia';
+import { expect } from 'chai';
 
 const EXAMPLE_URL = 'https://github.com/tanepiper/node-bitly';
 const EXAMPLE_URL_HASH = '2hpSRbP';
 const EXAMPLE_URL_BITLY = 'http://bit.ly/2hpSRbP';
 
-require('../test/bootstrap');
+import '../test/bootstrap';
 
-const bitlyClient = require('./bitly');
+import { BitlyClient } from './bitly';
+import { BitlyError } from '../global';
 
 describe('Bitly client', () => {
-  let bitly;
+  let bitly: BitlyClient;
   before(() => {
-    bitly = bitlyClient(process.env.BITLY_API_KEY);
+    bitly = new BitlyClient(process.env.BITLY_API_KEY);
   });
 
   describe('should handle invalid requests', () => {
     it('it should throw an error', async () => {
-      let err;
+      let err: BitlyError;
       try {
         await bitly.shorten(EXAMPLE_URL_BITLY);
       } catch (error) {
@@ -28,19 +29,19 @@ describe('Bitly client', () => {
   });
 
   describe('should work with bitly api endpoints with no helper', () => {
-    it('should accept any valid bitly url and data object', async() => {
+    it('should accept any valid bitly url and data object', async () => {
       try {
-        const {data} = await bitly.bitlyRequest('link/referrers_by_domain', {
+        const { data } = await bitly.bitlyRequest('link/referrers_by_domain', {
           link: EXAMPLE_URL_BITLY,
           unit: 'hour',
           timezone: 'Europe/Amsterdam'
         });
         return expect(data).to.have.property('referrers');
-      } catch (error)  {
+      } catch (error) {
         throw error;
       }
-    })
-  })
+    });
+  });
 
   describe('shorten', () => {
     it('should shorten a url', async () => {

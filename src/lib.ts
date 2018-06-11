@@ -1,6 +1,9 @@
-const url = require('url');
-const request = require('request-promise');
+import url, { UrlWithStringQuery } from 'url';
+import request from 'request-promise';
+
 const isUri = require('valid-url').isUri;
+
+import { BitlyConfig, BitlyUrlQueryParams, BitlyResponse } from '../global';
 
 /**
  * The internal library of node-bitly
@@ -8,7 +11,7 @@ const isUri = require('valid-url').isUri;
  * @private
  */
 
-const DEFAULT_OPTIONS = {
+const DEFAULT_OPTIONS: BitlyConfig = {
   apiUrl: 'api-ssl.bitly.com',
   apiVersion: 'v3',
   domain: 'bit.ly',
@@ -27,29 +30,29 @@ const DEFAULT_OPTIONS = {
  * @example
  * generateUrl({method: 'shorten', accessKey: 'myaccessKey', data: { longUrl: 'https://github.com/tanepiper/node-bitly' } });
  */
-const generateUrl = (
-  accessToken,
-  method,
-  data,
-  config = {},
-) => {
+export function generateUrl(
+  accessToken: string,
+  method: string,
+  data: BitlyUrlQueryParams = {},
+  config: BitlyConfig = {}
+): UrlWithStringQuery {
   const newQuery = Object.assign({
     access_token: accessToken,
     domain: config.domain || DEFAULT_OPTIONS.domain,
-    format: config.format || DEFAULT_OPTIONS.format,
+    format: config.format || DEFAULT_OPTIONS.format
   });
 
-  Object.keys(data || []).forEach(key => (newQuery[key] = data[key]));
+  Object.keys(data || []).forEach((key: any) => (newQuery[key] = data[key]));
 
   return url.parse(
     url.format({
       protocol: 'https',
       hostname: config.apiUrl || DEFAULT_OPTIONS.apiUrl,
       pathname: `/${config.apiVersion || DEFAULT_OPTIONS.apiVersion}/${method}`,
-      query: newQuery,
-    }),
+      query: newQuery
+    })
   );
-};
+}
 
 /**
  * Method called to generate a url and call the request
@@ -60,12 +63,12 @@ const generateUrl = (
  * @param {config} options.config A object that overrides the default values for a request
  * @returns {object} The request result object
  */
-const doRequest = async ({
-  accessToken,
-  method,
-  data,
-  config
-}) => {
+export async function doRequest(
+  accessToken: string,
+  method: string,
+  data: BitlyUrlQueryParams,
+  config: BitlyConfig
+): Promise<BitlyResponse> {
   const uri = generateUrl(accessToken, method, data, config);
   try {
     const req = await request({
@@ -75,7 +78,7 @@ const doRequest = async ({
   } catch (error) {
     throw error;
   }
-};
+}
 
 /**
  * Function to check through an array of items to check for short urls or hashes
@@ -84,19 +87,9 @@ const doRequest = async ({
  * @param  {object} query The query object
  * @return {object}
  */
-const sortUrlsAndHash = (unsortedItems, result = {
-  shortUrl: [],
-  hash: []
-}) => {
+export function sortUrlsAndHash(unsortedItems: string | string[], result: BitlyUrlQueryParams = { shortUrl: [], hash: [] }): BitlyUrlQueryParams {
   (Array.isArray(unsortedItems) ? unsortedItems : [unsortedItems]).map(
-    item =>
-    isUri(item) ? result.shortUrl.push(item) : typeof item === 'string' && result.hash.push(item),
+    item => (isUri(item) ? result.shortUrl.push(item) : typeof item === 'string' && result.hash.push(item))
   );
   return result;
-};
-
-module.exports = {
-  generateUrl,
-  doRequest,
-  sortUrlsAndHash,
-};
+}
