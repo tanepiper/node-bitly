@@ -2,10 +2,13 @@
 
 [![CircleCI](https://circleci.com/gh/tanepiper/node-bitly.svg?style=svg)](https://circleci.com/gh/tanepiper/node-bitly) [![NPM version](https://badge.fury.io/js/bitly.png)](http://badge.fury.io/js/bitly) [![Dependencies](https://david-dm.org/tanepiper/node-bitly.svg)](https://david-dm.org/tanepiper/node-bitly)
 
-This module provides calls to the [Bitly](http://bitly.com) API for [Nodejs](http://nodejs.org).
-For more information on the API request and responses visit the [Bitly API docs](http://dev.bitly.com/api.html)
+This module provides calls to the [Bitly](http://bitly.com) API for [Nodejs](http://nodejs.org). This documentation is for `v6.0.1`.
 
-`node-bitly` is programmed with `TypeScript` but is compiled to JavaScript and supports `node 6, 8, 10`.
+For more information on the API request and responses visit the [Bitly API docs](https://dev.bitly.com/api.html)
+
+`node-bitly` is programmed with `TypeScript` but is compiled to JavaScript and supports `node 6, 8, 10`.  When you import the client you get full type information.  There maybe be some gaps in the information but this will be filled in, in future releases.
+
+**Currently `node-bitly` only supports Bitly's `v3` API and has this hard coded in the parameter type.  Support for version 4 will be added in a future release**
 
 ## Installation
 
@@ -15,14 +18,12 @@ You can also install via git by cloning: `git clone https://github.com/tanepiper
 
 ## Usage
 
-**Note: This is the Version 6 API**
-
 This library uses the API provided by bitly and requires an OAuth token to use.
 To get your access token, visit [OAuth Apps](https://bitly.com/a/oauth_apps) (under Generic Access Token)
 
 See [http://dev.bitly.com](http://dev.bitly.com/) for format of returned objects from the API
 
-To see the available libary APIs, you can view the [API Documentation](docs/api.md)
+To see the available libary APIs, you can view the [API Documentation](docs/index.html) offline, or you can view the index here (the generated documentation does not work on Github).
 
 ### Code
 
