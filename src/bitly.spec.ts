@@ -8,7 +8,7 @@ const EXAMPLE_URL_BITLY = 'http://bit.ly/2hpSRbP';
 import '../test/bootstrap';
 
 import { BitlyClient } from './bitly';
-import { BitlyError } from '../global';
+import { BitlyError } from './bitly.d';
 
 describe('Bitly client', () => {
   let bitly: BitlyClient;
@@ -47,7 +47,9 @@ describe('Bitly client', () => {
     it('should shorten a url', async () => {
       try {
         const data = await bitly.shorten(EXAMPLE_URL);
-        return expect(data).to.have.property('hash').and.to.equal(EXAMPLE_URL_HASH);
+        return expect(data)
+          .to.have.property('hash')
+          .and.to.equal(EXAMPLE_URL_HASH);
       } catch (error) {
         throw error;
       }
@@ -58,7 +60,9 @@ describe('Bitly client', () => {
     it('should expand a url and hash', async () => {
       try {
         const data = await bitly.expand([EXAMPLE_URL_BITLY, EXAMPLE_URL_HASH]);
-        return expect(data).to.have.property('expand').and.lengthOf(2);
+        return expect(data)
+          .to.have.property('expand')
+          .and.lengthOf(2);
       } catch (error) {
         throw error;
       }
