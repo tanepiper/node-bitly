@@ -2,7 +2,7 @@ require('sepia');
 const expect = require('chai').expect;
 
 const EXAMPLE_URL = 'https://github.com/tanepiper/node-bitly';
-const EXAMPLE_URL_HASH = '1JtuvXY';
+const EXAMPLE_URL_HASH = '2hpSRbP';
 const EXAMPLE_URL_BITLY = 'http://bit.ly/2hpSRbP';
 
 require('../test/bootstrap');
