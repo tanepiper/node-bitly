@@ -12,7 +12,6 @@ if [ -d "$DIR" ]; then
     rm -rf "$DIR"
 fi
 
-mkdir $PWD/docs
-npm run ghdocs
+npm run docs
 
 echo "Build Done"
