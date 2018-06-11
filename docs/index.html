@@ -93,10 +93,11 @@
 <span class="hljs-keyword">const</span> bitly = <span class="hljs-keyword">new</span> BitlyClient(<span class="hljs-string">'&lt;accessToken&gt;'</span>, {});
 
 <span class="hljs-keyword">try</span> {
-  <span class="hljs-keyword">return</span> <span class="hljs-keyword">await</span> bitly.shorten(uri);
+  <span class="hljs-keyword">const</span> data = <span class="hljs-keyword">await</span> bitly.shorten(uri);
 } <span class="hljs-keyword">catch</span>(e) {
   <span class="hljs-keyword">throw</span> e;
 }
+<span class="hljs-keyword">return</span> data;
 </code></pre>
 				<p>If you are not using <code>node 8</code> then you can still use the library with <code>Promise</code> values:</p>
 				<pre><code class="lang-js"><span class="hljs-keyword">const</span> BitlyClient = <span class="hljs-built_in">require</span>(<span class="hljs-string">'bitly'</span>);
