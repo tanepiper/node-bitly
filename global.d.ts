@@ -14,13 +14,24 @@ export interface BitlyUrlQueryParams {
   [k: string]: any;
 }
 
+export interface ShortenResponse {
+  url: string;
+  hash: string;
+  global_hash: string;
+  long_url: string;
+  new_hash: number;
+}
+
+export interface ExpandInteface {
+  expand: string[];
+}
+
+type BitlyResponseData = ShortenResponse | ExpandInteface;
+
 export interface BitlyResponse {
   status_code: number;
   status_txt: string;
-  data: {
-    hash?: string;
-    expand?: string[]
-  };
+  data: BitlyResponseData;
 }
 
 export interface BitlyError extends Error {

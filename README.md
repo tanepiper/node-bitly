@@ -41,10 +41,11 @@ const { BitlyClient } = require('bitly');
 const bitly = new BitlyClient('<accessToken>', {});
 
 try {
-  return await bitly.shorten(uri);
+  const data = await bitly.shorten(uri);
 } catch(e) {
   throw e;
 }
+return data;
 ```
 
 If you are not using `node 8` then you can still use the library with `Promise` values:
