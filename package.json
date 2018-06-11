@@ -47,7 +47,7 @@
     "url": "https://github.com/tanepiper/node-bitly/issues"
   },
   "engines": {
-    "node": ">= 4.8.0"
+    "node": ">= 6.10.0"
   },
   "scripts": {
     "test": "VCR_MODE=cache mocha -r ts-node/register --reporter list src/*.spec.ts",
