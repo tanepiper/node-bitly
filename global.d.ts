@@ -1,3 +1,6 @@
+export * from './src/bitly';
+export * from './src/lib';
+
 export interface BitlyConfig {
   apiUrl?: string;
   apiVersion?: 'v3'; // Fixed as we only support this version for now
