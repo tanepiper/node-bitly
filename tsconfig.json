@@ -1,14 +1,17 @@
 {
-    "compilerOptions": {
-        "target": "es5",
-        "module": "commonjs",
-        "lib": ["es7"],
-        "allowJs": true,
-        "strict": false,
-        "noImplicitAny": false,
-        "strictNullChecks": false,
-        "noUnusedLocals": true,
-        "noUnusedParameters": true
+  "compilerOptions": {
+    "module": "commonjs",
+    "esModuleInterop": true,
+    "target": "es6",
+    "noImplicitAny": true,
+    "moduleResolution": "node",
+    "sourceMap": true,
+    "outDir": "./dist",
+    "baseUrl": ".",
+    "paths": {
+      "*": ["node_modules/*", "src/types/*"]
     },
-    "files": ["./src/bitly.js", "./src/lib.js"]
+    "lib": ["es7"]
+  },
+  "files": ["./src/bitly.ts", "./src/lib.ts"]
 }

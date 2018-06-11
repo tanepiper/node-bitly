@@ -5,8 +5,7 @@
 This module provides calls to the [Bitly](http://bitly.com) API for [Nodejs](http://nodejs.org).
 For more information on the API request and responses visit the [Bitly API docs](http://dev.bitly.com/api.html)
 
-`node-bitly` is programmed with ES7 `async/await` but uses the `typescript` compiler to ES5, so the library has
-been tested back to support `node v4.8.4`
+`node-bitly` is programmed with `TypeScript` but is compiled to JavaScript and supports `node 6, 8, 10`.
 
 ## Installation
 
@@ -16,6 +15,8 @@ You can also install via git by cloning: `git clone https://github.com/tanepiper
 
 ## Usage
 
+**Note: This is the Version 6 API**
+
 This library uses the API provided by bitly and requires an OAuth token to use.
 To get your access token, visit [OAuth Apps](https://bitly.com/a/oauth_apps) (under Generic Access Token)
 
@@ -24,16 +25,27 @@ See [http://dev.bitly.com](http://dev.bitly.com/) for format of returned objects
 To see the available libary APIs, you can view the [API Documentation](docs/api.md)
 
 ### Code
-
+#### TypeScript / ES6 Imports
 ```js
-const BitlyClient = require('bitly');
-const bitly = BitlyClient('<accessToken>');
-
+import { BitlyClient } from 'bitly';
+const bitly = new BitlyClient('<accessToken>', {});
 try {
   return await bitly.shorten(uri);
 } catch(e) {
   throw e;
 }
+```
+#### JavaScript
+```js
+const { BitlyClient } = require('bitly');
+const bitly = new BitlyClient('<accessToken>', {});
+
+try {
+  const data = await bitly.shorten(uri);
+} catch(e) {
+  throw e;
+}
+return data;
 ```
 
 If you are not using `node 8` then you can still use the library with `Promise` values:
@@ -56,7 +68,7 @@ token to the method
 
 ```js
 const BitlyClient = require('bitly');
-const bitly = BitlyClient('<accessToken>');
+const bitly = new BitlyClient('<accessToken>');
 
 try {
   return await bitly.bitlyRequest('link/referrers_by_domain', {
@@ -71,4 +83,4 @@ try {
 
 ### Tests
 
-To run tests type `npm test`.
+To run tests type `npm test`.  Please note one test will fail if you use your own API key, please update the string accordingly.
