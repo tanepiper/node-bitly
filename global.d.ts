@@ -1,5 +1,14 @@
-export * from './src/bitly';
-export * from './src/lib';
+export interface BitlyClient {
+  info: (items: string | string[]) => Promise<BitlyResponseData>;
+  shorten: (longUrl: string) => Promise<BitlyResponseData>;
+  expand: (items: string | string[]) => Promise<BitlyResponseData>;
+  clicks: (items: string | string[]) => Promise<BitlyResponseData>;
+  clicksByMinute: (items: string | string[]) => Promise<BitlyResponseData>;
+  clicksByDay: (items: string | string[]) => Promise<BitlyResponseData>;
+  lookup: (url: string) => Promise<BitlyResponseData>;
+  referrers: (item: string) => Promise<BitlyResponseData>;
+  countries: (item: string) => Promise<BitlyResponseData>;
+}
 
 export interface BitlyConfig {
   apiUrl?: string;
