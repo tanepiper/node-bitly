@@ -52,21 +52,21 @@
   "scripts": {
     "test": "VCR_MODE=cache mocha -r ts-node/register --reporter list src/*.spec.ts",
     "build": "npx tsc",
-    "docs": "jsdoc -c jsdoc.json -R README.md",
-    "ghdocs": "jsdoc2md --configure jsdoc.json src/*.js > docs/api.md",
-    "lint": "eslint --config=./.eslintrc.json src/**.js"
+    "docs": "npx typedoc --out ./docs"
   },
   "devDependencies": {
     "@types/chai": "^4.1.3",
     "@types/node": "^10.3.2",
     "@types/request-promise": "^4.1.41",
     "chai": "^4.1.2",
+    "jsdoc": "^3.5.5",
     "minami": "^1.2.3",
     "mocha": "^5.2.0",
     "mocha-typescript": "^1.1.16",
     "np": "^3.0.4",
     "sepia": "^2.0.2",
     "ts-node": "^6.1.0",
+    "typedoc": "^0.11.1",
     "typescript": "^2.9.1"
   },
   "dependencies": {
