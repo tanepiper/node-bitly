@@ -8,6 +8,13 @@ const isUri = require('valid-url').isUri;
  * @private
  */
 
+const DEFAULT_OPTIONS = {
+  apiUrl: 'api-ssl.bitly.com',
+  apiVersion: 'v3',
+  domain: 'bit.ly',
+  format: 'json'
+};
+
 /**
  * Generates a valid URL for a GET request to the Bit.ly API
  * @param {object} UrlParameters An object of paramters to pass to generate a bit.ly url
@@ -24,12 +31,12 @@ const generateUrl = (
   accessToken,
   method,
   data,
-  { apiUrl = 'api-ssl.bitly.com', apiVersion = 'v3', domain = 'bit.ly', format = 'json' } = {},
+  config = {},
 ) => {
   const newQuery = Object.assign({
     access_token: accessToken,
-    domain,
-    format,
+    domain: config.domain || DEFAULT_OPTIONS.domain,
+    format: config.format || DEFAULT_OPTIONS.format,
   });
 
   Object.keys(data || []).forEach(key => (newQuery[key] = data[key]));
@@ -37,8 +44,8 @@ const generateUrl = (
   return url.parse(
     url.format({
       protocol: 'https',
-      hostname: apiUrl,
-      pathname: `/${apiVersion}/${method}`,
+      hostname: config.apiUrl || DEFAULT_OPTIONS.apiUrl,
+      pathname: `/${config.apiVersion || DEFAULT_OPTIONS.apiVersion}/${method}`,
       query: newQuery,
     }),
   );
@@ -53,10 +60,17 @@ const generateUrl = (
  * @param {config} options.config A object that overrides the default values for a request
  * @returns {object} The request result object
  */
-const doRequest = async ({ accessToken, method, data, config }) => {
+const doRequest = async ({
+  accessToken,
+  method,
+  data,
+  config
+}) => {
   const uri = generateUrl(accessToken, method, data, config);
   try {
-    const req = await request({ uri });
+    const req = await request({
+      uri
+    });
     return JSON.parse(req);
   } catch (error) {
     throw error;
@@ -64,16 +78,19 @@ const doRequest = async ({ accessToken, method, data, config }) => {
 };
 
 /**
-* Function to check through an array of items to check for short urls or hashes
-* If only passed one item, put in array for url checking
-* @param  {Array<string>} unsortedItems The array of items to be checked
-* @param  {object} query The query object
-* @return {object}
-*/
-const sortUrlsAndHash = (unsortedItems, result = { shortUrl: [], hash: [] }) => {
+ * Function to check through an array of items to check for short urls or hashes
+ * If only passed one item, put in array for url checking
+ * @param  {Array<string>} unsortedItems The array of items to be checked
+ * @param  {object} query The query object
+ * @return {object}
+ */
+const sortUrlsAndHash = (unsortedItems, result = {
+  shortUrl: [],
+  hash: []
+}) => {
   (Array.isArray(unsortedItems) ? unsortedItems : [unsortedItems]).map(
     item =>
-      isUri(item) ? result.shortUrl.push(item) : typeof item === 'string' && result.hash.push(item),
+    isUri(item) ? result.shortUrl.push(item) : typeof item === 'string' && result.hash.push(item),
   );
   return result;
 };

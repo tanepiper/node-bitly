@@ -1,0 +1,1 @@
+{"status_code": 200, "data": {"clicks_by_minute": [{"host": null, "global_hash": "bT5Rke", "hash": "2hpSRbP", "user_hash": "2hpSRbP", "clicks": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]}]}, "status_txt": "OK"}

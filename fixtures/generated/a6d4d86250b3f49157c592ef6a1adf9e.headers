@@ -1,0 +1,19 @@
+{
+  "statusCode": 200,
+  "headers": {
+    "server": "nginx",
+    "date": "Mon, 11 Jun 2018 19:48:31 GMT",
+    "content-type": "application/json; charset=utf-8",
+    "content-length": "346",
+    "connection": "keep-alive",
+    "etag": "\"719cbe24f685b0a93108efe98502ea1f2221148d\""
+  },
+  "url": "https://api-ssl.bitly.com:443/v3/clicks_by_minute?access_token=b5e037d172fc61b737988c9dbaeb12934c30a9bd&domain=bit.ly&format=json&hash=1JtuvXY",
+  "time": 553,
+  "request": {
+    "method": "GET",
+    "headers": {
+      "host": "api-ssl.bitly.com"
+    }
+  }
+}
