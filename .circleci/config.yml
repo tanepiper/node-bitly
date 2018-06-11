@@ -63,19 +63,6 @@ jobs:
           name: Running tests
           command: npm test
 
-  run_tests_4:
-    working_directory: ~/repo
-    docker:
-      - image: circleci/node:4
-    steps:
-      - checkout
-      - attach_workspace:
-          at: ~/
-      - run:
-          name: Running tests
-          command: npm test
-
-
   build:
     <<: *defaults
     steps:
@@ -134,7 +121,6 @@ workflows:
           requires:
             - run_tests_8
             - run_tests_6
-            - run_tests_4
       - run_distribution:
           requires:
             - build
