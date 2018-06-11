@@ -25,45 +25,58 @@ See [http://dev.bitly.com](http://dev.bitly.com/) for format of returned objects
 To see the available libary APIs, you can view the [API Documentation](docs/api.md)
 
 ### Code
+
 #### TypeScript / ES6 Imports
+
 ```js
 import { BitlyClient } from 'bitly';
 const bitly = new BitlyClient('<accessToken>', {});
-try {
-  return await bitly.shorten(uri);
-} catch(e) {
-  throw e;
+
+async function init() {
+  let result;
+  try {
+    result = await bitly.shorten('https://github.com/tanepiper/node-bitly');
+  } catch (e) {
+    throw e;
+  }
+  return result;
 }
+
+init();
 ```
+
 #### JavaScript
+
 ```js
 const { BitlyClient } = require('bitly');
 const bitly = new BitlyClient('<accessToken>', {});
 
+let result;
 try {
-  const data = await bitly.shorten(uri);
+  result = await bitly.shorten(uri);
 } catch(e) {
   throw e;
 }
-return data;
+return result;
 ```
 
 If you are not using `node 8` then you can still use the library with `Promise` values:
 
 ```js
 const BitlyClient = require('bitly');
-const bitly = BitlyClient('<accessToken>');
+const bitly = new BitlyClient('<accessToken>');
 
-bitly.shorten('https://github.com/tanepiper/node-bitly')
-.then(function(result) {
-  console.log(result);
-})
-.catch(function(error) {
-  console.error(error);
-});
+bitly
+  .shorten('https://github.com/tanepiper/node-bitly')
+  .then(function(result) {
+    console.log(result);
+  })
+  .catch(function(error) {
+    console.error(error);
+  });
 ```
 
-You can also do raw requests to any Bitly endpoint.  With this you need to pass the access
+You can also do raw requests to any Bitly endpoint. With this you need to pass the access
 token to the method
 
 ```js
@@ -83,4 +96,4 @@ try {
 
 ### Tests
 
-To run tests type `npm test`.  Please note one test will fail if you use your own API key, please update the string accordingly.
+To run tests type `npm test`. Please note one test will fail if you use your own API key, please update the string accordingly.
