@@ -37,8 +37,8 @@ try {
 ```
 #### JavaScript
 ```js
-const BitlyClient = require('bitly');
-const bitly = BitlyClient('<accessToken>');
+const { BitlyClient } = require('bitly');
+const bitly = new BitlyClient('<accessToken>', {});
 
 try {
   return await bitly.shorten(uri);
