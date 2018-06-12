@@ -1,5 +1,5 @@
-import { doRequest, sortUrlsAndHash, generateUrl } from './lib';
-import { BitlyConfig, BitlyResponse, BitlyError, BitlyUrlQueryParams, BitlyResponseData } from './bitly.d';
+import { doRequest, sortUrlsAndHash, generateUrl } from '../lib';
+import { BitlyConfig, BitlyResponse, BitlyError, BitlyUrlQueryParams, BitlyResponseData } from '../index.d';
 
 /**
  *
@@ -26,8 +26,8 @@ import { BitlyConfig, BitlyResponse, BitlyError, BitlyUrlQueryParams, BitlyRespo
  *    }
  *  }
  */
-export class BitlyClient {
-  constructor(private accessToken: string, private config: BitlyConfig = {}) {}
+export class BitlyClientV4 {
+  constructor(private accessToken: string, private config: BitlyConfig = { apiVersion: 'v4' }) {}
   /**
    * This is used to return the page title for a given Bitlink.
    * @param  {array<string>} items An array of short urls or hashes

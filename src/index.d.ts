@@ -1,14 +1,15 @@
 export interface BitlyConfig {
   apiUrl?: string;
-  apiVersion?: 'v3'; // Fixed as we only support this version for now
+  apiVersion?: 'v3' | 'v4'; // We support only these versions
   domain?: string;
   format?: string;
-  [k: string]: any;
+  group_guid?: string;
+  [k: string]: any; // Config can support additional parameters we may need in the future
 }
 
 export interface BitlyUrlQueryParams {
   shortUrl?: string[];
-  longUrl?: string;
+  longUrl?: string[];
   url?: string;
   hash?: string[];
   [k: string]: any;

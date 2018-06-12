@@ -50,7 +50,7 @@
     "node": ">= 6.10.0"
   },
   "scripts": {
-    "test": "VCR_MODE=cache mocha -r ts-node/register --reporter list src/*.spec.ts",
+    "test": "VCR_MODE=cache mocha -r ts-node/register --reporter list src/**/*.spec.ts",
     "build": "npx tsc",
     "docs": "npx typedoc --out ./docs"
   },
