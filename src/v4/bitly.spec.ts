@@ -24,7 +24,9 @@ xdescribe('Bitly client', () => {
       } catch (error) {
         err = error;
       }
-      return expect(err.statusCode).to.equal(500);
+      return expect(err)
+        .to.have.property('statusCode')
+        .and.to.equal(500);
     });
   });
 

@@ -27,7 +27,7 @@ import { BitlyConfig, BitlyResponse, BitlyError, BitlyUrlQueryParams, BitlyRespo
  *  }
  */
 export class BitlyClientV4 {
-  constructor(private accessToken: string, private config: BitlyConfig = { apiVersion: 'v4' }) {}
+  constructor(private accessToken: string, private config: Partial<BitlyConfig> = { apiVersion: 'v4' }) {}
   /**
    * This is used to return the page title for a given Bitlink.
    * @param  {array<string>} items An array of short urls or hashes
@@ -115,7 +115,7 @@ export class BitlyClientV4 {
    * @param {object} data The data object to be passed. Keys should be query paramaters
    * @return {object} The bitly request return data
    */
-  async bitlyRequest(method: string, data: BitlyUrlQueryParams | object): Promise<BitlyResponseData> {
+  async bitlyRequest(method: string, data: Partial<BitlyUrlQueryParams>): Promise<BitlyResponseData> {
     try {
       const result: BitlyResponse = await doRequest(this.accessToken, method, data, this.config);
 
@@ -123,9 +123,7 @@ export class BitlyClientV4 {
         return result.data;
       }
 
-      const err: BitlyError = <BitlyError>(
-        new Error(`[node-bitly] Request returned ${result.status_code}: ${result.status_txt}`)
-      );
+      const err: BitlyError = <BitlyError>new Error(`[node-bitly] Request returned ${result.status_code}: ${result.status_txt}`);
       err.statusCode = result.status_code;
       err.data = result.data;
       throw err;

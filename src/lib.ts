@@ -11,7 +11,7 @@ import { BitlyConfig, BitlyUrlQueryParams, BitlyResponse } from './index.d';
  * @private
  */
 
-const DEFAULT_OPTIONS: BitlyConfig = {
+const DEFAULT_OPTIONS: Partial<BitlyConfig> = {
   apiUrl: 'api-ssl.bitly.com',
   apiVersion: 'v3',
   domain: 'bit.ly',
@@ -30,12 +30,7 @@ const DEFAULT_OPTIONS: BitlyConfig = {
  * @example
  * generateUrl({method: 'shorten', accessKey: 'myaccessKey', data: { longUrl: 'https://github.com/tanepiper/node-bitly' } });
  */
-export function generateUrl(
-  accessToken: string,
-  method: string,
-  data: BitlyUrlQueryParams = {},
-  config: BitlyConfig = {}
-): UrlWithStringQuery {
+export function generateUrl(accessToken: string, method: string, data: Partial<BitlyUrlQueryParams> = {}, config: Partial<BitlyConfig> = {}): UrlWithStringQuery {
   const newQuery = Object.assign({
     access_token: accessToken,
     domain: config.domain || DEFAULT_OPTIONS.domain,
@@ -47,7 +42,7 @@ export function generateUrl(
   return url.parse(
     url.format({
       protocol: 'https',
-      hostname: config.apiUrl || DEFAULT_OPTIONS.apiUrl,
+      hostname: `${config.apiUrl || DEFAULT_OPTIONS.apiUrl}`,
       pathname: `/${config.apiVersion || DEFAULT_OPTIONS.apiVersion}/${method}`,
       query: newQuery
     })
@@ -63,12 +58,7 @@ export function generateUrl(
  * @param {config} options.config A object that overrides the default values for a request
  * @returns {object} The request result object
  */
-export async function doRequest(
-  accessToken: string,
-  method: string,
-  data: BitlyUrlQueryParams,
-  config: BitlyConfig
-): Promise<BitlyResponse> {
+export async function doRequest(accessToken: string, method: string, data: Partial<BitlyUrlQueryParams>, config: Partial<BitlyConfig>): Promise<BitlyResponse> {
   const uri = generateUrl(accessToken, method, data, config);
   try {
     const req = await request({
@@ -87,9 +77,7 @@ export async function doRequest(
  * @param  {object} query The query object
  * @return {object}
  */
-export function sortUrlsAndHash(unsortedItems: string | string[], result: BitlyUrlQueryParams = { shortUrl: [], hash: [] }): BitlyUrlQueryParams {
-  (Array.isArray(unsortedItems) ? unsortedItems : [unsortedItems]).map(
-    item => (isUri(item) ? result.shortUrl.push(item) : typeof item === 'string' && result.hash.push(item))
-  );
+export function sortUrlsAndHash(unsortedItems: string | string[], result: Partial<BitlyUrlQueryParams> = { shortUrl: [], hash: [] }): Partial<BitlyUrlQueryParams> {
+  (Array.isArray(unsortedItems) ? unsortedItems : [unsortedItems]).map(item => (isUri(item) ? result.shortUrl.push(item) : typeof item === 'string' && result.hash.push(item)));
   return result;
 }
