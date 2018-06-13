@@ -19,7 +19,7 @@ git diff-index --quiet HEAD || git commit -m "Commit changes for $PACKAGE_VERSIO
 
 npm version ${VERSION_COMMAND:-patch} -m "$CIRCLE_BRANCH %s [ci skip]"
 
-if [$VERSION_NUMBER == "5"]
+if [$VERSION_NUMBER == 5]
 then
   npm publish --tag stable
 else
