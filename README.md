@@ -110,7 +110,9 @@ try {
 
 To run tests type `npm test`. Please note one test will fail if you use your own API key, please update the string accordingly.
 
-## Support on Beerpay
-Hey dude! Help me out for a couple of :beers:!
+## Support This Project
+This module is a side project of mine and I don't actively use the module except to completly over-engineer the CI pipeline and re-write it in Typescript all in the name of learning.  But to add features like the v4 API would take a lot of work, so if you use this library a lot please consider donating using the links below. Or if you learned something useful from one of my blog posts talking about the changes I've done with this module please consider leaving a tip.
 
 [![Beerpay](https://beerpay.io/tanepiper/node-bitly/badge.svg?style=beer-square)](https://beerpay.io/tanepiper/node-bitly)  [![Beerpay](https://beerpay.io/tanepiper/node-bitly/make-wish.svg?style=flat-square)](https://beerpay.io/tanepiper/node-bitly?focus=wish)
+
+You can also [PayPal Me](https://paypal.me/tanepiper).
