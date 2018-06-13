@@ -1,8 +1,19 @@
-# node-bitly - Bitly API for nodejs
+# node-bitly - Unofficial Bitly API for nodejs
 
 [![CircleCI](https://circleci.com/gh/tanepiper/node-bitly.svg?style=svg)](https://circleci.com/gh/tanepiper/node-bitly) [![NPM version](https://badge.fury.io/js/bitly.png)](http://badge.fury.io/js/bitly) [![Dependencies](https://david-dm.org/tanepiper/node-bitly.svg)](https://david-dm.org/tanepiper/node-bitly)
 
-This module provides calls to the [Bitly](http://bitly.com) API for [Nodejs](http://nodejs.org). This documentation is for `v6.0.1`.
+## Current Versions
+
+* [v6.0.x](https://github.com/tanepiper/node-bitly) - Support for Node >=6. Available on npm as `npm install bitly@latest`
+* [v5.1.x](https://github.com/tanepiper/node-bitly/tree/v5.x.x) - Support for Node >=4. Available on npm as `npm install bitly@stable`
+
+Version 5 is end-of-life and will only recieve minor updates in the future and is considered stable.  This will only ever support the **Bitly v3** API
+
+Version 6 is the current in-development version, re-written in Typescript. This version currently only supports the **Bitly v3** API and will continue to do so in `v6.0.x`. Version `6.1.x` will introduce **Bitly v4** support.
+
+## Module Features
+
+This module provides calls to the [Bitly](http://bitly.com) API for [Nodejs](http://nodejs.org).
 
 For more information on the API request and responses visit the [Bitly API docs](https://dev.bitly.com/api.html)
 
