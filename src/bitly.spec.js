@@ -23,30 +23,34 @@ describe('Bitly client', () => {
       } catch (error) {
         err = error;
       }
-      return expect(err.statusCode).to.equal(500);
+      return expect(err)
+        .to.have.property('statusCode')
+        .and.to.equal(500);
     });
   });
 
   describe('should work with bitly api endpoints with no helper', () => {
-    it('should accept any valid bitly url and data object', async() => {
+    it('should accept any valid bitly url and data object', async () => {
       try {
-        const {data} = await bitly.bitlyRequest('link/referrers_by_domain', {
+        const { data } = await bitly.bitlyRequest('link/referrers_by_domain', {
           link: EXAMPLE_URL_BITLY,
           unit: 'hour',
           timezone: 'Europe/Amsterdam'
         });
         return expect(data).to.have.property('referrers');
-      } catch (error)  {
+      } catch (error) {
         throw error;
       }
-    })
-  })
+    });
+  });
 
   describe('shorten', () => {
     it('should shorten a url', async () => {
       try {
         const { data } = await bitly.shorten(EXAMPLE_URL);
-        return expect(data.hash).to.equal(EXAMPLE_URL_HASH);
+        return expect(data)
+          .to.have.property('hash')
+          .and.to.equal(EXAMPLE_URL_HASH);
       } catch (error) {
         throw error;
       }
@@ -57,7 +61,9 @@ describe('Bitly client', () => {
     it('should expand a url and hash', async () => {
       try {
         const { data } = await bitly.expand([EXAMPLE_URL_BITLY, EXAMPLE_URL_HASH]);
-        return expect(data.expand.length).to.equal(2);
+        return expect(data)
+          .to.have.property('expand')
+          .and.lengthOf(2);
       } catch (error) {
         throw error;
       }
