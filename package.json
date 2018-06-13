@@ -65,7 +65,7 @@
     "mocha-typescript": "^1.1.16",
     "np": "^3.0.4",
     "sepia": "^2.0.2",
-    "ts-node": "^6.1.0",
+    "ts-node": "^6.1.1",
     "typedoc": "^0.11.1",
     "typescript": "^2.9.1"
   },
