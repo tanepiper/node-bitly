@@ -52,7 +52,7 @@
   "scripts": {
     "test": "VCR_MODE=cache mocha -r ts-node/register --reporter list src/*.spec.ts",
     "build": "npx tsc",
-    "docs": "npx typedoc --readme ./README.md --out ./docs"
+    "docs": "rm -rf ./docs && npx typedoc --readme ./README.md --out ./docs && touch ./docs/.nojekyll"
   },
   "devDependencies": {
     "@types/chai": "^4.1.3",

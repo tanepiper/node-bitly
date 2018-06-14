@@ -1,0 +1,241 @@
+<!doctype html>
+<html class="default no-js">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>bitly</title>
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="assets/css/main.css">
+</head>
+<body>
+<header>
+	<div class="tsd-page-toolbar">
+		<div class="container">
+			<div class="table-wrap">
+				<div class="table-cell" id="tsd-search" data-index="assets/js/search.js" data-base=".">
+					<div class="field">
+						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
+						<input id="tsd-search-field" type="text" />
+					</div>
+					<ul class="results">
+						<li class="state loading">Preparing search index...</li>
+						<li class="state failure">The search index is not available</li>
+					</ul>
+					<a href="index.html" class="title">bitly</a>
+				</div>
+				<div class="table-cell" id="tsd-widgets">
+					<div id="tsd-filter">
+						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
+						<div class="tsd-filter-group">
+							<div class="tsd-select" id="tsd-filter-visibility">
+								<span class="tsd-select-label">All</span>
+								<ul class="tsd-select-list">
+									<li data-value="public">Public</li>
+									<li data-value="protected">Public/Protected</li>
+									<li data-value="private" class="selected">All</li>
+								</ul>
+							</div>
+							<input type="checkbox" id="tsd-filter-inherited" checked />
+							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
+							<input type="checkbox" id="tsd-filter-externals" checked />
+							<label class="tsd-widget" for="tsd-filter-externals">Externals</label>
+							<input type="checkbox" id="tsd-filter-only-exported" />
+							<label class="tsd-widget" for="tsd-filter-only-exported">Only exported</label>
+						</div>
+					</div>
+					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="tsd-page-title">
+		<div class="container">
+			<ul class="tsd-breadcrumb">
+				<li>
+					<a href="globals.html">Globals</a>
+				</li>
+			</ul>
+			<h1> bitly</h1>
+		</div>
+	</div>
+</header>
+<div class="container container-main">
+	<div class="row">
+		<div class="col-8 col-content">
+			<div class="tsd-panel tsd-typography">
+				<h1 id="node-bitly-unofficial-bitly-api-for-nodejs">node-bitly - Unofficial Bitly API for nodejs</h1>
+				<p><a href="https://circleci.com/gh/tanepiper/node-bitly"><img src="https://circleci.com/gh/tanepiper/node-bitly.svg?style=svg" alt="CircleCI"></a> <a href="http://badge.fury.io/js/bitly"><img src="https://badge.fury.io/js/bitly.png" alt="NPM version"></a> <a href="https://david-dm.org/tanepiper/node-bitly"><img src="https://david-dm.org/tanepiper/node-bitly.svg" alt="Dependencies"></a></p>
+				<h2 id="current-versions">Current Versions</h2>
+				<ul>
+					<li><a href="https://github.com/tanepiper/node-bitly">v6.0.x</a> - Support for Node &gt;=6. Available on npm as <code>npm install bitly@latest</code></li>
+					<li><a href="https://github.com/tanepiper/node-bitly/tree/v5.x.x">v5.1.x</a> - Support for Node &gt;=4. Available on npm as <code>npm install bitly@stable</code></li>
+				</ul>
+				<p>Version 5 is end-of-life and will only recieve minor updates in the future and is considered stable.  This will only ever support the <strong>Bitly v3</strong> API</p>
+				<p>Version 6 is the current in-development version, re-written in Typescript. This version currently only supports the <strong>Bitly v3</strong> API and will continue to do so in <code>v6.0.x</code>. Version <code>6.1.x</code> will introduce <strong>Bitly v4</strong> support.</p>
+				<h2 id="module-features">Module Features</h2>
+				<p>This module provides calls to the <a href="http://bitly.com">Bitly</a> API for <a href="http://nodejs.org">Nodejs</a>.</p>
+				<p>For more information on the API request and responses visit the <a href="https://dev.bitly.com/api.html">Bitly API docs</a></p>
+				<p><code>node-bitly</code> is programmed with <code>TypeScript</code> but is compiled to JavaScript and supports <code>node 6, 8, 10</code>.  When you import the client you get full type information.  There maybe be some gaps in the information but this will be filled in, in future releases.</p>
+				<p><strong>Currently <code>node-bitly</code> only supports Bitly&#39;s <code>v3</code> API and has this hard coded in the parameter type.  Support for version 4 will be added in a future release</strong></p>
+				<h2 id="installation">Installation</h2>
+				<p>To install via NPM type the following: <code>npm install bitly</code></p>
+				<p>You can also install via git by cloning: <code>git clone https://github.com/tanepiper/node-bitly.git /path/to/bitly</code></p>
+				<h2 id="usage">Usage</h2>
+				<p>This library uses the API provided by bitly and requires an OAuth token to use.
+				To get your access token, visit <a href="https://bitly.com/a/oauth_apps">OAuth Apps</a> (under Generic Access Token)</p>
+				<p>See <a href="http://dev.bitly.com/">http://dev.bitly.com</a> for format of returned objects from the API</p>
+				<p>To see the available libary APIs, you can view the <a href="http://tanepiper.github.io/node-bitly/index.html">API Documentation</a> offline, or you can view the index here (the generated documentation does not work on Github).</p>
+				<h3 id="code">Code</h3>
+				<h4 id="typescript-es6-imports">TypeScript / ES6 Imports</h4>
+				<pre><code class="lang-js"><span class="hljs-keyword">import</span> { BitlyClient } <span class="hljs-keyword">from</span> <span class="hljs-string">'bitly'</span>;
+<span class="hljs-keyword">const</span> bitly = <span class="hljs-keyword">new</span> BitlyClient(<span class="hljs-string">'&lt;accessToken&gt;'</span>, {});
+
+<span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">init</span>(<span class="hljs-params"></span>) </span>{
+  <span class="hljs-keyword">let</span> result;
+  <span class="hljs-keyword">try</span> {
+    result = <span class="hljs-keyword">await</span> bitly.shorten(<span class="hljs-string">'https://github.com/tanepiper/node-bitly'</span>);
+  } <span class="hljs-keyword">catch</span> (e) {
+    <span class="hljs-keyword">throw</span> e;
+  }
+  <span class="hljs-keyword">return</span> result;
+}
+
+init();
+</code></pre>
+				<h4 id="javascript">JavaScript</h4>
+				<pre><code class="lang-js"><span class="hljs-keyword">const</span> { BitlyClient } = <span class="hljs-built_in">require</span>(<span class="hljs-string">'bitly'</span>);
+<span class="hljs-keyword">const</span> bitly = <span class="hljs-keyword">new</span> BitlyClient(<span class="hljs-string">'&lt;accessToken&gt;'</span>, {});
+
+<span class="hljs-keyword">let</span> result;
+<span class="hljs-keyword">try</span> {
+  result = <span class="hljs-keyword">await</span> bitly.shorten(uri);
+} <span class="hljs-keyword">catch</span>(e) {
+  <span class="hljs-keyword">throw</span> e;
+}
+<span class="hljs-keyword">return</span> result;
+</code></pre>
+				<p>If you are not using <code>node 8</code> then you can still use the library with <code>Promise</code> values:</p>
+				<pre><code class="lang-js"><span class="hljs-keyword">const</span> BitlyClient = <span class="hljs-built_in">require</span>(<span class="hljs-string">'bitly'</span>);
+<span class="hljs-keyword">const</span> bitly = <span class="hljs-keyword">new</span> BitlyClient(<span class="hljs-string">'&lt;accessToken&gt;'</span>);
+
+bitly
+  .shorten(<span class="hljs-string">'https://github.com/tanepiper/node-bitly'</span>)
+  .then(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">result</span>) </span>{
+    <span class="hljs-built_in">console</span>.log(result);
+  })
+  .catch(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">error</span>) </span>{
+    <span class="hljs-built_in">console</span>.error(error);
+  });
+</code></pre>
+				<p>You can also do raw requests to any Bitly endpoint. With this you need to pass the access
+				token to the method</p>
+				<pre><code class="lang-js"><span class="hljs-keyword">const</span> BitlyClient = <span class="hljs-built_in">require</span>(<span class="hljs-string">'bitly'</span>);
+<span class="hljs-keyword">const</span> bitly = <span class="hljs-keyword">new</span> BitlyClient(<span class="hljs-string">'&lt;accessToken&gt;'</span>);
+
+<span class="hljs-keyword">try</span> {
+  <span class="hljs-keyword">return</span> <span class="hljs-keyword">await</span> bitly.bitlyRequest(<span class="hljs-string">'link/referrers_by_domain'</span>, {
+    <span class="hljs-attr">link</span>: <span class="hljs-string">'https://github.com/tanepiper/node-bitly'</span>,
+    <span class="hljs-attr">unit</span>: <span class="hljs-string">'hour'</span>,
+    <span class="hljs-attr">timezone</span>: <span class="hljs-string">'Europe/Amsterdam'</span>
+  });
+} <span class="hljs-keyword">catch</span>(e) {
+  <span class="hljs-keyword">throw</span> e;
+}
+</code></pre>
+				<h3 id="tests">Tests</h3>
+				<p>To run tests type <code>npm test</code>. Please note one test will fail if you use your own API key, please update the string accordingly.</p>
+				<h2 id="support-this-project">Support This Project</h2>
+				<p>This module is a side project of mine and I don&#39;t actively use the module except to completly over-engineer the CI pipeline and re-write it in Typescript all in the name of learning.  But to add features like the v4 API would take a lot of work, so if you use this library a lot please consider donating using the links below. Or if you learned something useful from one of my blog posts talking about the changes I&#39;ve done with this module please consider leaving a tip.</p>
+				<p><a href="https://beerpay.io/tanepiper/node-bitly"><img src="https://beerpay.io/tanepiper/node-bitly/badge.svg?style=beer-square" alt="Beerpay"></a>  <a href="https://beerpay.io/tanepiper/node-bitly?focus=wish"><img src="https://beerpay.io/tanepiper/node-bitly/make-wish.svg?style=flat-square" alt="Beerpay"></a></p>
+				<p>You can also <a href="https://paypal.me/tanepiper">PayPal Me</a>.</p>
+			</div>
+		</div>
+		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
+			<nav class="tsd-navigation primary">
+				<ul>
+					<li class="globals  ">
+						<a href="globals.html"><em>Globals</em></a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_bitly_.html">"bitly"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_lib_.html">"lib"</a>
+					</li>
+				</ul>
+			</nav>
+			<nav class="tsd-navigation secondary menu-sticky">
+				<ul class="before-current">
+				</ul>
+			</nav>
+		</div>
+	</div>
+</div>
+<footer class="with-border-bottom">
+	<div class="container">
+		<h2>Legend</h2>
+		<div class="tsd-legend-group">
+			<ul class="tsd-legend">
+				<li class="tsd-kind-module"><span class="tsd-kind-icon">Module</span></li>
+				<li class="tsd-kind-object-literal"><span class="tsd-kind-icon">Object literal</span></li>
+				<li class="tsd-kind-variable"><span class="tsd-kind-icon">Variable</span></li>
+				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
+				<li class="tsd-kind-function tsd-has-type-parameter"><span class="tsd-kind-icon">Function with type parameter</span></li>
+				<li class="tsd-kind-index-signature"><span class="tsd-kind-icon">Index signature</span></li>
+				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-enum"><span class="tsd-kind-icon">Enumeration</span></li>
+				<li class="tsd-kind-enum-member"><span class="tsd-kind-icon">Enumeration member</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-enum"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-enum"><span class="tsd-kind-icon">Method</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
+				<li class="tsd-kind-interface tsd-has-type-parameter"><span class="tsd-kind-icon">Interface with type parameter</span></li>
+				<li class="tsd-kind-constructor tsd-parent-kind-interface"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-interface"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-interface"><span class="tsd-kind-icon">Method</span></li>
+				<li class="tsd-kind-index-signature tsd-parent-kind-interface"><span class="tsd-kind-icon">Index signature</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>
+				<li class="tsd-kind-class tsd-has-type-parameter"><span class="tsd-kind-icon">Class with type parameter</span></li>
+				<li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class"><span class="tsd-kind-icon">Accessor</span></li>
+				<li class="tsd-kind-index-signature tsd-parent-kind-class"><span class="tsd-kind-icon">Index signature</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static property</span></li>
+				<li class="tsd-kind-call-signature tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static method</span></li>
+			</ul>
+		</div>
+	</div>
+</footer>
+<div class="container tsd-generator">
+	<p>Generated using <a href="http://typedoc.org/" target="_blank">TypeDoc</a></p>
+</div>
+<div class="overlay"></div>
+<script src="assets/js/main.js"></script>
+<script>if (location.protocol == 'file:') document.write('<script src="assets/js/search.js"><' + '/script>');</script>
+</body>
+</html>
