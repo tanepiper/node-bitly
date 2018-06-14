@@ -28,7 +28,9 @@ const DEFAULT_OPTIONS: BitlyConfig = {
  * @private
  *
  * @example
+ * ```js
  * generateUrl({method: 'shorten', accessKey: 'myaccessKey', data: { longUrl: 'https://github.com/tanepiper/node-bitly' } });
+ * ```
  */
 export function generateUrl(
   accessToken: string,

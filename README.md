@@ -34,7 +34,7 @@ To get your access token, visit [OAuth Apps](https://bitly.com/a/oauth_apps) (un
 
 See [http://dev.bitly.com](http://dev.bitly.com/) for format of returned objects from the API
 
-To see the available libary APIs, you can view the [API Documentation](docs/index.html) offline, or you can view the index here (the generated documentation does not work on Github).
+To see the available libary APIs, you can view the [API Documentation](http://tanepiper.github.io/node-bitly/index.html) offline, or you can view the index here (the generated documentation does not work on Github).
 
 ### Code
 
