@@ -1,4 +1,4 @@
-import url, { UrlWithStringQuery } from 'url';
+import { format as formatURL, parse as parseURL, UrlWithStringQuery } from 'url';
 import request from 'request-promise';
 
 const isUri = require('valid-url').isUri;
@@ -46,8 +46,8 @@ export function generateUrl(
 
   Object.keys(data || []).forEach((key: any) => (newQuery[key] = data[key]));
 
-  return url.parse(
-    url.format({
+  return parseURL(
+    formatURL({
       protocol: 'https',
       hostname: config.apiUrl || DEFAULT_OPTIONS.apiUrl,
       pathname: `/${config.apiVersion || DEFAULT_OPTIONS.apiVersion}/${method}`,
@@ -90,6 +90,8 @@ export async function doRequest(
  * @return {object}
  */
 export function sortUrlsAndHash(unsortedItems: string | string[], result: BitlyUrlQueryParams = { shortUrl: [], hash: [] }): BitlyUrlQueryParams {
+  result.shortUrl = result.shortUrl || [];
+  result.hash = result.hash || [];
   (Array.isArray(unsortedItems) ? unsortedItems : [unsortedItems]).map(
     item => (isUri(item) ? result.shortUrl.push(item) : typeof item === 'string' && result.hash.push(item))
   );

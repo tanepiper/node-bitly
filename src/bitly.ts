@@ -1,4 +1,4 @@
-import { doRequest, sortUrlsAndHash, generateUrl } from './lib';
+import { doRequest, sortUrlsAndHash } from './lib';
 import { BitlyConfig, BitlyResponse, BitlyError, BitlyUrlQueryParams, BitlyResponseData } from './bitly.d';
 
 /**
