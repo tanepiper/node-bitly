@@ -3,7 +3,7 @@ import request from 'request-promise';
 
 const isUri = require('valid-url').isUri;
 
-import { BitlyConfig, BitlyUrlQueryParams, BitlyResponse } from './bitly.d';
+import { BitlyConfig, BitlyUrlQueryParams, BitlyResponse } from './bitly.types';
 
 /**
  * The internal library of node-bitly

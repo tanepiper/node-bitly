@@ -69,7 +69,7 @@
     "typedoc": "^0.11.1",
     "typescript": "^2.9.1"
   },
-  "typings": "./global.d.ts",
+  "typings": "./dist/*.d.ts",
   "dependencies": {
     "request": "^2.87.0",
     "request-promise": "^4.2.2",
