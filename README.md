@@ -75,7 +75,7 @@ return result;
 If you are not using `node 8` then you can still use the library with `Promise` values:
 
 ```js
-const BitlyClient = require('bitly');
+const BitlyClient = require('bitly').BitlyClient;
 const bitly = new BitlyClient('<accessToken>');
 
 bitly
@@ -92,7 +92,7 @@ You can also do raw requests to any Bitly endpoint. With this you need to pass t
 token to the method
 
 ```js
-const BitlyClient = require('bitly');
+const BitlyClient = require('bitly').BitlyClient;
 const bitly = new BitlyClient('<accessToken>');
 
 try {
