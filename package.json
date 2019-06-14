@@ -9,7 +9,7 @@
     "util"
   ],
   "homepage": "https://github.com/tanepiper/node-bitly",
-  "version": "6.0.8",
+  "version": "6.1.0",
   "author": {
     "name": "Tane Piper",
     "email": "piper.tane@gmail.com",
@@ -55,25 +55,25 @@
     "docs": "rm -rf ./docs && npx typedoc --readme ./README.md --out ./docs && touch ./docs/.nojekyll"
   },
   "devDependencies": {
-    "@types/chai": "^4.1.3",
-    "@types/node": "^10.3.2",
-    "@types/request-promise": "^4.1.41",
-    "chai": "^4.1.2",
-    "jsdoc": "^3.5.5",
+    "@types/chai": "^4.1.7",
+    "@types/node": "^12.0.8",
+    "@types/request-promise": "^4.1.44",
+    "chai": "^4.2.0",
+    "jsdoc": "^3.6.2",
     "minami": "^1.2.3",
-    "mocha": "^5.2.0",
-    "mocha-typescript": "^1.1.16",
-    "np": "^3.0.4",
+    "mocha": "^6.1.4",
+    "mocha-typescript": "^1.1.17",
+    "np": "^5.0.3",
     "sepia": "^2.0.2",
-    "ts-node": "^6.1.1",
-    "typedoc": "^0.11.1",
-    "typescript": "^2.9.1"
+    "ts-node": "^8.2.0",
+    "typedoc": "^0.14.2",
+    "typescript": "^3.5.2"
   },
-  "typings": "dist/bitly.d.ts",
   "dependencies": {
-    "request": "^2.87.0",
-    "request-promise": "^4.2.2",
+    "request": "^2.88.0",
+    "request-promise": "^4.2.4",
     "valid-url": "^1.0.9"
   },
-  "main": "dist/bitly.js"
+  "main": "dist/bitly.js",
+  "types": "dist/bitly.d.ts"
 }
