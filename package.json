@@ -75,5 +75,5 @@
     "valid-url": "^1.0.9"
   },
   "main": "dist/index.js",
-  "types": "index.d.ts"
+  "types": "dist/index.d.ts"
 }
