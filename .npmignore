@@ -1,4 +1,14 @@
+# CI
 .circleci/
+
+# Editor
 .vscode
+
+# Web Pages & docs
 fixtures/
 _config.yml
+
+# TS Files
+tsconfig.json
+test
+src/*

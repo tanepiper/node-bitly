@@ -9,7 +9,7 @@
     "util"
   ],
   "homepage": "https://github.com/tanepiper/node-bitly",
-  "version": "6.0.1",
+  "version": "6.0.8",
   "author": {
     "name": "Tane Piper",
     "email": "piper.tane@gmail.com",
@@ -52,7 +52,7 @@
   "scripts": {
     "test": "VCR_MODE=cache mocha -r ts-node/register --reporter list src/*.spec.ts",
     "build": "npx tsc",
-    "docs": "npx typedoc --out ./docs"
+    "docs": "rm -rf ./docs && npx typedoc --readme ./README.md --out ./docs && touch ./docs/.nojekyll"
   },
   "devDependencies": {
     "@types/chai": "^4.1.3",
@@ -65,11 +65,11 @@
     "mocha-typescript": "^1.1.16",
     "np": "^3.0.4",
     "sepia": "^2.0.2",
-    "ts-node": "^6.1.0",
+    "ts-node": "^6.1.1",
     "typedoc": "^0.11.1",
     "typescript": "^2.9.1"
   },
-  "typings": "./global.d.ts",
+  "typings": "dist/bitly.d.ts",
   "dependencies": {
     "request": "^2.87.0",
     "request-promise": "^4.2.2",

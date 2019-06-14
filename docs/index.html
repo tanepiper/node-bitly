@@ -64,9 +64,17 @@
 	<div class="row">
 		<div class="col-8 col-content">
 			<div class="tsd-panel tsd-typography">
-				<h1 id="node-bitly-bitly-api-for-nodejs">node-bitly - Bitly API for nodejs</h1>
+				<h1 id="node-bitly-unofficial-bitly-api-for-nodejs">node-bitly - Unofficial Bitly API for nodejs</h1>
 				<p><a href="https://circleci.com/gh/tanepiper/node-bitly"><img src="https://circleci.com/gh/tanepiper/node-bitly.svg?style=svg" alt="CircleCI"></a> <a href="http://badge.fury.io/js/bitly"><img src="https://badge.fury.io/js/bitly.png" alt="NPM version"></a> <a href="https://david-dm.org/tanepiper/node-bitly"><img src="https://david-dm.org/tanepiper/node-bitly.svg" alt="Dependencies"></a></p>
-				<p>This module provides calls to the <a href="http://bitly.com">Bitly</a> API for <a href="http://nodejs.org">Nodejs</a>. This documentation is for <code>v6.0.1</code>.</p>
+				<h2 id="current-versions">Current Versions</h2>
+				<ul>
+					<li><a href="https://github.com/tanepiper/node-bitly">v6.0.x</a> - Support for Node &gt;=6. Available on npm as <code>npm install bitly@latest</code></li>
+					<li><a href="https://github.com/tanepiper/node-bitly/tree/v5.x.x">v5.1.x</a> - Support for Node &gt;=4. Available on npm as <code>npm install bitly@stable</code></li>
+				</ul>
+				<p>Version 5 is end-of-life and will only recieve minor updates in the future and is considered stable.  This will only ever support the <strong>Bitly v3</strong> API</p>
+				<p>Version 6 is the current in-development version, re-written in Typescript. This version currently only supports the <strong>Bitly v3</strong> API and will continue to do so in <code>v6.0.x</code>. Version <code>6.1.x</code> will introduce <strong>Bitly v4</strong> support.</p>
+				<h2 id="module-features">Module Features</h2>
+				<p>This module provides calls to the <a href="http://bitly.com">Bitly</a> API for <a href="http://nodejs.org">Nodejs</a>.</p>
 				<p>For more information on the API request and responses visit the <a href="https://dev.bitly.com/api.html">Bitly API docs</a></p>
 				<p><code>node-bitly</code> is programmed with <code>TypeScript</code> but is compiled to JavaScript and supports <code>node 6, 8, 10</code>.  When you import the client you get full type information.  There maybe be some gaps in the information but this will be filled in, in future releases.</p>
 				<p><strong>Currently <code>node-bitly</code> only supports Bitly&#39;s <code>v3</code> API and has this hard coded in the parameter type.  Support for version 4 will be added in a future release</strong></p>
@@ -77,7 +85,7 @@
 				<p>This library uses the API provided by bitly and requires an OAuth token to use.
 				To get your access token, visit <a href="https://bitly.com/a/oauth_apps">OAuth Apps</a> (under Generic Access Token)</p>
 				<p>See <a href="http://dev.bitly.com/">http://dev.bitly.com</a> for format of returned objects from the API</p>
-				<p>To see the available libary APIs, you can view the <a href="docs/index.html">API Documentation</a> offline, or you can view the index here (the generated documentation does not work on Github).</p>
+				<p>To see the available libary APIs, you can view the <a href="http://tanepiper.github.io/node-bitly/index.html">API Documentation</a> offline, or you can view the index here (the generated documentation does not work on Github).</p>
 				<h3 id="code">Code</h3>
 				<h4 id="typescript-es6-imports">TypeScript / ES6 Imports</h4>
 				<pre><code class="lang-js"><span class="hljs-keyword">import</span> { BitlyClient } <span class="hljs-keyword">from</span> <span class="hljs-string">'bitly'</span>;
@@ -137,6 +145,10 @@ bitly
 </code></pre>
 				<h3 id="tests">Tests</h3>
 				<p>To run tests type <code>npm test</code>. Please note one test will fail if you use your own API key, please update the string accordingly.</p>
+				<h2 id="support-this-project">Support This Project</h2>
+				<p>This module is a side project of mine and I don&#39;t actively use the module except to completly over-engineer the CI pipeline and re-write it in Typescript all in the name of learning.  But to add features like the v4 API would take a lot of work, so if you use this library a lot please consider donating using the links below. Or if you learned something useful from one of my blog posts talking about the changes I&#39;ve done with this module please consider leaving a tip.</p>
+				<p><a href="https://beerpay.io/tanepiper/node-bitly"><img src="https://beerpay.io/tanepiper/node-bitly/badge.svg?style=beer-square" alt="Beerpay"></a>  <a href="https://beerpay.io/tanepiper/node-bitly?focus=wish"><img src="https://beerpay.io/tanepiper/node-bitly/make-wish.svg?style=flat-square" alt="Beerpay"></a></p>
+				<p>You can also <a href="https://paypal.me/tanepiper">PayPal Me</a>.</p>
 			</div>
 		</div>
 		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
@@ -145,11 +157,20 @@ bitly
 					<li class="globals  ">
 						<a href="globals.html"><em>Globals</em></a>
 					</li>
+					<li class="label tsd-is-external">
+						<span>Internals</span>
+					</li>
 					<li class=" tsd-kind-external-module">
 						<a href="modules/_bitly_.html">"bitly"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
 						<a href="modules/_lib_.html">"lib"</a>
+					</li>
+					<li class="label tsd-is-external">
+						<span>Externals</span>
+					</li>
+					<li class=" tsd-kind-external-module tsd-is-external">
+						<a href="modules/_bitly_types_.html">"bitly.types"</a>
 					</li>
 				</ul>
 			</nav>

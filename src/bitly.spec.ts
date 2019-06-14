@@ -8,7 +8,7 @@ const EXAMPLE_URL_BITLY = 'http://bit.ly/2hpSRbP';
 import '../test/bootstrap';
 
 import { BitlyClient } from './bitly';
-import { BitlyError } from './bitly.d';
+import { BitlyError } from './bitly.types';
 
 describe('Bitly client', () => {
   let bitly: BitlyClient;
@@ -24,7 +24,9 @@ describe('Bitly client', () => {
       } catch (error) {
         err = error;
       }
-      return expect(err.statusCode).to.equal(500);
+      return expect(err)
+        .to.have.property('statusCode')
+        .and.to.equal(500);
     });
   });
 

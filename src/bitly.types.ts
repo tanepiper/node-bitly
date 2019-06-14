@@ -26,7 +26,7 @@ export interface ExpandInteface {
   expand: string[];
 }
 
-type BitlyResponseData = ShortenResponse | ExpandInteface;
+export type BitlyResponseData = ShortenResponse | ExpandInteface;
 
 export interface BitlyResponse {
   status_code: number;
