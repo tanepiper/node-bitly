@@ -1,5 +1,11 @@
-import { doRequest, sortUrlsAndHash } from './lib';
-import { BitlyConfig, BitlyResponse, BitlyError, BitlyUrlQueryParams, BitlyResponseData } from './bitly.types';
+import { doRequest, sortUrlsAndHash } from "./lib";
+import {
+  BitlyConfig,
+  BitlyResponse,
+  BitlyError,
+  BitlyUrlQueryParams,
+  BitlyResponseData
+} from "./types";
 
 /**
  *
@@ -34,7 +40,7 @@ export class BitlyClient {
    * @return {object} The results of the request
    */
   async info(items: string | string[]): Promise<BitlyResponseData> {
-    return await this.bitlyRequest('info', sortUrlsAndHash(items));
+    return await this.bitlyRequest("info", sortUrlsAndHash(items));
   }
 
   /**
@@ -43,7 +49,7 @@ export class BitlyClient {
    * @return {object} The results of the request
    */
   async shorten(longUrl: string): Promise<BitlyResponseData> {
-    return await this.bitlyRequest('shorten', { longUrl });
+    return await this.bitlyRequest("shorten", { longUrl });
   }
 
   /**
@@ -52,7 +58,7 @@ export class BitlyClient {
    * @return {object} The results of the request
    */
   async expand(items: string | string[]): Promise<BitlyResponseData> {
-    return await this.bitlyRequest('expand', sortUrlsAndHash(items));
+    return await this.bitlyRequest("expand", sortUrlsAndHash(items));
   }
 
   /**
@@ -61,7 +67,7 @@ export class BitlyClient {
    * @return {object}
    */
   async clicks(items: string | string[]): Promise<BitlyResponseData> {
-    return await this.bitlyRequest('clicks', sortUrlsAndHash(items));
+    return await this.bitlyRequest("clicks", sortUrlsAndHash(items));
   }
 
   /**
@@ -70,7 +76,7 @@ export class BitlyClient {
    * @return {object}
    */
   async clicksByMinute(items: string | string[]): Promise<BitlyResponseData> {
-    return await this.bitlyRequest('clicks_by_minute', sortUrlsAndHash(items));
+    return await this.bitlyRequest("clicks_by_minute", sortUrlsAndHash(items));
   }
 
   /**
@@ -79,7 +85,7 @@ export class BitlyClient {
    * @return {object}
    */
   async clicksByDay(items: string | string[]): Promise<BitlyResponseData> {
-    return await this.bitlyRequest('clicks_by_day', sortUrlsAndHash(items));
+    return await this.bitlyRequest("clicks_by_day", sortUrlsAndHash(items));
   }
 
   /**
@@ -88,7 +94,7 @@ export class BitlyClient {
    * @return {object}
    */
   async lookup(url: string): Promise<BitlyResponseData> {
-    return await this.bitlyRequest('lookup', { url });
+    return await this.bitlyRequest("lookup", { url });
   }
 
   /**
@@ -97,7 +103,7 @@ export class BitlyClient {
    * @return {object}
    */
   async referrers(item: string): Promise<BitlyResponseData> {
-    return await this.bitlyRequest('referrers', sortUrlsAndHash([item]));
+    return await this.bitlyRequest("referrers", sortUrlsAndHash([item]));
   }
 
   /**
@@ -106,7 +112,7 @@ export class BitlyClient {
    * @return {object}
    */
   async countries(item: string): Promise<BitlyResponseData> {
-    return await this.bitlyRequest('countries', sortUrlsAndHash([item]));
+    return await this.bitlyRequest("countries", sortUrlsAndHash([item]));
   }
 
   /**
@@ -115,16 +121,28 @@ export class BitlyClient {
    * @param {object} data The data object to be passed. Keys should be query paramaters
    * @return {object} The bitly request return data
    */
-  async bitlyRequest(method: string, data: BitlyUrlQueryParams | object): Promise<BitlyResponseData> {
+  async bitlyRequest(
+    method: string,
+    data: BitlyUrlQueryParams | object
+  ): Promise<BitlyResponseData> {
     try {
-      const result: BitlyResponse = await doRequest(this.accessToken, method, data, this.config);
+      const result: BitlyResponse = await doRequest(
+        this.accessToken,
+        method,
+        data,
+        this.config
+      );
 
       if (result.status_code >= 200 && result.status_code < 400) {
         return result.data;
       }
 
       const err: BitlyError = <BitlyError>(
-        new Error(`[node-bitly] Request returned ${result.status_code}: ${result.status_txt}`)
+        new Error(
+          `[node-bitly] Request returned ${result.status_code}: ${
+            result.status_txt
+          }`
+        )
       );
       err.statusCode = result.status_code;
       err.data = result.data;

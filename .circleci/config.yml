@@ -16,7 +16,7 @@ jobs:
       - checkout
       - restore_cache:
           keys:
-          - node-bitly-{{ .Branch }}-{{ checksum "package.json" }}
+            - node-bitly-{{ .Branch }}-{{ checksum "package.json" }}
       - run:
           name: Install Dependencies
           command: npm upgrade && npm install
@@ -62,7 +62,17 @@ jobs:
       - run:
           name: Running tests
           command: npm test
-
+  run_tests_12:
+    working_directory: ~/repo
+    docker:
+      - image: circleci/node:12
+    steps:
+      - checkout
+      - attach_workspace:
+          at: ~/
+      - run:
+          name: Running tests
+          command: npm test
 
   build:
     <<: *defaults
@@ -118,11 +128,15 @@ workflows:
       - run_tests_10:
           requires:
             - run_install
+      - run_tests_12:
+          requires:
+            - run_install
       - build:
           requires:
             - run_tests_8
             - run_tests_6
             - run_tests_10
+            - run_tests_12
       - run_distribution:
           requires:
             - build

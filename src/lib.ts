@@ -1,9 +1,13 @@
-import { format as formatURL, parse as parseURL, UrlWithStringQuery } from 'url';
-import request from 'request-promise';
+import {
+  format as formatURL,
+  parse as parseURL,
+  UrlWithStringQuery
+} from "url";
+import request from "request-promise";
 
-const isUri = require('valid-url').isUri;
+const isUri = require("valid-url").isUri;
 
-import { BitlyConfig, BitlyUrlQueryParams, BitlyResponse } from './bitly.types';
+import { BitlyConfig, BitlyUrlQueryParams, BitlyResponse } from "./types";
 
 /**
  * The internal library of node-bitly
@@ -12,10 +16,10 @@ import { BitlyConfig, BitlyUrlQueryParams, BitlyResponse } from './bitly.types';
  */
 
 const DEFAULT_OPTIONS: BitlyConfig = {
-  apiUrl: 'api-ssl.bitly.com',
-  apiVersion: 'v3',
-  domain: 'bit.ly',
-  format: 'json'
+  apiUrl: "api-ssl.bitly.com",
+  apiVersion: "v3",
+  domain: "bit.ly",
+  format: "json"
 };
 
 /**
@@ -48,7 +52,7 @@ export function generateUrl(
 
   return parseURL(
     formatURL({
-      protocol: 'https',
+      protocol: "https",
       hostname: config.apiUrl || DEFAULT_OPTIONS.apiUrl,
       pathname: `/${config.apiVersion || DEFAULT_OPTIONS.apiVersion}/${method}`,
       query: newQuery
@@ -89,11 +93,16 @@ export async function doRequest(
  * @param  {object} query The query object
  * @return {object}
  */
-export function sortUrlsAndHash(unsortedItems: string | string[], result: BitlyUrlQueryParams = { shortUrl: [], hash: [] }): BitlyUrlQueryParams {
+export function sortUrlsAndHash(
+  unsortedItems: string | string[],
+  result: BitlyUrlQueryParams = { shortUrl: [], hash: [] }
+): BitlyUrlQueryParams {
   result.shortUrl = result.shortUrl || [];
   result.hash = result.hash || [];
-  (Array.isArray(unsortedItems) ? unsortedItems : [unsortedItems]).map(
-    item => (isUri(item) ? result.shortUrl.push(item) : typeof item === 'string' && result.hash.push(item))
+  (Array.isArray(unsortedItems) ? unsortedItems : [unsortedItems]).map(item =>
+    isUri(item)
+      ? result.shortUrl.push(item)
+      : typeof item === "string" && result.hash.push(item)
   );
   return result;
 }

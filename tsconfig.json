@@ -14,5 +14,10 @@
     },
     "lib": ["es7"]
   },
-  "files": ["./src/bitly.ts", "./src/lib.ts"]
+  "files": [
+    "./src/index.ts",
+    "./src/index.d.ts",
+    "./src/bitly.ts",
+    "./src/lib.ts"
+  ]
 }
