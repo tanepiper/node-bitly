@@ -1,0 +1,11 @@
+{
+  "timeout": true,
+  "time": 0,
+  "url": "https://api-ssl.bitly.com:443/v3/info?access_token=&domain=bit.ly&format=json&hash=1JtuvXY",
+  "request": {
+    "method": "GET",
+    "headers": {
+      "host": "api-ssl.bitly.com"
+    }
+  }
+}

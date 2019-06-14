@@ -1,0 +1,18 @@
+{
+  "statusCode": 200,
+  "headers": {
+    "server": "nginx",
+    "date": "Fri, 14 Jun 2019 11:27:57 GMT",
+    "content-type": "application/json; charset=utf-8",
+    "content-length": "69",
+    "connection": "keep-alive"
+  },
+  "url": "https://api-ssl.bitly.com:443/v3/clicks?access_token=&domain=bit.ly&format=json&shortUrl=http%3A%2F%2Fbit.ly%2F2hpSRbP&",
+  "time": 293,
+  "request": {
+    "method": "GET",
+    "headers": {
+      "host": "api-ssl.bitly.com"
+    }
+  }
+}

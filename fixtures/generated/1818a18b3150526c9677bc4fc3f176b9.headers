@@ -1,0 +1,18 @@
+{
+  "statusCode": 200,
+  "headers": {
+    "server": "nginx",
+    "date": "Fri, 14 Jun 2019 11:27:56 GMT",
+    "content-type": "application/json; charset=utf-8",
+    "content-length": "69",
+    "connection": "keep-alive"
+  },
+  "url": "https://api-ssl.bitly.com:443/v3/shorten?access_token=&domain=bit.ly&format=json&longUrl=https%3A%2F%2Fgithub.com%2Ftanepiper%2Fnode-bitly",
+  "time": 388,
+  "request": {
+    "method": "GET",
+    "headers": {
+      "host": "api-ssl.bitly.com"
+    }
+  }
+}
