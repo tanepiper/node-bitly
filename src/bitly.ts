@@ -5,7 +5,7 @@ import {
   BitlyError,
   BitlyUrlQueryParams,
   BitlyResponseData
-} from ".";
+} from "./types";
 
 /**
  *

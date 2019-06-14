@@ -75,5 +75,5 @@
     "valid-url": "^1.0.9"
   },
   "main": "dist/bitly.js",
-  "types": "dist/index.d.ts"
+  "types": "index.d.ts"
 }
