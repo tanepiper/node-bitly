@@ -9,7 +9,7 @@ export interface BitlyConfig {
   /**
    * API Version, currently v3 is only supported
    */
-  apiVersion?: "v3"; // Fixed as we only support this version for now
+  apiVersion?: string; // Fixed as we only support this version for now
   /**
    * Optional custom domain
    */
@@ -18,6 +18,7 @@ export interface BitlyConfig {
    * Return format, default is JSON
    */
   format?: string;
+
   [k: string]: any;
 }
 
@@ -28,11 +29,11 @@ export interface BitlyUrlQueryParams {
   /**
    * A list of short url hashes
    */
-  shortUrl?: string[];
+  short_url?: string[];
   /**
    * A list of long URLS
    */
-  longUrl?: string;
+  long_url?: string;
   /**
    * A single URL
    */
@@ -41,75 +42,125 @@ export interface BitlyUrlQueryParams {
    * A single hash
    */
   hash?: string[];
+
   [k: string]: any;
 }
 
-/**
- * The response from a shorten request
- */
-export interface ShortenResponse {
-  /**
-   * The Bitly URL
-   */
-  url: string;
-  /**
-   * The bitly hash
-   */
-  hash: string;
-  /**
-   * Global hash if URL already available
-   */
-  global_hash: string;
-  /**
-   * Long URL for this response
-   */
-  long_url: string;
-  /**
-   * If it's a new hash or not
-   */
-  new_hash: number;
+export interface References {
+  [key: string]: string;
 }
 
 /**
- * An expand response
+ * A Bitly link deep link
  */
-export interface ExpandResponse {
-  expand: string[];
+export interface DeepLink {
+  /**
+   * Bitlink
+   */
+  bitlink: string;
+  /**
+   * Install URL
+   */
+  install_url: string;
+  /**
+   * Created date
+   */
+  created: string;
+  /**
+   * App URI path
+   */
+  app_uri_path: string;
+  /**
+   * Modified
+   */
+  modified: string;
+  /**
+   * Install type
+   */
+  install_type: string;
+  /**
+   * App GUID
+   */
+  app_guid: string;
+  /**
+   * GUID
+   */
+  guid: string;
+  /**
+   * OS
+   */
+  os: string;
 }
 
-/**
- * Type for a response from Bitly
- */
-export type BitlyResponseData = ShortenResponse | ExpandResponse;
 
 /**
  * Type for a bitly response
  */
-export interface BitlyResponse<T = BitlyResponseData> {
+export interface BitlyLink {
   /**
-   * Status code of the response
+   * References
    */
-  status_code: number;
+  references: References;
   /**
-   * The status text
+   * Archived
    */
-  status_txt: string;
+  archived: boolean;
   /**
-   * The data being returned
+   * Tags
    */
-  data: T;
+  tags: string[];
+  /**
+   * Created Time
+   */
+  created_at: string;
+  /**
+   * Title
+   */
+  title: string;
+  /**
+   * Deep links
+   */
+  deeplinks: DeepLink[];
+  /**
+   * Created By
+   */
+  created_by: string;
+  /**
+   * Long URL
+   */
+  long_url: string;
+  /**
+   * Custom Bitlink
+   */
+  custom_bitlinks: string[];
+  /**
+   * Link
+   */
+  link: string;
+  /**
+   * ID
+   */
+  id: string;
 }
+
+/**
+ * A Bitly error
+ */
+export interface BitlyError {
+  field: string;
+  message: string;
+  error_code: string;
+}
+
 
 /**
  * An error from Bitly
  */
-export interface BitlyError<T = any> extends Error {
-  /**
-   * Status code of the error
-   */
-  statusCode: number;
-  /**
-   * Error data
-   */
-  data: T;
+export interface BitlyErrorResponse {
+  message: string;
+  errors: BitlyError[];
+  resource: string;
+  description: string;
 }
+
+export type BitlyResponse = BitlyLink | BitlyError;

@@ -5,6 +5,6 @@ export {
   BitlyConfig,
   BitlyUrlQueryParams,
   BitlyResponseData,
-  BitlyResponse,
-  BitlyError
+  BitlyLink,
+  BitlyErrorResponse
 } from "./types";

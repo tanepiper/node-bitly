@@ -1,0 +1,28 @@
+{
+  "statusCode": 200,
+  "headers": {
+    "server": "nginx",
+    "date": "Wed, 22 Jan 2020 23:55:27 GMT",
+    "content-type": "application/json",
+    "content-length": "147",
+    "strict-transport-security": "max-age=31536000; includeSubDomains",
+    "x-xss-protection": "1; mode=blockFilter",
+    "x-content-type-options": "nosniff",
+    "x-frame-options": "DENY",
+    "content-security-policy": "default-src 'none",
+    "via": "1.1 google",
+    "alt-svc": "clear"
+  },
+  "url": "https://api-ssl.bitly.com:443/v4/expand",
+  "time": 198,
+  "request": {
+    "method": "post",
+    "headers": {
+      "host": "api-ssl.bitly.com",
+      "authorization": "Bearer b5e037d172fc61b737988c9dbaeb12934c30a9bd",
+      "accept": "application/json",
+      "content-type": "application/json",
+      "content-length": 49
+    }
+  }
+}

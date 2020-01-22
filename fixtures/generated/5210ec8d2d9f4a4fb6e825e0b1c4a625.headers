@@ -1,0 +1,25 @@
+{
+  "statusCode": 405,
+  "headers": {
+    "server": "nginx",
+    "date": "Wed, 22 Jan 2020 23:07:39 GMT",
+    "content-type": "text/plain; charset=utf-8",
+    "content-length": "19",
+    "allow": "POST, OPTIONS",
+    "x-content-type-options": "nosniff, nosniff",
+    "strict-transport-security": "max-age=31536000; includeSubDomains",
+    "x-xss-protection": "1; mode=blockFilter",
+    "x-frame-options": "DENY",
+    "content-security-policy": "default-src 'none",
+    "via": "1.1 google",
+    "alt-svc": "clear"
+  },
+  "url": "https://api-ssl.bitly.com:443/v4/shorten?access_token=&domain=bit.ly&format=json&longUrl=https%3A%2F%2Fgithub.com%2Ftanepiper%2Fnode-bitly",
+  "time": 136,
+  "request": {
+    "method": "GET",
+    "headers": {
+      "host": "api-ssl.bitly.com"
+    }
+  }
+}

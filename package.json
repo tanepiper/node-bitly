@@ -55,23 +55,23 @@
     "docs": "rm -rf ./docs && npx typedoc --readme ./README.md --out ./docs && touch ./docs/.nojekyll"
   },
   "devDependencies": {
-    "@types/chai": "^4.1.7",
-    "@types/node": "^12.0.8",
-    "@types/request-promise": "^4.1.44",
+    "@types/chai": "^4.2.7",
+    "@types/node": "^13.1.8",
+    "@types/request-promise": "^4.1.45",
     "chai": "^4.2.0",
-    "jsdoc": "^3.6.2",
+    "jsdoc": "^3.6.3",
     "minami": "^1.2.3",
-    "mocha": "^6.1.4",
+    "mocha": "^7.0.0",
     "mocha-typescript": "^1.1.17",
-    "np": "^5.0.3",
+    "np": "^5.2.1",
     "sepia": "^2.0.2",
-    "ts-node": "^8.2.0",
-    "typedoc": "^0.14.2",
-    "typescript": "^3.5.2"
+    "ts-node": "^8.6.2",
+    "typedoc": "^0.16.8",
+    "typescript": "^3.7.5"
   },
   "dependencies": {
     "request": "^2.88.0",
-    "request-promise": "^4.2.4",
+    "request-promise": "^4.2.5",
     "valid-url": "^1.0.9"
   },
   "main": "dist/index.js",

@@ -1,0 +1,20 @@
+{
+  "statusCode": 400,
+  "headers": {
+    "content-type": "text/html; charset=UTF-8",
+    "referrer-policy": "no-referrer",
+    "content-length": "1555",
+    "date": "Wed, 22 Jan 2020 23:37:30 GMT"
+  },
+  "url": "https://api-ssl.bitly.com:443/v4/info",
+  "time": 126,
+  "request": {
+    "method": "GET",
+    "headers": {
+      "host": "api-ssl.bitly.com",
+      "accept": "application/json",
+      "content-type": "application/json",
+      "content-length": 68
+    }
+  }
+}
