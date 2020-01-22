@@ -1,1 +1,0 @@
-{"message":"ALREADY_A_BITLY_LINK","resource":"bitlinks","description":"The value provided is invalid.","errors":[{"field":"long_url","error_code":"invalid"}]}

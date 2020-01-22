@@ -2,7 +2,7 @@
   "statusCode": 200,
   "headers": {
     "server": "nginx",
-    "date": "Wed, 22 Jan 2020 23:55:27 GMT",
+    "date": "Wed, 22 Jan 2020 23:57:17 GMT",
     "content-type": "application/json",
     "content-length": "147",
     "strict-transport-security": "max-age=31536000; includeSubDomains",
@@ -14,7 +14,7 @@
     "alt-svc": "clear"
   },
   "url": "https://api-ssl.bitly.com:443/v4/expand",
-  "time": 198,
+  "time": 201,
   "request": {
     "method": "post",
     "headers": {
