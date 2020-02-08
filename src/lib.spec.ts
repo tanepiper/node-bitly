@@ -1,5 +1,4 @@
 import { expect } from 'chai';
-import 'sepia';
 import '../test/bootstrap';
 
 import { generateUrl, sortUrlsAndHash } from './lib';

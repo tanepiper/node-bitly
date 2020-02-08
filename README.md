@@ -108,7 +108,9 @@ try {
 
 ### Tests
 
-To run tests type `npm test`. Please note one test will fail if you use your own API key, please update the string accordingly.
+To run tests type `npm test`.
+
+The tests use [`replay`](https://www.npmjs.com/package/replay), which caches the responses from Bitly under the `/fixtures` directory, until you edit a test's requests payload. This means you can run the test suite without having a Bitly API key, until you need to edit or add a new test.
 
 ## Support This Project
 This module is a side project of mine and I don't actively use the module except to completly over-engineer the CI pipeline and re-write it in Typescript all in the name of learning.  But to add features like the v4 API would take a lot of work, so if you use this library a lot please consider donating using the links below. Or if you learned something useful from one of my blog posts talking about the changes I've done with this module please consider leaving a tip.

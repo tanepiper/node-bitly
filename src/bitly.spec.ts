@@ -1,5 +1,5 @@
-import 'sepia';
 import { expect } from 'chai';
+import '../test/bootstrap';
 
 const EXAMPLE_URL = 'https://github.com/tanepiper/node-bitly';
 const EXAMPLE_HASH = '1JtuvXY';

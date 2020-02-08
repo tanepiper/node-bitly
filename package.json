@@ -50,7 +50,7 @@
     "node": ">= 6.10.0"
   },
   "scripts": {
-    "test": "VCR_MODE=cache mocha -r ts-node/register --reporter list src/*.spec.ts",
+    "test": "mocha -r ts-node/register --reporter list src/*.spec.ts",
     "build": "npx tsc",
     "docs": "rm -rf ./docs && npx typedoc --readme ./README.md --out ./docs && touch ./docs/.nojekyll"
   },
@@ -64,7 +64,7 @@
     "mocha": "^7.0.0",
     "mocha-typescript": "^1.1.17",
     "np": "^5.2.1",
-    "sepia": "^2.0.2",
+    "replay": "^2.4.0",
     "ts-node": "^8.6.2",
     "typedoc": "^0.16.8",
     "typescript": "^3.7.5"
