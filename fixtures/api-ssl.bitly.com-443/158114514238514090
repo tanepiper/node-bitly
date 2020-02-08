@@ -1,0 +1,19 @@
+GET /v4/bitlinks/bit.ly/38XaXKy/clicks?unit=minute&units=-1&size=50&unit_reference=
+host: api-ssl.bitly.com
+accept: application/json
+
+HTTP/1.1 200 OK
+server: nginx
+date: Sat, 08 Feb 2020 06:59:00 GMT
+content-type: application/json
+content-length: 89
+strict-transport-security: max-age=31536000; includeSubDomains
+x-xss-protection: 1; mode=blockFilter
+x-content-type-options: nosniff
+x-frame-options: DENY
+content-security-policy: default-src 'none
+via: 1.1 google
+alt-svc: clear
+connection: close
+
+{"unit_reference":"2020-02-08T06:59:00+0000","link_clicks":[],"units":-1,"unit":"minute"}

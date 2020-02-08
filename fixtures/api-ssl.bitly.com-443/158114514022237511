@@ -1,0 +1,21 @@
+POST /v4/bitlinks
+host: api-ssl.bitly.com
+accept: application/json
+content-type: application/json
+body: {\"domain\":\"bit.ly\",\"long_url\":\"NOT_REAL_URL\"}
+
+HTTP/1.1 400 Bad Request
+server: nginx
+date: Sat, 08 Feb 2020 06:58:57 GMT
+content-type: application/json
+content-length: 158
+strict-transport-security: max-age=31536000; includeSubDomains
+x-xss-protection: 1; mode=blockFilter
+x-content-type-options: nosniff
+x-frame-options: DENY
+content-security-policy: default-src 'none
+via: 1.1 google
+alt-svc: clear
+connection: close
+
+{"message":"INVALID_ARG_LONG_URL","resource":"bitlinks","description":"The value provided is invalid.","errors":[{"field":"long_url","error_code":"invalid"}]}

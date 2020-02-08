@@ -1,10 +1,16 @@
-import { doRequest, sortUrlsAndHash } from './lib';
+import { doRequest, forceToBitlinkId, throwDeprecatedErr } from './lib';
 import {
   BitlyConfig,
+  BitlyExpandResponse,
+  BitlyQueryParams,
+  BitlyReqMethod,
   BitlyLink,
+  BitlyMetricsByCountryRes,
   BitlyErrorResponse,
-  BitlyUrlQueryParams,
-  BitlyResponse
+  BitlyMetricsByReferrers,
+  BitlyClickMetricsRes,
+  BitlyTimeUnit,
+  BitlySuccess
 } from './types';
 
 /**
@@ -23,7 +29,7 @@ import {
  * @returns {Bitly}
  * @example
  *  const BitlyClient = require('bitly');
- *  const bitly = BitleyClient('<accessToken>');
+ *  const bitly = BitlyClient('<accessToken>');
  *  const myFunc = async(uri = 'https://github.com/tanepiper/node-bitly') => {
  *    try {
  *      return await bitly.shorten(uri);
@@ -37,57 +43,73 @@ export class BitlyClient {
   }
 
   /**
-   * This is used to return the page title for a given Bitlink.
-   * @param  {array<string>} items An array of short urls or hashes
+   * This is used to get the summary of info about a given bitlink
+   * Ref: https://dev.bitly.com/v4/#operation/getBitlink
+   * @param  {string} item ID, short Url, or hash
    * @return {object} The results of the request
    */
-  async info(items: string | string[]): Promise<BitlyResponse> {
-    return await this.bitlyRequest('info', sortUrlsAndHash(items));
+  async getBitlink(item: string): Promise<BitlyLink | BitlyErrorResponse> {
+    return await this.bitlyRequest(`bitlinks/${forceToBitlinkId(item)}`, {}, 'GET');
   }
 
   /**
-   * Used to shorted a url
+   * This is used to return the page title for a given Bitlink.
+   * @param  {string} item ID, short Url, or hash
+   * @return {object} The results of the request
+   */
+  async info(item: string): Promise<BitlyLink | BitlyErrorResponse> {
+    return await this.getBitlink(item);
+  }
+
+  /**
+   * Used to shorten a url
    * @param  {string} longUrl The URL to be shortened
    * @return {object} The results of the request
    */
-  async shorten(longUrl: string): Promise<BitlyResponse> {
+  async shorten(longUrl: string): Promise<BitlyLink | BitlyErrorResponse> {
     return await this.bitlyRequest('bitlinks', { long_url: longUrl });
   }
 
   /**
    * Request to expand urls and hashes
-   * @param  {string|array<string>} items A string or array of strings of short urls and hashes.
+   * @param  {string} item ID, short Url, or hash
    * @return {object} The results of the request
    */
-  async expand(bitLink: string): Promise<BitlyResponse> {
-    return await this.bitlyRequest('expand', { bitlink_id: `bit.ly/${bitLink}` });
+  async expand(item: string): Promise<BitlyExpandResponse | BitlyErrorResponse> {
+    return await this.bitlyRequest('expand', { bitlink_id: forceToBitlinkId(item) });
   }
 
   /**
    * Request to get clicks for urls and hashes
-   * @param  {string|array<string>} items A string or array of strings of short urls and hashes.
+   * Defaults are per docs, and are the same result as if you call endpoint with no args
+   * @param  {string} item ID, short Url, or hash
    * @return {object}
    */
-  async clicks(items: string | string[]): Promise<BitlyResponse> {
-    return await this.bitlyRequest('clicks', sortUrlsAndHash(items));
+  async clicks(item: string, unit: BitlyTimeUnit = 'day', units: number = -1, size: number = 50, unit_reference?: string): Promise<BitlyClickMetricsRes | BitlyErrorResponse> {
+    return await this.bitlyRequest(`bitlinks/${forceToBitlinkId(item)}/clicks`, {
+      unit,
+      units,
+      size,
+      unit_reference
+    }, 'GET');
   }
 
   /**
    * Request to get clicks by minute for urls and hashes
-   * @param  {string|array<string>} items A string or array of strings of short urls and hashes.
+   * @param  {string} item ID, short Url, or hash
    * @return {object}
    */
-  async clicksByMinute(items: string | string[]): Promise<BitlyResponse> {
-    return await this.bitlyRequest('clicks_by_minute', sortUrlsAndHash(items));
+  async clicksByMinute(item: string): Promise<BitlyClickMetricsRes | BitlyErrorResponse> {
+    return await this.clicks(item, 'minute');
   }
 
   /**
    * Request to get clicks by day for urls and hashes
-   * @param  {string|array<string>} items A string or array of strings of short urls and hashes.
+   * @param  {string} item ID, short Url, or hash
    * @return {object}
    */
-  async clicksByDay(items: string | string[]): Promise<BitlyResponse> {
-    return await this.bitlyRequest('clicks_by_day', sortUrlsAndHash(items));
+  async clicksByDay(item: string): Promise<BitlyClickMetricsRes | BitlyErrorResponse> {
+    return await this.clicks(item, 'day');
   }
 
   /**
@@ -95,26 +117,26 @@ export class BitlyClient {
    * @param  {string} url The url to look up
    * @return {object}
    */
-  async lookup(url: string): Promise<BitlyResponse> {
-    return await this.bitlyRequest('lookup', { url });
+  async lookup(url: string): Promise<void> {
+    return throwDeprecatedErr('lookup', 'getBitlink');
   }
 
   /**
    * Request referrers for a single url
-   * @param  {string} uri The uri to look up
+   * @param  {string} item ID, short Url, or hash
    * @return {object}
    */
-  async referrers(item: string): Promise<BitlyResponse> {
-    return await this.bitlyRequest('referrers', sortUrlsAndHash([item]));
+  async referrers(item: string): Promise<BitlyMetricsByReferrers | BitlyErrorResponse> {
+    return await this.bitlyRequest(`bitlinks/${forceToBitlinkId(item)}/referrers`, {}, 'GET');
   }
 
   /**
    * Request countries for a single url
-   * @param  {string} uri The uri to look up
+   * @param  {string} item ID, short Url, or hash
    * @return {object}
    */
-  async countries(item: string): Promise<BitlyResponse> {
-    return await this.bitlyRequest('countries', sortUrlsAndHash([item]));
+  async countries(item: string): Promise<BitlyMetricsByCountryRes | BitlyErrorResponse> {
+    return await this.bitlyRequest(`bitlinks/${forceToBitlinkId(item)}/countries`, {}, 'GET');
   }
 
   /**
@@ -123,14 +145,15 @@ export class BitlyClient {
    * @param {object} data The data object to be passed. Keys should be query paramaters
    * @return {object} The bitly request return data
    */
-  async bitlyRequest(method: string, data: BitlyUrlQueryParams | object): Promise<BitlyResponse> {
+  async bitlyRequest<ResponseType extends BitlySuccess>(method: string, data: BitlyQueryParams | object, reqMethod: BitlyReqMethod = 'POST'): Promise<ResponseType | BitlyErrorResponse> {
     try {
       return await doRequest(
           this.accessToken,
           method,
           data,
-          this.config
-      );
+          this.config,
+          reqMethod
+      ) as ResponseType | BitlyErrorResponse;
     } catch (e) {
       throw e;
     }
@@ -145,7 +168,7 @@ export class BitlyClient {
  * @property {Function} clicks Function that gets the number of clicks of short urls. Accepts string or array of strings.
  * @property {Function} clicksByMinute Function that gets the number of clicks by minute for short urls. Accepts string or array of strings.
  * @property {Function} clicksByDay Function that gets the number of clicks by day for short urls. Accepts string or array of strings.
- * @property {Function} lookup Function that takes a url looks up data. Accepts valid URL.
+ * @property {Function} lookup !!! - DEPRECATED --- !!! Function that takes a url looks up data. Accepts valid URL.
  * @property {Function} info Function that takes a url and gets info. Accepts valid URL.
  * @property {Function} referrers Function that gets referrers for urls. Accepts valid URL.
  * @property {Function} countries Function that gets click by countries for urls. Accepts valid URL.

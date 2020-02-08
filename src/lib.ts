@@ -1,6 +1,6 @@
-import { format as formatURL, parse as parseURL, UrlWithStringQuery } from 'url';
+import { format as formatURL, parse as parseURL, UrlWithStringQuery, UrlObject } from 'url';
 import request from 'request-promise';
-import { BitlyConfig, BitlyResponse, BitlyUrlQueryParams } from './types';
+import { BitlyConfig, BitlyResponse, BitlyQueryParams, BitlyReqMethod, RequestPromiseInput } from './types';
 
 const isUri = require('valid-url').isUri;
 
@@ -33,15 +33,20 @@ const DEFAULT_OPTIONS: BitlyConfig = {
  */
 export function generateUrl(
     method: string,
-    data: BitlyUrlQueryParams = {},
-    config: BitlyConfig = {}
+    data: BitlyQueryParams = {},
+    config: BitlyConfig = {},
+    reqMethod: BitlyReqMethod = 'POST'
 ): UrlWithStringQuery {
+  let formatUrlOptions: UrlObject = {
+    protocol: "https",
+    hostname: config.apiUrl || DEFAULT_OPTIONS.apiUrl,
+    pathname: `/${config.apiVersion || DEFAULT_OPTIONS.apiVersion}/${method}`
+  };
+  if (reqMethod === 'GET') {
+    formatUrlOptions.query = data;
+  }
   return parseURL(
-      formatURL({
-        protocol: 'https',
-        hostname: config.apiUrl || DEFAULT_OPTIONS.apiUrl,
-        pathname: `/${config.apiVersion || DEFAULT_OPTIONS.apiVersion}/${method}`,
-      })
+      formatURL(formatUrlOptions)
   );
 }
 
@@ -53,26 +58,31 @@ export function generateUrl(
  * @param {config} config A object that overrides the default values for a request
  * @returns {object} The request result object
  */
-export async function doRequest(bearer: string, method: string, data: BitlyUrlQueryParams, config: BitlyConfig): Promise<BitlyResponse> {
-  const uri = generateUrl(method, data, config);
+export async function doRequest(bearer: string, method: string, data: BitlyQueryParams, config: BitlyConfig, reqMethod: BitlyReqMethod = 'POST'): Promise<BitlyResponse> {
+  const uri = generateUrl(method, data, config, reqMethod);
 
-  const body = Object.assign({
-    domain: config.domain || DEFAULT_OPTIONS.domain,
-    // format: config.format || DEFAULT_OPTIONS.format,
-    long_url: data.long_url
-  });
-  //console.log(body, uri)
+  const requestOptions: RequestPromiseInput = {
+    method: reqMethod,
+    uri,
+    auth: {
+      bearer
+    },
+    json: true
+  };
 
-  Object.keys(data || []).forEach((key: any) => (body[key] = data[key]));
-  try {
-    const req = await request({
-      method: 'post',
-      uri,
-      auth: {
-        bearer
-      },
-      json: body,
+  if (reqMethod !== 'GET') {
+    const body = Object.assign({
+      domain: config.domain || DEFAULT_OPTIONS.domain,
+      // format: config.format || DEFAULT_OPTIONS.format,
+      long_url: data.long_url
     });
+
+    Object.keys(data || []).forEach((key: any) => (body[key] = data[key]));
+    requestOptions.body = body;
+  }
+
+  try {
+    const req = await request(requestOptions);
     console.log(req);
     return req;
   } catch (error) {
@@ -90,8 +100,8 @@ export async function doRequest(bearer: string, method: string, data: BitlyUrlQu
  */
 export function sortUrlsAndHash(
     unsortedItems: string | string[],
-    result: BitlyUrlQueryParams = { shortUrl: [], hash: [] }
-): BitlyUrlQueryParams {
+    result: BitlyQueryParams = { shortUrl: [], hash: [] }
+): BitlyQueryParams {
   result.shortUrl = result.shortUrl || [];
   result.hash = result.hash || [];
   (Array.isArray(unsortedItems) ? unsortedItems : [unsortedItems]).map(item =>
@@ -100,4 +110,38 @@ export function sortUrlsAndHash(
           : typeof item === 'string' && result.hash.push(item)
   );
   return result;
+}
+
+/**
+ * Function to force a string that *could* be an old-style hash to the new ID style
+ * This is allow backward-compatibility with IDs produced by V3, and perhaps stored in users' DBs
+ * @param {string} hashIdOrLink An old style hash, or v4 bitly id (bitlink), or full bitly link
+ * @returns {string} Bitlink (domain + hash) formatted ID
+ */
+export function forceToBitlinkId(hashIdOrLink: string) {
+  // Old-style hash
+  if (/^[A-z0-9]{6,}$/.test(hashIdOrLink)) {
+    return `bit.ly/${hashIdOrLink}`;
+  }
+  // Bit.ly ID, or http/s prefixed bitly
+  if (BitlyHashPattern.test(hashIdOrLink)) {
+    const hash = BitlyHashPattern.exec(hashIdOrLink)[1];
+    return `bit.ly/${hash}`;
+  }
+  // For everything else, or maybe custom bitlinks
+  return hashIdOrLink;
+}
+
+export const BitlyIdPattern = /.*bit.ly\/([A-z0-9_-]{6,})$/i;
+export const BitlyHashPattern = /\/([A-z0-9_-]{6,})$/;
+
+export function throwDeprecatedErr(methodName: string, replacementMethod?: string, helpUrl?: string) {
+  let errMsg = `DEPRECATED: "${methodName}" is no longer supported by the Bitly API.`;
+  if (replacementMethod) {
+    errMsg += `\nPlease evaluate ${replacementMethod} as a replacement.`
+  }
+  if (helpUrl) {
+    errMsg += `\nFor more info, see ${helpUrl}`;
+  }
+  throw new Error(errMsg);
 }
