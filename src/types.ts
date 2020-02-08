@@ -1,3 +1,6 @@
+import { RequestPromiseOptions } from "request-promise";
+import { UriOptions, UrlOptions } from "request";
+
 /**
  * A Bitly module configuration
  */
@@ -23,27 +26,48 @@ export interface BitlyConfig {
 }
 
 /**
- * Paramaters that can be passed to a Bitly URL request
+ * Paramaters that can be passed to a Bitly Request
  */
-export interface BitlyUrlQueryParams {
+export interface BitlyQueryParams extends BitlyStandardQueryParams, BitlyStatQueryParams {
+  [k: string]: any;
+}
+
+export interface BitlyStandardQueryParams {
   /**
-   * A list of short url hashes
+   * Bitlink ID, made up of domain + hash. Example: bit.ly/1JtuvXY
    */
-  short_url?: string[];
+  bitlink?: string
   /**
-   * A list of long URLS
+   * Bitlink ID, made up of domain + hash. Alias for bitlink.
+   */
+  bitlink_id?: string;
+  /**
+   * Internet domain name. Default = "bit.ly"
+   */
+  domain?: string;
+  /**
+   * An un-shortened link
    */
   long_url?: string;
-  /**
-   * A single URL
-   */
-  url?: string;
-  /**
-   * A single hash
-   */
-  hash?: string[];
+}
 
-  [k: string]: any;
+export interface BitlyStatQueryParams {
+  /**
+   * Unit of time. Default = "day"
+   */
+  unit?: BitlyTimeUnit;
+  /**
+   * How many units to query data for. Default = -1, for all units.
+   */
+  units?: number;
+  /**
+   * Limit on # of items to return. Default = 50
+   */
+  size?: number;
+  /**
+   * ISO-8601 timestamp. Default = current time.
+   */
+  unit_reference?: string;
 }
 
 export interface References {
@@ -116,7 +140,7 @@ export interface BitlyLink {
   /**
    * Title
    */
-  title: string;
+  title?: string;
   /**
    * Deep links
    */
@@ -124,7 +148,7 @@ export interface BitlyLink {
   /**
    * Created By
    */
-  created_by: string;
+  created_by?: string;
   /**
    * Long URL
    */
@@ -144,6 +168,28 @@ export interface BitlyLink {
 }
 
 /**
+ * Expand response
+ */
+export interface BitlyExpandResponse {
+  /**
+   * ISO-8601 Timestamp
+   */
+  created_at: string;
+  /**
+   * The shortened link (domain + ID)
+   */
+  link: string;
+  /**
+   * Bitlink / ID
+   */
+  id: string;
+  /**
+   * The full, expanded link
+   */
+  long_url: string;
+}
+
+/**
  * A Bitly error
  */
 export interface BitlyError {
@@ -152,6 +198,66 @@ export interface BitlyError {
   error_code: string;
 }
 
+/**
+ * Generic Response Base
+ */
+export interface BitlyStatResponse {
+  units: number;
+  unit_reference: string;
+  unit: BitlyTimeUnit;
+  metrics: Array<{
+    value: string;
+    clicks: number;
+  }>;
+}
+
+/**
+ * https://dev.bitly.com/v4/#operation/getMetricsForBitlinkByCountries
+ */
+export interface BitlyMetricsByCountryRes extends BitlyStatResponse {
+  facet: BitlyFacet;
+}
+
+/**
+ * https://dev.bitly.com/v4/#operation/getClicksForBitlink
+ */
+export interface BitlyClickMetricsRes extends Omit<BitlyStatResponse, 'metrics'> {
+  link_clicks: Array<{
+    date: string;
+    clicks: number;
+  }>;
+}
+
+/**
+ * https://dev.bitly.com/v4/#operation/getMetricsForBitlinkByReferrersByDomains
+ */
+export interface BitlyReferrersByDomainsMetricsRes extends Omit<BitlyStatResponse, 'metrics'> {
+  referrers_by_domain: Array<{
+    network: string;
+    referrers: Array<{
+      value: string;
+      clicks: number;
+    }>
+  }>;
+}
+
+/**
+ * https://dev.bitly.com/v4/#operation/getMetricsForBitlinkByReferringDomains
+ */
+export interface BitlyReferringDomainsMetrics extends BitlyStatResponse {
+  facet: BitlyFacet;
+}
+
+/**
+ * https://dev.bitly.com/v4/#operation/getMetricsForBitlinkByReferrers
+ */
+export interface BitlyMetricsByReferrers extends BitlyStatResponse {
+  facet: BitlyFacet;
+}
+
+export type BitlyFacet = 'countries' | 'cities' | 'devices' | 'referrers' | 'referrers_by_domain' | 'referring_domains' | 'referring_networks' | 'shorten_counts';
+
+export type BitlyTimeUnit = 'minute' | 'hour' | 'day' | 'week' | 'month';
 
 /**
  * An error from Bitly
@@ -163,4 +269,20 @@ export interface BitlyErrorResponse {
   description: string;
 }
 
-export type BitlyResponse = BitlyLink | BitlyError;
+export type BitlyResponse = BitlySuccess | BitlyErrorResponse;
+export type BitlySuccess = BitlyLink | BitlyExpandResponse | BitlyMetricsByCountryRes | BitlyClickMetricsRes | BitlyReferrersByDomainsMetricsRes | BitlyReferringDomainsMetrics;
+
+export type BitlyReqMethod = 'GET' | 'POST' | 'PATCH';
+
+export type RequestPromiseInput = UriOptions & RequestPromiseOptions | UrlOptions & RequestPromiseOptions;
+
+/**
+ * Type Guards
+ */
+export function isBitlyLink(response: BitlyResponse): response is BitlyLink {
+  return 'link' in response && 'id' in response && 'long_url' in response;
+}
+
+export function isBitlyErrResponse(response: BitlyResponse): response is BitlyErrorResponse {
+  return 'errors' in response;
+}
