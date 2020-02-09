@@ -10,6 +10,7 @@ import {
   BitlyMetricsByReferrers,
   BitlyClickMetricsRes,
   BitlyTimeUnit,
+  BitlyResponse,
   BitlySuccess
 } from './types';
 
@@ -26,10 +27,11 @@ import {
  * @type {function}
  * @param {string} accessToken The access token, this from an OAuth session
  * @param {object=} config Optional config object
- * @returns {Bitly}
+ * @returns {BitlyResponse}
  * @example
- *  const BitlyClient = require('bitly');
- *  const bitly = BitlyClient('<accessToken>');
+ * ```js
+ *  const BitlyClient = require('bitly').BitlyClient;
+ *  const bitly = new BitlyClient('<accessToken>');
  *  const myFunc = async(uri = 'https://github.com/tanepiper/node-bitly') => {
  *    try {
  *      return await bitly.shorten(uri);
@@ -37,6 +39,7 @@ import {
  *      throw e;
  *    }
  *  }
+ * ```
  */
 export class BitlyClient {
   constructor(private accessToken: string, private config: BitlyConfig = {}) {
@@ -142,7 +145,7 @@ export class BitlyClient {
   /**
    * Perform any bitly API request using a method name and passed data object
    * @param {string} method The method name to be called on the API
-   * @param {object} data The data object to be passed. Keys should be query paramaters
+   * @param {object} data The data object to be passed. Keys should be query or body parameters.
    * @return {object} The bitly request return data
    */
   async bitlyRequest<ResponseType extends BitlySuccess>(method: string, data: BitlyQueryParams | object, reqMethod: BitlyReqMethod = 'POST'): Promise<ResponseType | BitlyErrorResponse> {
@@ -164,13 +167,13 @@ export class BitlyClient {
  * Bitly object definition
  * @typedef {object} Bitly
  * @property {Function} shorten Function that takes a url and shortens it. Accepts valid URL.
- * @property {Function} expends Function that gets long urls for short urls. Accepts string or array of strings.
- * @property {Function} clicks Function that gets the number of clicks of short urls. Accepts string or array of strings.
- * @property {Function} clicksByMinute Function that gets the number of clicks by minute for short urls. Accepts string or array of strings.
- * @property {Function} clicksByDay Function that gets the number of clicks by day for short urls. Accepts string or array of strings.
+ * @property {Function} expends Function that gets long urls for short urls. Accepts valid Bitlink.
+ * @property {Function} clicks Function that gets the number of clicks of short urls. Accepts valid Bitlink.
+ * @property {Function} clicksByMinute Function that gets the number of clicks by minute for short urls. Accepts valid Bitlink.
+ * @property {Function} clicksByDay Function that gets the number of clicks by day for short urls. Accepts valid Bitlink.
  * @property {Function} lookup !!! - DEPRECATED --- !!! Function that takes a url looks up data. Accepts valid URL.
- * @property {Function} info Function that takes a url and gets info. Accepts valid URL.
- * @property {Function} referrers Function that gets referrers for urls. Accepts valid URL.
- * @property {Function} countries Function that gets click by countries for urls. Accepts valid URL.
+ * @property {Function} info Function that takes a url and gets info. Accepts valid Bitlink.
+ * @property {Function} referrers Function that gets referrers for urls. Accepts valid Bitlink.
+ * @property {Function} countries Function that gets click by countries for urls. Accepts valid Bitlink.
  * @property {Function} bitlyRequest Function that allows you to to any bitly request
  */
