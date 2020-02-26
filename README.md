@@ -57,6 +57,25 @@ async function init() {
 init();
 ```
 
+When the library throws an error, it should be the error object response from Bitly, but if something has gone wrong with your internet or intermediate requests, it is possible that a generic AxiosError might get returned. You can use an exported Type Guard to narrow the type:
+```ts
+const bitly = new BitlyClient(process.env.BITLY_API_KEY);
+let data: BitlyLink;
+
+try {
+  data = await bitly.shorten('http://bit.ly/38XaXKy');
+} catch (error) {
+  if (isBitlyErrResponse(error)) {
+    // Inferred type by TS is `BitlyErrorResponse`
+    console.log(`Bitly error: ${error.description}`);
+  } else if (error.isAxiosError) {
+    // Infererred type is `any`, but you can cast to AxiosError safely
+    const axiosError = error as unknown as AxiosError;
+    console.log(`AxiosError:`, axiosError.toJSON());
+  }
+}
+```
+
 #### JavaScript
 
 ```js

@@ -280,5 +280,5 @@ export function isBitlyLink(response: BitlyResponse): response is BitlyLink {
 }
 
 export function isBitlyErrResponse(response: BitlyResponse): response is BitlyErrorResponse {
-  return 'errors' in response;
+  return 'message' in response && 'resource' in response;
 }

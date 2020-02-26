@@ -1,3 +1,4 @@
+import { AxiosError } from 'axios';
 import { doRequest, forceToBitlinkId, throwDeprecatedErr } from './lib';
 import {
   BitlyConfig,
@@ -10,7 +11,6 @@ import {
   BitlyMetricsByReferrers,
   BitlyClickMetricsRes,
   BitlyTimeUnit,
-  BitlyResponse,
   BitlySuccess
 } from './types';
 
@@ -51,7 +51,7 @@ export class BitlyClient {
    * @param  {string} item ID, short Url, or hash
    * @return {object} The results of the request
    */
-  async getBitlink(item: string): Promise<BitlyLink | BitlyErrorResponse> {
+  async getBitlink(item: string): Promise<BitlyLink> {
     return await this.bitlyRequest(`bitlinks/${forceToBitlinkId(item)}`, {}, 'GET');
   }
 
@@ -60,7 +60,7 @@ export class BitlyClient {
    * @param  {string} item ID, short Url, or hash
    * @return {object} The results of the request
    */
-  async info(item: string): Promise<BitlyLink | BitlyErrorResponse> {
+  async info(item: string): Promise<BitlyLink> {
     return await this.getBitlink(item);
   }
 
@@ -69,7 +69,7 @@ export class BitlyClient {
    * @param  {string} longUrl The URL to be shortened
    * @return {object} The results of the request
    */
-  async shorten(longUrl: string): Promise<BitlyLink | BitlyErrorResponse> {
+  async shorten(longUrl: string): Promise<BitlyLink> {
     return await this.bitlyRequest('bitlinks', { long_url: longUrl });
   }
 
@@ -78,7 +78,7 @@ export class BitlyClient {
    * @param  {string} item ID, short Url, or hash
    * @return {object} The results of the request
    */
-  async expand(item: string): Promise<BitlyExpandResponse | BitlyErrorResponse> {
+  async expand(item: string): Promise<BitlyExpandResponse> {
     return await this.bitlyRequest('expand', { bitlink_id: forceToBitlinkId(item) });
   }
 
@@ -88,7 +88,7 @@ export class BitlyClient {
    * @param  {string} item ID, short Url, or hash
    * @return {object}
    */
-  async clicks(item: string, unit: BitlyTimeUnit = 'day', units: number = -1, size: number = 50, unit_reference?: string): Promise<BitlyClickMetricsRes | BitlyErrorResponse> {
+  async clicks(item: string, unit: BitlyTimeUnit = 'day', units: number = -1, size: number = 50, unit_reference?: string): Promise<BitlyClickMetricsRes> {
     return await this.bitlyRequest(`bitlinks/${forceToBitlinkId(item)}/clicks`, {
       unit,
       units,
@@ -129,7 +129,7 @@ export class BitlyClient {
    * @param  {string} item ID, short Url, or hash
    * @return {object}
    */
-  async referrers(item: string): Promise<BitlyMetricsByReferrers | BitlyErrorResponse> {
+  async referrers(item: string): Promise<BitlyMetricsByReferrers> {
     return await this.bitlyRequest(`bitlinks/${forceToBitlinkId(item)}/referrers`, {}, 'GET');
   }
 
@@ -138,7 +138,7 @@ export class BitlyClient {
    * @param  {string} item ID, short Url, or hash
    * @return {object}
    */
-  async countries(item: string): Promise<BitlyMetricsByCountryRes | BitlyErrorResponse> {
+  async countries(item: string): Promise<BitlyMetricsByCountryRes> {
     return await this.bitlyRequest(`bitlinks/${forceToBitlinkId(item)}/countries`, {}, 'GET');
   }
 
@@ -148,7 +148,7 @@ export class BitlyClient {
    * @param {object} data The data object to be passed. Keys should be query or body parameters.
    * @return {object} The bitly request return data
    */
-  async bitlyRequest<ResponseType extends BitlySuccess>(method: string, data: BitlyQueryParams | {[index:string]: any}, reqMethod: BitlyReqMethod = 'POST'): Promise<ResponseType | BitlyErrorResponse> {
+  async bitlyRequest<ResponseType extends BitlySuccess>(method: string, data: BitlyQueryParams | {[index:string]: any}, reqMethod: BitlyReqMethod = 'POST'): Promise<ResponseType> {
     console.log(data);
     try {
       return await doRequest(
@@ -159,7 +159,11 @@ export class BitlyClient {
           reqMethod
       ) as ResponseType;
     } catch (e) {
-      throw e as BitlyErrorResponse;
+      const err: AxiosError = e;
+      if (err.response) {
+        throw err.response.data as unknown as BitlyErrorResponse;
+      }
+      throw err;
     }
   }
 }
