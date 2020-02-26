@@ -9,7 +9,7 @@
 
 Version 5 is end-of-life and will only recieve minor updates in the future and is considered stable.  This will only ever support the **Bitly v3** API
 
-Version 6 is the current in-development version, re-written in Typescript. This version only supports the **Bitly v3** API, which means it reaches EOL when Bitly deprecates V3 on March 1st, 2020.
+Version 6 was re-written in Typescript. This version only supports the **Bitly v3** API, which means it reaches EOL when Bitly deprecates V3 on March 1st, 2020.
 
 Version 7 is another rewrite, to support the transition to the V4 of the Bitly API.
 
@@ -66,7 +66,7 @@ To see the available libary APIs, you can view the [API Documentation](http://ta
 
 #### TypeScript / ES6 Imports
 
-```js
+```ts
 import { BitlyClient } from 'bitly';
 const bitly = new BitlyClient('<accessToken>', {});
 
@@ -85,6 +85,7 @@ init();
 
 When the library throws an error, it should be the error object response from Bitly, but if something has gone wrong with your internet or intermediate requests, it is possible that a generic AxiosError might get returned. You can use an exported Type Guard to narrow the type:
 ```ts
+import {BitlyClient, isBitlyErrResponse} from 'bitly';
 const bitly = new BitlyClient(process.env.BITLY_API_KEY);
 let data: BitlyLink;
 
@@ -157,8 +158,10 @@ To run tests type `npm test`.
 
 The tests use [`replay`](https://www.npmjs.com/package/replay), which caches the responses from Bitly under the `/fixtures` directory, until you edit a test's requests payload. This means you can run the test suite without having a Bitly API key, until you need to edit or add a new test.
 
+Once you need to run tests that can't use a cached response and actually hit Bitly's API, you will need to pass your API key to the tests by having an environment variable `BITLY_API_KEY` set to the value of your key.
+
 ## Support This Project
-This module is a side project of mine and I don't actively use the module except to completly over-engineer the CI pipeline and re-write it in Typescript all in the name of learning.  But to add features like the v4 API would take a lot of work, so if you use this library a lot please consider donating using the links below. Or if you learned something useful from one of my blog posts talking about the changes I've done with this module please consider leaving a tip.
+This module is a side project of mine and I don't actively use the module except to completely over-engineer the CI pipeline and re-write it in Typescript all in the name of learning.  But adding new features has taken a lot of work, so if you use this library a lot please consider donating using the links below. Or if you learned something useful from one of my blog posts talking about the changes I've done with this module please consider leaving a tip.
 
 [![Beerpay](https://beerpay.io/tanepiper/node-bitly/badge.svg?style=beer-square)](https://beerpay.io/tanepiper/node-bitly)  [![Beerpay](https://beerpay.io/tanepiper/node-bitly/make-wish.svg?style=flat-square)](https://beerpay.io/tanepiper/node-bitly?focus=wish)
 
