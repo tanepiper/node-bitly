@@ -282,6 +282,6 @@ export function isBitlyLink(response: BitlyResponse): response is BitlyLink {
   return 'link' in response && 'id' in response && 'long_url' in response;
 }
 
-export function isBitlyErrResponse(response: BitlyResponse): response is BitlyErrorResponse {
+export function isBitlyErrResponse(response: any): response is BitlyErrorResponse {
   return 'message' in response && 'resource' in response;
 }

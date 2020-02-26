@@ -1,8 +1,7 @@
 import { expect } from 'chai';
 import { BitlyClient } from './bitly';
-import { isBitlyLink } from './types';
+import { isBitlyLink, isBitlyErrResponse, BitlyErrorResponse } from './types';
 import { BitlyIdPattern } from './lib';
-import { AxiosError } from 'axios';
 import '../test/bootstrap';
 
 const EXAMPLE_URL = 'https://github.com/tanepiper/node-bitly';
@@ -55,15 +54,17 @@ describe('Bitly client', () => {
 
   describe('should handle invalid requests', () => {
     it('it should throw an error', async () => {
-      let err: AxiosError;
+      let err: any;
       try {
         await bitly.shorten('NOT_REAL_URL');
       } catch (error) {
         err = error;
       }
-      return expect(err.response)
-          .to.have.property('status')
-          .and.to.equal(400);
+      const isBitlyErr = isBitlyErrResponse(err);
+      expect(isBitlyErr).to.equal(true);
+      return expect(err)
+          .to.have.property('resource')
+          .and.to.equal('bitlinks');
     });
   });
 
