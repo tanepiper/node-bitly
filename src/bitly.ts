@@ -25,9 +25,9 @@ import {
  *
  * @module node-bitly
  * @type {function}
- * @param {string} accessToken The access token, this from an OAuth session
- * @param {object=} config Optional config object
- * @returns {BitlyResponse}
+ * @param accessToken The access token, this from an OAuth session
+ * @param config Optional config object
+ * @returns A given Bitly response
  * @example
  * ```js
  *  const BitlyClient = require('bitly').BitlyClient;
@@ -48,17 +48,18 @@ export class BitlyClient {
   /**
    * This is used to get the summary of info about a given bitlink
    * Ref: https://dev.bitly.com/v4/#operation/getBitlink
-   * @param  {string} item ID, short Url, or hash
-   * @return {object} The results of the request
+   * @param  item ID, short Url, or hash
+   * @return Summarized info about a given bitlink
    */
   async getBitlink(item: string): Promise<BitlyLink> {
     return await this.bitlyRequest(`bitlinks/${forceToBitlinkId(item)}`, {}, 'GET');
   }
 
   /**
-   * This is used to return the page title for a given Bitlink.
-   * @param  {string} item ID, short Url, or hash
-   * @return {object} The results of the request
+   * This is used to get the summary of info about a given bitlink
+   * Legacy wrapper around getBitlink
+   * @param item ID, short Url, or hash
+   * @return Summarized info about a given bitlink
    */
   async info(item: string): Promise<BitlyLink> {
     return await this.getBitlink(item);
@@ -66,8 +67,8 @@ export class BitlyClient {
 
   /**
    * Used to shorten a url
-   * @param  {string} longUrl The URL to be shortened
-   * @return {object} The results of the request
+   * @param  longUrl The URL to be shortened
+   * @return Shorten results
    */
   async shorten(longUrl: string): Promise<BitlyLink> {
     return await this.bitlyRequest('bitlinks', { long_url: longUrl });
@@ -75,8 +76,8 @@ export class BitlyClient {
 
   /**
    * Request to expand urls and hashes
-   * @param  {string} item ID, short Url, or hash
-   * @return {object} The results of the request
+   * @param item ID, short Url, or hash
+   * @return The results of the request
    */
   async expand(item: string): Promise<BitlyExpandResponse> {
     return await this.bitlyRequest('expand', { bitlink_id: forceToBitlinkId(item) });
@@ -85,8 +86,12 @@ export class BitlyClient {
   /**
    * Request to get clicks for urls and hashes
    * Defaults are per docs, and are the same result as if you call endpoint with no args
-   * @param  {string} item ID, short Url, or hash
-   * @return {object}
+   * @param item ID, short Url, or hash
+   * @param unit The unit of time for which to pull click stats
+   * @param units The time units to pull data for
+   * @param size How many results to limit the response to
+   * @param unit_reference Optional - ISO-8601 timestamp, indicating the most recent time to pull stats for
+   * @return The results of the request
    */
   async clicks(item: string, unit: BitlyTimeUnit = 'day', units: number = -1, size: number = 50, unit_reference?: string): Promise<BitlyClickMetricsRes> {
     return await this.bitlyRequest(`bitlinks/${forceToBitlinkId(item)}/clicks`, {
@@ -99,8 +104,8 @@ export class BitlyClient {
 
   /**
    * Request to get clicks by minute for urls and hashes
-   * @param  {string} item ID, short Url, or hash
-   * @return {object}
+   * @param item ID, short Url, or hash
+   * @return Clicks by minute stats
    */
   async clicksByMinute(item: string): Promise<BitlyClickMetricsRes | BitlyErrorResponse> {
     return await this.clicks(item, 'minute');
@@ -108,8 +113,8 @@ export class BitlyClient {
 
   /**
    * Request to get clicks by day for urls and hashes
-   * @param  {string} item ID, short Url, or hash
-   * @return {object}
+   * @param item ID, short Url, or hash
+   * @return clicks by day stats
    */
   async clicksByDay(item: string): Promise<BitlyClickMetricsRes | BitlyErrorResponse> {
     return await this.clicks(item, 'day');
@@ -117,8 +122,9 @@ export class BitlyClient {
 
   /**
    * Lookup a single url
-   * @param  {string} url The url to look up
-   * @return {object}
+   * DEPRECATED
+   * @param url The url to look up
+   * @return Deprecated Error
    */
   async lookup(url: string): Promise<void> {
     return throwDeprecatedErr('lookup', 'getBitlink');
@@ -126,8 +132,8 @@ export class BitlyClient {
 
   /**
    * Request referrers for a single url
-   * @param  {string} item ID, short Url, or hash
-   * @return {object}
+   * @param item ID, short Url, or hash
+   * @return Metrics by referrers
    */
   async referrers(item: string): Promise<BitlyMetricsByReferrers> {
     return await this.bitlyRequest(`bitlinks/${forceToBitlinkId(item)}/referrers`, {}, 'GET');
@@ -135,8 +141,8 @@ export class BitlyClient {
 
   /**
    * Request countries for a single url
-   * @param  {string} item ID, short Url, or hash
-   * @return {object}
+   * @param item ID, short Url, or hash
+   * @returns Stats by countries
    */
   async countries(item: string): Promise<BitlyMetricsByCountryRes> {
     return await this.bitlyRequest(`bitlinks/${forceToBitlinkId(item)}/countries`, {}, 'GET');
@@ -144,9 +150,11 @@ export class BitlyClient {
 
   /**
    * Perform any bitly API request using a method name and passed data object
-   * @param {string} method The method name to be called on the API
-   * @param {object} data The data object to be passed. Keys should be query or body parameters.
-   * @return {object} The bitly request return data
+   * @param method The method name to be called on the API. Not to be confused with reques method (aka HTTP verb)
+   * @param data The data object to be passed. Keys should be query or body parameters.
+   * @param reqMethod The HTTP request method to be used (aka *HTTP Verb*)
+   * @typeparam ResponseType - The expected response type
+   * @return The bitly request return data
    */
   async bitlyRequest<ResponseType extends BitlySuccess>(method: string, data: BitlyQueryParams | {[index:string]: any}, reqMethod: BitlyReqMethod = 'POST'): Promise<ResponseType> {
     try {
@@ -170,8 +178,9 @@ export class BitlyClient {
 /**
  * Bitly object definition
  * @typedef {object} Bitly
+ * @property {Function} getBitlink Function that is used to get the summary of info about a given bitlink.
  * @property {Function} shorten Function that takes a url and shortens it. Accepts valid URL.
- * @property {Function} expends Function that gets long urls for short urls. Accepts valid Bitlink.
+ * @property {Function} expand Function that gets long urls for short urls. Accepts valid Bitlink.
  * @property {Function} clicks Function that gets the number of clicks of short urls. Accepts valid Bitlink.
  * @property {Function} clicksByMinute Function that gets the number of clicks by minute for short urls. Accepts valid Bitlink.
  * @property {Function} clicksByDay Function that gets the number of clicks by day for short urls. Accepts valid Bitlink.

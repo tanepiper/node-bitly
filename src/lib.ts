@@ -20,11 +20,11 @@ const DEFAULT_OPTIONS: BitlyConfig = {
 
 /**
  * Generates a valid URL for a GET request to the Bit.ly API
- * @param {object} UrlParameters An object of paramters to pass to generate a bit.ly url
- * @param {string} accessToken Your bit.ly access token
- * @param {string} method The method to call
- * @param {object} data a data object specifying bit.ly keys for your method
- * @param {object} config A custom config object to overide values
+ * @param method The method to call
+ * @param data a data object specifying bit.ly keys for your method
+ * @param config A custom config object to overide values
+ * @param reqMethod The HTTP request method
+ * @returns parsed generated URL
  * @private
  *
  * @example
@@ -53,11 +53,12 @@ export function generateUrl(
 
 /**
  * Method called to generate a url and call the request
- * @param {string} bearer The request accessToken
- * @param {string} method The method to be called on Bitly
- * @param {object} data A data object with key=>value pairs mapped to request parameters
- * @param {config} config A object that overrides the default values for a request
- * @returns {object} The request result object
+ * @param bearer The request accessToken
+ * @param method The method to be called on Bitly
+ * @param data A data object with key=>value pairs mapped to request parameters
+ * @param config A object that overrides the default values for a request
+ * @param reqMethod The HTTP Method to use
+ * @returns The request result object
  */
 export async function doRequest(bearer: string, method: string, data: BitlyQueryParams, config: BitlyConfig, reqMethod: BitlyReqMethod = 'POST'): Promise<BitlyResponse> {
   const url = formatURL(generateUrl(method, data, config, reqMethod));
@@ -99,9 +100,9 @@ export async function doRequest(bearer: string, method: string, data: BitlyQuery
 /**
  * Function to check through an array of items to check for short urls or hashes
  * If only passed one item, put in array for url checking
- * @param  {Array<string>} unsortedItems The array of items to be checked
- * @param  {object} result The query object
- * @return {object}
+ * @param  unsortedItems The array of items to be checked
+ * @param  result The query object
+ * @return Sorted shortUrls and hashes
  */
 export function sortUrlsAndHash(
     unsortedItems: string | string[],
@@ -120,8 +121,9 @@ export function sortUrlsAndHash(
 /**
  * Function to force a string that *could* be an old-style hash to the new ID style
  * This is allow backward-compatibility with IDs produced by V3, and perhaps stored in users' DBs
- * @param {string} hashIdOrLink An old style hash, or v4 bitly id (bitlink), or full bitly link
- * @returns {string} Bitlink (domain + hash) formatted ID
+ * @param hashIdOrLink An old style hash, or v4 bitly id (bitlink), or full bitly link
+ * @returns Bitlink (domain + hash) formatted ID
+ * @private
  */
 export function forceToBitlinkId(hashIdOrLink: string) {
   // Old-style hash
@@ -140,6 +142,13 @@ export function forceToBitlinkId(hashIdOrLink: string) {
 export const BitlyIdPattern = /.*bit.ly\/([A-z0-9_-]{6,})$/i;
 export const BitlyHashPattern = /\/([A-z0-9_-]{6,})$/;
 
+/**
+ * Throw a deprecated error
+ * @param methodName Bitly method name
+ * @param replacementMethod Method that might be a suitable replacement
+ * @param helpUrl URL with more info
+ * @private
+ */
 export function throwDeprecatedErr(methodName: string, replacementMethod?: string, helpUrl?: string) {
   let errMsg = `DEPRECATED: "${methodName}" is no longer supported by the Bitly API.`;
   if (replacementMethod) {

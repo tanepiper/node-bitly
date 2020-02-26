@@ -27,7 +27,7 @@ export interface BitlyConfig {
 }
 
 /**
- * Paramaters that can be passed to a Bitly Request
+ * Parameters that can be passed to a Bitly Request
  */
 export interface BitlyQueryParams extends BitlyStandardQueryParams, BitlyStatQueryParams {
   [k: string]: any;
