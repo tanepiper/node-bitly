@@ -148,7 +148,8 @@ export class BitlyClient {
    * @param {object} data The data object to be passed. Keys should be query or body parameters.
    * @return {object} The bitly request return data
    */
-  async bitlyRequest<ResponseType extends BitlySuccess>(method: string, data: BitlyQueryParams | object, reqMethod: BitlyReqMethod = 'POST'): Promise<ResponseType | BitlyErrorResponse> {
+  async bitlyRequest<ResponseType extends BitlySuccess>(method: string, data: BitlyQueryParams | {[index:string]: any}, reqMethod: BitlyReqMethod = 'POST'): Promise<ResponseType | BitlyErrorResponse> {
+    console.log(data);
     try {
       return await doRequest(
           this.accessToken,
@@ -156,9 +157,9 @@ export class BitlyClient {
           data,
           this.config,
           reqMethod
-      ) as ResponseType | BitlyErrorResponse;
+      ) as ResponseType;
     } catch (e) {
-      throw e;
+      throw e as BitlyErrorResponse;
     }
   }
 }

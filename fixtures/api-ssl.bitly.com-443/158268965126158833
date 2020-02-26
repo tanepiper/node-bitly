@@ -1,12 +1,11 @@
-GET /v4/bitlinks/bit.ly/38XaXKy/clicks?unit=minute&units=-1&size=50&unit_reference=
-host: api-ssl.bitly.com
-accept: application/json
+GET /v4/bitlinks/bit.ly/38XaXKy/countries
+accept: application/json, text/plain, */*
 
 HTTP/1.1 200 OK
 server: nginx
-date: Sat, 08 Feb 2020 06:59:00 GMT
+date: Wed, 26 Feb 2020 04:00:42 GMT
 content-type: application/json
-content-length: 89
+content-length: 127
 strict-transport-security: max-age=31536000; includeSubDomains
 x-xss-protection: 1; mode=blockFilter
 x-content-type-options: nosniff
@@ -16,4 +15,4 @@ via: 1.1 google
 alt-svc: clear
 connection: close
 
-{"unit_reference":"2020-02-08T06:59:00+0000","link_clicks":[],"units":-1,"unit":"minute"}
+{"unit_reference":"2020-02-26T04:00:42+0000","metrics":[{"value":"US","clicks":3}],"units":30,"unit":"day","facet":"countries"}

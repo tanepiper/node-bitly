@@ -1,12 +1,11 @@
 GET /v4/bitlinks/bit.ly/38XaXKy/referrers_by_domains
-host: api-ssl.bitly.com
-accept: application/json
+accept: application/json, text/plain, */*
 
 HTTP/1.1 200 OK
 server: nginx
-date: Sat, 08 Feb 2020 06:58:58 GMT
+date: Wed, 26 Feb 2020 04:00:38 GMT
 content-type: application/json
-content-length: 256
+content-length: 263
 strict-transport-security: max-age=31536000; includeSubDomains
 x-xss-protection: 1; mode=blockFilter
 x-content-type-options: nosniff
@@ -16,4 +15,4 @@ via: 1.1 google
 alt-svc: clear
 connection: close
 
-{"units":-1,"unit":"day","unit_reference":1581145138,"facet":"referrers_by_domain","referrers_by_domain":[{"network":"other","referrers":[{"value":"https://stackoverflow.com/","clicks":1}]},{"network":"direct","referrers":[{"value":"direct","clicks":1}]}]}
+{"referrers_by_domain":[{"network":"direct","referrers":[{"value":"direct","clicks":2}]},{"network":"other","referrers":[{"value":"https://stackoverflow.com/","clicks":1}]}],"units":30,"unit":"day","unit_reference":1582689638,"facet":"referrers_by_domain"}

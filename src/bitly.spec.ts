@@ -1,4 +1,8 @@
 import { expect } from 'chai';
+import { BitlyClient } from './bitly';
+import { BitlyErrorResponse, isBitlyLink, BitlyLink, isBitlyErrResponse } from './types';
+import { BitlyIdPattern } from './lib';
+import { AxiosError } from 'axios';
 import '../test/bootstrap';
 
 const EXAMPLE_URL = 'https://github.com/tanepiper/node-bitly';
@@ -9,12 +13,6 @@ let EXAMPLE_SHORTENED = {
   // Full URL
   URL_BITLY: 'http://bit.ly/2hpSRbP'
 };
-
-import '../test/bootstrap';
-
-import { BitlyClient } from './bitly';
-import { BitlyErrorResponse, isBitlyLink } from './types';
-import { BitlyIdPattern } from './lib';
 
 describe('Bitly client', () => {
   let bitly: BitlyClient;
@@ -57,14 +55,14 @@ describe('Bitly client', () => {
 
   describe('should handle invalid requests', () => {
     it('it should throw an error', async () => {
-      let err: BitlyErrorResponse;
+      let err: AxiosError;
       try {
         await bitly.shorten('NOT_REAL_URL');
       } catch (error) {
         err = error;
       }
-      return expect(err)
-          .to.have.property('statusCode')
+      return expect(err.response)
+          .to.have.property('status')
           .and.to.equal(400);
     });
   });
@@ -114,7 +112,29 @@ describe('Bitly client', () => {
     });
   });
 
-  describe('clicksByMinute', () => {
+  describe('clicksByDay', () => {
+    it('should get click numbers by day for url', async () => {
+      try {
+        const data = await bitly.clicksByDay(EXAMPLE_SHORTENED.URL_BITLY);
+        expect(data).to.have.property('unit').that.is.equal('day');
+        expect(data).to.have.property('link_clicks').that.is.an('array');
+      } catch (error) {
+        throw error;
+      }
+    });
+    it('should get click numbers by day for hash', async () => {
+      try {
+        const data = await bitly.clicksByDay(EXAMPLE_SHORTENED.URL_HASH);
+        expect(data).to.have.property('unit').that.is.equal('day');
+        expect(data).to.have.property('link_clicks').that.is.an('array');
+      } catch (error) {
+        throw error;
+      }
+    });
+  })
+
+  // This API endpint is currently returning 500 internal errors for the same requests that were previously working
+  describe.skip('clicksByMinute', () => {
     it('should get click numbers by minute for url', async () => {
       try {
         const data = await bitly.clicksByMinute(EXAMPLE_SHORTENED.URL_BITLY);

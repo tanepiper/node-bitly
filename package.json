@@ -37,6 +37,10 @@
     {
       "name": "Ildar Sagdejev",
       "email": "specious@gmail.com"
+    },
+    {
+      "name": "Joshua Tzucker",
+      "url": "https://joshuatz.com/"
     }
   ],
   "repository": {
@@ -57,7 +61,6 @@
   "devDependencies": {
     "@types/chai": "^4.2.7",
     "@types/node": "^13.1.8",
-    "@types/request-promise": "^4.1.45",
     "chai": "^4.2.0",
     "jsdoc": "^3.6.3",
     "minami": "^1.2.3",
@@ -70,8 +73,7 @@
     "typescript": "^3.7.5"
   },
   "dependencies": {
-    "request": "^2.88.0",
-    "request-promise": "^4.2.5",
+    "axios": "^0.19.2",
     "valid-url": "^1.0.9"
   },
   "main": "dist/index.js",

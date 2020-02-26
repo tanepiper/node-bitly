@@ -1,6 +1,6 @@
-import { format as formatURL, parse as parseURL, UrlWithStringQuery, UrlObject } from 'url';
-import request from 'request-promise';
-import { BitlyConfig, BitlyResponse, BitlyQueryParams, BitlyReqMethod, RequestPromiseInput } from './types';
+import axios, { AxiosRequestConfig } from 'axios';
+import { format as formatURL, parse as parseURL, UrlObject, UrlWithStringQuery } from 'url';
+import { BitlyConfig, BitlyQueryParams, BitlyReqMethod, BitlyResponse } from './types';
 
 const isUri = require('valid-url').isUri;
 
@@ -59,32 +59,32 @@ export function generateUrl(
  * @returns {object} The request result object
  */
 export async function doRequest(bearer: string, method: string, data: BitlyQueryParams, config: BitlyConfig, reqMethod: BitlyReqMethod = 'POST'): Promise<BitlyResponse> {
-  const uri = generateUrl(method, data, config, reqMethod);
+  const url = formatURL(generateUrl(method, data, config, reqMethod));
 
-  const requestOptions: RequestPromiseInput = {
+  const requestOptions: AxiosRequestConfig = {
     method: reqMethod,
-    uri,
-    auth: {
-      bearer
+    url,
+    headers: {
+      Authorization: bearer
     },
-    json: true
+    responseType: 'json'
   };
 
   if (reqMethod !== 'GET') {
     const body = Object.assign({
       domain: config.domain || DEFAULT_OPTIONS.domain,
-      // format: config.format || DEFAULT_OPTIONS.format,
       long_url: data.long_url
     });
 
     Object.keys(data || []).forEach((key: any) => (body[key] = data[key]));
-    requestOptions.body = body;
+    requestOptions.data = body;
+    requestOptions.headers['Content-Type'] = 'application/json';
   }
 
   try {
-    const req = await request(requestOptions);
+    const req = await axios(requestOptions);
     console.log(req);
-    return req;
+    return req.data;
   } catch (error) {
     //console.log(error);
     throw error;

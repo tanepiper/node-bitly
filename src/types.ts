@@ -1,6 +1,3 @@
-import { RequestPromiseOptions } from "request-promise";
-import { UriOptions, UrlOptions } from "request";
-
 /**
  * A Bitly module configuration
  */
@@ -274,7 +271,6 @@ export type BitlySuccess = BitlyLink | BitlyExpandResponse | BitlyMetricsByCount
 
 export type BitlyReqMethod = 'GET' | 'POST' | 'PATCH';
 
-export type RequestPromiseInput = UriOptions & RequestPromiseOptions | UrlOptions & RequestPromiseOptions;
 
 /**
  * Type Guards

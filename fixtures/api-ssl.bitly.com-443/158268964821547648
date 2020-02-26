@@ -1,12 +1,11 @@
 POST /v4/expand
-host: api-ssl.bitly.com
-accept: application/json
+accept: application/json, text/plain, */*
 content-type: application/json
 body: {\"domain\":\"bit.ly\",\"bitlink_id\":\"bit.ly/38XaXKy\"}
 
 HTTP/1.1 200 OK
 server: nginx
-date: Sat, 08 Feb 2020 06:58:59 GMT
+date: Wed, 26 Feb 2020 04:00:39 GMT
 content-type: application/json
 content-length: 147
 strict-transport-security: max-age=31536000; includeSubDomains
