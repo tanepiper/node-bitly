@@ -3,23 +3,49 @@
 [![CircleCI](https://circleci.com/gh/tanepiper/node-bitly.svg?style=svg)](https://circleci.com/gh/tanepiper/node-bitly) [![NPM version](https://badge.fury.io/js/bitly.png)](http://badge.fury.io/js/bitly) [![Dependencies](https://david-dm.org/tanepiper/node-bitly.svg)](https://david-dm.org/tanepiper/node-bitly)
 
 ## Current Versions
-
-* [v6.0.x](https://github.com/tanepiper/node-bitly) - Support for Node >=6. Available on npm as `npm install bitly@latest`
+* [v7.x.x](https://github.com/tanepiper/node-bitly) - Support for Node >=6. Available on npm as `npm install bitly@latest`. Uses V4 of the Bitly API.
+* [v6.x.x](https://github.com/tanepiper/node-bitly/tree/v6.x.x) - Support for Node >=6. EOL on 3/1/2020, when Bitly deprecates V3 support.
 * [v5.1.x](https://github.com/tanepiper/node-bitly/tree/v5.x.x) - Support for Node >=4. Available on npm as `npm install bitly@stable`
 
 Version 5 is end-of-life and will only recieve minor updates in the future and is considered stable.  This will only ever support the **Bitly v3** API
 
-Version 6 is the current in-development version, re-written in Typescript. This version currently only supports the **Bitly v3** API and will continue to do so in `v6.0.x`. Version `6.1.x` will introduce **Bitly v4** support.
+Version 6 is the current in-development version, re-written in Typescript. This version only supports the **Bitly v3** API, which means it reaches EOL when Bitly deprecates V3 on March 1st, 2020.
+
+Version 7 is another rewrite, to support the transition to the V4 of the Bitly API.
+
+### V6.x.x to V7.x.x transition - aka V3 of Bitly API to V4 - Breaking Changes
+In March 2020, Bitly deprecated the v3 of their API, and switched to v4. Unfortunately, even with the changes to this package to make it compatible, there are several unavoidable breaking changes. These are summarized below:
+ - Endpoints no longer support bulk options (multiple hashes or URLs in a single request)
+   - Most importantly, this affects `expand()` and `shorten()`
+   - As a general rule of thumb, *none* of the v4 endpoints take bulk inputs
+ - Return types have changed, for multiple endpoints
+ - DEPRECATED: The `lookup` method and corresponding endpoint have been deprecated
+
+Here is a simple example of how you might have to update your use of node-bitly to account for the change:
+```js
+// Both versions
+const BitlyClient = require('bitly').BitlyClient;
+const bitly = new BitlyClient('<accessToken>');
+
+// v6.1.0
+async function example(url) {
+  const response = await bitly.shorten(url);
+  console.log(`Your shortened bitlink is ${response.url}`);
+}
+// v7.x.x
+async function example(url) {
+  const response = await bitly.shorten(url);
+  console.log(`Your shortened bitlink is ${response.link}`);
+}
+```
 
 ## Module Features
 
 This module provides calls to the [Bitly](http://bitly.com) API for [Nodejs](http://nodejs.org).
 
-For more information on the API request and responses visit the [Bitly API docs](https://dev.bitly.com/api.html)
+For more information on the API request and responses visit the [Bitly API docs](https://dev.bitly.com/v4_documentation.html)
 
 `node-bitly` is programmed with `TypeScript` but is compiled to JavaScript and supports `node 6, 8, 10`.  When you import the client you get full type information.  There maybe be some gaps in the information but this will be filled in, in future releases.
-
-**Currently `node-bitly` only supports Bitly's `v3` API and has this hard coded in the parameter type.  Support for version 4 will be added in a future release**
 
 ## Installation
 
