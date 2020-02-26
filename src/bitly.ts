@@ -149,7 +149,6 @@ export class BitlyClient {
    * @return {object} The bitly request return data
    */
   async bitlyRequest<ResponseType extends BitlySuccess>(method: string, data: BitlyQueryParams | {[index:string]: any}, reqMethod: BitlyReqMethod = 'POST'): Promise<ResponseType> {
-    console.log(data);
     try {
       return await doRequest(
           this.accessToken,

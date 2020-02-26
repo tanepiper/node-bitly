@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 import { BitlyClient } from './bitly';
-import { BitlyErrorResponse, isBitlyLink, BitlyLink, isBitlyErrResponse } from './types';
+import { isBitlyLink } from './types';
 import { BitlyIdPattern } from './lib';
 import { AxiosError } from 'axios';
 import '../test/bootstrap';

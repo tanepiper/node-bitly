@@ -14,7 +14,8 @@ const DEFAULT_OPTIONS: BitlyConfig = {
   apiUrl: 'api-ssl.bitly.com',
   apiVersion: 'v4',
   domain: 'bit.ly',
-  format: 'json'
+  format: 'json',
+  debug: false
 };
 
 /**
@@ -83,10 +84,14 @@ export async function doRequest(bearer: string, method: string, data: BitlyQuery
 
   try {
     const req = await axios(requestOptions);
-    console.log(req);
+    if (config.debug) {
+      console.log(req);
+    }
     return req.data;
   } catch (error) {
-    //console.log(error);
+    if (config.debug) {
+      console.log(error);
+    }
     throw error;
   }
 }

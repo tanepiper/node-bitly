@@ -18,6 +18,10 @@ export interface BitlyConfig {
    * Return format, default is JSON
    */
   format?: string;
+  /**
+   * Debug mode
+   */
+  debug?: boolean;
 
   [k: string]: any;
 }
@@ -187,16 +191,7 @@ export interface BitlyExpandResponse {
 }
 
 /**
- * A Bitly error
- */
-export interface BitlyError {
-  field: string;
-  message: string;
-  error_code: string;
-}
-
-/**
- * Generic Response Base
+ * Generic Stats Response Base
  */
 export interface BitlyStatResponse {
   units: number;
@@ -264,6 +259,14 @@ export interface BitlyErrorResponse {
   errors: BitlyError[];
   resource: string;
   description: string;
+}
+/**
+ * Error specifics
+ */
+export interface BitlyError {
+  field: string;
+  message: string;
+  error_code: string;
 }
 
 export type BitlyResponse = BitlySuccess | BitlyErrorResponse;
