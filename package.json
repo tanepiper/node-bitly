@@ -9,7 +9,7 @@
     "util"
   ],
   "homepage": "https://github.com/tanepiper/node-bitly",
-  "version": "6.1.0",
+  "version": "7.0.0",
   "author": {
     "name": "Tane Piper",
     "email": "piper.tane@gmail.com",
@@ -51,7 +51,7 @@
     "url": "https://github.com/tanepiper/node-bitly/issues"
   },
   "engines": {
-    "node": ">= 6.10.0"
+    "node": ">= 10.0.0"
   },
   "scripts": {
     "test": "mocha -r ts-node/register --reporter list src/*.spec.ts",

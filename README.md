@@ -2,17 +2,6 @@
 
 [![CircleCI](https://circleci.com/gh/tanepiper/node-bitly.svg?style=svg)](https://circleci.com/gh/tanepiper/node-bitly) [![NPM version](https://badge.fury.io/js/bitly.png)](http://badge.fury.io/js/bitly) [![Dependencies](https://david-dm.org/tanepiper/node-bitly.svg)](https://david-dm.org/tanepiper/node-bitly)
 
-## Current Versions
-* [v7.x.x](https://github.com/tanepiper/node-bitly) - Support for Node >=6. Available on npm as `npm install bitly@latest`. Uses V4 of the Bitly API.
-* [v6.x.x](https://github.com/tanepiper/node-bitly/tree/v6.x.x) - Support for Node >=6. EOL on 3/1/2020, when Bitly deprecates V3 support.
-* [v5.1.x](https://github.com/tanepiper/node-bitly/tree/v5.x.x) - Support for Node >=4. Available on npm as `npm install bitly@stable`
-
-Version 5 is end-of-life and will only recieve minor updates in the future and is considered stable.  This will only ever support the **Bitly v3** API
-
-Version 6 was re-written in Typescript. This version only supports the **Bitly v3** API, which means it reaches EOL when Bitly deprecates V3 on March 1st, 2020.
-
-Version 7 is another rewrite, to support the transition to the V4 of the Bitly API.
-
 ### V6.x.x to V7.x.x transition - aka V3 of Bitly API to V4 - Breaking Changes
 In March 2020, Bitly deprecated the v3 of their API, and switched to v4. Unfortunately, even with the changes to this package to make it compatible, there are several unavoidable breaking changes. These are summarized below:
  - Endpoints no longer support bulk options (multiple hashes or URLs in a single request)
@@ -20,6 +9,8 @@ In March 2020, Bitly deprecated the v3 of their API, and switched to v4. Unfortu
    - As a general rule of thumb, *none* of the v4 endpoints take bulk inputs
  - Return types have changed, for multiple endpoints
  - DEPRECATED: The `lookup` method and corresponding endpoint have been deprecated
+ 
+With these changes all previous versions of this library are now full deprecated and there is only 1 version starting with v7.0.0
 
 Here is a simple example of how you might have to update your use of node-bitly to account for the change:
 ```js
@@ -45,7 +36,7 @@ This module provides calls to the [Bitly](http://bitly.com) API for [Nodejs](htt
 
 For more information on the API request and responses visit the [Bitly API docs](https://dev.bitly.com/v4_documentation.html)
 
-`node-bitly` is programmed with `TypeScript` but is compiled to JavaScript and supports `node 6, 8, 10`.  When you import the client you get full type information.  There maybe be some gaps in the information but this will be filled in, in future releases.
+`node-bitly` is programmed with `TypeScript` but is compiled to JavaScript and supports `node >= 10.0.0`.  When you import the client you get full type information.  There maybe be some gaps in the information but this will be filled in, in future releases.
 
 ## Installation
 
@@ -159,10 +150,3 @@ To run tests type `npm test`.
 The tests use [`replay`](https://www.npmjs.com/package/replay), which caches the responses from Bitly under the `/fixtures` directory, until you edit a test's requests payload. This means you can run the test suite without having a Bitly API key, until you need to edit or add a new test.
 
 Once you need to run tests that can't use a cached response and actually hit Bitly's API, you will need to pass your API key to the tests by having an environment variable `BITLY_API_KEY` set to the value of your key.
-
-## Support This Project
-This module is a side project of mine and I don't actively use the module except to completely over-engineer the CI pipeline and re-write it in Typescript all in the name of learning.  But adding new features has taken a lot of work, so if you use this library a lot please consider donating using the links below. Or if you learned something useful from one of my blog posts talking about the changes I've done with this module please consider leaving a tip.
-
-[![Beerpay](https://beerpay.io/tanepiper/node-bitly/badge.svg?style=beer-square)](https://beerpay.io/tanepiper/node-bitly)  [![Beerpay](https://beerpay.io/tanepiper/node-bitly/make-wish.svg?style=flat-square)](https://beerpay.io/tanepiper/node-bitly?focus=wish)
-
-You can also [PayPal Me](https://paypal.me/tanepiper).
