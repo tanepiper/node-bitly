@@ -9,7 +9,7 @@
     "util"
   ],
   "homepage": "https://github.com/tanepiper/node-bitly",
-  "version": "6.0.8",
+  "version": "7.0.0",
   "author": {
     "name": "Tane Piper",
     "email": "piper.tane@gmail.com",
@@ -37,6 +37,10 @@
     {
       "name": "Ildar Sagdejev",
       "email": "specious@gmail.com"
+    },
+    {
+      "name": "Joshua Tzucker",
+      "url": "https://joshuatz.com/"
     }
   ],
   "repository": {
@@ -47,33 +51,31 @@
     "url": "https://github.com/tanepiper/node-bitly/issues"
   },
   "engines": {
-    "node": ">= 6.10.0"
+    "node": ">= 10.0.0"
   },
   "scripts": {
-    "test": "VCR_MODE=cache mocha -r ts-node/register --reporter list src/*.spec.ts",
+    "test": "mocha -r ts-node/register --reporter list src/*.spec.ts",
     "build": "npx tsc",
     "docs": "rm -rf ./docs && npx typedoc --readme ./README.md --out ./docs && touch ./docs/.nojekyll"
   },
   "devDependencies": {
-    "@types/chai": "^4.1.3",
-    "@types/node": "^10.3.2",
-    "@types/request-promise": "^4.1.41",
-    "chai": "^4.1.2",
-    "jsdoc": "^3.5.5",
+    "@types/chai": "^4.2.10",
+    "@types/node": "^13.7.7",
+    "chai": "^4.2.0",
+    "jsdoc": "^3.6.3",
     "minami": "^1.2.3",
-    "mocha": "^5.2.0",
-    "mocha-typescript": "^1.1.16",
-    "np": "^3.0.4",
-    "sepia": "^2.0.2",
-    "ts-node": "^6.1.1",
-    "typedoc": "^0.11.1",
-    "typescript": "^2.9.1"
+    "mocha": "^7.1.0",
+    "mocha-typescript": "^1.1.17",
+    "np": "^5.2.1",
+    "replay": "^2.4.0",
+    "ts-node": "^8.6.2",
+    "typedoc": "^0.16.11",
+    "typescript": "^3.8.3"
   },
-  "typings": "dist/bitly.d.ts",
   "dependencies": {
-    "request": "^2.87.0",
-    "request-promise": "^4.2.2",
+    "axios": "^0.19.2",
     "valid-url": "^1.0.9"
   },
-  "main": "dist/bitly.js"
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts"
 }

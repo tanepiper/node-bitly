@@ -1,3 +1,10 @@
+const Replay = require('replay');
+
+// Set replay mode
+Replay.mode = 'record';
+// Remove Auth header from capture
+Replay.headers = Replay.headers.filter(pattern => !pattern.test('authorization'));
+
 process.on('unhandledRejection', err => {
   /*eslint-disable */
   console.log(err.stack);

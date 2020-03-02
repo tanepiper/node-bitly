@@ -88,7 +88,7 @@
 				<p>To see the available libary APIs, you can view the <a href="http://tanepiper.github.io/node-bitly/index.html">API Documentation</a> offline, or you can view the index here (the generated documentation does not work on Github).</p>
 				<h3 id="code">Code</h3>
 				<h4 id="typescript-es6-imports">TypeScript / ES6 Imports</h4>
-				<pre><code class="lang-js"><span class="hljs-keyword">import</span> { BitlyClient } <span class="hljs-keyword">from</span> <span class="hljs-string">'bitly'</span>;
+				<pre><code class="language-js"><span class="hljs-keyword">import</span> { BitlyClient } <span class="hljs-keyword">from</span> <span class="hljs-string">'bitly'</span>;
 <span class="hljs-keyword">const</span> bitly = <span class="hljs-keyword">new</span> BitlyClient(<span class="hljs-string">'&lt;accessToken&gt;'</span>, {});
 
 <span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">init</span>(<span class="hljs-params"></span>) </span>{
@@ -101,10 +101,9 @@
   <span class="hljs-keyword">return</span> result;
 }
 
-init();
-</code></pre>
+init();</code></pre>
 				<h4 id="javascript">JavaScript</h4>
-				<pre><code class="lang-js"><span class="hljs-keyword">const</span> { BitlyClient } = <span class="hljs-built_in">require</span>(<span class="hljs-string">'bitly'</span>);
+				<pre><code class="language-js"><span class="hljs-keyword">const</span> { BitlyClient } = <span class="hljs-built_in">require</span>(<span class="hljs-string">'bitly'</span>);
 <span class="hljs-keyword">const</span> bitly = <span class="hljs-keyword">new</span> BitlyClient(<span class="hljs-string">'&lt;accessToken&gt;'</span>, {});
 
 <span class="hljs-keyword">let</span> result;
@@ -113,10 +112,9 @@ init();
 } <span class="hljs-keyword">catch</span>(e) {
   <span class="hljs-keyword">throw</span> e;
 }
-<span class="hljs-keyword">return</span> result;
-</code></pre>
+<span class="hljs-keyword">return</span> result;</code></pre>
 				<p>If you are not using <code>node 8</code> then you can still use the library with <code>Promise</code> values:</p>
-				<pre><code class="lang-js"><span class="hljs-keyword">const</span> BitlyClient = <span class="hljs-built_in">require</span>(<span class="hljs-string">'bitly'</span>);
+				<pre><code class="language-js"><span class="hljs-keyword">const</span> BitlyClient = <span class="hljs-built_in">require</span>(<span class="hljs-string">'bitly'</span>).BitlyClient;
 <span class="hljs-keyword">const</span> bitly = <span class="hljs-keyword">new</span> BitlyClient(<span class="hljs-string">'&lt;accessToken&gt;'</span>);
 
 bitly
@@ -126,11 +124,10 @@ bitly
   })
   .catch(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">error</span>) </span>{
     <span class="hljs-built_in">console</span>.error(error);
-  });
-</code></pre>
+  });</code></pre>
 				<p>You can also do raw requests to any Bitly endpoint. With this you need to pass the access
 				token to the method</p>
-				<pre><code class="lang-js"><span class="hljs-keyword">const</span> BitlyClient = <span class="hljs-built_in">require</span>(<span class="hljs-string">'bitly'</span>);
+				<pre><code class="language-js"><span class="hljs-keyword">const</span> BitlyClient = <span class="hljs-built_in">require</span>(<span class="hljs-string">'bitly'</span>).BitlyClient;
 <span class="hljs-keyword">const</span> bitly = <span class="hljs-keyword">new</span> BitlyClient(<span class="hljs-string">'&lt;accessToken&gt;'</span>);
 
 <span class="hljs-keyword">try</span> {
@@ -141,8 +138,7 @@ bitly
   });
 } <span class="hljs-keyword">catch</span>(e) {
   <span class="hljs-keyword">throw</span> e;
-}
-</code></pre>
+}</code></pre>
 				<h3 id="tests">Tests</h3>
 				<p>To run tests type <code>npm test</code>. Please note one test will fail if you use your own API key, please update the string accordingly.</p>
 				<h2 id="support-this-project">Support This Project</h2>
@@ -164,13 +160,16 @@ bitly
 						<a href="modules/_bitly_.html">"bitly"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
+						<a href="modules/_index_.html">"index"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
 						<a href="modules/_lib_.html">"lib"</a>
 					</li>
 					<li class="label tsd-is-external">
 						<span>Externals</span>
 					</li>
 					<li class=" tsd-kind-external-module tsd-is-external">
-						<a href="modules/_bitly_types_.html">"bitly.types"</a>
+						<a href="modules/_types_.html">"types"</a>
 					</li>
 				</ul>
 			</nav>
