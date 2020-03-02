@@ -1,0 +1,18 @@
+GET /v4/bitlinks/bit.ly/38XaXKy/clicks?unit=day&units=-1&size=50&unit_reference=
+accept: application/json, text/plain, */*
+
+HTTP/1.1 200 OK
+server: nginx
+date: Wed, 26 Feb 2020 04:00:39 GMT
+content-type: application/json
+content-length: 1495
+strict-transport-security: max-age=31536000; includeSubDomains
+x-xss-protection: 1; mode=blockFilter
+x-content-type-options: nosniff
+x-frame-options: DENY
+content-security-policy: default-src 'none
+via: 1.1 google
+alt-svc: clear
+connection: close
+
+{"unit_reference":"2020-02-26T04:00:39+0000","link_clicks":[{"date":"2020-02-26T00:00:00+0000","clicks":0},{"date":"2020-02-25T00:00:00+0000","clicks":1},{"date":"2020-02-24T00:00:00+0000","clicks":0},{"date":"2020-02-23T00:00:00+0000","clicks":0},{"date":"2020-02-22T00:00:00+0000","clicks":0},{"date":"2020-02-21T00:00:00+0000","clicks":0},{"date":"2020-02-20T00:00:00+0000","clicks":0},{"date":"2020-02-19T00:00:00+0000","clicks":0},{"date":"2020-02-18T00:00:00+0000","clicks":0},{"date":"2020-02-17T00:00:00+0000","clicks":0},{"date":"2020-02-16T00:00:00+0000","clicks":0},{"date":"2020-02-15T00:00:00+0000","clicks":0},{"date":"2020-02-14T00:00:00+0000","clicks":0},{"date":"2020-02-13T00:00:00+0000","clicks":0},{"date":"2020-02-12T00:00:00+0000","clicks":0},{"date":"2020-02-11T00:00:00+0000","clicks":0},{"date":"2020-02-10T00:00:00+0000","clicks":0},{"date":"2020-02-09T00:00:00+0000","clicks":0},{"date":"2020-02-08T00:00:00+0000","clicks":0},{"date":"2020-02-07T00:00:00+0000","clicks":0},{"date":"2020-02-06T00:00:00+0000","clicks":0},{"date":"2020-02-05T00:00:00+0000","clicks":0},{"date":"2020-02-04T00:00:00+0000","clicks":2},{"date":"2020-02-03T00:00:00+0000","clicks":0},{"date":"2020-02-02T00:00:00+0000","clicks":0},{"date":"2020-02-01T00:00:00+0000","clicks":0},{"date":"2020-01-31T00:00:00+0000","clicks":0},{"date":"2020-01-30T00:00:00+0000","clicks":0},{"date":"2020-01-29T00:00:00+0000","clicks":0},{"date":"2020-01-28T00:00:00+0000","clicks":0}],"units":30,"unit":"day"}

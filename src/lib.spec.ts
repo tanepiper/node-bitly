@@ -1,25 +1,24 @@
 import { expect } from 'chai';
-import 'sepia';
 import '../test/bootstrap';
 
 import { generateUrl, sortUrlsAndHash } from './lib';
 
 describe('generateUrl', () => {
   it('should return a default url', () => {
-    const result = generateUrl('iamatoken', 'foo');
+    const result = generateUrl('foo');
     expect(result)
-      .to.have.property('href')
-      .and.to.equal('https://api-ssl.bitly.com/v3/foo?access_token=iamatoken&domain=bit.ly&format=json');
+        .to.have.property('href')
+        .and.to.equal('https://api-ssl.bitly.com/v4/foo');
   });
 
   it('should return a custom url', () => {
-    const result = generateUrl('iamatoken', 'foo', null, {
+    const result = generateUrl('foo', null, {
       apiUrl: 'api-ssl.myhost.com',
-      apiVersion: 'v3'
+      apiVersion: 'v4',
     });
     expect(result)
-      .to.have.property('href')
-      .and.to.equal('https://api-ssl.myhost.com/v3/foo?access_token=iamatoken&domain=bit.ly&format=json');
+        .to.have.property('href')
+        .and.to.equal('https://api-ssl.myhost.com/v4/foo');
   });
 });
 
