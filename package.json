@@ -37,6 +37,10 @@
     {
       "name": "Ildar Sagdejev",
       "email": "specious@gmail.com"
+    },
+    {
+      "name": "Joshua Tzucker",
+      "url": "https://joshuatz.com/"
     }
   ],
   "repository": {
@@ -50,28 +54,26 @@
     "node": ">= 6.10.0"
   },
   "scripts": {
-    "test": "VCR_MODE=cache mocha -r ts-node/register --reporter list src/*.spec.ts",
+    "test": "mocha -r ts-node/register --reporter list src/*.spec.ts",
     "build": "npx tsc",
     "docs": "rm -rf ./docs && npx typedoc --readme ./README.md --out ./docs && touch ./docs/.nojekyll"
   },
   "devDependencies": {
     "@types/chai": "^4.2.7",
     "@types/node": "^13.1.8",
-    "@types/request-promise": "^4.1.45",
     "chai": "^4.2.0",
     "jsdoc": "^3.6.3",
     "minami": "^1.2.3",
     "mocha": "^7.0.0",
     "mocha-typescript": "^1.1.17",
     "np": "^5.2.1",
-    "sepia": "^2.0.2",
+    "replay": "^2.4.0",
     "ts-node": "^8.6.2",
     "typedoc": "^0.16.8",
     "typescript": "^3.7.5"
   },
   "dependencies": {
-    "request": "^2.88.0",
-    "request-promise": "^4.2.5",
+    "axios": "^0.19.2",
     "valid-url": "^1.0.9"
   },
   "main": "dist/index.js",

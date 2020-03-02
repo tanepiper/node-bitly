@@ -7,8 +7,13 @@
 # Web Pages & docs
 fixtures/
 _config.yml
+docs
 
 # TS Files
 tsconfig.json
 test
 src/*
+
+# Misc
+.nojekyll
+*.tgz

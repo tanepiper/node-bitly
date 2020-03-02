@@ -1,0 +1,20 @@
+POST /v4/bitlinks
+accept: application/json, text/plain, */*
+content-type: application/json
+body: {\"domain\":\"bit.ly\",\"long_url\":\"https://github.com/tanepiper/node-bitly\"}
+
+HTTP/1.1 200 OK
+server: nginx
+date: Wed, 26 Feb 2020 04:00:38 GMT
+content-type: application/json
+content-length: 283
+strict-transport-security: max-age=31536000; includeSubDomains
+x-xss-protection: 1; mode=blockFilter
+x-content-type-options: nosniff
+x-frame-options: DENY
+content-security-policy: default-src 'none
+via: 1.1 google
+alt-svc: clear
+connection: close
+
+{"created_at":"2020-02-03T12:06:17+0000","id":"bit.ly/38XaXKy","link":"http://bit.ly/38XaXKy","custom_bitlinks":[],"long_url":"https://github.com/tanepiper/node-bitly","archived":false,"tags":[],"deeplinks":[],"references":{"group":"https://api-ssl.bitly.com/v4/groups/8sBebUiuV1s"}}

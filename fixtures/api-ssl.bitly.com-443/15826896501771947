@@ -1,0 +1,18 @@
+GET /v4/bitlinks/bit.ly/38XaXKy
+accept: application/json, text/plain, */*
+
+HTTP/1.1 200 OK
+server: nginx
+date: Wed, 26 Feb 2020 04:00:41 GMT
+content-type: application/json
+content-length: 412
+strict-transport-security: max-age=31536000; includeSubDomains
+x-xss-protection: 1; mode=blockFilter
+x-content-type-options: nosniff
+x-frame-options: DENY
+content-security-policy: default-src 'none
+via: 1.1 google
+alt-svc: clear
+connection: close
+
+{"created_at":"2020-02-03T12:06:17+0000","id":"bit.ly/38XaXKy","link":"http://bit.ly/38XaXKy","custom_bitlinks":["http://bit.ly/node-bitly-gh"],"long_url":"https://github.com/tanepiper/node-bitly","title":"Node-Bitly","archived":false,"created_by":"tanepiper","client_id":"jiqwre2wc3f6j9hgi5132z4k5kdfrhuzi7r42r2b","tags":[],"deeplinks":[],"references":{"group":"https://api-ssl.bitly.com/v4/groups/8sBebUiuV1s"}}
