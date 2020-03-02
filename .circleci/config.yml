@@ -126,7 +126,7 @@ workflows:
           filters:
             branches:
               only:
-                - master
+                - v7.x.x
       - run_distribution_beta:
           requires:
             - build
