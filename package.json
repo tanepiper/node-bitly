@@ -9,7 +9,7 @@
     "util"
   ],
   "homepage": "https://github.com/tanepiper/node-bitly",
-  "version": "7.0.0",
+  "version": "7.0.1",
   "author": {
     "name": "Tane Piper",
     "url": "https://github.com/tanepiper"
