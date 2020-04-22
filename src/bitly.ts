@@ -71,7 +71,7 @@ export class BitlyClient {
    * @return Shorten results
    */
   async shorten(longUrl: string): Promise<BitlyLink> {
-    return await this.bitlyRequest('bitlinks', { long_url: longUrl });
+    return await this.bitlyRequest('shorten', { long_url: longUrl });
   }
 
   /**
