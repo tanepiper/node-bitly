@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>BitlyConfig | bitly</title>
+	<title>BitlyLink | bitly</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -59,10 +59,10 @@
 					<a href="../modules/_types_.html">&quot;types&quot;</a>
 				</li>
 				<li>
-					<a href="_types_.bitlyconfig.html">BitlyConfig</a>
+					<a href="_types_.bitlylink.html">BitlyLink</a>
 				</li>
 			</ul>
-			<h1>Interface BitlyConfig</h1>
+			<h1>Interface BitlyLink</h1>
 		</div>
 	</div>
 </header>
@@ -72,7 +72,7 @@
 			<section class="tsd-panel tsd-comment">
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
-						<p>A Bitly module configuration</p>
+						<p>Type for a bitly response</p>
 					</div>
 				</div>
 			</section>
@@ -80,18 +80,9 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">BitlyConfig</span>
+						<span class="target">BitlyLink</span>
 					</li>
 				</ul>
-			</section>
-			<section class="tsd-panel tsd-kind-interface tsd-parent-kind-external-module tsd-is-external">
-				<h3 class="tsd-before-signature">Indexable</h3>
-				<div class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">[</span>k: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">]: </span><span class="tsd-signature-type">any</span></div>
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>A Bitly module configuration</p>
-					</div>
-				</div>
 			</section>
 			<section class="tsd-panel-group tsd-index-group">
 				<h2>Index</h2>
@@ -100,11 +91,17 @@
 						<section class="tsd-index-section tsd-is-external">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-external"><a href="_types_.bitlyconfig.html#apiurl" class="tsd-kind-icon">api<wbr>Url</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-external"><a href="_types_.bitlyconfig.html#apiversion" class="tsd-kind-icon">api<wbr>Version</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-external"><a href="_types_.bitlyconfig.html#debug" class="tsd-kind-icon">debug</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-external"><a href="_types_.bitlyconfig.html#domain" class="tsd-kind-icon">domain</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-external"><a href="_types_.bitlyconfig.html#format" class="tsd-kind-icon">format</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-external"><a href="_types_.bitlylink.html#archived" class="tsd-kind-icon">archived</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-external"><a href="_types_.bitlylink.html#created_at" class="tsd-kind-icon">created_<wbr>at</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-external"><a href="_types_.bitlylink.html#created_by" class="tsd-kind-icon">created_<wbr>by</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-external"><a href="_types_.bitlylink.html#custom_bitlinks" class="tsd-kind-icon">custom_<wbr>bitlinks</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-external"><a href="_types_.bitlylink.html#deeplinks" class="tsd-kind-icon">deeplinks</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-external"><a href="_types_.bitlylink.html#id" class="tsd-kind-icon">id</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-external"><a href="_types_.bitlylink.html#link" class="tsd-kind-icon">link</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-external"><a href="_types_.bitlylink.html#long_url" class="tsd-kind-icon">long_<wbr>url</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-external"><a href="_types_.bitlylink.html#references" class="tsd-kind-icon">references</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-external"><a href="_types_.bitlylink.html#tags" class="tsd-kind-icon">tags</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-external"><a href="_types_.bitlylink.html#title" class="tsd-kind-icon">title</a></li>
 							</ul>
 						</section>
 					</div>
@@ -113,77 +110,167 @@
 			<section class="tsd-panel-group tsd-member-group tsd-is-external">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-external">
-					<a name="apiurl" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> api<wbr>Url</h3>
-					<div class="tsd-signature tsd-kind-icon">api<wbr>Url<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<a name="archived" class="tsd-anchor"></a>
+					<h3>archived</h3>
+					<div class="tsd-signature tsd-kind-icon">archived<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/tanepiper/node-bitly/blob/fc45bbe/src/types.ts#L8">types.ts:8</a></li>
+							<li>Defined in <a href="https://github.com/tanepiper/node-bitly/blob/fc45bbe/src/types.ts#L132">types.ts:132</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>The API URL, optional as default is provided</p>
+							<p>Archived</p>
 						</div>
 					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-external">
-					<a name="apiversion" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> api<wbr>Version</h3>
-					<div class="tsd-signature tsd-kind-icon">api<wbr>Version<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<a name="created_at" class="tsd-anchor"></a>
+					<h3>created_<wbr>at</h3>
+					<div class="tsd-signature tsd-kind-icon">created_<wbr>at<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/tanepiper/node-bitly/blob/fc45bbe/src/types.ts#L12">types.ts:12</a></li>
+							<li>Defined in <a href="https://github.com/tanepiper/node-bitly/blob/fc45bbe/src/types.ts#L140">types.ts:140</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>API Version, currently v3 is only supported</p>
+							<p>Created Time</p>
 						</div>
 					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-external">
-					<a name="debug" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> debug</h3>
-					<div class="tsd-signature tsd-kind-icon">debug<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+					<a name="created_by" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> created_<wbr>by</h3>
+					<div class="tsd-signature tsd-kind-icon">created_<wbr>by<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/tanepiper/node-bitly/blob/fc45bbe/src/types.ts#L24">types.ts:24</a></li>
+							<li>Defined in <a href="https://github.com/tanepiper/node-bitly/blob/fc45bbe/src/types.ts#L152">types.ts:152</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>Debug mode</p>
+							<p>Created By</p>
 						</div>
 					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-external">
-					<a name="domain" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> domain</h3>
-					<div class="tsd-signature tsd-kind-icon">domain<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<a name="custom_bitlinks" class="tsd-anchor"></a>
+					<h3>custom_<wbr>bitlinks</h3>
+					<div class="tsd-signature tsd-kind-icon">custom_<wbr>bitlinks<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/tanepiper/node-bitly/blob/fc45bbe/src/types.ts#L16">types.ts:16</a></li>
+							<li>Defined in <a href="https://github.com/tanepiper/node-bitly/blob/fc45bbe/src/types.ts#L160">types.ts:160</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>Optional custom domain</p>
+							<p>Custom Bitlink</p>
 						</div>
 					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-external">
-					<a name="format" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> format</h3>
-					<div class="tsd-signature tsd-kind-icon">format<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<a name="deeplinks" class="tsd-anchor"></a>
+					<h3>deeplinks</h3>
+					<div class="tsd-signature tsd-kind-icon">deeplinks<span class="tsd-signature-symbol">:</span> <a href="_types_.deeplink.html" class="tsd-signature-type">DeepLink</a><span class="tsd-signature-symbol">[]</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/tanepiper/node-bitly/blob/fc45bbe/src/types.ts#L20">types.ts:20</a></li>
+							<li>Defined in <a href="https://github.com/tanepiper/node-bitly/blob/fc45bbe/src/types.ts#L148">types.ts:148</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>Return format, default is JSON</p>
+							<p>Deep links</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-external">
+					<a name="id" class="tsd-anchor"></a>
+					<h3>id</h3>
+					<div class="tsd-signature tsd-kind-icon">id<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/tanepiper/node-bitly/blob/fc45bbe/src/types.ts#L168">types.ts:168</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>ID</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-external">
+					<a name="link" class="tsd-anchor"></a>
+					<h3>link</h3>
+					<div class="tsd-signature tsd-kind-icon">link<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/tanepiper/node-bitly/blob/fc45bbe/src/types.ts#L164">types.ts:164</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Link</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-external">
+					<a name="long_url" class="tsd-anchor"></a>
+					<h3>long_<wbr>url</h3>
+					<div class="tsd-signature tsd-kind-icon">long_<wbr>url<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/tanepiper/node-bitly/blob/fc45bbe/src/types.ts#L156">types.ts:156</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Long URL</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-external">
+					<a name="references" class="tsd-anchor"></a>
+					<h3>references</h3>
+					<div class="tsd-signature tsd-kind-icon">references<span class="tsd-signature-symbol">:</span> <a href="_types_.references.html" class="tsd-signature-type">References</a></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/tanepiper/node-bitly/blob/fc45bbe/src/types.ts#L128">types.ts:128</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>References</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-external">
+					<a name="tags" class="tsd-anchor"></a>
+					<h3>tags</h3>
+					<div class="tsd-signature tsd-kind-icon">tags<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/tanepiper/node-bitly/blob/fc45bbe/src/types.ts#L136">types.ts:136</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Tags</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-external">
+					<a name="title" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> title</h3>
+					<div class="tsd-signature tsd-kind-icon">title<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/tanepiper/node-bitly/blob/fc45bbe/src/types.ts#L144">types.ts:144</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Title</p>
 						</div>
 					</div>
 				</section>
@@ -220,30 +307,9 @@
 					<li class=" tsd-kind-interface tsd-parent-kind-external-module tsd-is-external">
 						<a href="_types_.bitlyclickmetricsres.html" class="tsd-kind-icon">Bitly<wbr>Click<wbr>Metrics<wbr>Res</a>
 					</li>
-				</ul>
-				<ul class="current">
-					<li class="current tsd-kind-interface tsd-parent-kind-external-module tsd-is-external">
+					<li class=" tsd-kind-interface tsd-parent-kind-external-module tsd-is-external">
 						<a href="_types_.bitlyconfig.html" class="tsd-kind-icon">Bitly<wbr>Config</a>
-						<ul>
-							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-external">
-								<a href="_types_.bitlyconfig.html#apiurl" class="tsd-kind-icon">api<wbr>Url</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-external">
-								<a href="_types_.bitlyconfig.html#apiversion" class="tsd-kind-icon">api<wbr>Version</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-external">
-								<a href="_types_.bitlyconfig.html#debug" class="tsd-kind-icon">debug</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-external">
-								<a href="_types_.bitlyconfig.html#domain" class="tsd-kind-icon">domain</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-external">
-								<a href="_types_.bitlyconfig.html#format" class="tsd-kind-icon">format</a>
-							</li>
-						</ul>
 					</li>
-				</ul>
-				<ul class="after-current">
 					<li class=" tsd-kind-interface tsd-parent-kind-external-module tsd-is-external">
 						<a href="_types_.bitlyerror.html" class="tsd-kind-icon">Bitly<wbr>Error</a>
 					</li>
@@ -253,9 +319,48 @@
 					<li class=" tsd-kind-interface tsd-parent-kind-external-module tsd-is-external">
 						<a href="_types_.bitlyexpandresponse.html" class="tsd-kind-icon">Bitly<wbr>Expand<wbr>Response</a>
 					</li>
-					<li class=" tsd-kind-interface tsd-parent-kind-external-module tsd-is-external">
+				</ul>
+				<ul class="current">
+					<li class="current tsd-kind-interface tsd-parent-kind-external-module tsd-is-external">
 						<a href="_types_.bitlylink.html" class="tsd-kind-icon">Bitly<wbr>Link</a>
+						<ul>
+							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-external">
+								<a href="_types_.bitlylink.html#archived" class="tsd-kind-icon">archived</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-external">
+								<a href="_types_.bitlylink.html#created_at" class="tsd-kind-icon">created_<wbr>at</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-external">
+								<a href="_types_.bitlylink.html#created_by" class="tsd-kind-icon">created_<wbr>by</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-external">
+								<a href="_types_.bitlylink.html#custom_bitlinks" class="tsd-kind-icon">custom_<wbr>bitlinks</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-external">
+								<a href="_types_.bitlylink.html#deeplinks" class="tsd-kind-icon">deeplinks</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-external">
+								<a href="_types_.bitlylink.html#id" class="tsd-kind-icon">id</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-external">
+								<a href="_types_.bitlylink.html#link" class="tsd-kind-icon">link</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-external">
+								<a href="_types_.bitlylink.html#long_url" class="tsd-kind-icon">long_<wbr>url</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-external">
+								<a href="_types_.bitlylink.html#references" class="tsd-kind-icon">references</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-external">
+								<a href="_types_.bitlylink.html#tags" class="tsd-kind-icon">tags</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-external">
+								<a href="_types_.bitlylink.html#title" class="tsd-kind-icon">title</a>
+							</li>
+						</ul>
 					</li>
+				</ul>
+				<ul class="after-current">
 					<li class=" tsd-kind-interface tsd-parent-kind-external-module tsd-is-external">
 						<a href="_types_.bitlymetricsbycountryres.html" class="tsd-kind-icon">Bitly<wbr>Metrics<wbr>ByCountry<wbr>Res</a>
 					</li>

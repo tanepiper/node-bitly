@@ -56,7 +56,7 @@
 					<a href="globals.html">Globals</a>
 				</li>
 			</ul>
-			<h1> bitly</h1>
+			<h1>bitly</h1>
 		</div>
 	</div>
 </header>
@@ -64,31 +64,64 @@
 	<div class="row">
 		<div class="col-8 col-content">
 			<div class="tsd-panel tsd-typography">
-				<h1 id="node-bitly-unofficial-bitly-api-for-nodejs">node-bitly - Unofficial Bitly API for nodejs</h1>
+				<a href="#node-bitly---unofficial-bitly-api-for-nodejs" id="node-bitly---unofficial-bitly-api-for-nodejs" style="color: inherit; text-decoration: none;">
+					<h1>node-bitly - Unofficial Bitly API for nodejs</h1>
+				</a>
 				<p><a href="https://circleci.com/gh/tanepiper/node-bitly"><img src="https://circleci.com/gh/tanepiper/node-bitly.svg?style=svg" alt="CircleCI"></a> <a href="http://badge.fury.io/js/bitly"><img src="https://badge.fury.io/js/bitly.png" alt="NPM version"></a> <a href="https://david-dm.org/tanepiper/node-bitly"><img src="https://david-dm.org/tanepiper/node-bitly.svg" alt="Dependencies"></a></p>
-				<h2 id="current-versions">Current Versions</h2>
+				<a href="#v6xx-to-v7xx-transition---aka-v3-of-bitly-api-to-v4---breaking-changes" id="v6xx-to-v7xx-transition---aka-v3-of-bitly-api-to-v4---breaking-changes" style="color: inherit; text-decoration: none;">
+					<h3>V6.x.x to V7.x.x transition - aka V3 of Bitly API to V4 - Breaking Changes</h3>
+				</a>
+				<p>In March 2020, Bitly deprecated the v3 of their API, and switched to v4. Unfortunately, even with the changes to this package to make it compatible, there are several unavoidable breaking changes. These are summarized below:</p>
 				<ul>
-					<li><a href="https://github.com/tanepiper/node-bitly">v6.0.x</a> - Support for Node &gt;=6. Available on npm as <code>npm install bitly@latest</code></li>
-					<li><a href="https://github.com/tanepiper/node-bitly/tree/v5.x.x">v5.1.x</a> - Support for Node &gt;=4. Available on npm as <code>npm install bitly@stable</code></li>
+					<li>Endpoints no longer support bulk options (multiple hashes or URLs in a single request)<ul>
+							<li>Most importantly, this affects <code>expand()</code> and <code>shorten()</code></li>
+							<li>As a general rule of thumb, <em>none</em> of the v4 endpoints take bulk inputs</li>
+						</ul>
+					</li>
+					<li>Return types have changed, for multiple endpoints</li>
+					<li>DEPRECATED: The <code>lookup</code> method and corresponding endpoint have been deprecated</li>
 				</ul>
-				<p>Version 5 is end-of-life and will only recieve minor updates in the future and is considered stable.  This will only ever support the <strong>Bitly v3</strong> API</p>
-				<p>Version 6 is the current in-development version, re-written in Typescript. This version currently only supports the <strong>Bitly v3</strong> API and will continue to do so in <code>v6.0.x</code>. Version <code>6.1.x</code> will introduce <strong>Bitly v4</strong> support.</p>
-				<h2 id="module-features">Module Features</h2>
+				<p>With these changes all previous versions of this library are now full deprecated and there is only 1 version starting with v7.0.0</p>
+				<p>Here is a simple example of how you might have to update your use of node-bitly to account for the change:</p>
+				<pre><code class="language-js"><span class="hljs-comment">// Both versions</span>
+<span class="hljs-keyword">const</span> BitlyClient = <span class="hljs-built_in">require</span>(<span class="hljs-string">'bitly'</span>).BitlyClient;
+<span class="hljs-keyword">const</span> bitly = <span class="hljs-keyword">new</span> BitlyClient(<span class="hljs-string">'&lt;accessToken&gt;'</span>);
+
+<span class="hljs-comment">// v6.1.0</span>
+<span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">example</span>(<span class="hljs-params">url</span>) </span>{
+  <span class="hljs-keyword">const</span> response = <span class="hljs-keyword">await</span> bitly.shorten(url);
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">`Your shortened bitlink is <span class="hljs-subst">${response.url}</span>`</span>);
+}
+<span class="hljs-comment">// v7.x.x</span>
+<span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">example</span>(<span class="hljs-params">url</span>) </span>{
+  <span class="hljs-keyword">const</span> response = <span class="hljs-keyword">await</span> bitly.shorten(url);
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">`Your shortened bitlink is <span class="hljs-subst">${response.link}</span>`</span>);
+}</code></pre>
+				<a href="#module-features" id="module-features" style="color: inherit; text-decoration: none;">
+					<h2>Module Features</h2>
+				</a>
 				<p>This module provides calls to the <a href="http://bitly.com">Bitly</a> API for <a href="http://nodejs.org">Nodejs</a>.</p>
-				<p>For more information on the API request and responses visit the <a href="https://dev.bitly.com/api.html">Bitly API docs</a></p>
-				<p><code>node-bitly</code> is programmed with <code>TypeScript</code> but is compiled to JavaScript and supports <code>node 6, 8, 10</code>.  When you import the client you get full type information.  There maybe be some gaps in the information but this will be filled in, in future releases.</p>
-				<p><strong>Currently <code>node-bitly</code> only supports Bitly&#39;s <code>v3</code> API and has this hard coded in the parameter type.  Support for version 4 will be added in a future release</strong></p>
-				<h2 id="installation">Installation</h2>
+				<p>For more information on the API request and responses visit the <a href="https://dev.bitly.com/v4_documentation.html">Bitly API docs</a></p>
+				<p><code>node-bitly</code> is programmed with <code>TypeScript</code> but is compiled to JavaScript and supports <code>node &gt;= 10.0.0</code>.  When you import the client you get full type information.  There maybe be some gaps in the information but this will be filled in, in future releases.</p>
+				<a href="#installation" id="installation" style="color: inherit; text-decoration: none;">
+					<h2>Installation</h2>
+				</a>
 				<p>To install via NPM type the following: <code>npm install bitly</code></p>
 				<p>You can also install via git by cloning: <code>git clone https://github.com/tanepiper/node-bitly.git /path/to/bitly</code></p>
-				<h2 id="usage">Usage</h2>
+				<a href="#usage" id="usage" style="color: inherit; text-decoration: none;">
+					<h2>Usage</h2>
+				</a>
 				<p>This library uses the API provided by bitly and requires an OAuth token to use.
 				To get your access token, visit <a href="https://bitly.com/a/oauth_apps">OAuth Apps</a> (under Generic Access Token)</p>
 				<p>See <a href="http://dev.bitly.com/">http://dev.bitly.com</a> for format of returned objects from the API</p>
 				<p>To see the available libary APIs, you can view the <a href="http://tanepiper.github.io/node-bitly/index.html">API Documentation</a> offline, or you can view the index here (the generated documentation does not work on Github).</p>
-				<h3 id="code">Code</h3>
-				<h4 id="typescript-es6-imports">TypeScript / ES6 Imports</h4>
-				<pre><code class="language-js"><span class="hljs-keyword">import</span> { BitlyClient } <span class="hljs-keyword">from</span> <span class="hljs-string">'bitly'</span>;
+				<a href="#code" id="code" style="color: inherit; text-decoration: none;">
+					<h3>Code</h3>
+				</a>
+				<a href="#typescript--es6-imports" id="typescript--es6-imports" style="color: inherit; text-decoration: none;">
+					<h4>TypeScript / ES6 Imports</h4>
+				</a>
+				<pre><code class="language-ts"><span class="hljs-keyword">import</span> { BitlyClient } <span class="hljs-keyword">from</span> <span class="hljs-string">'bitly'</span>;
 <span class="hljs-keyword">const</span> bitly = <span class="hljs-keyword">new</span> BitlyClient(<span class="hljs-string">'&lt;accessToken&gt;'</span>, {});
 
 <span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">init</span>(<span class="hljs-params"></span>) </span>{
@@ -102,7 +135,26 @@
 }
 
 init();</code></pre>
-				<h4 id="javascript">JavaScript</h4>
+				<p>When the library throws an error, it should be the error object response from Bitly, but if something has gone wrong with your internet or intermediate requests, it is possible that a generic AxiosError might get returned. You can use an exported Type Guard to narrow the type:</p>
+				<pre><code class="language-ts"><span class="hljs-keyword">import</span> {BitlyClient, isBitlyErrResponse} <span class="hljs-keyword">from</span> <span class="hljs-string">'bitly'</span>;
+<span class="hljs-keyword">const</span> bitly = <span class="hljs-keyword">new</span> BitlyClient(process.env.BITLY_API_KEY);
+<span class="hljs-keyword">let</span> data: BitlyLink;
+
+<span class="hljs-keyword">try</span> {
+  data = <span class="hljs-keyword">await</span> bitly.shorten(<span class="hljs-string">'http://bit.ly/38XaXKy'</span>);
+} <span class="hljs-keyword">catch</span> (error) {
+  <span class="hljs-keyword">if</span> (isBitlyErrResponse(error)) {
+    <span class="hljs-comment">// Inferred type by TS is `BitlyErrorResponse`</span>
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">`Bitly error: <span class="hljs-subst">${error.description}</span>`</span>);
+  } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (error.isAxiosError) {
+    <span class="hljs-comment">// Infererred type is `any`, but you can cast to AxiosError safely</span>
+    <span class="hljs-keyword">const</span> axiosError = error <span class="hljs-keyword">as</span> unknown <span class="hljs-keyword">as</span> AxiosError;
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">`AxiosError:`</span>, axiosError.toJSON());
+  }
+}</code></pre>
+				<a href="#javascript" id="javascript" style="color: inherit; text-decoration: none;">
+					<h4>JavaScript</h4>
+				</a>
 				<pre><code class="language-js"><span class="hljs-keyword">const</span> { BitlyClient } = <span class="hljs-built_in">require</span>(<span class="hljs-string">'bitly'</span>);
 <span class="hljs-keyword">const</span> bitly = <span class="hljs-keyword">new</span> BitlyClient(<span class="hljs-string">'&lt;accessToken&gt;'</span>, {});
 
@@ -139,12 +191,12 @@ bitly
 } <span class="hljs-keyword">catch</span>(e) {
   <span class="hljs-keyword">throw</span> e;
 }</code></pre>
-				<h3 id="tests">Tests</h3>
-				<p>To run tests type <code>npm test</code>. Please note one test will fail if you use your own API key, please update the string accordingly.</p>
-				<h2 id="support-this-project">Support This Project</h2>
-				<p>This module is a side project of mine and I don&#39;t actively use the module except to completly over-engineer the CI pipeline and re-write it in Typescript all in the name of learning.  But to add features like the v4 API would take a lot of work, so if you use this library a lot please consider donating using the links below. Or if you learned something useful from one of my blog posts talking about the changes I&#39;ve done with this module please consider leaving a tip.</p>
-				<p><a href="https://beerpay.io/tanepiper/node-bitly"><img src="https://beerpay.io/tanepiper/node-bitly/badge.svg?style=beer-square" alt="Beerpay"></a>  <a href="https://beerpay.io/tanepiper/node-bitly?focus=wish"><img src="https://beerpay.io/tanepiper/node-bitly/make-wish.svg?style=flat-square" alt="Beerpay"></a></p>
-				<p>You can also <a href="https://paypal.me/tanepiper">PayPal Me</a>.</p>
+				<a href="#tests" id="tests" style="color: inherit; text-decoration: none;">
+					<h3>Tests</h3>
+				</a>
+				<p>To run tests type <code>npm test</code>.</p>
+				<p>The tests use <a href="https://www.npmjs.com/package/replay"><code>replay</code></a>, which caches the responses from Bitly under the <code>/fixtures</code> directory, until you edit a test&#39;s requests payload. This means you can run the test suite without having a Bitly API key, until you need to edit or add a new test.</p>
+				<p>Once you need to run tests that can&#39;t use a cached response and actually hit Bitly&#39;s API, you will need to pass your API key to the tests by having an environment variable <code>BITLY_API_KEY</code> set to the value of your key.</p>
 			</div>
 		</div>
 		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
@@ -157,19 +209,19 @@ bitly
 						<span>Internals</span>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="modules/_bitly_.html">"bitly"</a>
+						<a href="modules/_bitly_.html">&quot;bitly&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="modules/_index_.html">"index"</a>
+						<a href="modules/_index_.html">&quot;index&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="modules/_lib_.html">"lib"</a>
+						<a href="modules/_lib_.html">&quot;lib&quot;</a>
 					</li>
 					<li class="label tsd-is-external">
 						<span>Externals</span>
 					</li>
 					<li class=" tsd-kind-external-module tsd-is-external">
-						<a href="modules/_types_.html">"types"</a>
+						<a href="modules/_types_.html">&quot;types&quot;</a>
 					</li>
 				</ul>
 			</nav>
@@ -192,6 +244,7 @@ bitly
 				<li class="tsd-kind-function tsd-has-type-parameter"><span class="tsd-kind-icon">Function with type parameter</span></li>
 				<li class="tsd-kind-index-signature"><span class="tsd-kind-icon">Index signature</span></li>
 				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
+				<li class="tsd-kind-type-alias tsd-has-type-parameter"><span class="tsd-kind-icon">Type alias with type parameter</span></li>
 			</ul>
 			<ul class="tsd-legend">
 				<li class="tsd-kind-enum"><span class="tsd-kind-icon">Enumeration</span></li>
@@ -240,7 +293,7 @@ bitly
 	</div>
 </footer>
 <div class="container tsd-generator">
-	<p>Generated using <a href="http://typedoc.org/" target="_blank">TypeDoc</a></p>
+	<p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p>
 </div>
 <div class="overlay"></div>
 <script src="assets/js/main.js"></script>

@@ -70,9 +70,11 @@
 				<h2>Index</h2>
 				<section class="tsd-panel tsd-index-panel">
 					<div class="tsd-index-content">
-						<section class="tsd-index-section tsd-is-not-exported">
+						<section class="tsd-index-section ">
 							<h3>Variables</h3>
 							<ul class="tsd-index-list">
+								<li class="tsd-kind-variable tsd-parent-kind-external-module"><a href="_lib_.html#bitlyhashpattern" class="tsd-kind-icon">Bitly<wbr>Hash<wbr>Pattern</a></li>
+								<li class="tsd-kind-variable tsd-parent-kind-external-module"><a href="_lib_.html#bitlyidpattern" class="tsd-kind-icon">Bitly<wbr>IdPattern</a></li>
 								<li class="tsd-kind-variable tsd-parent-kind-external-module tsd-is-not-exported"><a href="_lib_.html#isuri" class="tsd-kind-icon">is<wbr>Uri</a></li>
 							</ul>
 						</section>
@@ -80,8 +82,10 @@
 							<h3>Functions</h3>
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-function tsd-parent-kind-external-module"><a href="_lib_.html#dorequest" class="tsd-kind-icon">do<wbr>Request</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-external-module tsd-is-private"><a href="_lib_.html#forcetobitlinkid" class="tsd-kind-icon">force<wbr>ToBitlink<wbr>Id</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-external-module tsd-is-private"><a href="_lib_.html#generateurl" class="tsd-kind-icon">generate<wbr>Url</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-external-module"><a href="_lib_.html#sorturlsandhash" class="tsd-kind-icon">sort<wbr>Urls<wbr>And<wbr>Hash</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-external-module tsd-is-private"><a href="_lib_.html#throwdeprecatederr" class="tsd-kind-icon">throw<wbr>Deprecated<wbr>Err</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section tsd-is-private tsd-is-private-protected tsd-is-not-exported">
@@ -93,15 +97,35 @@
 					</div>
 				</section>
 			</section>
-			<section class="tsd-panel-group tsd-member-group tsd-is-not-exported">
+			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Variables</h2>
+				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-external-module">
+					<a name="bitlyhashpattern" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> Bitly<wbr>Hash<wbr>Pattern</h3>
+					<div class="tsd-signature tsd-kind-icon">Bitly<wbr>Hash<wbr>Pattern<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">RegExp</span><span class="tsd-signature-symbol"> = /\/([A-z0-9_-]{6,})$/</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/tanepiper/node-bitly/blob/fc45bbe/src/lib.ts#L143">lib.ts:143</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-external-module">
+					<a name="bitlyidpattern" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> Bitly<wbr>IdPattern</h3>
+					<div class="tsd-signature tsd-kind-icon">Bitly<wbr>IdPattern<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">RegExp</span><span class="tsd-signature-symbol"> = /.*bit.ly\/([A-z0-9_-]{6,})$/i</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/tanepiper/node-bitly/blob/fc45bbe/src/lib.ts#L142">lib.ts:142</a></li>
+						</ul>
+					</aside>
+				</section>
 				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-external-module tsd-is-not-exported">
 					<a name="isuri" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagConst">Const</span> is<wbr>Uri</h3>
-					<div class="tsd-signature tsd-kind-icon">is<wbr>Uri<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol"> =&nbsp;require(&quot;valid-url&quot;).isUri</span></div>
+					<div class="tsd-signature tsd-kind-icon">is<wbr>Uri<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol"> = require(&#x27;valid-url&#x27;).isUri</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/tanepiper/node-bitly/blob/330a495/src/lib.ts#L8">lib.ts:8</a></li>
+							<li>Defined in <a href="https://github.com/tanepiper/node-bitly/blob/fc45bbe/src/lib.ts#L5">lib.ts:5</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -112,13 +136,13 @@
 					<a name="dorequest" class="tsd-anchor"></a>
 					<h3>do<wbr>Request</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module">
-						<li class="tsd-signature tsd-kind-icon">do<wbr>Request<span class="tsd-signature-symbol">(</span>accessToken<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, method<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, data<span class="tsd-signature-symbol">: </span><a href="../interfaces/_types_.bitlyurlqueryparams.html" class="tsd-signature-type">BitlyUrlQueryParams</a>, config<span class="tsd-signature-symbol">: </span><a href="../interfaces/_types_.bitlyconfig.html" class="tsd-signature-type">BitlyConfig</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_types_.bitlyresponse.html" class="tsd-signature-type">BitlyResponse</a><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">do<wbr>Request<span class="tsd-signature-symbol">(</span>bearer<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, method<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, data<span class="tsd-signature-symbol">: </span><a href="../interfaces/_types_.bitlyqueryparams.html" class="tsd-signature-type">BitlyQueryParams</a>, config<span class="tsd-signature-symbol">: </span><a href="../interfaces/_types_.bitlyconfig.html" class="tsd-signature-type">BitlyConfig</a>, reqMethod<span class="tsd-signature-symbol">?: </span><a href="_types_.html#bitlyreqmethod" class="tsd-signature-type">BitlyReqMethod</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="_types_.html#bitlyresponse" class="tsd-signature-type">BitlyResponse</a><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/tanepiper/node-bitly/blob/330a495/src/lib.ts#L72">lib.ts:72</a></li>
+									<li>Defined in <a href="https://github.com/tanepiper/node-bitly/blob/fc45bbe/src/lib.ts#L63">lib.ts:63</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -129,20 +153,71 @@
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>accessToken: <span class="tsd-signature-type">string</span></h5>
+									<h5>bearer: <span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The request accessToken</p>
+									</div>
 								</li>
 								<li>
 									<h5>method: <span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The method to be called on Bitly</p>
+									</div>
 								</li>
 								<li>
-									<h5>data: <a href="../interfaces/_types_.bitlyurlqueryparams.html" class="tsd-signature-type">BitlyUrlQueryParams</a></h5>
+									<h5>data: <a href="../interfaces/_types_.bitlyqueryparams.html" class="tsd-signature-type">BitlyQueryParams</a></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>A data object with key=&gt;value pairs mapped to request parameters</p>
+									</div>
 								</li>
 								<li>
 									<h5>config: <a href="../interfaces/_types_.bitlyconfig.html" class="tsd-signature-type">BitlyConfig</a></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>A object that overrides the default values for a request</p>
+									</div>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagDefault value">Default value</span> reqMethod: <a href="_types_.html#bitlyreqmethod" class="tsd-signature-type">BitlyReqMethod</a><span class="tsd-signature-symbol"> = &quot;POST&quot;</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The HTTP Method to use</p>
+									</div>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_types_.bitlyresponse.html" class="tsd-signature-type">BitlyResponse</a><span class="tsd-signature-symbol">&gt;</span></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="_types_.html#bitlyresponse" class="tsd-signature-type">BitlyResponse</a><span class="tsd-signature-symbol">&gt;</span></h4>
 							<p>The request result object</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-external-module tsd-is-private">
+					<a name="forcetobitlinkid" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> force<wbr>ToBitlink<wbr>Id</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module tsd-is-private">
+						<li class="tsd-signature tsd-kind-icon">force<wbr>ToBitlink<wbr>Id<span class="tsd-signature-symbol">(</span>hashIdOrLink<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/tanepiper/node-bitly/blob/fc45bbe/src/lib.ts#L128">lib.ts:128</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Function to force a string that <em>could</em> be an old-style hash to the new ID style
+									This is allow backward-compatibility with IDs produced by V3, and perhaps stored in users&#39; DBs</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>hashIdOrLink: <span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>An old style hash, or v4 bitly id (bitlink), or full bitly link</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
+							<p>Bitlink (domain + hash) formatted ID</p>
 						</li>
 					</ul>
 				</section>
@@ -150,13 +225,13 @@
 					<a name="generateurl" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagPrivate">Private</span> generate<wbr>Url</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module tsd-is-private">
-						<li class="tsd-signature tsd-kind-icon">generate<wbr>Url<span class="tsd-signature-symbol">(</span>accessToken<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, method<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, data<span class="tsd-signature-symbol">?: </span><a href="../interfaces/_types_.bitlyurlqueryparams.html" class="tsd-signature-type">BitlyUrlQueryParams</a>, config<span class="tsd-signature-symbol">?: </span><a href="../interfaces/_types_.bitlyconfig.html" class="tsd-signature-type">BitlyConfig</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">UrlWithStringQuery</span></li>
+						<li class="tsd-signature tsd-kind-icon">generate<wbr>Url<span class="tsd-signature-symbol">(</span>method<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, data<span class="tsd-signature-symbol">?: </span><a href="../interfaces/_types_.bitlyqueryparams.html" class="tsd-signature-type">BitlyQueryParams</a>, config<span class="tsd-signature-symbol">?: </span><a href="../interfaces/_types_.bitlyconfig.html" class="tsd-signature-type">BitlyConfig</a>, reqMethod<span class="tsd-signature-symbol">?: </span><a href="_types_.html#bitlyreqmethod" class="tsd-signature-type">BitlyReqMethod</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">UrlWithStringQuery</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/tanepiper/node-bitly/blob/330a495/src/lib.ts#L39">lib.ts:39</a></li>
+									<li>Defined in <a href="https://github.com/tanepiper/node-bitly/blob/fc45bbe/src/lib.ts#L35">lib.ts:35</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -172,31 +247,32 @@
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>accessToken: <span class="tsd-signature-type">string</span></h5>
-									<div class="tsd-comment tsd-typography">
-										<p>Your bit.ly access token</p>
-									</div>
-								</li>
-								<li>
 									<h5>method: <span class="tsd-signature-type">string</span></h5>
 									<div class="tsd-comment tsd-typography">
 										<p>The method to call</p>
 									</div>
 								</li>
 								<li>
-									<h5><span class="tsd-flag ts-flagDefault value">Default value</span> data: <a href="../interfaces/_types_.bitlyurlqueryparams.html" class="tsd-signature-type">BitlyUrlQueryParams</a><span class="tsd-signature-symbol"> =&nbsp;{}</span></h5>
+									<h5><span class="tsd-flag ts-flagDefault value">Default value</span> data: <a href="../interfaces/_types_.bitlyqueryparams.html" class="tsd-signature-type">BitlyQueryParams</a><span class="tsd-signature-symbol"> = {}</span></h5>
 									<div class="tsd-comment tsd-typography">
 										<p>a data object specifying bit.ly keys for your method</p>
 									</div>
 								</li>
 								<li>
-									<h5><span class="tsd-flag ts-flagDefault value">Default value</span> config: <a href="../interfaces/_types_.bitlyconfig.html" class="tsd-signature-type">BitlyConfig</a><span class="tsd-signature-symbol"> =&nbsp;{}</span></h5>
+									<h5><span class="tsd-flag ts-flagDefault value">Default value</span> config: <a href="../interfaces/_types_.bitlyconfig.html" class="tsd-signature-type">BitlyConfig</a><span class="tsd-signature-symbol"> = {}</span></h5>
 									<div class="tsd-comment tsd-typography">
 										<p>A custom config object to overide values</p>
 									</div>
 								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagDefault value">Default value</span> reqMethod: <a href="_types_.html#bitlyreqmethod" class="tsd-signature-type">BitlyReqMethod</a><span class="tsd-signature-symbol"> = &quot;POST&quot;</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The HTTP request method</p>
+									</div>
+								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">UrlWithStringQuery</span></h4>
+							<p>parsed generated URL</p>
 						</li>
 					</ul>
 				</section>
@@ -204,13 +280,13 @@
 					<a name="sorturlsandhash" class="tsd-anchor"></a>
 					<h3>sort<wbr>Urls<wbr>And<wbr>Hash</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module">
-						<li class="tsd-signature tsd-kind-icon">sort<wbr>Urls<wbr>And<wbr>Hash<span class="tsd-signature-symbol">(</span>unsortedItems<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span>, result<span class="tsd-signature-symbol">?: </span><a href="../interfaces/_types_.bitlyurlqueryparams.html" class="tsd-signature-type">BitlyUrlQueryParams</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/_types_.bitlyurlqueryparams.html" class="tsd-signature-type">BitlyUrlQueryParams</a></li>
+						<li class="tsd-signature tsd-kind-icon">sort<wbr>Urls<wbr>And<wbr>Hash<span class="tsd-signature-symbol">(</span>unsortedItems<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span>, result<span class="tsd-signature-symbol">?: </span><a href="../interfaces/_types_.bitlyqueryparams.html" class="tsd-signature-type">BitlyQueryParams</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/_types_.bitlyqueryparams.html" class="tsd-signature-type">BitlyQueryParams</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/tanepiper/node-bitly/blob/330a495/src/lib.ts#L96">lib.ts:96</a></li>
+									<li>Defined in <a href="https://github.com/tanepiper/node-bitly/blob/fc45bbe/src/lib.ts#L107">lib.ts:107</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -228,10 +304,57 @@
 									</div>
 								</li>
 								<li>
-									<h5><span class="tsd-flag ts-flagDefault value">Default value</span> result: <a href="../interfaces/_types_.bitlyurlqueryparams.html" class="tsd-signature-type">BitlyUrlQueryParams</a><span class="tsd-signature-symbol"> =&nbsp;{ shortUrl: [], hash: [] }</span></h5>
+									<h5><span class="tsd-flag ts-flagDefault value">Default value</span> result: <a href="../interfaces/_types_.bitlyqueryparams.html" class="tsd-signature-type">BitlyQueryParams</a><span class="tsd-signature-symbol"> = { shortUrl: [], hash: [] }</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The query object</p>
+									</div>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <a href="../interfaces/_types_.bitlyurlqueryparams.html" class="tsd-signature-type">BitlyUrlQueryParams</a></h4>
+							<h4 class="tsd-returns-title">Returns <a href="../interfaces/_types_.bitlyqueryparams.html" class="tsd-signature-type">BitlyQueryParams</a></h4>
+							<p>Sorted shortUrls and hashes</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-external-module tsd-is-private">
+					<a name="throwdeprecatederr" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> throw<wbr>Deprecated<wbr>Err</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module tsd-is-private">
+						<li class="tsd-signature tsd-kind-icon">throw<wbr>Deprecated<wbr>Err<span class="tsd-signature-symbol">(</span>methodName<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, replacementMethod<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span>, helpUrl<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/tanepiper/node-bitly/blob/fc45bbe/src/lib.ts#L152">lib.ts:152</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Throw a deprecated error</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>methodName: <span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>Bitly method name</p>
+									</div>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> replacementMethod: <span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>Method that might be a suitable replacement</p>
+									</div>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> helpUrl: <span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>URL with more info</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -244,7 +367,7 @@
 					<div class="tsd-signature tsd-kind-icon">DEFAULT_<wbr>OPTIONS<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/tanepiper/node-bitly/blob/330a495/src/lib.ts#L18">lib.ts:18</a></li>
+							<li>Defined in <a href="https://github.com/tanepiper/node-bitly/blob/fc45bbe/src/lib.ts#L13">lib.ts:13</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -260,40 +383,50 @@
 					<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal tsd-is-not-exported">
 						<a name="default_options.apiurl" class="tsd-anchor"></a>
 						<h3>api<wbr>Url</h3>
-						<div class="tsd-signature tsd-kind-icon">api<wbr>Url<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;&quot;api-ssl.bitly.com&quot;</span></div>
+						<div class="tsd-signature tsd-kind-icon">api<wbr>Url<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = &quot;api-ssl.bitly.com&quot;</span></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/tanepiper/node-bitly/blob/330a495/src/lib.ts#L19">lib.ts:19</a></li>
+								<li>Defined in <a href="https://github.com/tanepiper/node-bitly/blob/fc45bbe/src/lib.ts#L14">lib.ts:14</a></li>
 							</ul>
 						</aside>
 					</section>
 					<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal tsd-is-not-exported">
 						<a name="default_options.apiversion" class="tsd-anchor"></a>
 						<h3>api<wbr>Version</h3>
-						<div class="tsd-signature tsd-kind-icon">api<wbr>Version<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">"v3"</span><span class="tsd-signature-symbol"> =&nbsp;&quot;v3&quot;</span></div>
+						<div class="tsd-signature tsd-kind-icon">api<wbr>Version<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = &quot;v4&quot;</span></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/tanepiper/node-bitly/blob/330a495/src/lib.ts#L20">lib.ts:20</a></li>
+								<li>Defined in <a href="https://github.com/tanepiper/node-bitly/blob/fc45bbe/src/lib.ts#L15">lib.ts:15</a></li>
+							</ul>
+						</aside>
+					</section>
+					<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal tsd-is-not-exported">
+						<a name="default_options.debug" class="tsd-anchor"></a>
+						<h3>debug</h3>
+						<div class="tsd-signature tsd-kind-icon">debug<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">false</span><span class="tsd-signature-symbol"> = false</span></div>
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in <a href="https://github.com/tanepiper/node-bitly/blob/fc45bbe/src/lib.ts#L18">lib.ts:18</a></li>
 							</ul>
 						</aside>
 					</section>
 					<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal tsd-is-not-exported">
 						<a name="default_options.domain" class="tsd-anchor"></a>
 						<h3>domain</h3>
-						<div class="tsd-signature tsd-kind-icon">domain<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;&quot;bit.ly&quot;</span></div>
+						<div class="tsd-signature tsd-kind-icon">domain<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = &quot;bit.ly&quot;</span></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/tanepiper/node-bitly/blob/330a495/src/lib.ts#L21">lib.ts:21</a></li>
+								<li>Defined in <a href="https://github.com/tanepiper/node-bitly/blob/fc45bbe/src/lib.ts#L16">lib.ts:16</a></li>
 							</ul>
 						</aside>
 					</section>
 					<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal tsd-is-not-exported">
 						<a name="default_options.format" class="tsd-anchor"></a>
 						<h3>format</h3>
-						<div class="tsd-signature tsd-kind-icon">format<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;&quot;json&quot;</span></div>
+						<div class="tsd-signature tsd-kind-icon">format<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = &quot;json&quot;</span></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/tanepiper/node-bitly/blob/330a495/src/lib.ts#L22">lib.ts:22</a></li>
+								<li>Defined in <a href="https://github.com/tanepiper/node-bitly/blob/fc45bbe/src/lib.ts#L17">lib.ts:17</a></li>
 							</ul>
 						</aside>
 					</section>
@@ -310,24 +443,30 @@
 						<span>Internals</span>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="_bitly_.html">"bitly"</a>
+						<a href="_bitly_.html">&quot;bitly&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="_index_.html">"index"</a>
+						<a href="_index_.html">&quot;index&quot;</a>
 					</li>
 					<li class="current tsd-kind-external-module">
-						<a href="_lib_.html">"lib"</a>
+						<a href="_lib_.html">&quot;lib&quot;</a>
 					</li>
 					<li class="label tsd-is-external">
 						<span>Externals</span>
 					</li>
 					<li class=" tsd-kind-external-module tsd-is-external">
-						<a href="_types_.html">"types"</a>
+						<a href="_types_.html">&quot;types&quot;</a>
 					</li>
 				</ul>
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
+					<li class=" tsd-kind-variable tsd-parent-kind-external-module">
+						<a href="_lib_.html#bitlyhashpattern" class="tsd-kind-icon">Bitly<wbr>Hash<wbr>Pattern</a>
+					</li>
+					<li class=" tsd-kind-variable tsd-parent-kind-external-module">
+						<a href="_lib_.html#bitlyidpattern" class="tsd-kind-icon">Bitly<wbr>IdPattern</a>
+					</li>
 					<li class=" tsd-kind-variable tsd-parent-kind-external-module tsd-is-not-exported">
 						<a href="_lib_.html#isuri" class="tsd-kind-icon">is<wbr>Uri</a>
 					</li>
@@ -335,10 +474,16 @@
 						<a href="_lib_.html#dorequest" class="tsd-kind-icon">do<wbr>Request</a>
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-external-module tsd-is-private">
+						<a href="_lib_.html#forcetobitlinkid" class="tsd-kind-icon">force<wbr>ToBitlink<wbr>Id</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-external-module tsd-is-private">
 						<a href="_lib_.html#generateurl" class="tsd-kind-icon">generate<wbr>Url</a>
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-external-module">
 						<a href="_lib_.html#sorturlsandhash" class="tsd-kind-icon">sort<wbr>Urls<wbr>And<wbr>Hash</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-external-module tsd-is-private">
+						<a href="_lib_.html#throwdeprecatederr" class="tsd-kind-icon">throw<wbr>Deprecated<wbr>Err</a>
 					</li>
 					<li class=" tsd-kind-object-literal tsd-parent-kind-external-module tsd-is-private tsd-is-not-exported">
 						<a href="_lib_.html#default_options" class="tsd-kind-icon">DEFAULT_<wbr>OPTIONS</a>
@@ -360,6 +505,7 @@
 				<li class="tsd-kind-function tsd-has-type-parameter"><span class="tsd-kind-icon">Function with type parameter</span></li>
 				<li class="tsd-kind-index-signature"><span class="tsd-kind-icon">Index signature</span></li>
 				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
+				<li class="tsd-kind-type-alias tsd-has-type-parameter"><span class="tsd-kind-icon">Type alias with type parameter</span></li>
 			</ul>
 			<ul class="tsd-legend">
 				<li class="tsd-kind-enum"><span class="tsd-kind-icon">Enumeration</span></li>
@@ -408,7 +554,7 @@
 	</div>
 </footer>
 <div class="container tsd-generator">
-	<p>Generated using <a href="http://typedoc.org/" target="_blank">TypeDoc</a></p>
+	<p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p>
 </div>
 <div class="overlay"></div>
 <script src="../assets/js/main.js"></script>

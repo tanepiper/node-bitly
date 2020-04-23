@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>BitlyResponse | bitly</title>
+	<title>BitlyStatQueryParams | bitly</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -56,13 +56,13 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="../modules/_bitly_types_.html">&quot;bitly.types&quot;</a>
+					<a href="../modules/_types_.html">&quot;types&quot;</a>
 				</li>
 				<li>
-					<a href="_bitly_types_.bitlyresponse.html">BitlyResponse</a>
+					<a href="_types_.bitlystatqueryparams.html">BitlyStatQueryParams</a>
 				</li>
 			</ul>
-			<h1>Interface BitlyResponse</h1>
+			<h1>Interface BitlyStatQueryParams</h1>
 		</div>
 	</div>
 </header>
@@ -73,7 +73,12 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">BitlyResponse</span>
+						<span class="target">BitlyStatQueryParams</span>
+						<ul class="tsd-hierarchy">
+							<li>
+								<a href="_types_.bitlyqueryparams.html" class="tsd-signature-type">BitlyQueryParams</a>
+							</li>
+						</ul>
 					</li>
 				</ul>
 			</section>
@@ -84,9 +89,10 @@
 						<section class="tsd-index-section tsd-is-external">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-external"><a href="_bitly_types_.bitlyresponse.html#data" class="tsd-kind-icon">data</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-external"><a href="_bitly_types_.bitlyresponse.html#status_code" class="tsd-kind-icon">status_<wbr>code</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-external"><a href="_bitly_types_.bitlyresponse.html#status_txt" class="tsd-kind-icon">status_<wbr>txt</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-external"><a href="_types_.bitlystatqueryparams.html#size" class="tsd-kind-icon">size</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-external"><a href="_types_.bitlystatqueryparams.html#unit" class="tsd-kind-icon">unit</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-external"><a href="_types_.bitlystatqueryparams.html#unit_reference" class="tsd-kind-icon">unit_<wbr>reference</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-external"><a href="_types_.bitlystatqueryparams.html#units" class="tsd-kind-icon">units</a></li>
 							</ul>
 						</section>
 					</div>
@@ -95,34 +101,64 @@
 			<section class="tsd-panel-group tsd-member-group tsd-is-external">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-external">
-					<a name="data" class="tsd-anchor"></a>
-					<h3>data</h3>
-					<div class="tsd-signature tsd-kind-icon">data<span class="tsd-signature-symbol">:</span> <a href="../modules/_bitly_types_.html#bitlyresponsedata" class="tsd-signature-type">BitlyResponseData</a></div>
+					<a name="size" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> size</h3>
+					<div class="tsd-signature tsd-kind-icon">size<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/tanepiper/node-bitly/blob/43369d4/src/bitly.types.ts#L34">bitly.types.ts:34</a></li>
+							<li>Defined in <a href="https://github.com/tanepiper/node-bitly/blob/fc45bbe/src/types.ts#L67">types.ts:67</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Limit on # of items to return. Default = 50</p>
+						</div>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-external">
-					<a name="status_code" class="tsd-anchor"></a>
-					<h3>status_<wbr>code</h3>
-					<div class="tsd-signature tsd-kind-icon">status_<wbr>code<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<a name="unit" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> unit</h3>
+					<div class="tsd-signature tsd-kind-icon">unit<span class="tsd-signature-symbol">:</span> <a href="../modules/_types_.html#bitlytimeunit" class="tsd-signature-type">BitlyTimeUnit</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/tanepiper/node-bitly/blob/43369d4/src/bitly.types.ts#L32">bitly.types.ts:32</a></li>
+							<li>Defined in <a href="https://github.com/tanepiper/node-bitly/blob/fc45bbe/src/types.ts#L59">types.ts:59</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Unit of time. Default = &quot;day&quot;</p>
+						</div>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-external">
-					<a name="status_txt" class="tsd-anchor"></a>
-					<h3>status_<wbr>txt</h3>
-					<div class="tsd-signature tsd-kind-icon">status_<wbr>txt<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<a name="unit_reference" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> unit_<wbr>reference</h3>
+					<div class="tsd-signature tsd-kind-icon">unit_<wbr>reference<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/tanepiper/node-bitly/blob/43369d4/src/bitly.types.ts#L33">bitly.types.ts:33</a></li>
+							<li>Defined in <a href="https://github.com/tanepiper/node-bitly/blob/fc45bbe/src/types.ts#L71">types.ts:71</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>ISO-8601 timestamp. Default = current time.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-external">
+					<a name="units" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> units</h3>
+					<div class="tsd-signature tsd-kind-icon">units<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/tanepiper/node-bitly/blob/fc45bbe/src/types.ts#L63">types.ts:63</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>How many units to query data for. Default = -1, for all units.</p>
+						</div>
+					</div>
 				</section>
 			</section>
 		</div>
@@ -136,56 +172,110 @@
 						<span>Internals</span>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="../modules/_bitly_.html">"bitly"</a>
+						<a href="../modules/_bitly_.html">&quot;bitly&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="../modules/_lib_.html">"lib"</a>
+						<a href="../modules/_index_.html">&quot;index&quot;</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="../modules/_lib_.html">&quot;lib&quot;</a>
 					</li>
 					<li class="label tsd-is-external">
 						<span>Externals</span>
 					</li>
 					<li class="current tsd-kind-external-module tsd-is-external">
-						<a href="../modules/_bitly_types_.html">"bitly.types"</a>
+						<a href="../modules/_types_.html">&quot;types&quot;</a>
 					</li>
 				</ul>
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
 					<li class=" tsd-kind-interface tsd-parent-kind-external-module tsd-is-external">
-						<a href="_bitly_types_.bitlyconfig.html" class="tsd-kind-icon">Bitly<wbr>Config</a>
+						<a href="_types_.bitlyclickmetricsres.html" class="tsd-kind-icon">Bitly<wbr>Click<wbr>Metrics<wbr>Res</a>
 					</li>
 					<li class=" tsd-kind-interface tsd-parent-kind-external-module tsd-is-external">
-						<a href="_bitly_types_.bitlyerror.html" class="tsd-kind-icon">Bitly<wbr>Error</a>
+						<a href="_types_.bitlyconfig.html" class="tsd-kind-icon">Bitly<wbr>Config</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-external-module tsd-is-external">
+						<a href="_types_.bitlyerror.html" class="tsd-kind-icon">Bitly<wbr>Error</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-external-module tsd-is-external">
+						<a href="_types_.bitlyerrorresponse.html" class="tsd-kind-icon">Bitly<wbr>Error<wbr>Response</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-external-module tsd-is-external">
+						<a href="_types_.bitlyexpandresponse.html" class="tsd-kind-icon">Bitly<wbr>Expand<wbr>Response</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-external-module tsd-is-external">
+						<a href="_types_.bitlylink.html" class="tsd-kind-icon">Bitly<wbr>Link</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-external-module tsd-is-external">
+						<a href="_types_.bitlymetricsbycountryres.html" class="tsd-kind-icon">Bitly<wbr>Metrics<wbr>ByCountry<wbr>Res</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-external-module tsd-is-external">
+						<a href="_types_.bitlymetricsbyreferrers.html" class="tsd-kind-icon">Bitly<wbr>Metrics<wbr>ByReferrers</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-external-module tsd-is-external">
+						<a href="_types_.bitlyqueryparams.html" class="tsd-kind-icon">Bitly<wbr>Query<wbr>Params</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-external-module tsd-is-external">
+						<a href="_types_.bitlyreferrersbydomainsmetricsres.html" class="tsd-kind-icon">Bitly<wbr>Referrers<wbr>ByDomains<wbr>Metrics<wbr>Res</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-external-module tsd-is-external">
+						<a href="_types_.bitlyreferringdomainsmetrics.html" class="tsd-kind-icon">Bitly<wbr>Referring<wbr>Domains<wbr>Metrics</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-external-module tsd-is-external">
+						<a href="_types_.bitlystandardqueryparams.html" class="tsd-kind-icon">Bitly<wbr>Standard<wbr>Query<wbr>Params</a>
 					</li>
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-interface tsd-parent-kind-external-module tsd-is-external">
-						<a href="_bitly_types_.bitlyresponse.html" class="tsd-kind-icon">Bitly<wbr>Response</a>
+						<a href="_types_.bitlystatqueryparams.html" class="tsd-kind-icon">Bitly<wbr>Stat<wbr>Query<wbr>Params</a>
 						<ul>
 							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-external">
-								<a href="_bitly_types_.bitlyresponse.html#data" class="tsd-kind-icon">data</a>
+								<a href="_types_.bitlystatqueryparams.html#size" class="tsd-kind-icon">size</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-external">
-								<a href="_bitly_types_.bitlyresponse.html#status_code" class="tsd-kind-icon">status_<wbr>code</a>
+								<a href="_types_.bitlystatqueryparams.html#unit" class="tsd-kind-icon">unit</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-external">
-								<a href="_bitly_types_.bitlyresponse.html#status_txt" class="tsd-kind-icon">status_<wbr>txt</a>
+								<a href="_types_.bitlystatqueryparams.html#unit_reference" class="tsd-kind-icon">unit_<wbr>reference</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-external">
+								<a href="_types_.bitlystatqueryparams.html#units" class="tsd-kind-icon">units</a>
 							</li>
 						</ul>
 					</li>
 				</ul>
 				<ul class="after-current">
 					<li class=" tsd-kind-interface tsd-parent-kind-external-module tsd-is-external">
-						<a href="_bitly_types_.bitlyurlqueryparams.html" class="tsd-kind-icon">Bitly<wbr>Url<wbr>Query<wbr>Params</a>
+						<a href="_types_.bitlystatresponse.html" class="tsd-kind-icon">Bitly<wbr>Stat<wbr>Response</a>
 					</li>
 					<li class=" tsd-kind-interface tsd-parent-kind-external-module tsd-is-external">
-						<a href="_bitly_types_.expandinteface.html" class="tsd-kind-icon">Expand<wbr>Inteface</a>
+						<a href="_types_.deeplink.html" class="tsd-kind-icon">Deep<wbr>Link</a>
 					</li>
 					<li class=" tsd-kind-interface tsd-parent-kind-external-module tsd-is-external">
-						<a href="_bitly_types_.shortenresponse.html" class="tsd-kind-icon">Shorten<wbr>Response</a>
+						<a href="_types_.references.html" class="tsd-kind-icon">References</a>
 					</li>
 					<li class=" tsd-kind-type-alias tsd-parent-kind-external-module tsd-is-external">
-						<a href="../modules/_bitly_types_.html#bitlyresponsedata" class="tsd-kind-icon">Bitly<wbr>Response<wbr>Data</a>
+						<a href="../modules/_types_.html#bitlyfacet" class="tsd-kind-icon">Bitly<wbr>Facet</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-parent-kind-external-module tsd-is-external">
+						<a href="../modules/_types_.html#bitlyreqmethod" class="tsd-kind-icon">Bitly<wbr>Req<wbr>Method</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-parent-kind-external-module tsd-is-external">
+						<a href="../modules/_types_.html#bitlyresponse" class="tsd-kind-icon">Bitly<wbr>Response</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-parent-kind-external-module tsd-is-external">
+						<a href="../modules/_types_.html#bitlysuccess" class="tsd-kind-icon">Bitly<wbr>Success</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-parent-kind-external-module tsd-is-external">
+						<a href="../modules/_types_.html#bitlytimeunit" class="tsd-kind-icon">Bitly<wbr>Time<wbr>Unit</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-external-module tsd-is-external">
+						<a href="../modules/_types_.html#isbitlyerrresponse" class="tsd-kind-icon">is<wbr>Bitly<wbr>Err<wbr>Response</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-external-module tsd-is-external">
+						<a href="../modules/_types_.html#isbitlylink" class="tsd-kind-icon">is<wbr>Bitly<wbr>Link</a>
 					</li>
 				</ul>
 			</nav>
@@ -204,6 +294,7 @@
 				<li class="tsd-kind-function tsd-has-type-parameter"><span class="tsd-kind-icon">Function with type parameter</span></li>
 				<li class="tsd-kind-index-signature"><span class="tsd-kind-icon">Index signature</span></li>
 				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
+				<li class="tsd-kind-type-alias tsd-has-type-parameter"><span class="tsd-kind-icon">Type alias with type parameter</span></li>
 			</ul>
 			<ul class="tsd-legend">
 				<li class="tsd-kind-enum"><span class="tsd-kind-icon">Enumeration</span></li>
@@ -252,7 +343,7 @@
 	</div>
 </footer>
 <div class="container tsd-generator">
-	<p>Generated using <a href="http://typedoc.org/" target="_blank">TypeDoc</a></p>
+	<p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p>
 </div>
 <div class="overlay"></div>
 <script src="../assets/js/main.js"></script>
