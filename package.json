@@ -9,7 +9,7 @@
     "util"
   ],
   "homepage": "https://github.com/tanepiper/node-bitly",
-  "version": "7.1.0",
+  "version": "7.1.1",
   "author": {
     "name": "Tane Piper",
     "url": "https://github.com/tanepiper"
@@ -72,7 +72,7 @@
     "typescript": "^3.8.3"
   },
   "dependencies": {
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "valid-url": "^1.0.9"
   },
   "main": "dist/index.js",
